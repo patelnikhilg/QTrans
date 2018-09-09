@@ -17,7 +17,7 @@ namespace QTrans.Models
     {
         public UserProfile()
         {
-            this.areaPreferences =  new HashSet<AreaPreference>();
+           // this.areaPreferences =  new HashSet<AreaPreference>();
         }
     
         public long userid { get; set; }
@@ -66,6 +66,6 @@ namespace QTrans.Models
 
         public string Token { get; set; }
 
-        public ICollection<AreaPreference> areaPreferences { get; set; }
+        //public ICollection<AreaPreference> areaPreferences { get; set; }
     }
 }

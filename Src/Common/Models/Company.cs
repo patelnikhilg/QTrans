@@ -33,9 +33,9 @@ namespace QTrans.Models
         public string state { get; set; } = "NA";
         [DefaultValue("NA")]
         public string city { get; set; } = "NA";
-        public long userid { get; set; }
+        public long UserId { get; set; }
         [DefaultValue("NA")]
-        public int comanytype { get; set; } = 0;
+        public int companytype { get; set; } = 0;
         public System.DateTime createddate { get; set; }
         public Nullable<System.DateTime> modifydate { get; set; }
     }

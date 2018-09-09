@@ -22,7 +22,7 @@ namespace QTrans.Models
         public string transporttype { get; set; }
         public string description { get; set; }
 
-        public char Usertype { get; set; }
+        public string Usertype { get; set; }
 
     }
 }

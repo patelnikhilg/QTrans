@@ -11,8 +11,7 @@ namespace QTrans.DataAccess
         /// Flag: Has Dispose already been called
         /// </summary>
         bool disposed;
-
-        int attemp = byte.MinValue;
+        //readonly int attemp = byte.MinValue;
         SqlConnection sqlConnection;
         SqlCommand sqlCommand;
         private string connectionString = ConfigurationManager.AppSettings["QTransConnectionString"].ToString();
@@ -35,29 +34,19 @@ namespace QTrans.DataAccess
             sqlCommand.Parameters.Add(param);            
         }
 
-        public void AddOutParameterWithValue(string name, object value)
+        public void AddOutParameterWithType(string name, SqlDbType dbType)
         {
-            SqlParameter param = new SqlParameter(name, value)
+            SqlParameter param = new SqlParameter(name, dbType)
             {
+                
                 Direction = ParameterDirection.Output
             };
-            sqlCommand.Parameters.Add(param);
-        }
-
-        public void AddOutParameterWithType(string name, SqlDbType type)
-        {
-            SqlParameter param = new SqlParameter(name, type)
-            {
-                Direction = ParameterDirection.Output
-            };
-
-            if(name == "@Message")
+            if (name == "@Message")
             {
                 param.Size = 100;
             }
-
             sqlCommand.Parameters.Add(param);
-        }
+        }       
 
         public void AddInOutParameterWithValue(string name, object value)
         {
@@ -66,7 +55,7 @@ namespace QTrans.DataAccess
                 Direction = ParameterDirection.InputOutput
             };
             sqlCommand.Parameters.Add(param);
-        }
+        }        
 
         public void AddReturnParameterWithValue(string name, object value)
         {
@@ -87,7 +76,11 @@ namespace QTrans.DataAccess
         }
         public void AddOutParameter(string name, SqlDbType dbType, int size)
         {
-            sqlCommand.Parameters.Add(name, dbType, size);
+            SqlParameter param = new SqlParameter(name, dbType, size)
+            {
+                Direction = ParameterDirection.ReturnValue
+            };
+            sqlCommand.Parameters.Add(param);
         }
 
         public object GetParamaeterValue(string parameter)
@@ -112,7 +105,7 @@ namespace QTrans.DataAccess
 
         public DataTable GetDataTable()
         {
-            DataSet ds = null;
+            DataSet ds = new DataSet();
             using (var adapter = new SqlDataAdapter(sqlCommand))
             {
                 adapter.Fill(ds);
@@ -123,7 +116,7 @@ namespace QTrans.DataAccess
 
         public DataSet GetDataSet()
         {
-            DataSet ds = null;
+            DataSet ds = new DataSet();
             using (var adapter = new SqlDataAdapter(sqlCommand))
             {
                 adapter.Fill(ds);

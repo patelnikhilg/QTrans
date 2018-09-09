@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QTrans.WebAPI", "Src\Web\QT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QTrans.WebPortal", "Src\Web\QTrans.WebPortal\QTrans.WebPortal.csproj", "{016F9002-707A-4EAE-8FA6-1766E8152348}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleTest", "SampleTest", "{0DED4F75-551D-44F3-B4DE-685ABAC4C821}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

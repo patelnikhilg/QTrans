@@ -199,6 +199,7 @@
     <Compile Include="Helpers\EncryptDecryptHelper.cs" />
     <Compile Include="Helpers\RequestValidatorAttribute.cs" />
     <Compile Include="Models\DeviceRegistration.cs" />
+    <Compile Include="Models\UserPersonalDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

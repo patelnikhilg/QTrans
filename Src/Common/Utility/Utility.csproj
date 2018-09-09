@@ -46,6 +46,7 @@
     <Compile Include="DefaultConstants.cs" />
     <Compile Include="EncryptDecryptHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmtpMailUtility.cs" />
     <Compile Include="TransportEnums.cs" />
     <Compile Include="UsersSession.cs" />
   </ItemGroup>

@@ -24,12 +24,14 @@ namespace QTrans.Models
         [DefaultValue("NA")]
         public string emailaddress { get; set; } = "NA";
         [DefaultValue("NA")]
+        public string Password { get; set; } = "NA";
+        [DefaultValue("NA")]
         public string firstname { get; set; } = "NA";
         [DefaultValue("NA")]
         public string middlename { get; set; } = "NA";
         [DefaultValue("NA")]
         public string lastname { get; set; } = "NA";
-        public string mobilenumber { get; set; } = "NA";
+        public string mobilenumber { get; set; }
         [DefaultValue("NA")]
         public string landlinenumber { get; set; } = "NA";
         public Nullable<System.DateTime> dob { get; set; } = DateTime.Now;
@@ -37,8 +39,7 @@ namespace QTrans.Models
         public string addressline1 { get; set; } = "NA";
         [DefaultValue("NA")]
         public string addressline2 { get; set; } = "NA";
-        [DefaultValue("NA")]
-        public int pincode { get; set; } =0;
+        public int pincode { get; set; } = 0;
         [DefaultValue("NA")]
         public string photo { get; set; } = "NA";
         [DefaultValue("NA")]
@@ -48,7 +49,7 @@ namespace QTrans.Models
         [DefaultValue("NA")]
         public string district { get; set; } = "NA";
         [DefaultValue("NA")]
-        public string city { get; set; }
+        public string city { get; set; } = "NA";
         [DefaultValue("NA")]
         public string area { get; set; } = "NA";
 
@@ -65,8 +66,6 @@ namespace QTrans.Models
         public int OTP { get; set; } = 0;
 
         public string Token { get; set; }
-
-        public string password { get; set; } = "NA";
 
         public ICollection<AreaPreference> areaPreferences { get; set; }
     }

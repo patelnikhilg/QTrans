@@ -26,6 +26,10 @@ namespace QTrans.WebAPI.Controllers
             {
                 log.Info(message);
             }
+            else
+            {
+                message = "OK";
+            }
             return Ok(new { Status = message, data = result });
         }
 
@@ -40,12 +44,16 @@ namespace QTrans.WebAPI.Controllers
             {
                 log.Info(message);
             }
+            else
+            {
+                message = "OK";
+            }
             return Ok(new { Status = message, data = result });
         }
 
         [Route("OTPVerification")]
         [HttpPost]
-        public IHttpActionResult DeviceVerification(OTPVerification OTP)
+        public IHttpActionResult DeviceVerification([FromBody] OTPVerification OTP)
         {
             string Platform = HttpContext.Current.Request.Headers["platform"].ToString();
             string message = string.Empty;
@@ -75,6 +83,60 @@ namespace QTrans.WebAPI.Controllers
             return Ok(new { Status = message, data = token });
         }
 
-       
+        [Route("OTPVerification")]
+        [HttpPost]
+        public IHttpActionResult DeviceVerification([FromBody] UserOTPVerification OTP)
+        {
+            string Platform = HttpContext.Current.Request.Headers["platform"].ToString();
+            string message = string.Empty;
+            bool result = false;
+            string token = string.Empty;
+            long userid = 0;
+            if (Platform.ToLower() == "web")
+            {
+                UserRepository userRepository = new UserRepository();
+                result = userRepository.UpdateMobileEmailVerification(OTP.mobileno, OTP.emailaddres, false, OTP.OTP, out userid, out token, out message);
+
+            }
+            else if (Platform.ToLower() == "mobile")
+            {
+                UserRepository userRepository = new UserRepository();
+                result = userRepository.UpdateMobileEmailVerification(OTP.mobileno, OTP.emailaddres, true, OTP.OTP, out userid, out token, out message);
+            }
+            if (!string.IsNullOrEmpty(message))
+            {
+                log.Info(message);
+            }
+            else
+            {
+                message = "OK";
+            }
+            if (!string.IsNullOrEmpty(token) && userid > 0)
+            {
+                UsersSession.userTokenDic.TryAdd(token, userid);
+            }
+
+            return Ok(new { Status = message, data = token });
+        }
+
+        [Route("ForgotUserLoginDetail")]
+        [HttpGet]
+        public IHttpActionResult ForgotUserLoginDetail(string mobileno, string emailaddress)
+        {
+            string message = string.Empty;
+            UserRepository userRepository = new UserRepository();
+            var result = userRepository.ForgotUserLoginDetail(mobileno, emailaddress, out message);
+            if (!string.IsNullOrEmpty(message))
+            {
+                log.Info(message);
+            }
+            else
+            {
+                message = "OK";
+            }
+
+            return Ok(new { Status = message, data = result });
+        }
+
     }
 }

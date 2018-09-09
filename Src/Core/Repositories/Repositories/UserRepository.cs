@@ -24,7 +24,8 @@ namespace QTrans.Repositories
             if (instanceUser.InsertUpdateUserDetails(user, out identity, out message))
             {
                 user.userid = identity;
-                new CompanyRepository(identity).CompanyRegistration(new Company() { userid = identity }, out message);
+                var cmp = new Company() { UserId = identity };
+                new CompanyRepository(identity).CompanyRegistration(cmp, out message);
                 return user;
             }
 
@@ -38,9 +39,9 @@ namespace QTrans.Repositories
         }
 
 
-        public List<TransportType > GetTransportType()
+        public List<TransportType> GetTransportType()
         {
-            var data= instanceUser.GetTransportType();
+            var data = instanceUser.GetTransportType();
 
             return DataAccessUtility.ConvertToList<TransportType>(data);
 
@@ -59,6 +60,18 @@ namespace QTrans.Repositories
             }
 
             return userDetail;
+        }
+
+        public UserProfile UpdateUserProfile(UserProfile user, out string message)
+        {
+            message = string.Empty;           
+            long userid;
+            if (instanceUser.InsertUpdateUserDetails(user, out userid, out message))
+            {
+                return user;
+            }
+
+            return null;
         }
 
         public bool ChangePassword(string mobileNo, string emailAddress, string password, out string message)
@@ -87,6 +100,10 @@ namespace QTrans.Repositories
             var dt = instanceUser.ForgotUserLoginDetail(mobileNo, emailAddress, out message);
             var lst = DataAccessUtility.ConvertToList<UserProfile>(dt);
             UserProfile user = lst.Count > 0 ? lst[0] : null;
+            if (user != null)
+            {
+                SmtpMailUtility.SendMail(user.emailaddress, "QTransSupport@gmail.com", "New Password for your QTrans account", "Hello, This is auto generated mail. Your password is :" + user.Password, false);
+            }
             return user;
         }
 
@@ -106,6 +123,20 @@ namespace QTrans.Repositories
             var lst = DataAccessUtility.ConvertToList<UserProfile>(dt);
             UserProfile user = lst.Count > 0 ? lst[0] : null;
             return user;
+        }
+
+        public bool UpdateMobileEmailVerification(string mobilenumber, string emailaddres, bool isMobile, int OTP, out long userid, out string token, out string message)
+        {
+            message = string.Empty;
+            token = string.Empty;
+            userid = 0;
+            if (instanceUser.UpdateMobileEmailVerification(mobilenumber, emailaddres, isMobile, OTP, out message))
+            {
+                token = EncryptDecryptHelper.ComputePasswordHash(isMobile ? mobilenumber : emailaddres, isMobile ? mobilenumber : emailaddres);
+                return instanceUser.UpdateToken(mobilenumber, emailaddres, token, out userid, out message);
+            }
+
+            return false;
         }
     }
 }

@@ -10,6 +10,7 @@ namespace QTrans.DataAccess
         public bool InsertUpdateUserDetails(UserProfile user, out long identity, out string message)
         {
             int rowEffected = 0;
+            identity = 0;
             using (DBConnector connector = new DBConnector("Usp_InsertUpdateUser", true))
             {
                 connector.AddInParameterWithValue("@emailaddress", user.emailaddress);
@@ -32,7 +33,9 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@PAN", user.pan);
                 connector.AddInParameterWithValue("@GST", user.gst);
                 connector.AddInParameterWithValue("@AadhaarNo", user.aadhaarno);
-              //  connector.AddInParameterWithValue("@AreaPreferenceDetails", DataAccessUtility.ToDataTable<AreaPreference>(user.areaPreferences.ToList()));
+                connector.AddInParameterWithValue("@OTP", user.OTP);
+                connector.AddInParameterWithValue("@password", user.Password);
+                //  connector.AddInParameterWithValue("@AreaPreferenceDetails", DataAccessUtility.ToDataTable<AreaPreference>(user.areaPreferences.ToList()));
                 connector.AddOutParameterWithType("@identity", SqlDbType.BigInt);
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
@@ -54,7 +57,7 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@TransportTypeId", TransportTypeId);
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
-                message = connector.GetParamaeterValue("@Message").ToString();
+                message = connector.GetParamaeterValue("@Message").ToString();                
             }
 
             return rowEffected > 0;
@@ -69,7 +72,6 @@ namespace QTrans.DataAccess
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 dt=connector.GetDataTable();
                 message = connector.GetParamaeterValue("@Message").ToString();
-
             }
 
             return dt;
@@ -89,17 +91,17 @@ namespace QTrans.DataAccess
             return dt;
         }
 
-        public bool UpdateMobileEmailVerification(long id,int OTP, bool isMobile, out string message)
+        public bool UpdateMobileEmailVerification(long userid,int OTP, bool isMobile, out string message)
         {
             int rowEffected = 0;
             using (DBConnector connector = new DBConnector("Usp_UpdateVerificationById", true))
             {
-                connector.AddInParameterWithValue("@UserId", id);
-                connector.AddInParameterWithValue("@OTP", OTP);
+                connector.AddInParameterWithValue("@UserId", userid);
+                connector.AddInParameterWithValue("@OTP", OTP);                
                 connector.AddInParameterWithValue("@IsMobile", isMobile); // if true means mobile verification otherwise email verification
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
-                message = connector.GetParamaeterValue("@Message").ToString();
+                message = connector.GetParamaeterValue("@Message").ToString();              
             }
 
             return rowEffected > 0;
@@ -120,7 +122,25 @@ namespace QTrans.DataAccess
             return rowEffected > 0;
         }
 
-        public bool UpdateMobileEmailVerification(string mobilenumber, string emailaddres, bool isMobile,Int16 OTP, out string message)
+        public bool UpdateToken(string mobilenumber, string emailaddres, string token, out long userid, out string message)
+        {
+            int rowEffected = 0;
+            using (DBConnector connector = new DBConnector("Usp_UpdateTokenByNoEmail", true))
+            {
+                connector.AddInParameterWithValue("@mobileno", mobilenumber);
+                connector.AddInParameterWithValue("@emailaddress", emailaddres);
+                connector.AddInParameterWithValue("@Token", token);
+                connector.AddOutParameterWithType("@UserId", SqlDbType.BigInt);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                rowEffected = connector.ExceuteNonQuery();
+                message = connector.GetParamaeterValue("@Message").ToString();
+                userid= Convert.ToInt64(connector.GetParamaeterValue("@UserId").ToString());
+            }
+
+            return rowEffected > 0;
+        }
+
+        public bool UpdateMobileEmailVerification(string mobilenumber, string emailaddres, bool isMobile,int OTP, out string message)
         {
             int rowEffected = 0;
             using (DBConnector connector = new DBConnector("Usp_UpdateVerification", true))

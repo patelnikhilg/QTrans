@@ -27,7 +27,7 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@CancellationReson", bidding.cancellationreson);
                 connector.AddInParameterWithValue("@biggingDetails", DataAccessUtility.ToDataTable<BiddingDetails>(bidding.biddingDetails.ToList()));
                 connector.AddOutParameterWithType("@identity", SqlDbType.BigInt);
-                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);              
                 rowEffected = connector.ExceuteNonQuery();
                 message = connector.GetParamaeterValue("@Message").ToString();
                 identity = Convert.ToInt64(connector.GetParamaeterValue("@identity"));

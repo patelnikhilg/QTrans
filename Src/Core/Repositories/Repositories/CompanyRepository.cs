@@ -20,16 +20,12 @@ namespace QTrans.Repositories
         {
             long companyId = 0;
             message = string.Empty;
-            Company companyDetail = null;
             if (this.instanceCompany.InsertUpdateCompanyDetails(company, out companyId, out message))
             {
-                companyDetail.companyid = companyId;
-                //var dt = this.instanceCompany.GetById(companyId, out message);
-                //var lst = DataAccessUtility.ConvertToList<Company>(dt);
-                //companyDetail = lst.Count > 0 ? lst[0] : null;
+                company.companyid = companyId;
             }
 
-            return companyDetail;
+            return company;
         }
 
         public Company GetCompanyDetailById(long companyId, out string message)

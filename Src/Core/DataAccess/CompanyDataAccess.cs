@@ -23,13 +23,14 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@Country", company.country);
                 connector.AddInParameterWithValue("@State", company.state);
                 connector.AddInParameterWithValue("@City", company.city);
-                connector.AddInParameterWithValue("@UserId", company.userid);
-                connector.AddInParameterWithValue("@ComanyType", company.comanytype);
+                connector.AddInParameterWithValue("@UserId", company.UserId);
+                connector.AddInParameterWithValue("@CompanyType", company.companytype);
                 connector.AddOutParameterWithType("@identity", SqlDbType.BigInt);
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
-                message = connector.GetParamaeterValue("@Message").ToString();
                 identity = Convert.ToInt64(connector.GetParamaeterValue("@identity"));
+                message = connector.GetParamaeterValue("@Message").ToString();
+                               
             }
 
             return rowEffected > 0;

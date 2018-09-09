@@ -82,10 +82,17 @@ namespace QTrans.DataAccess
             {
                 foreach (PropertyInfo pro in temp.GetProperties())
                 {
-                    if (pro.Name == column.ColumnName)
-                        pro.SetValue(obj, dr[column.ColumnName], null);
-                    else
-                        continue;
+                    try
+                    {
+                        if (pro.Name == column.ColumnName)
+                            pro.SetValue(obj, dr[column.ColumnName], null);
+                        else
+                            continue;
+                    }
+                    catch
+                    {
+
+                    }
                 }
             }
             return obj;

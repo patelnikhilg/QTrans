@@ -21,21 +21,21 @@ namespace QTrans.Models
     
         public long companyid { get; set; }
         
-        public string companyname { get; set; } = "DEMO";
+        public string companyname { get; set; }
         
-        public string address { get; set; };
+        public string address { get; set; }
         
-        public string telenumber { get; set; };
-        public string alternettelnumber { get; set; };
+        public string telenumber { get; set; }
+        public string alternettelnumber { get; set; }
         
-        public string country { get; set; };
+        public string country { get; set; }
         
-        public string state { get; set; };
+        public string state { get; set; }
         
-        public string city { get; set; };
+        public string city { get; set; }
         public long userid { get; set; }
         
-        public int comanytype { get; set; } = 0;
+        public int comanytype { get; set; } 
         public System.DateTime createddate { get; set; }
         public Nullable<System.DateTime> modifydate { get; set; }
     }

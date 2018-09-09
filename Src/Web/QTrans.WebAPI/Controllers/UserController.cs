@@ -1,4 +1,5 @@
 ﻿using QTrans.Logging;
+using QTrans.Models;
 using QTrans.Repositories;
 using QTrans.WebAPI.Models;
 using System;
@@ -26,12 +27,16 @@ namespace QTrans.WebAPI.Controllers
             {
                 log.Info(message);
             }
+            else
+            {
+                message = "OK";
+            }
             return Ok(new { Status = message, data = result });
         }
 
         [Route("TransportTypeRegistration")]
         [HttpPost]
-        public IHttpActionResult TransportTypeRegistration(TransportTypeRegistration transportTypeRegistration)
+        public IHttpActionResult TransportTypeRegistration([FromBody] TransportTypeRegistration transportTypeRegistration)
         {
             string message = string.Empty;
             UserRepository userRepository = new UserRepository();
@@ -39,6 +44,10 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+            }
+            else
+            {
+                message = "OK";
             }
             return Ok(new { Status = message, data = result });
         }
@@ -50,6 +59,43 @@ namespace QTrans.WebAPI.Controllers
             UserRepository userRepository = new UserRepository();
             var result = userRepository.GetTransportType();            
             return Ok(new { Status = "OK", data = result });
+        }
+
+        [Route("ChangePassword")]
+        [HttpPost]
+        public IHttpActionResult ChangePassword([FromBody] ChangePassword changePassword)
+        {
+            string message = string.Empty;
+            UserRepository userRepository = new UserRepository();
+            var result = userRepository.ChangePassword(changePassword.mobilenumber, changePassword.emailaddres, changePassword.password, out message);
+            if (!string.IsNullOrEmpty(message))
+            {
+                log.Info(message);
+            }
+            else
+            {
+                message = "OK";
+            }
+            return Ok(new { Status = message, data = result });
+        }
+
+        [Route("UpdateUserProfile")]
+        [HttpPost]
+        public IHttpActionResult UpdateUserProfile([FromBody] UserProfile changePassword)
+        {
+            string message = string.Empty;
+            UserRepository userRepository = new UserRepository();
+            var result = userRepository.UpdateUserProfile(changePassword, out message);
+            if (!string.IsNullOrEmpty(message))
+            {
+                log.Info(message);
+            }
+            else
+            {
+                message = "OK";
+            }
+
+            return Ok(new { Status = message, data = result });
         }
     }
 }
