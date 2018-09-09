@@ -196,7 +196,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\EncryptDecryptHelper.cs" />
     <Compile Include="Helpers\RequestValidatorAttribute.cs" />
     <Compile Include="Models\DeviceRegistration.cs" />
     <Compile Include="Models\UserPersonalDetail.cs" />
@@ -241,6 +240,7 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

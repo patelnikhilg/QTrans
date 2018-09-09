@@ -1,0 +1,214 @@
+﻿@model QTrans.Models.UserProfile
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserProfile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.emailaddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailaddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.firstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.middlename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.middlename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mobilenumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mobilenumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.landlinenumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.landlinenumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dob)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dob)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.addressline1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.addressline1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.addressline2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.addressline2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pincode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pincode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.photo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.photo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.state)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.state)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.district)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.district)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.city)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.city)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mobileverification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mobileverification)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emailverification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailverification)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gst)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gst)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.aadhaarno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.aadhaarno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createddate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createddate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modifydate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modifydate)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
