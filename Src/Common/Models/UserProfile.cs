@@ -22,47 +22,47 @@ namespace QTrans.Models
     
         public long userid { get; set; }
         [DefaultValue("NA")]
-        public string emailaddress { get; set; }
+        public string emailaddress { get; set; } = "NA";
         [DefaultValue("NA")]
-        public string firstname { get; set; }
+        public string firstname { get; set; } = "NA";
         [DefaultValue("NA")]
-        public string middlename { get; set; }
+        public string middlename { get; set; } = "NA";
         [DefaultValue("NA")]
-        public string lastname { get; set; }
-        public string mobilenumber { get; set; }
+        public string lastname { get; set; } = "NA";
+        public string mobilenumber { get; set; } = "NA";
         [DefaultValue("NA")]
-        public string landlinenumber { get; set; }
-        public Nullable<System.DateTime> dob { get; set; }
+        public string landlinenumber { get; set; } = "NA";
+        public Nullable<System.DateTime> dob { get; set; } = DateTime.Now
         [DefaultValue("NA")]
-        public string addressline1 { get; set; }
+        public string addressline1 { get; set; } = "NA";
         [DefaultValue("NA")]
-        public string addressline2 { get; set; }
+        public string addressline2 { get; set; } = "NA";
         [DefaultValue("NA")]
-        public int pincode { get; set; }
+        public int pincode { get; set; } = "NA";
         [DefaultValue("NA")]
-        public string photo { get; set; }
+        public string photo { get; set; } = "NA";
         [DefaultValue("NA")]
-        public string country { get; set; }
+        public string country { get; set; } = "NA";
         [DefaultValue("NA")]
-        public string state { get; set; }
+        public string state { get; set; } = "NA";
         [DefaultValue("NA")]
-        public string district { get; set; }
+        public string district { get; set; } = "NA";
         [DefaultValue("NA")]
         public string city { get; set; }
         [DefaultValue("NA")]
-        public string area { get; set; }
+        public string area { get; set; } = "NA";
 
-        public bool mobileverification { get; set; }
-        public bool emailverification { get; set; }
+        public bool mobileverification { get; set; } = false;
+        public bool emailverification { get; set; } = false;
         [DefaultValue("NA")]
-        public string pan { get; set; }
+        public string pan { get; set; } = "NA";
         [DefaultValue("NA")]
-        public string gst { get; set; }
-        public Nullable<long> aadhaarno { get; set; }
+        public string gst { get; set; } = "NA";
+        public Nullable<long> aadhaarno { get; set; } = 0;
         public DateTime createddate { get; set; }
         public Nullable<DateTime> modifydate { get; set; }
 
-        public int OTP { get; set; }
+        public int OTP { get; set; } = 0;
 
         public string Token { get; set; }
 
