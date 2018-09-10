@@ -22,7 +22,7 @@ namespace QTrans.Models
     
         public long userid { get; set; }
         [DefaultValue("NA")]
-        public string emailaddress { get; set; }
+        public string emailaddress { get; set; } = "NA";
         [DefaultValue("NA")]
         public string firstname { get; set; }
         [DefaultValue("NA")]
