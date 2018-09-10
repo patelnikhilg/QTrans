@@ -25,11 +25,11 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@City", company.city);
                 connector.AddInParameterWithValue("@UserId", company.userid);
                 connector.AddInParameterWithValue("@ComanyType", company.comanytype);
-                connector.AddOutParameterWithValue("@identity", 0);
-                connector.AddOutParameterWithValue("@Message", string.Empty);
+                connector.AddOutParameterWithType("@identity", SqlDbType.BigInt);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                rowEffected = connector.ExceuteNonQuery();
                 message = connector.GetParamaeterValue("@Message").ToString();
                 identity = Convert.ToInt64(connector.GetParamaeterValue("@identity"));
-                rowEffected = connector.ExceuteNonQuery();
             }
 
             return rowEffected > 0;
@@ -41,9 +41,9 @@ namespace QTrans.DataAccess
             using (DBConnector connector = new DBConnector("Usp_GetCompanyDetailsById", true))
             {                
                 connector.AddInParameterWithValue("@CompanyId", companyId);
-                connector.AddOutParameterWithValue("@Message", string.Empty);
-                message = connector.GetParamaeterValue("@Message").ToString();
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 dt = connector.GetDataTable();
+                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return dt;

@@ -151,6 +151,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Bidding\BiddingDetails.cs" />
+    <Compile Include="Models\Bidding\BiddingProfile.cs" />
+    <Compile Include="Models\Common\Materialtype.cs" />
+    <Compile Include="Models\Common\Packagetype.cs" />
+    <Compile Include="Models\Common\Transporttype.cs" />
+    <Compile Include="Models\Common\Vehicletype.cs" />
+    <Compile Include="Models\Posting\PostingDetails.cs" />
+    <Compile Include="Models\Posting\PostingProfile.cs" />
+    <Compile Include="Models\Users\Company.cs" />
+    <Compile Include="Models\Users\UserProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -195,7 +205,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -25,11 +25,11 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@Description", posting.description);
                 connector.AddInParameterWithValue("@PackageTypeId", posting.packagetypeid);
                 connector.AddInParameterWithValue("@PackageTypeDesc  ", posting.packagetypedesc);
-                connector.AddOutParameterWithValue("@identity", 0);
-                connector.AddOutParameterWithValue("@Message", string.Empty);
+                connector.AddOutParameterWithType("@identity", SqlDbType.BigInt);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                rowEffected = connector.ExceuteNonQuery();
                 message = connector.GetParamaeterValue("@Message").ToString();
                 identity = Convert.ToInt64(connector.GetParamaeterValue("@identity"));
-                rowEffected = connector.ExceuteNonQuery();
             }
 
             return rowEffected > 0;
@@ -67,9 +67,9 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@TollTaxInclude", postingDetails.tolltaxinclude);
                 connector.AddInParameterWithValue("@Remark", postingDetails.remark);
                 connector.AddInParameterWithValue("@LoadingType", postingDetails.loadingtype);
-                connector.AddOutParameterWithValue("@Message", string.Empty);
-                message = connector.GetParamaeterValue("@Message").ToString();
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
+                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return rowEffected > 0;
@@ -81,9 +81,9 @@ namespace QTrans.DataAccess
             using (DBConnector connector = new DBConnector("Usp_GetPostingById", true))
             {
                 connector.AddInParameterWithValue("@postingId", postingId);
-                connector.AddOutParameterWithValue("@Message", string.Empty);
-                message = connector.GetParamaeterValue("@Message").ToString();
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 dt = connector.GetDataTable();
+                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return dt;
@@ -95,9 +95,9 @@ namespace QTrans.DataAccess
             using (DBConnector connector = new DBConnector("Usp_GetPostingDetailsById", true))
             {
                 connector.AddInParameterWithValue("@postingId", postingId);
-                connector.AddOutParameterWithValue("@Message", string.Empty);
-                message = connector.GetParamaeterValue("@Message").ToString();
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 ds = connector.GetDataSet();
+                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return ds;

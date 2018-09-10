@@ -33,11 +33,12 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@GST", user.gst);
                 connector.AddInParameterWithValue("@AadhaarNo", user.aadhaarno);
               //  connector.AddInParameterWithValue("@AreaPreferenceDetails", DataAccessUtility.ToDataTable<AreaPreference>(user.areaPreferences.ToList()));
-                connector.AddOutParameterWithValue("@identity", 0);
-                connector.AddOutParameterWithValue("@Message", string.Empty);
+                connector.AddOutParameterWithType("@identity", SqlDbType.BigInt);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                rowEffected = connector.ExceuteNonQuery();
                 message = connector.GetParamaeterValue("@Message").ToString();
                 identity = Convert.ToInt64(connector.GetParamaeterValue("@identity"));
-                rowEffected = connector.ExceuteNonQuery();                
+
             }
 
             return rowEffected > 0;
@@ -49,11 +50,11 @@ namespace QTrans.DataAccess
             using (DBConnector connector = new DBConnector("Usp_InsertUserCompanyMapping", true))
             {
                 connector.AddInParameterWithValue("@UserId", userId);
-                connector.AddOutParameterWithValue("@CompanyId", companyId);
-                connector.AddOutParameterWithValue("@TransportTypeId", TransportTypeId);
-                connector.AddOutParameterWithValue("@Message", string.Empty);
-                message = connector.GetParamaeterValue("@Message").ToString();
+                connector.AddInParameterWithValue("@CompanyId", companyId);
+                connector.AddInParameterWithValue("@TransportTypeId", TransportTypeId);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
+                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return rowEffected > 0;
@@ -65,9 +66,10 @@ namespace QTrans.DataAccess
             using (DBConnector connector = new DBConnector("Usp_GetUserDetailsById", true))
             {                
                 connector.AddInParameterWithValue("@UserId", id);
-                connector.AddOutParameterWithValue("@Message", string.Empty);
-                message = connector.GetParamaeterValue("@Message").ToString();
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 dt=connector.GetDataTable();
+                message = connector.GetParamaeterValue("@Message").ToString();
+
             }
 
             return dt;
@@ -79,9 +81,9 @@ namespace QTrans.DataAccess
             using (DBConnector connector = new DBConnector("Usp_GetUserDetailsBytoken", true))
             {
                 connector.AddInParameterWithValue("@token", token);
-                connector.AddOutParameterWithValue("@Message", string.Empty);
-                message = connector.GetParamaeterValue("@Message").ToString();
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 dt = connector.GetDataTable();
+                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return dt;
@@ -94,10 +96,10 @@ namespace QTrans.DataAccess
             {
                 connector.AddInParameterWithValue("@UserId", id);
                 connector.AddInParameterWithValue("@OTP", OTP);
-                connector.AddOutParameterWithValue("@IsMobile", isMobile); // if true means mobile verification otherwise email verification
-                connector.AddOutParameterWithValue("@Message", string.Empty);
-                message = connector.GetParamaeterValue("@Message").ToString();
+                connector.AddInParameterWithValue("@IsMobile", isMobile); // if true means mobile verification otherwise email verification
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
+                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return rowEffected > 0;
@@ -110,9 +112,9 @@ namespace QTrans.DataAccess
             {
                 connector.AddInParameterWithValue("@UserId", userId);
                 connector.AddInParameterWithValue("@Token", token);
-                connector.AddOutParameterWithValue("@Message", string.Empty);
-                message = connector.GetParamaeterValue("@Message").ToString();
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
+                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return rowEffected > 0;
@@ -126,10 +128,10 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@MobileNumber", mobilenumber);
                 connector.AddInParameterWithValue("@emailaddres", emailaddres);
                 connector.AddInParameterWithValue("@OTP", OTP);
-                connector.AddOutParameterWithValue("@IsMobile", isMobile); // if true means mobile verification otherwise email verification
-                connector.AddOutParameterWithValue("@Message", string.Empty);
-                message = connector.GetParamaeterValue("@Message").ToString();
+                connector.AddInParameterWithValue("@IsMobile", isMobile); // if true means mobile verification otherwise email verification
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
+                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return rowEffected > 0;
@@ -143,9 +145,9 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@MobileNumber", mobilenumber);
                 connector.AddInParameterWithValue("@emailaddres", emailaddres);
                 connector.AddInParameterWithValue("@password", password);
-                connector.AddOutParameterWithValue("@Message", string.Empty);
-                message = connector.GetParamaeterValue("@Message").ToString();
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 dt = connector.GetDataTable();
+                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return dt;
@@ -159,9 +161,9 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@MobileNumber", mobilenumber);
                 connector.AddInParameterWithValue("@emailaddres", emailaddres);
                 connector.AddInParameterWithValue("@password", password);
-                connector.AddOutParameterWithValue("@Message", string.Empty);
-                message = connector.GetParamaeterValue("@Message").ToString();
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
+                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return rowEffected > 0;
@@ -174,9 +176,9 @@ namespace QTrans.DataAccess
             {
                 connector.AddInParameterWithValue("@MobileNumber", mobilenumber);
                 connector.AddInParameterWithValue("@emailaddres", emailaddres);                
-                connector.AddOutParameterWithValue("@Message", string.Empty);
-                message = connector.GetParamaeterValue("@Message").ToString();
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 dt = connector.GetDataTable();
+                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return dt;

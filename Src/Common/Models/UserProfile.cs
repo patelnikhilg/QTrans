@@ -32,13 +32,13 @@ namespace QTrans.Models
         public string mobilenumber { get; set; } = "NA";
         [DefaultValue("NA")]
         public string landlinenumber { get; set; } = "NA";
-        public Nullable<System.DateTime> dob { get; set; } = DateTime.Now
+        public Nullable<System.DateTime> dob { get; set; } = DateTime.Now;
         [DefaultValue("NA")]
         public string addressline1 { get; set; } = "NA";
         [DefaultValue("NA")]
         public string addressline2 { get; set; } = "NA";
         [DefaultValue("NA")]
-        public int pincode { get; set; } = "NA";
+        public int pincode { get; set; } =0;
         [DefaultValue("NA")]
         public string photo { get; set; } = "NA";
         [DefaultValue("NA")]
@@ -65,6 +65,8 @@ namespace QTrans.Models
         public int OTP { get; set; } = 0;
 
         public string Token { get; set; }
+
+        public string password { get; set; } = "NA";
 
         public ICollection<AreaPreference> areaPreferences { get; set; }
     }

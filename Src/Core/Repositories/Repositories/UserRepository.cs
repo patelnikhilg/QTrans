@@ -20,11 +20,11 @@ namespace QTrans.Repositories
             UserProfile user = new UserProfile();
             user.mobilenumber = mobileNo;
             user.OTP = CommonFunction.GenerateOTP();
-            long userid;
-            if (instanceUser.InsertUpdateUserDetails(user, out userid, out message))
+            long identity;
+            if (instanceUser.InsertUpdateUserDetails(user, out identity, out message))
             {
-                user.userid = userid;
-                new CompanyRepository(userid).CompanyRegistration(new Company(), out message);
+                user.userid = identity;
+                new CompanyRepository(identity).CompanyRegistration(new Company() { userid = identity }, out message);
                 return user;
             }
 

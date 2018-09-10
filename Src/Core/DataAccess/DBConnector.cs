@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -14,7 +15,7 @@ namespace QTrans.DataAccess
         int attemp = byte.MinValue;
         SqlConnection sqlConnection;
         SqlCommand sqlCommand;
-        private string connectionString = @"Data Source=NIK\SQLEXPRESS;Initial Catalog=QTrans;User ID=QTrans;Password=nikhil;";
+        private string connectionString = ConfigurationManager.AppSettings["QTransConnectionString"].ToString();
         public DBConnector(string inlineQuery, bool isSP)
         {
             this.sqlConnection = new SqlConnection(this.connectionString);
@@ -40,6 +41,21 @@ namespace QTrans.DataAccess
             {
                 Direction = ParameterDirection.Output
             };
+            sqlCommand.Parameters.Add(param);
+        }
+
+        public void AddOutParameterWithType(string name, SqlDbType type)
+        {
+            SqlParameter param = new SqlParameter(name, type)
+            {
+                Direction = ParameterDirection.Output
+            };
+
+            if(name == "@Message")
+            {
+                param.Size = 100;
+            }
+
             sqlCommand.Parameters.Add(param);
         }
 
