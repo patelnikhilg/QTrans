@@ -125,6 +125,15 @@ namespace QTrans.Repositories
             return user;
         }
 
+        public UserProfile Login(string username,string password, out string message)
+        {
+            message = string.Empty;
+            var dt = instanceUser.UserLogIn(username, password, out message);
+            var lst = DataAccessUtility.ConvertToList<UserProfile>(dt);
+            UserProfile user = lst.Count > 0 ? lst[0] : null;
+            return user;
+        }
+
         public bool UpdateMobileEmailVerification(string mobilenumber, string emailaddres, bool isMobile, int OTP, out long userid, out string token, out string message)
         {
             message = string.Empty;

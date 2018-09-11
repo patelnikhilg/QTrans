@@ -157,13 +157,12 @@ namespace QTrans.DataAccess
             return rowEffected > 0;
         }
 
-        public DataTable UserLogIn(string mobilenumber, string emailaddres,string password, out string message)
+        public DataTable UserLogIn(string username,string password, out string message)
         {
             DataTable dt = null;
             using (DBConnector connector = new DBConnector("Usp_GetUserDetailsByUserLogin", true))
             {
-                connector.AddInParameterWithValue("@MobileNumber", mobilenumber);
-                connector.AddInParameterWithValue("@emailaddres", emailaddres);
+                connector.AddInParameterWithValue("@username", username);
                 connector.AddInParameterWithValue("@password", password);
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 dt = connector.GetDataTable();

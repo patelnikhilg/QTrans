@@ -29,6 +29,11 @@ namespace QTrans.WebPortal.Models
         [StringLength(50)]
         public string emailaddress { get; set; }
 
+        [Required(ErrorMessage = "The password is required")]
+        [DisplayName("Password")]
+        [StringLength(10)]
+        public string Password { get; set; }
+
         [DisplayName("First Name")]
         [Required(ErrorMessage = "The first name is required")]
         [StringLength(20)]
@@ -65,7 +70,7 @@ namespace QTrans.WebPortal.Models
         [StringLength(150)]
         public string addressline2 { get; set; }
 
-        [DisplayName("Address 1")]
+        [DisplayName("Pincode")]
         [Required(ErrorMessage = "The pincode is required")]
         public int pincode { get; set; }
 

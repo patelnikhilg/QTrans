@@ -7,7 +7,7 @@ using System.Web;
 
 namespace QTrans.WebPortal.Models.Login
 {
-    public class Login
+    public class UserLogin
     {
         [Required(ErrorMessage = "User Name is required")]
         [StringLength(50)]

@@ -67,8 +67,8 @@ namespace QTrans.Repositories
         {
             message = string.Empty;
             PostingProfile postingProfile = null;
-            var ds = this.instancePosting.GetByPostingDetailsId(postingId, out message);
-            var lstProfile = DataAccessUtility.ConvertToList<PostingProfile>(ds.Tables[0]);
+            var dt = this.instancePosting.GetById(postingId, out message);
+            var lstProfile = DataAccessUtility.ConvertToList<PostingProfile>(dt);
             postingProfile = lstProfile.Count > 0 ? lstProfile[0] : null;
             return postingProfile;
         }

@@ -75,7 +75,7 @@ namespace QTrans.DataAccess
             return rowEffected > 0;
         }
 
-        public DataTable GetById(int postingId, out string message)
+        public DataTable GetById(long postingId, out string message)
         {
             DataTable dt = null;
             using (DBConnector connector = new DBConnector("Usp_GetPostingById", true))

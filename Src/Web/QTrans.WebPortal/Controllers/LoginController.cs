@@ -1,9 +1,11 @@
-﻿using System.Web.Mvc;
+﻿using QTrans.Repositories;
+using QTrans.WebPortal.Models.Login;
+using System.Web.Mvc;
 
 namespace QTrans.WebPortal.Controllers
 {
     public class LoginController : Controller
-    {       
+    {
 
         // GET: Login
         public ActionResult Login()
@@ -13,17 +15,27 @@ namespace QTrans.WebPortal.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult Login(FormCollection collection)
+        public ActionResult Login(UserLogin login)
         {
             try
             {
-                ////TODO: logic here
-                return RedirectToAction("Details/");
+                if (ModelState.IsValid)
+                {
+                    var message = string.Empty;
+                    UserRepository repository = new UserRepository();
+                    var user = repository.Login(login.UserName, login.Password, out message);
+                    if (user != null)
+                    {
+                        return RedirectToAction("Details/" + user.userid);
+                    }
+                }
             }
             catch
             {
-                return View();
+                ////TODO: log the error.
             }
+
+            return View();
         }
 
         // GET: Logout

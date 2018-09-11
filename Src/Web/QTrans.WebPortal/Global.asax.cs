@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using QTrans.WebPortal.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +18,16 @@ namespace QTrans.WebPortal
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<UserProfile, QTrans.Models.UserProfile>().ForMember(dt=> dt.areaPreferences, options => options.Ignore()) ;
+                
+                cfg.CreateMap<Company, QTrans.Models.Company>();
+
+            });
+
+            Mapper.AssertConfigurationIsValid();
         }
     }
 }

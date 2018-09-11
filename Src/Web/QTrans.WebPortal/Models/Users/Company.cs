@@ -44,7 +44,7 @@ namespace QTrans.WebPortal.Models
         public long userid { get; set; }
 
         [DisplayName("Company Type")]
-        public int comanytype { get; set; }
+        public int companytype { get; set; }
 
         [DisplayName("Creation Date")]
         public System.DateTime createddate { get; set; }

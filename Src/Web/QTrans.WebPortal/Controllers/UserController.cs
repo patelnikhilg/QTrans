@@ -1,4 +1,7 @@
-﻿using QTrans.WebPortal.Common;
+﻿using AutoMapper;
+using QTrans.Repositories;
+using QTrans.WebPortal.Common;
+using QTrans.WebPortal.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -34,17 +37,29 @@ namespace QTrans.WebPortal.Controllers
         // POST: User/Create
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(UserProfile userProfile)
         {
             try
             {
-               
-                return RedirectToAction("Details/");
+                if (ModelState.IsValid)
+                {
+                    var message = string.Empty;
+                    UserRepository repository = new UserRepository();
+                    //Perform the conversion and fetch the destination view model
+                    var userProf = Mapper.Map<QTrans.Models.UserProfile>(userProfile);
+                    var user = repository.WebRegistration(userProf, out message);
+                    if (user != null)
+                    {
+                        return RedirectToAction("Details/" + user.userid);
+                    }
+                }
             }
             catch
             {
-                return View();
+                ////TODO: log the error.
             }
+
+            return View();
         }
 
         // GET: User/Edit/5
