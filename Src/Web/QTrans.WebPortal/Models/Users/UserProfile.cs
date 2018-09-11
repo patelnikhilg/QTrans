@@ -12,6 +12,7 @@ namespace QTrans.WebPortal.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public  class UserProfile
     {
@@ -21,43 +22,92 @@ namespace QTrans.WebPortal.Models
         }
     
         public long userid { get; set; }
-        
+
+        [Required(ErrorMessage = "The email address is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [DisplayName("Email Address")]
+        [StringLength(50)]
         public string emailaddress { get; set; }
-        
+
+        [DisplayName("First Name")]
+        [Required(ErrorMessage = "The first name is required")]
+        [StringLength(20)]
         public string firstname { get; set; }
-        
+
+        [DisplayName("Middle Name")]
+        [Required(ErrorMessage = "The middle name is required")]
+        [StringLength(20)]
         public string middlename { get; set; }
-        
+
+        [DisplayName("Last Name")]
+        [Required(ErrorMessage = "The last name is required")]
+        [StringLength(20)]
         public string lastname { get; set; }
+
+        [DisplayName("Mobile No.")]
+        [Required(ErrorMessage = "The mobile number is required")]
+        [StringLength(10)]
         public string mobilenumber { get; set; }
-        
+
+        [DisplayName("Landline Name")]
+        [StringLength(15)]
         public string landlinenumber { get; set; }
+
+        [DisplayName("DOB Name")]
         public Nullable<System.DateTime> dob { get; set; }
-        
+
+        [DisplayName("Address 1")]
+        [Required(ErrorMessage = "The Address 1 is required")]
+        [StringLength(150)]
         public string addressline1 { get; set; }
-        
+
+        [DisplayName("Address 2")]        
+        [StringLength(150)]
         public string addressline2 { get; set; }
-        
+
+        [DisplayName("Address 1")]
+        [Required(ErrorMessage = "The pincode is required")]
         public int pincode { get; set; }
-        
+
+        [DisplayName("Photo")]
         public string photo { get; set; }
-        
+
+        [DisplayName("Country")]
+        [Required(ErrorMessage = "The Country is required")]
+        [StringLength(15)]
         public string country { get; set; }
-        
+
+        [DisplayName("State")]
+        [Required(ErrorMessage = "The state is required")]
+        [StringLength(20)]
         public string state { get; set; }
-        
+
+        [DisplayName("District")]
+        [Required(ErrorMessage = "The District is required")]
+        [StringLength(20)]
         public string district { get; set; }
-        
+
+        [DisplayName("City")]
+        [Required(ErrorMessage = "The city is required")]
+        [StringLength(20)]
         public string city { get; set; }
-        
+
+        [DisplayName("District")]
+        [StringLength(20)]
         public string area { get; set; }
 
         public bool mobileverification { get; set; }
         public bool emailverification { get; set; }
-        
+
+        [DisplayName("PanCard No.")]
+        [StringLength(10)]
         public string pan { get; set; }
-        
+
+        [DisplayName("GST No.")]
+        [StringLength(16)]
         public string gst { get; set; }
+
+        [DisplayName("Aadhar No.")]
         public Nullable<long> aadhaarno { get; set; }
         public DateTime createddate { get; set; }
         public Nullable<DateTime> modifydate { get; set; }

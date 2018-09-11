@@ -20,23 +20,36 @@ namespace QTrans.WebPortal.Models
         }
     
         public long companyid { get; set; }
-        
+
+        [DisplayName("Company Name")]
         public string companyname { get; set; }
-        
+
+        [DisplayName("Address")]
         public string address { get; set; }
-        
+
+        [DisplayName("Office Tel.No.")]
         public string telenumber { get; set; }
+
+        [DisplayName("Alternet Tel.No.")]
         public string alternettelnumber { get; set; }
-        
+
+        [DisplayName("Country")]
         public string country { get; set; }
-        
+
+        [DisplayName("State")]
         public string state { get; set; }
-        
+
+        [DisplayName("City")]
         public string city { get; set; }
         public long userid { get; set; }
-        
-        public int comanytype { get; set; } 
+
+        [DisplayName("Company Type")]
+        public int comanytype { get; set; }
+
+        [DisplayName("Creation Date")]
         public System.DateTime createddate { get; set; }
+
+        [DisplayName("Last updated Date")]
         public Nullable<System.DateTime> modifydate { get; set; }
     }
 }
