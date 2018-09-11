@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QTrans.Models
+namespace QTrans.WebPortal.Models
 {
     using System;
     using System.Collections.Generic;
@@ -17,8 +17,7 @@ namespace QTrans.Models
         public PostingDetails()
         {
         }
-    
-        public PostingProfile postingProfile { get; set; }
+            
         public long dtlpostingid { get; set; }
         public long postingid { get; set; }
         public int materialweight { get; set; }

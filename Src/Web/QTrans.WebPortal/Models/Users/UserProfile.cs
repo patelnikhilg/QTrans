@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QTrans.Models
+namespace QTrans.WebPortal.Models
 {
     using System;
     using System.Collections.Generic;

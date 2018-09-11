@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QTrans.WebPortal.Common;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace QTrans.WebPortal.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         //// GET: User
         //public ActionResult Index()
@@ -23,6 +24,7 @@ namespace QTrans.WebPortal.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         // GET: User/Create
         public ActionResult Create()
         {
@@ -30,6 +32,7 @@ namespace QTrans.WebPortal.Controllers
         }
 
         // POST: User/Create
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
