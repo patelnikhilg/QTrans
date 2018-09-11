@@ -156,7 +156,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BiddingController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -189,6 +188,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\BiddingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PostingController.cs" />
@@ -295,10 +295,6 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Contract\Contract.csproj">
-      <Project>{bada55a7-3dbb-4f00-9372-9fbf790475fb}</Project>
-      <Name>Contract</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Common\Logging\Logging.csproj">
       <Project>{862009bf-ccc6-45ef-a82e-3195b86fcd6e}</Project>
       <Name>Logging</Name>

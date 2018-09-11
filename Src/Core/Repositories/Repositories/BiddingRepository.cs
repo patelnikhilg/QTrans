@@ -14,11 +14,10 @@ namespace QTrans.Repositories
             this.instanceBidding = new BiddingDataAccess();
         }
 
-        public BiddingProfile PostingCreation(long postingId, BiddingProfile bidding, out string message)
+        public BiddingProfile BiddingSubmition(BiddingProfile bidding, out string message)
         {
             long biddingId = 0;
-            message = string.Empty;
-            bidding.postingid = postingId;
+            message = string.Empty;            
             BiddingProfile biddingDetails = null;
             if (this.instanceBidding.InsertUpdateBiddingDetails(bidding, out biddingId, out message))
             {
@@ -29,7 +28,7 @@ namespace QTrans.Repositories
             }
 
             return biddingDetails;
-        }
+        }      
 
         public BiddingProfile GetBiddingDetailById(long biddingId, out string message)
         {
@@ -41,16 +40,33 @@ namespace QTrans.Repositories
             return biddingDetails;
         }
 
-        public List<BiddingProfile> GetPostingListByPostingId(long postingId, out string message)
+        /// <summary>
+        /// Get list of bidding by posting and user id.
+        /// </summary>
+        /// <param name="postingId"></param>
+        /// <param name="userId"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public List<BiddingProfile> GetBiddingDetailById(long postingId,long userId, out string message)
         {
             message = string.Empty;
-            return null;
+            var dt = this.instanceBidding.GetByPostingUserId(postingId, userId, out message);
+            var lst = DataAccessUtility.ConvertToList<BiddingProfile>(dt);
+            return lst.Count > 0 ? lst : null;
         }
 
-        public List<BiddingProfile> GetBiddingListByUserId(long userId, out string message)
+        /// <summary>
+        /// Get list of bidding done by userid.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public List<BiddingProfile> GetListBiddingDetailByUserId(long userId, out string message)
         {
             message = string.Empty;
-            return null;
+            var dt = this.instanceBidding.GetByUserId(userId, out message);
+            var lst = DataAccessUtility.ConvertToList<BiddingProfile>(dt);
+            return lst;
         }
     }
 }

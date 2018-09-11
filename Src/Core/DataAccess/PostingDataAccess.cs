@@ -102,5 +102,19 @@ namespace QTrans.DataAccess
 
             return ds;
         }
+        
+        public DataTable GetListPostingByUserId(long userId, out string message)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetListPostingByUserId", true))
+            {
+                connector.AddInParameterWithValue("@userId", userId);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                dt = connector.GetDataTable();
+                message = connector.GetParamaeterValue("@Message").ToString();
+            }
+
+            return dt;
+        }
     }
 }

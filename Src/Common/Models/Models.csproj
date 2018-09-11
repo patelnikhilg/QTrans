@@ -61,12 +61,6 @@
     <Compile Include="Vehicletype.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Contract\Contract.csproj">
-      <Project>{bada55a7-3dbb-4f00-9372-9fbf790475fb}</Project>
-      <Name>Contract</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="ViewModel\Bidding\" />
     <Folder Include="ViewModel\Common\" />
     <Folder Include="ViewModel\Posting\" />

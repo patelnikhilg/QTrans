@@ -48,10 +48,6 @@
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Contract\Contract.csproj">
-      <Project>{bada55a7-3dbb-4f00-9372-9fbf790475fb}</Project>
-      <Name>Contract</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Common\Logging\Logging.csproj">
       <Project>{862009bf-ccc6-45ef-a82e-3195b86fcd6e}</Project>
       <Name>Logging</Name>

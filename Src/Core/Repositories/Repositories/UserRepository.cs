@@ -61,7 +61,7 @@ namespace QTrans.Repositories
 
             return userDetail;
         }
-
+               
         public UserProfile UpdateUserProfile(UserProfile user, out string message)
         {
             message = string.Empty;           

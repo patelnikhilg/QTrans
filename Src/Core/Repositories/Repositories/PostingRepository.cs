@@ -52,7 +52,7 @@ namespace QTrans.Repositories
 
         public PostingDetails GetPostingDetailById(long postingId, out string message)
         {
-             message = string.Empty;
+            message = string.Empty;
             PostingDetails postingDetails = null;
             var ds = this.instancePosting.GetByPostingDetailsId(postingId, out message);
             var lstProfile = DataAccessUtility.ConvertToList<PostingProfile>(ds.Tables[0]);
@@ -63,10 +63,23 @@ namespace QTrans.Repositories
             return postingDetails;
         }
 
-        public List<PostingDetails> GetPostingListByUserId(long userId, out string message)
+        public PostingProfile GetPostingProfileById(long postingId, out string message)
         {
             message = string.Empty;
-            return null;
+            PostingProfile postingProfile = null;
+            var ds = this.instancePosting.GetByPostingDetailsId(postingId, out message);
+            var lstProfile = DataAccessUtility.ConvertToList<PostingProfile>(ds.Tables[0]);
+            postingProfile = lstProfile.Count > 0 ? lstProfile[0] : null;
+            return postingProfile;
+        }
+
+        public List<PostingProfile> GetPostingListByUserId(long userId, out string message)
+        {
+            message = string.Empty;
+            var dt = this.instancePosting.GetListPostingByUserId(userId, out message);
+            var lstProfile = DataAccessUtility.ConvertToList<PostingProfile>(dt);
+
+            return lstProfile.Count > 0 ? lstProfile : null; 
         }
     }
 }

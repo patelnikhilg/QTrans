@@ -21,6 +21,11 @@ namespace QTrans.WebAPI.Controllers
             {
                 log.Info(message);
             }
+            else
+            {
+                message = "OK";
+            }
+
             return Ok(new { Status = message, data = result });
         }
 
@@ -35,11 +40,16 @@ namespace QTrans.WebAPI.Controllers
             {
                 log.Info(message);
             }
+            else
+            {
+                message = "OK";
+            }
+
             return Ok(new { Status = message, data = result });
         }
 
 
-        [Route("GetPosting")]
+        [Route("GetPostingDetailsById")]
         [HttpGet]
         public IHttpActionResult GetpostingById(long postingId, long userId)
         {
@@ -49,6 +59,48 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+            }
+            else
+            {
+                message = "OK";
+            }
+
+            return Ok(new { Status = message, data = result });
+        }
+
+        [Route("GetPostingProfileById")]
+        [HttpGet]
+        public IHttpActionResult GetPostingProfileById(long postingId, long userId)
+        {
+            string message = string.Empty;
+            PostingRepository repository = new PostingRepository(userId);
+            var result = repository.GetPostingProfileById(postingId, out message);
+            if (!string.IsNullOrEmpty(message))
+            {
+                log.Info(message);
+            }
+            else
+            {
+                message = "OK";
+            }
+
+            return Ok(new { Status = message, data = result });
+        }
+        
+        [Route("GetPostingListById")]
+        [HttpGet]
+        public IHttpActionResult GetPostingProfileListById(long userId)
+        {
+            string message = string.Empty;
+            PostingRepository repository = new PostingRepository(userId);
+            var result = repository.GetPostingListByUserId(userId, out message);
+            if (!string.IsNullOrEmpty(message))
+            {
+                log.Info(message);
+            }
+            else
+            {
+                message = "OK";
             }
 
             return Ok(new { Status = message, data = result });

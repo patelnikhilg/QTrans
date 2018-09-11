@@ -81,11 +81,11 @@ namespace QTrans.WebAPI.Controllers
 
         [Route("UpdateUserProfile")]
         [HttpPost]
-        public IHttpActionResult UpdateUserProfile([FromBody] UserProfile changePassword)
+        public IHttpActionResult UpdateUserProfile([FromBody] UserProfile userProfile)
         {
             string message = string.Empty;
             UserRepository userRepository = new UserRepository();
-            var result = userRepository.UpdateUserProfile(changePassword, out message);
+            var result = userRepository.UpdateUserProfile(userProfile, out message);
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);

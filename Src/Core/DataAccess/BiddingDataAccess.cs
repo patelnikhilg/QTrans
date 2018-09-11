@@ -48,6 +48,35 @@ namespace QTrans.DataAccess
             }
 
             return dt;
-        }        
+        }
+
+        public DataTable GetByPostingUserId(long postingId,long userId, out string message)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetBiddingDetailsByPostingId", true))
+            {
+                connector.AddInParameterWithValue("@postingId", postingId);
+                connector.AddInParameterWithValue("@userId", userId);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                dt = connector.GetDataTable();
+                message = connector.GetParamaeterValue("@Message").ToString();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetByUserId(long userId, out string message)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetBiddingDetailsByUserId", true))
+            {
+                connector.AddInParameterWithValue("@userId", userId);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                dt = connector.GetDataTable();
+                message = connector.GetParamaeterValue("@Message").ToString();
+            }
+
+            return dt;
+        }
     }
 }
