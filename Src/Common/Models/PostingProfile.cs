@@ -11,7 +11,9 @@ namespace QTrans.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public  class PostingProfile
     {
         public PostingProfile()
@@ -19,13 +21,35 @@ namespace QTrans.Models
         }
     
         public long postingid { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [DisplayName("Post Type")]
+        [StringLength(10)]
         public string posttype { get; set; }
         public long userid { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [DisplayName("Source Address")]
+        [StringLength(200)]
         public string soureaddress { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [DisplayName("Destination Address")]
+        [StringLength(200)]
         public string destinationadress { get; set; }
+
+        [RegularExpression(Constants.RegexIntInput, ErrorMessage = Constants.StringNumeric)]
+        [DisplayName("Material Type")]
         public short materialtypeid { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [DisplayName("Description")]
+        [StringLength(200)]
         public string description { get; set; }
+
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [DisplayName("Package Type")]
+        [StringLength(200)]
         public short packagetypeid { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [DisplayName("Package Description")]
+        [StringLength(200)]
         public string packagetypedesc { get; set; }
         public System.DateTime createddate { get; set; }
         public Nullable<System.DateTime> modifydate { get; set; }

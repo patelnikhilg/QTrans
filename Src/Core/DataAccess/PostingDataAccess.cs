@@ -45,7 +45,7 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@Materialweight", postingDetails.materialweight);
                 connector.AddInParameterWithValue("@MaterialPhotos", postingDetails.materialphotos);
                 connector.AddInParameterWithValue("@PackingDimension", postingDetails.packingdimension);
-                connector.AddInParameterWithValue("@NumberPckets", postingDetails.numberpckets);
+                connector.AddInParameterWithValue("@NumberPckets", postingDetails.numberpackets);
                 connector.AddInParameterWithValue("@Vehicletype", postingDetails.vehicletype);
                 connector.AddInParameterWithValue("@NoVehicle", postingDetails.novehicle);
                 connector.AddInParameterWithValue("@DeliveryPeriodDay", postingDetails.deliveryperiodday);

@@ -11,7 +11,9 @@ namespace QTrans.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public  class MaterialType
     {
         public MaterialType()
@@ -19,7 +21,15 @@ namespace QTrans.Models
         }
     
         public short materialtypeid { get; set; }
+
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [Required(ErrorMessage = "The Material Type is required")]
+        [DisplayName("Materila Type")]
+        [StringLength(20)]
         public string materialtype { get; set; }
+
+        [DisplayName("Description")]
+        [StringLength(200)]
         public string description { get; set; }
     }
 }

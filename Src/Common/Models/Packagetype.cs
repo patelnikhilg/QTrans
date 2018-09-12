@@ -11,7 +11,9 @@ namespace QTrans.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public  class PackageType
     {
         public PackageType()
@@ -19,7 +21,15 @@ namespace QTrans.Models
         }
     
         public short packagetypeid { get; set; }
+
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [Required(ErrorMessage = "The Package Type is required")]
+        [DisplayName("Package Type")]
+        [StringLength(20)]
         public string packagetype { get; set; }
+
+        [DisplayName("Description")]
+        [StringLength(200)]
         public string description { get; set; }
     
     }

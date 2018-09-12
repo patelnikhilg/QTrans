@@ -24,7 +24,7 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@ServiceCharges", bidding.servicecharges);
                 connector.AddInParameterWithValue("@PaymentMethod", bidding.paymentmethod);
                 connector.AddInParameterWithValue("@Rating", bidding.rating);
-                connector.AddInParameterWithValue("@CancellationReson", bidding.cancellationreson);
+                connector.AddInParameterWithValue("@CancellationReson", bidding.cancellationreason);
                 connector.AddInParameterWithValue("@biggingDetails", DataAccessUtility.ToDataTable<BiddingDetails>(bidding.biddingDetails.ToList()));
                 connector.AddOutParameterWithType("@identity", SqlDbType.BigInt);
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);              

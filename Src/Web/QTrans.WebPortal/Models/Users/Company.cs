@@ -9,9 +9,11 @@
 
 namespace QTrans.WebPortal.Models
 {
+    using QTrans.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public  class Company
     {
@@ -21,28 +23,43 @@ namespace QTrans.WebPortal.Models
     
         public long companyid { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Company Name")]
+        [StringLength(100)]
         public string companyname { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Address")]
+        [StringLength(200)]
         public string address { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Office Tel.No.")]
+        [StringLength(16)]
         public string telenumber { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Alternet Tel.No.")]
+        [StringLength(16)]
         public string alternettelnumber { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Country")]
+        [StringLength(15)]
         public string country { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("State")]
+        [StringLength(20)]
         public string state { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("City")]
+        [StringLength(20)]
         public string city { get; set; }
         public long userid { get; set; }
 
+        [RegularExpression(Constants.RegexIntInput, ErrorMessage = Constants.StringNumeric)]
         [DisplayName("Company Type")]
         public int companytype { get; set; }
 

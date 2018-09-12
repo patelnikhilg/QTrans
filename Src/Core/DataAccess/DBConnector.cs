@@ -14,7 +14,7 @@ namespace QTrans.DataAccess
         //readonly int attemp = byte.MinValue;
         SqlConnection sqlConnection;
         SqlCommand sqlCommand;
-        private string connectionString = ConfigurationManager.AppSettings["QTransConnectionString"].ToString();
+        private string connectionString = ConfigurationManager.ConnectionStrings["QTransConnectionString"].ToString();
         public DBConnector(string inlineQuery, bool isSP)
         {
             this.sqlConnection = new SqlConnection(this.connectionString);

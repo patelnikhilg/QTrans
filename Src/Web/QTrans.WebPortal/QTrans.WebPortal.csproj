@@ -172,15 +172,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Bidding\BiddingDetails.cs" />
-    <Compile Include="Models\Bidding\BiddingProfile.cs" />
-    <Compile Include="Models\Common\Materialtype.cs" />
-    <Compile Include="Models\Common\Packagetype.cs" />
-    <Compile Include="Models\Common\Transporttype.cs" />
-    <Compile Include="Models\Common\Vehicletype.cs" />
     <Compile Include="Models\Login\Login.cs" />
-    <Compile Include="Models\Posting\PostingDetails.cs" />
-    <Compile Include="Models\Posting\PostingProfile.cs" />
     <Compile Include="Models\Users\Company.cs" />
     <Compile Include="Models\Users\UserPersonalDetails.cs" />
     <Compile Include="Models\Users\UserProfile.cs" />
@@ -283,6 +275,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Bidding\" />
+    <Folder Include="Models\Common\" />
+    <Folder Include="Models\Posting\" />
     <Folder Include="Views\Bidding\" />
     <Folder Include="Views\Posting\" />
   </ItemGroup>

@@ -11,17 +11,36 @@ namespace QTrans.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public  class InsuranceDetails
     {
         public long insuranceid { get; set; }
+
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [DisplayName("Insurance Name")]
+        [StringLength(50)]
         public string insurancename { get; set; }
+
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [DisplayName("Insurance Number")]
+        [StringLength(16)]
         public string insurancenumber { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [DisplayName("Company Number")]
+        [StringLength(50)]
         public string companyname { get; set; }
+                
+        [DisplayName("Description")]
+        [StringLength(150)]
         public string description { get; set; }
+
+        [DisplayName("Insurance Date")]
         public System.DateTime insurancedate { get; set; }
         public Nullable<System.DateTime> expiredate { get; set; }
         public long vehicleid { get; set; }
+
         public System.DateTime createddate { get; set; }
         public Nullable<System.DateTime> modifydate { get; set; }
     

@@ -11,7 +11,9 @@ namespace QTrans.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public  class BiddingProfile
     {
         public BiddingProfile()
@@ -23,13 +25,32 @@ namespace QTrans.Models
         public long dtlpostingid { get; set; }
         public long postingid { get; set; }
         public long userid { get; set; }
+
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [DisplayName("Amount")]        
         public decimal amount { get; set; }
+
+        [DisplayName("Comment")]
+        [StringLength(400)]
         public string biddercomment { get; set; }
+
+        [DisplayName("Status")]
         public short status { get; set; }
+
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [DisplayName("Service Charges")]
         public decimal servicecharges { get; set; }
         public Nullable<short> paymentmethod { get; set; }
+
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [DisplayName("Rating")]
         public Nullable<short> rating { get; set; }
-        public string cancellationreson { get; set; }
+
+        [DisplayName("Cancellation Reason")]
+        [StringLength(200)]
+        public string cancellationreason { get; set; }
+
+        [DisplayName("Bidding Date")]
         public Nullable<System.DateTime> createddate { get; set; }
         public Nullable<System.DateTime> modifydate { get; set; }
     

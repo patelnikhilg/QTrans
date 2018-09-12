@@ -11,18 +11,29 @@ namespace QTrans.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public  class BiddingDetails
     {
         public long dtlbiddingid { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [DisplayName("No of Vehicle")]
         public short vehicleno { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [DisplayName("Capacity of Vehicle")]
         public short capacity { get; set; }
         public Nullable<long> biddingid { get; set; }
     }
 
-    public class BiddinguserType
-    {
-        public short vehicleno { get; set; }
-        public short capacity { get; set; }
-    }
+    ////public class BiddinguserType
+    ////{
+    ////    [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+    ////    [DisplayName("No of Vehicle")]        
+    ////    public short vehicleno { get; set; }
+
+    ////    [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+    ////    [DisplayName("Capacity of Vehicle")]
+    ////    public short capacity { get; set; }
+    ////}
 }

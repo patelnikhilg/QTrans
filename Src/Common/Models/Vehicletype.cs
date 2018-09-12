@@ -11,11 +11,19 @@ namespace QTrans.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public  class VehicleType
     {
         public short vehicletypeid { get; set; }
-        public string vechicletype { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [Required(ErrorMessage = "The Vehicle Type is required")]
+        [DisplayName("Vehicle Type")]
+        [StringLength(20)]
+        public string vehicletype { get; set; }
+        [DisplayName("Description")]
+        [StringLength(200)]
         public string description { get; set; }
     }
 }

@@ -11,7 +11,9 @@ namespace QTrans.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public  class TransportType
     {
         public TransportType()
@@ -19,9 +21,20 @@ namespace QTrans.Models
         }
     
         public short transporttypeid { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [Required(ErrorMessage = "The Transport Type is required")]
+        [DisplayName("Transport Type")]
+        [StringLength(20)]
         public string transporttype { get; set; }
+
+        [DisplayName("Description")]
+        [StringLength(200)]
         public string description { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [Required(ErrorMessage = "The User Type is required")]
+        [DisplayName("User Type")]
+        [StringLength(20)]
         public string Usertype { get; set; }
 
     }

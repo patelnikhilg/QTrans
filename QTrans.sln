@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QTrans.WebPortal", "Src\Web
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleTest", "SampleTest", "{0DED4F75-551D-44F3-B4DE-685ABAC4C821}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleTest", "Src\Research\SampleTest\SampleTest.csproj", "{1130D568-438B-446D-BFD4-AF14CDB7F96B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{016F9002-707A-4EAE-8FA6-1766E8152348}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{016F9002-707A-4EAE-8FA6-1766E8152348}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{016F9002-707A-4EAE-8FA6-1766E8152348}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1130D568-438B-446D-BFD4-AF14CDB7F96B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1130D568-438B-446D-BFD4-AF14CDB7F96B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1130D568-438B-446D-BFD4-AF14CDB7F96B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1130D568-438B-446D-BFD4-AF14CDB7F96B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{81DBD1EC-FAC1-403A-8CF6-51A34A0A2692} = {8F563A7E-D995-47FA-BDE7-1CA0BC15B4A2}
 		{45BB3953-FCE5-44C5-9075-F001E2474ECE} = {16B3FB65-3D7B-4F59-A813-BD88C1A73113}
 		{016F9002-707A-4EAE-8FA6-1766E8152348} = {16B3FB65-3D7B-4F59-A813-BD88C1A73113}
+		{1130D568-438B-446D-BFD4-AF14CDB7F96B} = {0DED4F75-551D-44F3-B4DE-685ABAC4C821}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {960E7416-D611-425E-ADD8-BF7EEB898EA6}

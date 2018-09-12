@@ -9,6 +9,7 @@
 
 namespace QTrans.WebPortal.Models
 {
+    using QTrans.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -29,31 +30,37 @@ namespace QTrans.WebPortal.Models
         [StringLength(50)]
         public string emailaddress { get; set; }
 
+        [RegularExpression(Constants.RegexStringPasswordInput, ErrorMessage = Constants.StringPwdAlphNumeric)]
         [Required(ErrorMessage = "The password is required")]
         [DisplayName("Password")]
         [StringLength(10)]
         public string Password { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("First Name")]
         [Required(ErrorMessage = "The first name is required")]
         [StringLength(20)]
         public string firstname { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Middle Name")]
         [Required(ErrorMessage = "The middle name is required")]
         [StringLength(20)]
         public string middlename { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Last Name")]
         [Required(ErrorMessage = "The last name is required")]
         [StringLength(20)]
         public string lastname { get; set; }
 
+        [RegularExpression(Constants.RegexMobileNoInput, ErrorMessage = Constants.StringMobileNumber)]
         [DisplayName("Mobile No.")]
         [Required(ErrorMessage = "The mobile number is required")]
         [StringLength(10)]
         public string mobilenumber { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Landline Name")]
         [StringLength(15)]
         public string landlinenumber { get; set; }
@@ -61,42 +68,51 @@ namespace QTrans.WebPortal.Models
         [DisplayName("DOB Name")]
         public Nullable<System.DateTime> dob { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Address 1")]
         [Required(ErrorMessage = "The Address 1 is required")]
         [StringLength(150)]
         public string addressline1 { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Address 2")]        
         [StringLength(150)]
         public string addressline2 { get; set; }
 
+        [RegularExpression(Constants.RegexIntInput, ErrorMessage = Constants.StringNumeric)]
         [DisplayName("Pincode")]
         [Required(ErrorMessage = "The pincode is required")]
         public int pincode { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Photo")]
         public string photo { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Country")]
         [Required(ErrorMessage = "The Country is required")]
         [StringLength(15)]
         public string country { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("State")]
         [Required(ErrorMessage = "The state is required")]
         [StringLength(20)]
         public string state { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("District")]
         [Required(ErrorMessage = "The District is required")]
         [StringLength(20)]
         public string district { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("City")]
         [Required(ErrorMessage = "The city is required")]
         [StringLength(20)]
         public string city { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("District")]
         [StringLength(20)]
         public string area { get; set; }
@@ -104,14 +120,17 @@ namespace QTrans.WebPortal.Models
         public bool mobileverification { get; set; }
         public bool emailverification { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("PanCard No.")]
         [StringLength(10)]
         public string pan { get; set; }
 
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("GST No.")]
         [StringLength(16)]
         public string gst { get; set; }
 
+        [RegularExpression(Constants.RegexIntInput, ErrorMessage = Constants.StringNumeric)]
         [DisplayName("Aadhar No.")]
         public Nullable<long> aadhaarno { get; set; }
         public DateTime createddate { get; set; }
