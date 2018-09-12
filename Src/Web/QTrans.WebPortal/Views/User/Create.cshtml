@@ -55,7 +55,10 @@
                 </li>
                 <li role="Identity">
                     <a href="#Identity" role="tab" data-toggle="tab">Identity</a>
-                </li>               
+                </li>
+                <li role="AreaPeferance">
+                    <a href="#AreaPeferance" role="tab" data-toggle="tab">Area Peferance</a>
+                </li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
@@ -192,7 +195,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             @*<a class="btn-all btnPrevious">Previous</a>
-        <a class="btn-all btnNext">Next</a>*@
+                    <a class="btn-all btnNext">Next</a>*@
                             <input value="Previous" class="btn btn-default btnPrevious" />
                             <input value="Next" class="btn btn-default btnNext" />
                         </div>
@@ -206,15 +209,7 @@
                             @Html.EditorFor(model => model.photo, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.photo) } })
                             @Html.ValidationMessageFor(model => model.photo, "", new { @class = "text-danger" })
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.area, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.area, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.area) } })
-                            @Html.ValidationMessageFor(model => model.area, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                    </div>                
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.pan, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -240,14 +235,30 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10" style="float:left;">                            
+                        <div class="col-md-offset-2 col-md-10">
+                            @*<a class="btn-all btnPrevious">Previous</a>
+                <a class="btn-all btnNext">Next</a>*@
+                            <input value="Previous" class="btn btn-default btnPrevious" />
+                            <input value="Next" class="btn btn-default btnNext" />
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="AreaPeferance" style="margin-top:15px">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.area, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.area, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.area) } })
+                            @Html.ValidationMessageFor(model => model.area, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="float:left;">
                             <input value="Previous" class="btn btn-default btnPrevious" />
                             <span></span>
                             <input type="submit" value="Submit" class="btn btn-default" />
                         </div>
                     </div>
-                </div>               
-               
+                </div>
             </div>
 
         </div>

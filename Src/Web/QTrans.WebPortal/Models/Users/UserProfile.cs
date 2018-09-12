@@ -113,7 +113,7 @@ namespace QTrans.WebPortal.Models
         public string city { get; set; }
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
-        [DisplayName("District")]
+        [DisplayName("Area")]
         [StringLength(20)]
         public string area { get; set; }
 

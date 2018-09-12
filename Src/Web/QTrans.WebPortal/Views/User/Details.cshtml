@@ -1,210 +1,235 @@
-﻿@model QTrans.Models.UserProfile
+﻿@model QTrans.WebPortal.Models.UserProfile
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script type="text/javascript">       
+        $(function () {
+            $('.btnNext').click(function () {
+                $('.nav-tabs > .active').next('li').find('a').trigger('click');
+            });
 
-<h2>Details</h2>
+            $('.btnPrevious').click(function () {
+                $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+            });
+        })
+</script>
 
 <div>
-    <h4>UserProfile</h4>
+    <h4>User Profile</h4>
     <hr />
     <dl class="dl-horizontal">
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.emailaddress)
-        </dt>
+        <div id="wizard">
+            <!-- Tabstrip -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#personal" role="tab" data-toggle="tab">Personal</a>
+                </li>
+                <li role="presentation">
+                    <a href="#Address" role="tab" data-toggle="tab">Contact</a>
+                </li>
+                <li role="Identity">
+                    <a href="#Identity" role="tab" data-toggle="tab">Identity</a>
+                </li>
+                <li role="AreaPeferance">
+                    <a href="#AreaPeferance" role="tab" data-toggle="tab">Area Peferance</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="personal" style="margin-top:15px">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.firstname)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.emailaddress)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.firstname)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.middlename)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.middlename)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.lastname)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.firstname)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.lastname)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.emailaddress)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.firstname)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.emailaddress)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.middlename)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.middlename)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Password)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.lastname)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.mobilenumber)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.lastname)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.mobilenumber)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.dob)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.mobilenumber)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.dob)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.mobilenumber)
-        </dd>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            @*<a class="btn-all btnNext">Next</a>*@
+                            <input value="Next" class="btn btn-default btnNext" />
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="Address" style="margin-top:15px">
+                    <dd>
+                        @Html.DisplayFor(model => model.landlinenumber)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.landlinenumber)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.landlinenumber)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.landlinenumber)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.addressline1)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.dob)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.addressline1)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.dob)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.addressline2)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.addressline1)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.addressline2)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.country)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.addressline1)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.country)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.addressline2)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.state)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.addressline2)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.state)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.pincode)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.district)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.pincode)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.district)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.photo)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.city)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.photo)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.city)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.pincode)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.country)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.pincode)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.country)
-        </dd>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            @*<a class="btn-all btnPrevious">Previous</a>
+                                <a class="btn-all btnNext">Next</a>*@
+                            <input value="Previous" class="btn btn-default btnPrevious" />
+                            <input value="Next" class="btn btn-default btnNext" />
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="Identity" style="margin-top:15px">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.photo)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.state)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.photo)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.state)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.pan)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.district)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.pan)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.district)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.gst)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.city)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.gst)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.city)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.aadhaarno)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.area)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.aadhaarno)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.area)
-        </dd>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            @*<a class="btn-all btnPrevious">Previous</a>
+                                <a class="btn-all btnNext">Next</a>*@
+                            <input value="Previous" class="btn btn-default btnPrevious" />
+                            <input value="Next" class="btn btn-default btnNext" />
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="AreaPeferance" style="margin-top:15px">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.mobileverification)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.area)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.mobileverification)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.area)
+                    </dd>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.emailverification)
-        </dt>
+                            <input value="Previous" class="btn btn-default btnPrevious" />
 
-        <dd>
-            @Html.DisplayFor(model => model.emailverification)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.pan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.pan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.gst)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.gst)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.aadhaarno)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.aadhaarno)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.createddate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.createddate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.modifydate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.modifydate)
-        </dd>
-
-
+                        </div>
+                    </div>
+                </div>
 
     </dl>
 </div>

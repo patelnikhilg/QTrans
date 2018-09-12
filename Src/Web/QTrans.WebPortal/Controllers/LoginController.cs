@@ -13,6 +13,36 @@ namespace QTrans.WebPortal.Controllers
             return View();
         }
 
+        public ActionResult UserLogin()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult UserLogin(UserLogin login)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var message = string.Empty;
+                    UserRepository repository = new UserRepository();
+                    var user = repository.Login(login.UserName, login.Password, out message);
+                    if (user != null)
+                    {
+                        return RedirectToAction("Details/" + user.userid);
+                    }
+                }
+            }
+            catch
+            {
+                ////TODO: log the error.
+            }
+
+            return View();
+        }
+
         [AllowAnonymous]
         [HttpPost]
         public ActionResult Login(UserLogin login)
