@@ -213,5 +213,19 @@ namespace QTrans.DataAccess
 
             return dt;
         }
+
+        public DataTable GetTransportTypeByUserId(long UserId, out string message)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetTransportTypeByUserId", true))
+            {
+                connector.AddInParameterWithValue("@UserId", UserId);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                dt = connector.GetDataTable();
+                message = connector.GetParamaeterValue("@Message").ToString();                
+            }
+
+            return dt;
+        }
     }
 }

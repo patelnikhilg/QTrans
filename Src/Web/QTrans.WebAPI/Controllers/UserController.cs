@@ -61,6 +61,25 @@ namespace QTrans.WebAPI.Controllers
             return Ok(new { Status = "OK", data = result });
         }
 
+
+        [Route("GetTransportTypeByuserId")]
+        [HttpGet]
+        public IHttpActionResult GetTransportTypeByUserId(long userId)
+        {
+            string message = string.Empty;
+            UserRepository userRepository = new UserRepository();
+            var result = userRepository.GetTransportTypeByUserId(userId, out message);
+            if (!string.IsNullOrEmpty(message))
+            {
+                log.Info(message);
+            }
+            else
+            {
+                message = "OK";
+            }
+            return Ok(new { Status = message, data = result });
+        }
+
         [Route("ChangePassword")]
         [HttpPost]
         public IHttpActionResult ChangePassword([FromBody] ChangePassword changePassword)

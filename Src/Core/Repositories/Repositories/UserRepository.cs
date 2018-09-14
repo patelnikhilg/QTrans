@@ -46,6 +46,14 @@ namespace QTrans.Repositories
             return DataAccessUtility.ConvertToList<TransportType>(data);
 
         }
+
+        public List<TransportType> GetTransportTypeByUserId(long userid, out string message)
+        {
+            message = string.Empty;
+            var data = instanceUser.GetTransportTypeByUserId(userid,out message);
+            return DataAccessUtility.ConvertToList<TransportType>(data);
+        }
+
         public UserProfile WebRegistration(UserProfile user, out string message)
         {
             message = string.Empty;

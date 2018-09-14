@@ -37,5 +37,7 @@ namespace QTrans.Models
         [StringLength(20)]
         public string Usertype { get; set; }
 
+        [DisplayName("Last Modify Date")]
+        public DateTime LastUpdateDate { get; set; }
     }
 }
