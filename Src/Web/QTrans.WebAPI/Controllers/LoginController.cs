@@ -51,9 +51,9 @@ namespace QTrans.WebAPI.Controllers
             return Ok(new { Status = message, data = result });
         }
 
-        [Route("OTPVerification")]
+        [Route("OTPVerificationByUser")]
         [HttpPost]
-        public IHttpActionResult DeviceVerification([FromBody] OTPVerification OTP)
+        public IHttpActionResult DeviceVerificationByUser([FromBody] OTPVerification OTP)
         {
             string Platform = HttpContext.Current.Request.Headers["platform"].ToString();
             string message = string.Empty;
