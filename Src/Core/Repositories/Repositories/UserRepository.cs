@@ -50,7 +50,7 @@ namespace QTrans.Repositories
         public List<TransportType> GetTransportTypeByUserId(long userid, out string message)
         {
             message = string.Empty;
-            var data = instanceUser.GetTransportTypeByUserId(userid,out message);
+            var data = instanceUser.GetTransportTypeByUserId(userid, out message);
             return DataAccessUtility.ConvertToList<TransportType>(data);
         }
 
@@ -69,10 +69,10 @@ namespace QTrans.Repositories
 
             return userDetail;
         }
-               
+
         public UserProfile UpdateUserProfile(UserProfile user, out string message)
         {
-            message = string.Empty;           
+            message = string.Empty;
             long userid;
             if (instanceUser.InsertUpdateUserDetails(user, out userid, out message))
             {
@@ -102,7 +102,7 @@ namespace QTrans.Repositories
         }
 
 
-        public UserProfile ForgotUserLoginDetail(string mobileNo, string emailAddress, out string message)
+        public bool ForgotUserLoginDetail(string mobileNo, string emailAddress, out string message)
         {
             message = string.Empty;
             var dt = instanceUser.ForgotUserLoginDetail(mobileNo, emailAddress, out message);
@@ -112,7 +112,8 @@ namespace QTrans.Repositories
             {
                 SmtpMailUtility.SendMail(user.emailaddress, "QTransSupport@gmail.com", "New Password for your QTrans account", "Hello, This is auto generated mail. Your password is :" + user.Password, false);
             }
-            return user;
+
+            return user != null;
         }
 
         public UserProfile GetUserDetailById(long userid, out string message)
@@ -133,7 +134,7 @@ namespace QTrans.Repositories
             return user;
         }
 
-        public UserProfile Login(string username,string password, out string message)
+        public UserProfile Login(string username, string password, out string message)
         {
             message = string.Empty;
             var dt = instanceUser.UserLogIn(username, password, out message);

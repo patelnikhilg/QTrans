@@ -1,8 +1,5 @@
-﻿using QTrans.WebPortal.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using QTrans.Models;
+using QTrans.Repositories.Repositories;
 using System.Web.Mvc;
 
 namespace QTrans.WebPortal.Controllers
@@ -16,14 +13,39 @@ namespace QTrans.WebPortal.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+          
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult Contact(Contact contact)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    CommonRepository repository = new CommonRepository();
+                    //Perform the conversion and fetch the destination view model
+                    if (repository.InsertContactDetails(contact))
+                    {
+                        ViewData["Message"] = "Successfully Submitted";
+                    }
+                    else
+                    {
+                        ViewData["Message"] = "Fail to Submit";
+                    }
+                }
+            }
+            catch
+            {
+                ViewData["Message"] = "Fail to Submit";
+            }
 
             return View();
         }

@@ -56,7 +56,7 @@ namespace QTrans.WebPortal.Controllers
                     var user = repository.Login(login.UserName, login.Password, out message);
                     if (user != null)
                     {
-                        return RedirectToAction("Details/" + user.userid);
+                        return RedirectToAction("../user/Details/" + user.userid.ToString());
                     }
                 }
             }
@@ -74,7 +74,7 @@ namespace QTrans.WebPortal.Controllers
             try
             {
 
-                return RedirectToAction("Home/Index");
+                return RedirectToAction("../Home/Index");
             }
             catch
             {
@@ -89,18 +89,28 @@ namespace QTrans.WebPortal.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult ForgotPassword(FormCollection collection)
+        public ActionResult ForgotPassword(Forgotpassword forgotpassword)
         {
+            string output = "User account not found";
             try
             {
-                ////TODO: logic here
-                return RedirectToAction("Details/");
+                if (ModelState.IsValid)
+                {
+                    var message = string.Empty;
+                    UserRepository repository = new UserRepository();
+                    var result = repository.ForgotUserLoginDetail(forgotpassword.MobileNo, forgotpassword.EmailAddress, out message);
+                    if (result)
+                    {
+                        output = "Send password details on your email address";
+                    }
+                }
             }
             catch
             {
-                return View();
+               
             }
-        }
 
+            return View();
+        }
     }
 }

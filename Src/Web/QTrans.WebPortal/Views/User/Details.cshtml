@@ -1,10 +1,15 @@
 ﻿@model QTrans.WebPortal.Models.UserProfile
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "User Details";
+    Layout = "~/Views/Shared/_PrivateLayout.cshtml";
 }
-<script type="text/javascript">       
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+    <script type="text/javascript">
         $(function () {
             $('.btnNext').click(function () {
                 $('.nav-tabs > .active').next('li').find('a').trigger('click');
@@ -14,11 +19,11 @@
                 $('.nav-tabs > .active').prev('li').find('a').trigger('click');
             });
         })
-</script>
-
+    </script>
+}
 <div>
     <h4>User Profile</h4>
-    <hr />
+    <br />
     <dl class="dl-horizontal">
         <div id="wizard">
             <!-- Tabstrip -->
@@ -42,7 +47,6 @@
                     <dt>
                         @Html.DisplayNameFor(model => model.firstname)
                     </dt>
-
                     <dd>
                         @Html.DisplayFor(model => model.firstname)
                     </dd>
@@ -230,10 +234,12 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.userid  })
+
 </p>

@@ -47,6 +47,7 @@
     <Compile Include="BiddingProfile.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Contact.cs" />
     <Compile Include="InsuranceDetails.cs" />
     <Compile Include="Materialtype.cs" />
     <Compile Include="Packagetype.cs" />

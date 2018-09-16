@@ -24,7 +24,12 @@ namespace QTrans.WebPortal.Controllers
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var message = string.Empty;
+            UserRepository repository = new UserRepository();
+            //Perform the conversion and fetch the destination view model
+            var user = repository.GetUserDetailById(id, out message);
+            var userProf = Mapper.Map<QTrans.WebPortal.Models.UserProfile>(user);
+            return View(userProf);
         }
 
         [AllowAnonymous]
@@ -50,11 +55,11 @@ namespace QTrans.WebPortal.Controllers
                     var user = repository.WebRegistration(userProf, out message);
                     if (user != null)
                     {
-                        return RedirectToAction("Details/" + user.userid);
+                        return RedirectToAction("../login/login");
                     }
                 }
             }
-            catch
+            catch(Exception exp)
             {
                 ////TODO: log the error.
             }
@@ -65,23 +70,42 @@ namespace QTrans.WebPortal.Controllers
         // GET: User/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var message = string.Empty;
+            UserRepository repository = new UserRepository();
+            //Perform the conversion and fetch the destination view model
+            var user = repository.GetUserDetailById(id, out message);
+            var userProf = Mapper.Map<QTrans.WebPortal.Models.UserProfile>(user);
+            return View(userProf);
         }
 
         // POST: User/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, UserProfile userProfile)
         {
             try
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Details/" + id.ToString());
+                if (ModelState.IsValid)
+                {
+                    userProfile.userid = id;
+                    var message = string.Empty;
+                    UserRepository repository = new UserRepository();
+                    //Perform the conversion and fetch the destination view model
+                    var userProf = Mapper.Map<QTrans.Models.UserProfile>(userProfile);
+                    var user = repository.UpdateUserProfile(userProf, out message);
+                    if (user != null)
+                    {
+                        return RedirectToAction("Details/" + id.ToString());
+                    }
+                }
+               /// return RedirectToAction("Details/" + id.ToString());
             }
             catch
             {
-                return View();
+                ////TODO: log the error.
             }
+
+            return View();
         }        
     }
 }

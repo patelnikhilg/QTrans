@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BiddingDataAccess.cs" />
+    <Compile Include="CommonDataAccess.cs" />
     <Compile Include="CompanyDataAccess.cs" />
     <Compile Include="DBConnector.cs" />
     <Compile Include="PostingDataAccess.cs" />

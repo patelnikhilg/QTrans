@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QTrans.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -30,4 +31,6 @@ namespace QTrans.WebPortal.Models.Login
         [StringLength(12)]
         public string MobileNo { get; set; }
     }
+
+   
 }
