@@ -1,0 +1,100 @@
+﻿@model QTrans.Models.PostingProfile
+
+<div>
+    <h4>PostingProfile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.postingid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postingid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.posttype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.posttype)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soureaddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soureaddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.destinationadress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.destinationadress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materialtypeid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materialtypeid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.packagetypeid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.packagetypeid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.packagetypedesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.packagetypedesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createddate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createddate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modifydate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modifydate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1443,14 +1443,21 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Login\ForgotPassword.cshtml" />
     <Content Include="Views\Login\UserLogin.cshtml" />
+    <Content Include="Views\Bidding\Index.cshtml" />
+    <Content Include="Views\Bidding\Create.cshtml" />
+    <Content Include="Views\Bidding\Edit.cshtml" />
+    <Content Include="Views\Posting\Index.cshtml" />
+    <Content Include="Views\Posting\Create.cshtml" />
+    <Content Include="Views\Posting\Edit.cshtml" />
+    <Content Include="Views\Posting\IndexDetails.cshtml" />
+    <Content Include="Views\Posting\CreateDetails.cshtml" />
+    <Content Include="Views\Posting\EditDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\Bidding\" />
     <Folder Include="Models\Common\" />
     <Folder Include="Models\Posting\" />
-    <Folder Include="Views\Bidding\" />
-    <Folder Include="Views\Posting\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

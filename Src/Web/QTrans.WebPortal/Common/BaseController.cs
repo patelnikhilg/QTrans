@@ -14,7 +14,7 @@ namespace QTrans.WebPortal.Common
         /// <summary>
         /// An object of the session storage information
         /// </summary>
-        private readonly ISessionStorage sessionStorage;            
+        protected readonly ISessionStorage sessionStorage;            
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseController" /> class.
