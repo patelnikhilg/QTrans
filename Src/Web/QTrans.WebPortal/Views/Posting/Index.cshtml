@@ -1,100 +1,96 @@
 ﻿@model QTrans.Models.PostingProfile
 
-<div>
-    <h4>PostingProfile</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.postingid)
-        </dt>
+<div class="col-lg-12">
+    <div class="card" style="border:none">
+        <div class="card-header">
+            <strong>Posting Profile</strong>
+        </div>
+        <div class="card-body card-block">
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.postingid)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.postingid)</p>
+                </div>
+            </div>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.posttype)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.posttype)</p>
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.postingid)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.posttype)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.posttype)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.userid)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.userid)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.soureaddress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.soureaddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.destinationadress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.destinationadress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.materialtypeid)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.materialtypeid)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.packagetypeid)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.packagetypeid)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.packagetypedesc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.packagetypedesc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.createddate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.createddate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.modifydate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.modifydate)
-        </dd>
-
-    </dl>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.soureaddress)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.soureaddress)</p>
+                </div>
+            </div>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.destinationadress)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.destinationadress)</p>
+                </div>
+            </div>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.materialtypeid)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.materialtypeid)</p>
+                </div>
+            </div>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.description)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.description)</p>
+                </div>
+            </div>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.packagetypeid)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.packagetypeid)</p>
+                </div>
+            </div>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.packagetypedesc)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.packagetypedesc)</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div>
+    <div class="fa-hover col-lg-3 col-md-6"><i class="fa fa-edit"></i>@Html.ActionLink("Edit", "Edit", new { id = Model.postingid })</div>
+</div>
+
