@@ -10,18 +10,12 @@ using System.Web.Mvc;
 namespace QTrans.WebPortal.Controllers
 {
     public class BiddingController : BaseController
-    {
-        private long userId;
-
-        public BiddingController()
-        {
-            this.userId = (this.sessionStorage.GetValue("UserSession") as UserSession).UserId;
-        }
+    {       
         // GET: Bidding
         public ActionResult Index(long Id)
         {
             var message = string.Empty;
-            BiddingRepository Repository = new BiddingRepository(this.userId);
+            BiddingRepository Repository = new BiddingRepository(this.UserId);
             var bidding = Repository.GetBiddingDetailById(Id, out message);
             return View(bidding);
         }
@@ -41,7 +35,7 @@ namespace QTrans.WebPortal.Controllers
                 if (ModelState.IsValid)
                 {
                     var message = string.Empty;
-                    BiddingRepository repository = new BiddingRepository(this.userId);
+                    BiddingRepository repository = new BiddingRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
                     var profileresult = repository.BiddingSubmition(profile, out message);
                     if (profileresult != null)
@@ -67,7 +61,7 @@ namespace QTrans.WebPortal.Controllers
         public ActionResult Edit(int id)
         {
             var message = string.Empty;
-            BiddingRepository repository = new BiddingRepository(this.userId);
+            BiddingRepository repository = new BiddingRepository(this.UserId);
             //Perform the conversion and fetch the destination view model
             var profile = repository.GetBiddingDetailById(id, out message);
             return View(profile);
@@ -83,7 +77,7 @@ namespace QTrans.WebPortal.Controllers
                 {
                     var message = string.Empty;
                     profile.biddingid = id;
-                    BiddingRepository repository = new BiddingRepository(this.userId);
+                    BiddingRepository repository = new BiddingRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
                     var profileresult = repository.BiddingSubmition(profile, out message);
                     if (profileresult != null)

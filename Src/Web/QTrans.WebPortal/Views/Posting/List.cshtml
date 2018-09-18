@@ -1,0 +1,92 @@
+﻿@model IEnumerable<QTrans.Models.PostingProfile>
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_PrivateLayout.cshtml";
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.postingid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.posttype)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.soureaddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.destinationadress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.materialtypeid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.packagetypeid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.packagetypedesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createddate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modifydate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.postingid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.posttype)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.userid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.soureaddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.destinationadress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.materialtypeid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.packagetypeid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.packagetypedesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createddate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.modifydate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>

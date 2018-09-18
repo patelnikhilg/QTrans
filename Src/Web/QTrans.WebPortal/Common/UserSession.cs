@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QTrans.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,7 +10,7 @@ namespace QTrans.WebPortal.Common
     {
         public long UserId { get; set; }
 
-        public string UserName { get; set; }
+        public string LoginUserName { get; set; }
 
         public string EmailAddress { get; set; }
 
@@ -22,5 +23,16 @@ namespace QTrans.WebPortal.Common
         public DateTime LastLogin { get; set; }
 
         public string Token { get; set; }
+
+        public void SetValue(UserProfile user)
+        {
+            this.UserId = user.userid;
+            this.LoginUserName = string.Concat(user.firstname, " ", user.lastname);
+            this.EmailAddress = user.emailaddress;
+            this.FirstName = user.firstname;
+            this.LastName = user.lastname;
+            this.MobileNo = user.mobilenumber;
+            this.LastLogin = user.modifydate ?? user.createddate;
+        }
     }
 }

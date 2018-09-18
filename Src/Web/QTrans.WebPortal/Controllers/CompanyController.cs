@@ -1,34 +1,27 @@
 ﻿using AutoMapper;
+using QTrans.Models;
 using QTrans.Repositories;
 using QTrans.WebPortal.Common;
-using QTrans.WebPortal.Models;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
 
 namespace QTrans.WebPortal.Controllers
 {
-    public class UserController : BaseController
-    {
-        //// GET: User
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
+    public class CompanyController : BaseController
+    {      
 
+        #region =============== Company details================
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
             var message = string.Empty;
-            UserRepository repository = new UserRepository();
+            CompanyRepository repository = new CompanyRepository(this.UserId);
             //Perform the conversion and fetch the destination view model
-            var user = repository.GetUserDetailById(id, out message);
-            var userProf = Mapper.Map<QTrans.WebPortal.Models.UserProfile>(user);
+            var user = repository.GetCompanyDetailById(id, out message);
+            var userProf = Mapper.Map<QTrans.WebPortal.Models.Company>(user);
             return View(userProf);
         }
 
@@ -42,24 +35,24 @@ namespace QTrans.WebPortal.Controllers
         // POST: User/Create
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult Create(UserProfile userProfile)
+        public ActionResult Create(Company company)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     var message = string.Empty;
-                    UserRepository repository = new UserRepository();
+                    CompanyRepository repository = new CompanyRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
-                    var userProf = Mapper.Map<QTrans.Models.UserProfile>(userProfile);
-                    var user = repository.WebRegistration(userProf, out message);
-                    if (user != null)
+                    var comp = Mapper.Map<QTrans.Models.Company>(company);
+                    comp = repository.CompanyRegistration(comp, out message);
+                    if (comp != null)
                     {
-                        return RedirectToAction("../login/login");
+                        return RedirectToAction("Details/" + comp.companyid.ToString());
                     }
                 }
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 ////TODO: log the error.
             }
@@ -71,34 +64,34 @@ namespace QTrans.WebPortal.Controllers
         public ActionResult Edit(int id)
         {
             var message = string.Empty;
-            UserRepository repository = new UserRepository();
+            CompanyRepository repository = new CompanyRepository(this.UserId);
             //Perform the conversion and fetch the destination view model
-            var user = repository.GetUserDetailById(id, out message);
-            var userProf = Mapper.Map<QTrans.WebPortal.Models.UserProfile>(user);
-            return View(userProf);
+            var company = repository.GetCompanyDetailById(id, out message);
+            var comp = Mapper.Map<QTrans.WebPortal.Models.Company>(company);
+            return View(comp);
         }
 
         // POST: User/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, UserProfile userProfile)
+        public ActionResult Edit(int id, Company company)
         {
             try
             {
                 // TODO: Add update logic here
                 if (ModelState.IsValid)
                 {
-                    userProfile.userid = id;
+                    company.companyid = id;
                     var message = string.Empty;
-                    UserRepository repository = new UserRepository();
+                    CompanyRepository repository = new CompanyRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
-                    var userProf = Mapper.Map<QTrans.Models.UserProfile>(userProfile);
-                    var user = repository.UpdateUserProfile(userProf, out message);
-                    if (user != null)
+                    var comp = Mapper.Map<QTrans.Models.Company>(company);
+                    comp = repository.CompanyRegistration(comp, out message);
+                    if (comp != null)
                     {
                         return RedirectToAction("Details/" + id.ToString());
                     }
                 }
-               /// return RedirectToAction("Details/" + id.ToString());
+                /// return RedirectToAction("Details/" + id.ToString());
             }
             catch
             {
@@ -107,7 +100,6 @@ namespace QTrans.WebPortal.Controllers
 
             return View();
         }
-
-
+        #endregion
     }
 }

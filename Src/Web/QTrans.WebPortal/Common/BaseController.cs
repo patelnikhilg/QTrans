@@ -23,6 +23,11 @@ namespace QTrans.WebPortal.Common
         {
         }
 
+        public long UserId
+        {
+            get { return (this.sessionStorage.GetValue("UserSession") as UserSession).UserId; }
+        }
+
         /// <summary>
         /// Initialization of the base controller
         /// </summary>
@@ -56,29 +61,32 @@ namespace QTrans.WebPortal.Common
             {
                 throw new ArgumentNullException("filterContext", @"Input parameter can't be NULL here.");
             }
-
-
-            var userName = string.Empty;
-            if (filterContext.HttpContext.User.Identity.IsAuthenticated)
+            bool skipAuthorization = filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
+                          || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true);
+            if (!skipAuthorization)
             {
-                //TODO: Need to check if fesible than use it otherwise make login and store user session in storage
-                userName = filterContext.HttpContext.User.Identity.Name;
-                userName = userName.Substring(userName.IndexOf('\\') + 1);
-                UserSession userInformation = null;
-                if (this.sessionStorage.IsSessionHasValue("UserSession"))
+                var userName = string.Empty;
+                if (filterContext.HttpContext.User.Identity.IsAuthenticated)
                 {
-                    userInformation = this.sessionStorage.GetValue("UserSession") as UserSession;
-                }
-                else
-                {   
-                    ////TODO: database call to check the user is available or not.
-                    ///TODO: redirect ot login screen.
-                    this.sessionStorage.SetValue("UserSession", userInformation);
-                }
+                    //TODO: Need to check if fesible than use it otherwise make login and store user session in storage
+                    userName = filterContext.HttpContext.User.Identity.Name;
+                    userName = userName.Substring(userName.IndexOf('\\') + 1);
+                    UserSession userInformation = null;
+                    if (this.sessionStorage.IsSessionHasValue("UserSession"))
+                    {
+                        userInformation = this.sessionStorage.GetValue("UserSession") as UserSession;
+                    }
+                    else
+                    {
+                        ////TODO: database call to check the user is available or not.
+                        ///TODO: redirect ot login screen.
+                        this.sessionStorage.SetValue("UserSession", userInformation);
+                    }
 
-                if (userInformation != null)
-                {
-                    filterContext.Controller.ViewBag.LoginUserName = string.Concat(userInformation.FirstName, " ", userInformation.LastName);
+                    if (userInformation != null)
+                    {
+                        filterContext.Controller.ViewBag.LoginUserName = userInformation.LoginUserName;// string.Concat(userInformation.FirstName, " ", userInformation.LastName);
+                    }
                 }
             }
 

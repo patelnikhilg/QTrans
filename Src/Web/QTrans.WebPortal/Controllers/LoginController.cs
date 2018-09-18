@@ -1,18 +1,24 @@
 ﻿using QTrans.Repositories;
+using QTrans.WebPortal.Common;
 using QTrans.WebPortal.Models.Login;
+using System;
 using System.Web.Mvc;
 
 namespace QTrans.WebPortal.Controllers
 {
-    public class LoginController : Controller
+    [AllowAnonymous]
+    public class LoginController : BaseController
     {
 
+        [AllowAnonymous]
+        [HttpGet]
         // GET: Login
         public ActionResult Login()
         {
             return View();
         }
-
+        [AllowAnonymous]
+        [HttpGet]
         public ActionResult UserLogin()
         {
             return View();
@@ -35,7 +41,7 @@ namespace QTrans.WebPortal.Controllers
                     }
                 }
             }
-            catch
+            catch (Exception exp)
             {
                 ////TODO: log the error.
             }
@@ -56,18 +62,22 @@ namespace QTrans.WebPortal.Controllers
                     var user = repository.Login(login.UserName, login.Password, out message);
                     if (user != null)
                     {
+                        var session = new UserSession();
+                        session.SetValue(user);
+                        this.sessionStorage.SetValue("UserSession", session);
                         return RedirectToAction("../user/Details/" + user.userid.ToString());
                     }
                 }
             }
-            catch
+            catch(Exception exp)
             {
                 ////TODO: log the error.
             }
 
             return View();
         }
-
+        [AllowAnonymous]
+        [HttpGet]
         // GET: Logout
         public ActionResult Logout()
         {
@@ -76,12 +86,13 @@ namespace QTrans.WebPortal.Controllers
 
                 return RedirectToAction("../Home/Index");
             }
-            catch
+            catch (Exception exp)
             {
                 return View();
             }
         }
-
+        [AllowAnonymous]
+        [HttpGet]
         public ActionResult ForgotPassword()
         {
             return View();
@@ -105,7 +116,7 @@ namespace QTrans.WebPortal.Controllers
                     }
                 }
             }
-            catch
+            catch (Exception exp)
             {
                
             }

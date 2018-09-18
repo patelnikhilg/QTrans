@@ -10,19 +10,12 @@ using System.Web.Mvc;
 namespace QTrans.WebPortal.Controllers
 {
     public class PostingController : BaseController
-    {
-
-        private long userId;
-
-        public PostingController()
-        {
-            this.userId = (this.sessionStorage.GetValue("UserSession") as UserSession).UserId;
-        }
+    {      
         // GET: Posting
         public ActionResult Index(long postingId)
         {
             var message = string.Empty;
-            PostingRepository postingRepository = new PostingRepository(this.userId);
+            PostingRepository postingRepository = new PostingRepository(this.UserId);
             var post=postingRepository.GetPostingProfileById(postingId, out message);
             return View(post);
         }
@@ -42,7 +35,7 @@ namespace QTrans.WebPortal.Controllers
                 if (ModelState.IsValid)
                 {
                     var message = string.Empty;
-                    PostingRepository repository = new PostingRepository(this.userId);
+                    PostingRepository repository = new PostingRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
                     var profileresult = repository.PostingPorfileCreation(profile, out message);
                     if (profileresult != null)
@@ -68,7 +61,7 @@ namespace QTrans.WebPortal.Controllers
         public ActionResult Edit(int id)
         {
             var message = string.Empty;
-            PostingRepository repository = new PostingRepository(this.userId);
+            PostingRepository repository = new PostingRepository(this.UserId);
             //Perform the conversion and fetch the destination view model
             var profile = repository.GetPostingDetailById(id, out message);
             return View(profile);
@@ -84,7 +77,7 @@ namespace QTrans.WebPortal.Controllers
                 {
                     var message = string.Empty;
                     profile.postingid = id;
-                    PostingRepository repository = new PostingRepository(this.userId);
+                    PostingRepository repository = new PostingRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
                     var profileresult = repository.PostingPorfileCreation(profile, out message);
                     if (profileresult != null)
@@ -106,12 +99,21 @@ namespace QTrans.WebPortal.Controllers
             return View();
         }
         
+
+        public ActionResult List()
+        {
+            var message = string.Empty;
+            PostingRepository postingRepository = new PostingRepository(this.UserId);
+            var post = postingRepository.GetPostingListByUserId(this.UserId, out message);
+            return View(post);
+        }
+
         #region ===============Posting details =======================
         // GET: Posting
         public ActionResult IndexDetails(long postingId)
         {
             var message = string.Empty;
-            PostingRepository postingRepository = new PostingRepository(this.userId);
+            PostingRepository postingRepository = new PostingRepository(this.UserId);
             var post = postingRepository.GetPostingDetailById(postingId, out message);
             return View(post);
         }
@@ -131,7 +133,7 @@ namespace QTrans.WebPortal.Controllers
                 if (ModelState.IsValid)
                 {
                     var message = string.Empty;
-                    PostingRepository repository = new PostingRepository(this.userId);
+                    PostingRepository repository = new PostingRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
                     var profileresult = repository.PostingDetailCreation(details, out message);
                     if (profileresult != null)
@@ -157,7 +159,7 @@ namespace QTrans.WebPortal.Controllers
         public ActionResult EditDetails(int id)
         {
             var message = string.Empty;
-            PostingRepository repository = new PostingRepository(this.userId);
+            PostingRepository repository = new PostingRepository(this.UserId);
             var details = repository.GetPostingDetailById(id, out message);
             return View(details);
         }
@@ -172,7 +174,7 @@ namespace QTrans.WebPortal.Controllers
                 {
                     var message = string.Empty;
                     details.dtlpostingid = id;
-                    PostingRepository repository = new PostingRepository(this.userId);
+                    PostingRepository repository = new PostingRepository(this.UserId);
                     var profileresult = repository.PostingDetailCreation(details, out message);
                     if (profileresult != null)
                     {
