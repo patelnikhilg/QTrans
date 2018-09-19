@@ -20,9 +20,9 @@ namespace QTrans.WebPortal.Controllers
             var message = string.Empty;
             CompanyRepository repository = new CompanyRepository(this.UserId);
             //Perform the conversion and fetch the destination view model
-            var user = repository.GetCompanyDetailById(id, out message);
-            var userProf = Mapper.Map<QTrans.WebPortal.Models.Company>(user);
-            return View(userProf);
+            var comp = repository.GetCompanyDetailById(id, out message);
+            var Company = Mapper.Map<QTrans.WebPortal.Models.Company>(comp);
+            return View(Company);
         }
 
         [AllowAnonymous]

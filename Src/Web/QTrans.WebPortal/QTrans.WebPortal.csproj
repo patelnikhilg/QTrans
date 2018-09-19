@@ -1465,13 +1465,15 @@
     <Content Include="Views\Posting\CreateDetails.cshtml" />
     <Content Include="Views\Posting\EditDetails.cshtml" />
     <Content Include="Views\Posting\List.cshtml" />
+    <Content Include="Views\Company\Details.cshtml" />
+    <Content Include="Views\Company\Create.cshtml" />
+    <Content Include="Views\Company\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\Bidding\" />
     <Folder Include="Models\Common\" />
     <Folder Include="Models\Posting\" />
-    <Folder Include="Views\Company\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

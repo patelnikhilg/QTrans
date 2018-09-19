@@ -1,6 +1,7 @@
 ﻿using QTrans.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,40 @@ namespace QTrans.DataAccess
             }
 
             return rowEffected > 0;
+        }
+
+        public DataTable GetMaterialType()
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetMaterialType", true))
+            {
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
+
+        public DataTable GetPackageType()
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetPackageType", true))
+            {
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetVehicleType()
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetVehicleType", true))
+            {
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
         }
     }
 }

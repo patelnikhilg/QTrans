@@ -20,5 +20,23 @@ namespace QTrans.Repositories.Repositories
         {
             return this.instance.InsertContactDetails(contact);
         }
+
+        public List<MaterialType> GetMaterialType()
+        {
+            var data = instance.GetMaterialType();
+            return DataAccessUtility.ConvertToList<MaterialType>(data);
+        }
+
+        public List<PackageType> GetPackageType()
+        {
+            var data = instance.GetMaterialType();
+            return DataAccessUtility.ConvertToList<PackageType>(data);
+        }
+
+        public List<VehicleType> GetVehicleType()
+        {
+            var data = instance.GetVehicleType();
+            return DataAccessUtility.ConvertToList<VehicleType>(data);
+        }
     }
 }
