@@ -38,5 +38,14 @@ namespace QTrans.Repositories
             companyDetail = lst.Count > 0 ? lst[0] : null;
             return companyDetail;
         }
+
+        public Company GetCompanyDetailByUserId(long userId, out string message)
+        {
+            message = string.Empty;
+            var dt = this.instanceCompany.GetByUserId(userId, out message);
+            var lst = DataAccessUtility.ConvertToList<Company>(dt);
+            Company companyDetail = lst.Count > 0 ? lst[0] : null;
+            return companyDetail;
+        }
     }
 }

@@ -29,4 +29,11 @@ namespace QTrans.WebPortal.Models.Users
         [DisplayName("Area Peferance")]
         public string Area { get; set; }
     }
+
+    public class UserCompany
+    {
+        public UserProfile userProfile { get; set; }
+
+        public Company company { get; set; }
+    }
 }

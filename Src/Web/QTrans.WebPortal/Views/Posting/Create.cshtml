@@ -1,5 +1,20 @@
 ﻿@model QTrans.Models.PostingProfile
 
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_PrivateLayout.cshtml";
+}
+
+
+
+@{
+    List<QTrans.Models.MaterialType> listMaterialItems = new QTrans.Repositories.Repositories.CommonRepository().GetMaterialType();
+    List<QTrans.Models.PackageType> listPackageItems = new QTrans.Repositories.Repositories.CommonRepository().GetPackageType();
+
+}
+
+
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -21,8 +36,9 @@
                 <div class="row form-group">
                     @Html.LabelFor(model => model.posttype, htmlAttributes: new { @class = "form-control-label" })
                     <div class="col-12 col-sm-6">
-                        @Html.EditorFor(model => model.posttype, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.posttype) } })
-                        @Html.ValidationMessageFor(model => model.posttype, "", new { @class = "text-danger" })
+                        &nbsp; &nbsp;
+                        @Html.RadioButtonFor(m => m.posttype, "Single") Single &nbsp; &nbsp;
+                        @Html.RadioButtonFor(m => m.posttype, "Contract")  Contract
                     </div>
                 </div>
 
@@ -45,8 +61,9 @@
                 <div class="row form-group">
                     @Html.LabelFor(model => model.materialtypeid, htmlAttributes: new { @class = "form-control-label" })
                     <div class="col-12 col-sm-6">
-                        @Html.EditorFor(model => model.materialtypeid, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.materialtypeid) } })
-                        @Html.ValidationMessageFor(model => model.materialtypeid, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(model => model.materialtypeid, new SelectList(listMaterialItems, "materialtypeid", "materialtype") , "-- Select --")
+                        @*@Html.EditorFor(model => model.materialtypeid, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.materialtypeid) } })
+        @Html.ValidationMessageFor(model => model.materialtypeid, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -61,8 +78,9 @@
                 <div class="row form-group">
                     @Html.LabelFor(model => model.packagetypeid, htmlAttributes: new { @class = "form-control-label" })
                     <div class="col-12 col-sm-6">
-                        @Html.EditorFor(model => model.packagetypeid, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.packagetypeid) } })
-                        @Html.ValidationMessageFor(model => model.packagetypeid, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(model => model.packagetypeid, new SelectList(listPackageItems, "packagetypeid", "packagetype"), "-- Select --")
+                        @*@Html.EditorFor(model => model.packagetypeid, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.packagetypeid) } })
+        @Html.ValidationMessageFor(model => model.packagetypeid, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 

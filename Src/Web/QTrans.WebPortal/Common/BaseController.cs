@@ -85,7 +85,8 @@ namespace QTrans.WebPortal.Common
 
                     if (userInformation != null)
                     {
-                        filterContext.Controller.ViewBag.LoginUserName = userInformation.LoginUserName;// string.Concat(userInformation.FirstName, " ", userInformation.LastName);
+                       ViewBag.LoginUserName = userInformation.LoginUserName;// string.Concat(userInformation.FirstName, " ", userInformation.LastName);
+                       ViewBag.UserId = userInformation.UserId;
                     }
                 }
             }

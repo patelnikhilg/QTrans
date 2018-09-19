@@ -53,9 +53,9 @@
                         <li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Manage User</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-puzzle-piece"></i><a href="../User/Details/1">Update Details</a></li>
+                                <li><i class="fa fa-puzzle-piece"></i><a href="../User/Details/"@ViewBag.UserId>Details</a></li>
                                 <li><i class="fa fa-bars"></i><a href="#">Manage Peference</a></li>
-                                <li><i class="fa fa-share-square-o"></i><a href="#">Update Password</a></li>
+                                <li><i class="fa fa-share-square-o"></i><a href="../User/UpdatePassword">Update Password</a></li>
                                 @*<li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Cards</a></li>
                 <li><i class="fa fa-exclamation-triangle"></i><a href="ui-alerts.html">Alerts</a></li>
                 <li><i class="fa fa-spinner"></i><a href="ui-progressbar.html">Progress Bars</a></li>
@@ -68,16 +68,15 @@
                         <li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Manage Company</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-table"></i><a href="#">Create Company</a></li>
-                                <li><i class="fa fa-table"></i><a href="#">Update Company</a></li>
+                                <li><i class="fa fa-table"></i><a href="~/company/Index">Company Details</a></li>
                             </ul>
                         </li>
                         <h3 class="menu-title">Post</h3><!-- /.menu-title -->
                         <li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Post</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-table"></i><a href="../posting/create">Create Posting</a></li>
-                                <li><i class="fa fa-table"></i><a href="../posting/list">Mange Posting</a></li>
+                                <li><i class="fa fa-table"></i><a href="~/posting/create">Create Posting</a></li>
+                                <li><i class="fa fa-table"></i><a href="~/posting/list">Mange Posting</a></li>
                             </ul>
                         </li>
                         <h3 class="menu-title">Bidding</h3><!-- /.menu-title -->
@@ -108,8 +107,9 @@
             <header id="header" class="header">
                 <div class="header-menu">
                     <div class="col-sm-7">
+                        @ViewBag.LoginUserName
                         <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
-                        
+
                     </div>
                     
                 </div>

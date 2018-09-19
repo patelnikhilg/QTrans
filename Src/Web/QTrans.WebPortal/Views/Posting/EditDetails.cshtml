@@ -1,5 +1,9 @@
 ﻿@model QTrans.Models.PostingDetails
 
+@{
+    ViewBag.Title = "EditDetials";
+    Layout = "~/Views/Shared/_PrivateLayout.cshtml";
+}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()

@@ -11,9 +11,24 @@ using System.Web.Mvc;
 namespace QTrans.WebPortal.Controllers
 {
     public class CompanyController : BaseController
-    {      
+    {
 
         #region =============== Company details================
+        public ActionResult Index()
+        {
+            var message = string.Empty;
+            CompanyRepository repository = new CompanyRepository(this.UserId);
+            //Perform the conversion and fetch the destination view model
+            var comp = repository.GetCompanyDetailByUserId(this.UserId, out message);
+            if (comp != null)
+            {
+                var Company = Mapper.Map<QTrans.WebPortal.Models.Company>(comp);
+                return View(Company);
+            }
+
+            return RedirectToAction("Create");
+        }
+
         // GET: User/Details/5
         public ActionResult Details(int id)
         {

@@ -41,6 +41,7 @@ namespace QTrans.WebPortal.Controllers
                     if (profileresult != null)
                     {
                         ViewData["Message"] = message;
+                        return RedirectToAction("CreateDetails");
                     }
                     else
                     {

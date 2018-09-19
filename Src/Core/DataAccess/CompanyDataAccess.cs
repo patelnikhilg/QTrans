@@ -42,6 +42,22 @@ namespace QTrans.DataAccess
             using (DBConnector connector = new DBConnector("Usp_GetCompanyDetailsById", true))
             {                
                 connector.AddInParameterWithValue("@CompanyId", companyId);
+                connector.AddInParameterWithValue("@userId", 0);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                dt = connector.GetDataTable();
+                message = connector.GetParamaeterValue("@Message").ToString();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetByUserId(long userId, out string message)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetCompanyDetailsById", true))
+            {
+                connector.AddInParameterWithValue("@CompanyId", 0);
+                connector.AddInParameterWithValue("@userId", userId);              
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 dt = connector.GetDataTable();
                 message = connector.GetParamaeterValue("@Message").ToString();

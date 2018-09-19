@@ -29,7 +29,7 @@ namespace QTrans.Repositories.Repositories
 
         public List<PackageType> GetPackageType()
         {
-            var data = instance.GetMaterialType();
+            var data = instance.GetPackageType();
             return DataAccessUtility.ConvertToList<PackageType>(data);
         }
 
