@@ -24,7 +24,15 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@MaterialTypeId", posting.materialtypeid);
                 connector.AddInParameterWithValue("@Description", posting.description);
                 connector.AddInParameterWithValue("@PackageTypeId", posting.packagetypeid);
-                connector.AddInParameterWithValue("@PackageTypeDesc  ", posting.packagetypedesc);
+                connector.AddInParameterWithValue("@PackageTypeDesc", posting.packagetypedesc);
+                connector.AddInParameterWithValue("@src_state", posting.src_state);
+                connector.AddInParameterWithValue("@src_city", posting.src_city);
+                connector.AddInParameterWithValue("@src_pincode", posting.src_pincode);
+                connector.AddInParameterWithValue("@src_landmark", posting.src_landmark);
+                connector.AddInParameterWithValue("@dst_state", posting.dst_state);
+                connector.AddInParameterWithValue("@dst_city", posting.dst_city);
+                connector.AddInParameterWithValue("@dst_pincode", posting.dst_pincode);
+                connector.AddInParameterWithValue("@dst_landmark", posting.dst_landmark);
                 connector.AddOutParameterWithType("@identity", SqlDbType.BigInt);
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();

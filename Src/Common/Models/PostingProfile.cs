@@ -55,5 +55,37 @@ namespace QTrans.Models
         public Nullable<System.DateTime> modifydate { get; set; }
     
         public virtual ICollection<PostingDetails> tbldtlpostings { get; set; }
+
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [DisplayName("Source State")]
+        [StringLength(20)]
+        public string src_state { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [DisplayName("Source City")]
+        [StringLength(20)]
+        public string src_city { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.RegexIntInput)]
+        [DisplayName("Source Pincode")]
+        public int src_pincode { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [DisplayName("Source LandMark")]
+        [StringLength(30)]
+        public string src_landmark { get; set; }
+
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [DisplayName("Destination State")]
+        [StringLength(20)]
+        public string dst_state { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [DisplayName("Destination City")]
+        [StringLength(20)]
+        public string dst_city { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.RegexIntInput)]
+        [DisplayName("Destination Pincode")]
+        public int dst_pincode { get; set; }
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [DisplayName("Destination LandMark")]
+        [StringLength(20)]
+        public string dst_landmark { get; set; }
     }
 }
