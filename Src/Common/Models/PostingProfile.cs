@@ -45,7 +45,6 @@ namespace QTrans.Models
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
         [DisplayName("Package Type")]
-        [StringLength(200)]
         public short packagetypeid { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Package Description")]
