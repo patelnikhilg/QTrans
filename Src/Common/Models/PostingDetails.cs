@@ -20,7 +20,7 @@ namespace QTrans.Models
         {
         }
     
-        public PostingProfile postingProfile { get; set; }
+        public QTrans.Models.ViewModel.Posting.PostingProfileView postingProfile { get; set; }
         public long dtlpostingid { get; set; }
         public long postingid { get; set; }
 
@@ -70,7 +70,7 @@ namespace QTrans.Models
         public Nullable<System.DateTime> contractenddatetime { get; set; }
 
         [RegularExpression(Constants.RegexIntInput, ErrorMessage = Constants.StringNumeric)]
-        [DisplayName("Contract End DateTime")]
+        [DisplayName("Order Type")]
         public short ordertype { get; set; }
 
         [DisplayName("Bidding Activation DateTime")]

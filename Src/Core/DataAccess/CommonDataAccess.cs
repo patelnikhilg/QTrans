@@ -60,5 +60,40 @@ namespace QTrans.DataAccess
 
             return dt;
         }
+
+        #region =========== State,City,Pincode==============
+        public DataTable GetState()
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetState", true))
+            {
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetCity()
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetCity", true))
+            {
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetPincode()
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetPincode", true))
+            {
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+        #endregion
     }
 }

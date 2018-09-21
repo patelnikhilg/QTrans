@@ -1,0 +1,56 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QTrans.Models.ViewModel.Posting
+{
+    public class PostingList
+    {
+        public long postingid { get; set; }
+        [DisplayName("Post Type")]
+        public string posttype { get; set; }
+        [DisplayName("City")]
+        public string src_city { get; set; }
+        [DisplayName("State")]
+        public string src_state { get; set; }
+        
+        [DisplayName("City")]
+        public string dst_city { get; set; }
+        [DisplayName("State")]
+        public string dst_state { get; set; }
+        
+        [DisplayName("Material Type")]
+        public string materialtype { get; set; }
+        
+        [DisplayName("Package Type")]
+        public string packagetype { get; set; }
+
+        [DisplayName("Material Weight")]
+        public int materialweight { get; set; }
+        [DisplayName("Vehicle Type")]
+        public short vehicletype { get; set; }
+        [DisplayName("No of Vehicle")]
+        public short novehicle { get; set; }
+        [DisplayName("Pickup DateTime")]
+        public System.DateTime pickupdatetime { get; set; }
+
+        [DisplayName("Order Type")]
+        public short ordertype { get; set; }
+
+        [DisplayName("Bidding Activation DateTime")]
+        public System.DateTime biddingactivatedatetime { get; set; }
+
+        [DisplayName("Bidding Close DateTime")]
+        public System.DateTime biddingclosedatetime { get; set; }
+
+        [DisplayName("Status of Post")]
+        public short poststatus { get; set; }
+
+        [DisplayName("Post Amount")]
+        public Nullable<decimal> postamount { get; set; }
+
+    }
+}

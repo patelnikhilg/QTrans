@@ -109,11 +109,19 @@ namespace QTrans.WebPortal.Controllers
         }
 
 
-        public ActionResult List()
+        public ActionResult PastList()
         {
             var message = string.Empty;
             PostingRepository postingRepository = new PostingRepository(this.UserId);
-            var post = postingRepository.GetPostingListByUserId(this.UserId, out message);
+            var post = postingRepository.GetPostingListByUserId(this.UserId,true, out message);
+            return View(post);
+        }
+
+        public ActionResult CurrentList()
+        {
+            var message = string.Empty;
+            PostingRepository postingRepository = new PostingRepository(this.UserId);
+            var post = postingRepository.GetPostingListByUserId(this.UserId, false, out message);
             return View(post);
         }
 

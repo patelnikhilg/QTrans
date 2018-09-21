@@ -11,6 +11,7 @@ namespace SampleTest
     {
         static void Main(string[] args)
         {            
+            var t= new Random(6).Next();
             Console.ReadKey(); 
         }
     }

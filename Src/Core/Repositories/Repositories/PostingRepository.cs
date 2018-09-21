@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using QTrans.DataAccess;
 using QTrans.Models;
+using QTrans.Models.ViewModel.Posting;
 
 namespace QTrans.Repositories
 {
@@ -39,7 +40,7 @@ namespace QTrans.Repositories
                 if(this.instancePosting.InsertUpdatePostingDetails(postingDetails, out message))
                 {
                     var ds = this.instancePosting.GetByPostingDetailsId(postingId, out message);
-                    var lstProfile = DataAccessUtility.ConvertToList<PostingProfile>(ds.Tables[0]);
+                    var lstProfile = DataAccessUtility.ConvertToList<QTrans.Models.ViewModel.Posting.PostingProfileView>(ds.Tables[0]);
                     var lstDetails = DataAccessUtility.ConvertToList<PostingDetails>(ds.Tables[1]);
                     postingDetails = lstDetails.Count > 0 ? lstDetails[0] : null;
                     postingDetails.postingProfile = lstProfile.Count > 0 ? lstProfile[0] : null;                    
@@ -55,7 +56,7 @@ namespace QTrans.Repositories
             message = string.Empty;
             PostingDetails postingDetails = null;
             var ds = this.instancePosting.GetByPostingDetailsId(postingId, out message);
-            var lstProfile = DataAccessUtility.ConvertToList<PostingProfile>(ds.Tables[0]);
+            var lstProfile = DataAccessUtility.ConvertToList<QTrans.Models.ViewModel.Posting.PostingProfileView>(ds.Tables[0]);
             var lstDetails = DataAccessUtility.ConvertToList<PostingDetails>(ds.Tables[1]);
             postingDetails = lstDetails.Count > 0 ? lstDetails[0] : null;
             postingDetails.postingProfile = lstProfile.Count > 0 ? lstProfile[0] : null;
@@ -73,11 +74,11 @@ namespace QTrans.Repositories
             return postingProfile;
         }
 
-        public List<PostingProfile> GetPostingListByUserId(long userId, out string message)
+        public List<PostingList> GetPostingListByUserId(long userId, bool isPast, out string message)
         {
             message = string.Empty;
-            var dt = this.instancePosting.GetListPostingByUserId(userId, out message);
-            var lstProfile = DataAccessUtility.ConvertToList<PostingProfile>(dt);
+            var dt = this.instancePosting.GetListPostingByUserId(userId, isPast, out message);
+            var lstProfile = DataAccessUtility.ConvertToList<PostingList>(dt);
 
             return lstProfile.Count > 0 ? lstProfile : null; 
         }

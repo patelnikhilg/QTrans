@@ -11,7 +11,7 @@ namespace QTrans.Utility
 
         public static int GenerateOTP()
         {
-            return new Random().Next(10000, 999999);
+            return new Random().Next(100000, 999999);
         }
     }
 }

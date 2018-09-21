@@ -1464,12 +1464,13 @@
     <Content Include="Views\Posting\IndexDetails.cshtml" />
     <Content Include="Views\Posting\CreateDetails.cshtml" />
     <Content Include="Views\Posting\EditDetails.cshtml" />
-    <Content Include="Views\Posting\List.cshtml" />
+    <Content Include="Views\Posting\PastList.cshtml" />
     <Content Include="Views\Company\Details.cshtml" />
     <Content Include="Views\Company\Create.cshtml" />
     <Content Include="Views\Company\Edit.cshtml" />
     <Content Include="Views\User\UpdatePassword.cshtml" />
     <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\Posting\CurrentList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

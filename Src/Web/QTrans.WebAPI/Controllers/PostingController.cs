@@ -86,14 +86,14 @@ namespace QTrans.WebAPI.Controllers
 
             return Ok(new { Status = message, data = result });
         }
-        
-        [Route("GetPostingListById")]
+
+        [Route("GetPostingListById/{paramOne}/{paramTwo}")]
         [HttpGet]
-        public IHttpActionResult GetPostingProfileListById(long userId)
+        public IHttpActionResult GetPostingProfileListById(long userId, bool isPast)
         {
             string message = string.Empty;
             PostingRepository repository = new PostingRepository(userId);
-            var result = repository.GetPostingListByUserId(userId, out message);
+            var result = repository.GetPostingListByUserId(userId, isPast, out message);
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);

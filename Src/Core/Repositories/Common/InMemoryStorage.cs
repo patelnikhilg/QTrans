@@ -8,6 +8,7 @@ using System.Collections.Concurrent;
 using QTrans.Models;
 using QTrans.Repositories.Repositories;
 using System.Timers;
+using QTrans.Models.ViewModel.Common;
 
 namespace QTrans.Utility.Common
 {
@@ -26,6 +27,12 @@ namespace QTrans.Utility.Common
 
         public ConcurrentDictionary<int, VehicleType> VehicleTypeStorage;
 
+        public ConcurrentDictionary<int, CountryState> StateStorage;
+
+        public ConcurrentDictionary<int, StateCity> CityStorage;
+
+        public ConcurrentDictionary<int, CityPincode> PincodeStorage;
+
         private static InMemoryStorage instance;
 
         private InMemoryStorage()
@@ -34,6 +41,11 @@ namespace QTrans.Utility.Common
             this.MaterialTypeStorage = new ConcurrentDictionary<int, MaterialType>();
             this.PackageTypeStorage = new ConcurrentDictionary<int, PackageType>();
             this.VehicleTypeStorage = new ConcurrentDictionary<int, VehicleType>();
+
+            this.StateStorage = new ConcurrentDictionary<int, CountryState>();
+            this.CityStorage = new ConcurrentDictionary<int, StateCity>();
+            this.PincodeStorage = new ConcurrentDictionary<int, CityPincode>();
+            this.LoadLocationDetails();
         }
 
         public static InMemoryStorage Instance
@@ -51,6 +63,45 @@ namespace QTrans.Utility.Common
 
         public long TimeInterval { get; set; }
 
+        public void LoadLocationDetails()
+        {
+            CommonRepository repository = new CommonRepository();
+            foreach (var item in repository.GetState())
+            {
+                if (this.StateStorage.Keys.Contains(item.StateId))
+                {
+                    this.StateStorage.AddOrUpdate(item.StateId, item, (key, oldValue) => item);
+                }
+                else
+                {
+                    this.StateStorage.TryAdd(item.StateId, item);
+                }
+            }
+
+            foreach (var item in repository.GetCity())
+            {
+                if (this.CityStorage.Keys.Contains(item.CityId))
+                {
+                    this.CityStorage.AddOrUpdate(item.CityId, item, (key, oldValue) => item);
+                }
+                else
+                {
+                    this.CityStorage.TryAdd(item.CityId, item);
+                }
+            }
+
+            foreach (var item in repository.GetPincode())
+            {
+                if (this.PincodeStorage.Keys.Contains(item.PincodeId))
+                {
+                    this.PincodeStorage.AddOrUpdate(item.PincodeId, item, (key, oldValue) => item);
+                }
+                else
+                {
+                    this.PincodeStorage.TryAdd(item.PincodeId, item);
+                }
+            }
+        }
 
         public void LoadData()
         {

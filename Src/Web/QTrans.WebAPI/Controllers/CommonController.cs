@@ -36,5 +36,52 @@ namespace QTrans.WebAPI.Controllers
             var result = repository.GetVehicleType();
             return Ok(new { Status = "OK", data = result });
         }
+
+        #region ============== Location Details=================
+        [Route("GetState")]
+        [HttpGet]
+        public IHttpActionResult GetState()
+        {
+            CommonRepository repository = new CommonRepository();
+            var result = repository.GetState();
+            return Ok(new { Status = "OK", data = result });
+        }
+
+        [Route("GetCity")]
+        [HttpGet]
+        public IHttpActionResult GetCity()
+        {
+            CommonRepository repository = new CommonRepository();
+            var result = repository.GetCity();
+            return Ok(new { Status = "OK", data = result });
+        }
+
+        [Route("GetPincode")]
+        [HttpGet]
+        public IHttpActionResult GetPincode()
+        {
+            CommonRepository repository = new CommonRepository();
+            var result = repository.GetPincode();
+            return Ok(new { Status = "OK", data = result });
+        }
+
+        [Route("GetCityByStateId")]
+        [HttpGet]
+        public IHttpActionResult GetCityByStateId(int stateId)
+        {
+            CommonRepository repository = new CommonRepository();
+            var result = repository.GetCityByStateId(stateId);
+            return Ok(new { Status = "OK", data = result });
+        }
+
+        [Route("GetPincodeByCityId")]
+        [HttpGet]
+        public IHttpActionResult GetPincodeByCityId(int cityId)
+        {
+            CommonRepository repository = new CommonRepository();
+            var result = repository.GetPincodeByCityId(cityId);
+            return Ok(new { Status = "OK", data = result });
+        }
+        #endregion
     }
 }

@@ -111,12 +111,13 @@ namespace QTrans.DataAccess
             return ds;
         }
         
-        public DataTable GetListPostingByUserId(long userId, out string message)
+        public DataTable GetListPostingByUserId(long userId, bool isPast,out string message)
         {
             DataTable dt = null;
             using (DBConnector connector = new DBConnector("Usp_GetListPostingByUserId", true))
             {
                 connector.AddInParameterWithValue("@userId", userId);
+                connector.AddInParameterWithValue("@isPast", isPast);
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 dt = connector.GetDataTable();
                 message = connector.GetParamaeterValue("@Message").ToString();
