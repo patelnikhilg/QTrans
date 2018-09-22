@@ -61,7 +61,7 @@ namespace QTrans.Repositories
         /// <param name="userId"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public List<BiddingProfile> GetListBiddingDetailByUserId(long userId, out string message)
+        public List<BiddingProfile> GetListBiddingDetailByUserId(long userId, bool isPast, out string message)
         {
             message = string.Empty;
             var dt = this.instanceBidding.GetByUserId(userId, out message);

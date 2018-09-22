@@ -1,6 +1,7 @@
 ﻿using QTrans.Logging;
 using QTrans.Models;
 using QTrans.Repositories;
+using QTrans.WebAPI.Models;
 using System.Web.Http;
 
 namespace QTrans.WebAPI.Controllers
@@ -51,11 +52,11 @@ namespace QTrans.WebAPI.Controllers
 
         [Route("GetPostingDetailsById")]
         [HttpGet]
-        public IHttpActionResult GetpostingById(long postingId, long userId)
+        public IHttpActionResult GetpostingById(PostingParam param)
         {
             string message = string.Empty;
-            PostingRepository repository = new PostingRepository(userId);
-            var result = repository.GetPostingDetailById(postingId, out message);
+            PostingRepository repository = new PostingRepository(param.UserId);
+            var result = repository.GetPostingDetailById(param.PostingId, out message);
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
@@ -70,11 +71,11 @@ namespace QTrans.WebAPI.Controllers
 
         [Route("GetPostingProfileById")]
         [HttpGet]
-        public IHttpActionResult GetPostingProfileById(long postingId, long userId)
+        public IHttpActionResult GetPostingProfileById(PostingParam param)
         {
             string message = string.Empty;
-            PostingRepository repository = new PostingRepository(userId);
-            var result = repository.GetPostingProfileById(postingId, out message);
+            PostingRepository repository = new PostingRepository(param.UserId);
+            var result = repository.GetPostingProfileById(param.PostingId, out message);
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
@@ -87,13 +88,13 @@ namespace QTrans.WebAPI.Controllers
             return Ok(new { Status = message, data = result });
         }
 
-        [Route("GetPostingListById/{paramOne}/{paramTwo}")]
+        [Route("GetPostingListById")]
         [HttpGet]
-        public IHttpActionResult GetPostingProfileListById(long userId, bool isPast)
+        public IHttpActionResult GetPostingProfileListById(PostingParam param)
         {
             string message = string.Empty;
-            PostingRepository repository = new PostingRepository(userId);
-            var result = repository.GetPostingListByUserId(userId, isPast, out message);
+            PostingRepository repository = new PostingRepository(param.UserId);
+            var result = repository.GetPostingListByUserId(param.UserId, param.IsPast, out message);
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);

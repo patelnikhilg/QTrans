@@ -61,6 +61,46 @@ namespace QTrans.DataAccess
             return dt;
         }
 
+        #region =============== Area Peference ============
+        public bool InsertAreaPeference(long userId, int cityId)
+        {
+            int rowEffected = 0;
+            using (DBConnector connector = new DBConnector("Usp_InsertAreaPreference", true))
+            {
+                connector.AddInParameterWithValue("@UserId", userId);
+                connector.AddInParameterWithValue("@CityId", cityId);
+                rowEffected = connector.ExceuteNonQuery();
+            }
+
+            return rowEffected > 0;
+        }
+
+        public bool DeleteAreaPeference(long userId, int cityId)
+        {
+            int rowEffected = 0;
+            using (DBConnector connector = new DBConnector("Usp_DeleteAreaPreference", true))
+            {
+                connector.AddInParameterWithValue("@UserId", userId);
+                connector.AddInParameterWithValue("@CityId", cityId);
+                rowEffected = connector.ExceuteNonQuery();
+            }
+
+            return rowEffected > 0;
+        }
+
+        public DataTable GetAreaPeferenceByUserId(long userId)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetAreaPreferenceByUserId", true))
+            {
+                connector.AddInParameterWithValue("@UserId", userId);
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+        #endregion
+
         #region =========== State,City,Pincode==============
         public DataTable GetState()
         {

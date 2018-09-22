@@ -4,126 +4,140 @@
     ViewBag.Title = "CurrentList";
     Layout = "~/Views/Shared/_PrivateLayout.cshtml";
 }
-
-<h2>CurrentList</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.postingid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.posttype)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.src_city)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.src_state)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dst_city)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dst_state)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.materialtype)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.packagetype)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.materialweight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.vehicletype)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.novehicle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pickupdatetime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ordertype)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.biddingactivatedatetime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.biddingclosedatetime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.poststatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.postamount)
-        </th>
-        <th></th>
-    </tr>
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Current Posting List</strong>
+                    </div>
+                    <div class="card-body">
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.postingid)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.posttype)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.src_city)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.src_state)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dst_city)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dst_state)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.materialtype)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.packagetype)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.materialweight)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.vehicletype)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.novehicle)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.pickupdatetime)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ordertype)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.biddingactivatedatetime)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.biddingclosedatetime)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.poststatus)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.postamount)
+                                </th>
+                                <th></th>
+                            </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.postingid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.posttype)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.src_city)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.src_state)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dst_city)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dst_state)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.materialtype)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.packagetype)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.materialweight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.vehicletype)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.novehicle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pickupdatetime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ordertype)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.biddingactivatedatetime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.biddingclosedatetime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.poststatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.postamount)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.postingid  }) |
-            @Html.ActionLink("Details", "Details", new { id=item.postingid }) |
-        </td>
-    </tr>
-}
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.postingid)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.posttype)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.src_city)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.src_state)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.dst_city)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.dst_state)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.materialtype)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.packagetype)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.materialweight)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.vehicletype)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.novehicle)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.pickupdatetime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ordertype)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.biddingactivatedatetime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.biddingclosedatetime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.poststatus)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.postamount)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.postingid }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.postingid }) |
+                                    </td>
+                                </tr>
+                            }
 
-</table>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

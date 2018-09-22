@@ -1,4 +1,5 @@
-﻿using QTrans.Repositories.Repositories;
+﻿using QTrans.Models;
+using QTrans.Repositories.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,36 @@ namespace QTrans.WebAPI.Controllers
             var result = repository.GetVehicleType();
             return Ok(new { Status = "OK", data = result });
         }
+
+        #region=============== Area Preference ============
+        [Route("AddAreaPeference")]
+        [HttpPost]
+        public IHttpActionResult CreateAreaPeference(AreaPreferenceParam area)
+        {
+            CommonRepository repository = new CommonRepository();
+            var result = repository.InsertAreaPeference(area.UserId,area.CityId);
+            return Ok(new { Status = "OK", data = result ? "Inserted successfully" : "Records not inserted" });
+        }
+
+        [Route("DeleteAreaPeference")]
+        [HttpPost]
+        public IHttpActionResult DeleteAreaPeference(AreaPreferenceParam area)
+        {
+            CommonRepository repository = new CommonRepository();
+            var result = repository.DeleteAreaPeference(area.UserId, area.CityId);
+            return Ok(new { Status = "OK", data = result?"Delete successfully" : "Records not found" });
+        }
+
+        [Route("GetAreaPeference")]
+        [HttpGet]
+        public IHttpActionResult GetAreaPeference(long userId)
+        {
+            CommonRepository repository = new CommonRepository();
+            var result = repository.GetAreaPeferenceByUserId(userId);
+            return Ok(new { Status = "OK", data = result });
+        }
+        #endregion
+
 
         #region ============== Location Details=================
         [Route("GetState")]

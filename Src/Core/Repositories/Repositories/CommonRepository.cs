@@ -23,23 +23,105 @@ namespace QTrans.Repositories.Repositories
             return this.instance.InsertContactDetails(contact);
         }
 
+        #region ==================== System Type ====================
         public List<MaterialType> GetMaterialType()
         {
-            var data = instance.GetMaterialType();
-            return DataAccessUtility.ConvertToList<MaterialType>(data);
+            if (InMemoryStorage.Instance.MaterialTypeStorage.Count > 0)
+            {
+                return InMemoryStorage.Instance.MaterialTypeStorage.Values.ToList();
+            }
+            else
+            {
+                var data = instance.GetMaterialType();
+                var lst = DataAccessUtility.ConvertToList<MaterialType>(data);
+                foreach (var item in lst)
+                {
+                    if (InMemoryStorage.Instance.MaterialTypeStorage.Keys.Contains(item.materialtypeid))
+                    {
+                        InMemoryStorage.Instance.MaterialTypeStorage.AddOrUpdate(item.materialtypeid, item, (key, oldValue) => item);
+                    }
+                    else
+                    {
+                        InMemoryStorage.Instance.MaterialTypeStorage.TryAdd(item.materialtypeid, item);
+                    }
+                }
+
+                return lst;
+            }
         }
 
         public List<PackageType> GetPackageType()
         {
-            var data = instance.GetPackageType();
-            return DataAccessUtility.ConvertToList<PackageType>(data);
+            if (InMemoryStorage.Instance.PackageTypeStorage.Count > 0)
+            {
+                return InMemoryStorage.Instance.PackageTypeStorage.Values.ToList();
+            }
+            else
+            {
+                var data = instance.GetPackageType();
+                var lst = DataAccessUtility.ConvertToList<PackageType>(data);
+                foreach (var item in lst)
+                {
+                    if (InMemoryStorage.Instance.PackageTypeStorage.Keys.Contains(item.packagetypeid))
+                    {
+                        InMemoryStorage.Instance.PackageTypeStorage.AddOrUpdate(item.packagetypeid, item, (key, oldValue) => item);
+                    }
+                    else
+                    {
+                        InMemoryStorage.Instance.PackageTypeStorage.TryAdd(item.packagetypeid, item);
+                    }
+                }
+
+                return lst;
+            }
         }
 
         public List<VehicleType> GetVehicleType()
         {
-            var data = instance.GetVehicleType();
-            return DataAccessUtility.ConvertToList<VehicleType>(data);
+            if (InMemoryStorage.Instance.VehicleTypeStorage.Count > 0)
+            {
+                return InMemoryStorage.Instance.VehicleTypeStorage.Values.ToList();
+            }
+            else
+            {
+                var data = instance.GetVehicleType();
+                var lst = DataAccessUtility.ConvertToList<VehicleType>(data);
+                foreach (var item in lst)
+                {
+                    if (InMemoryStorage.Instance.VehicleTypeStorage.Keys.Contains(item.vehicletypeid))
+                    {
+                        InMemoryStorage.Instance.VehicleTypeStorage.AddOrUpdate(item.vehicletypeid, item, (key, oldValue) => item);
+                    }
+                    else
+                    {
+                        InMemoryStorage.Instance.VehicleTypeStorage.TryAdd(item.vehicletypeid, item);
+                    }
+                }
+
+                return lst;
+            }
         }
+
+        #endregion
+
+        #region =============== Area Peference ============
+        public bool InsertAreaPeference(long userId, int cityId)
+        {
+            return instance.InsertAreaPeference(userId, cityId);
+        }
+
+        public bool DeleteAreaPeference(long userId, int cityId)
+        {
+            return instance.InsertAreaPeference(userId, cityId);
+        }
+
+        public List<AreaPreference> GetAreaPeferenceByUserId(long userId)
+        {
+            var data = instance.GetAreaPeferenceByUserId(userId);
+            return DataAccessUtility.ConvertToList<AreaPreference>(data);
+        }
+
+        #endregion
 
         #region =========== State,City,Pincode==============
 

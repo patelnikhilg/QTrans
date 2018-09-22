@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using QTrans.Utility.Common;
 using QTrans.WebPortal.Common;
 using QTrans.WebPortal.Infrastructure;
 using QTrans.WebPortal.Models;
@@ -20,7 +21,8 @@ namespace QTrans.WebPortal
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);        
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            InMemoryStorage.Instance.Int();
         }
 
         /// <summary>

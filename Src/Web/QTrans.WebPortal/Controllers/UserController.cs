@@ -28,7 +28,7 @@ namespace QTrans.WebPortal.Controllers
             var message = string.Empty;
             UserRepository repository = new UserRepository();
             //Perform the conversion and fetch the destination view model
-            var user = repository.GetUserDetailById(id, out message);
+            var user = repository.GetUserDetailById(id > 0 ?id:this.UserId, out message);
             var userProf = Mapper.Map<QTrans.WebPortal.Models.UserProfile>(user);
             return View(userProf);
         }

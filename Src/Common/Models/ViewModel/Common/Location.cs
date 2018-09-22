@@ -10,7 +10,7 @@ namespace QTrans.Models.ViewModel.Common
     {
         public int StateId { get; set; }
 
-        public string StateName { get; set; }
+        public string State { get; set; }
     }
 
     public class StateCity

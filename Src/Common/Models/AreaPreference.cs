@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
 
 namespace QTrans.Models
 {
@@ -7,10 +6,15 @@ namespace QTrans.Models
     {
         public long preferenceId { get; set; }
         public long UserId { get; set; }
-        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
-        [DisplayName("Area Preference")]
-        [StringLength(20)]
-        public string Area { get; set; }
+        public int CityId { get; set; }
+        public string CityName { get; set; }
+        public string State { get; set; }
 
-    }  
+        public DateTime CreateDate { get; set; }
+    }
+    public class AreaPreferenceParam
+    {
+        public long UserId { get; set; }
+        public int CityId { get; set; }
+    }
 }

@@ -22,14 +22,6 @@ namespace QTrans.WebPortal.Models.Users
         public string ConfirmPassword { get; set; }
     }
 
-    public class AreaPeferance
-    {
-        public long preferenceId { get; set; }
-        public long UserId { get; set; }
-        [DisplayName("Area Peferance")]
-        public string Area { get; set; }
-    }
-
     public class UserCompany
     {
         public UserProfile userProfile { get; set; }

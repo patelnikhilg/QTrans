@@ -1,6 +1,7 @@
 ﻿using QTrans.Logging;
 using QTrans.Models;
 using QTrans.Repositories;
+using QTrans.WebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,11 +38,11 @@ namespace QTrans.WebAPI.Controllers
 
         [Route("GetBiddingByPostingId")]
         [HttpGet]
-        public IHttpActionResult GetBiddingById(long postingId, long userId)
+        public IHttpActionResult GetBiddingById(PostingParam param)
         {
             string message = string.Empty;
-            BiddingRepository repository = new BiddingRepository(userId);
-            var result = repository.GetBiddingDetailById(postingId, out message);
+            BiddingRepository repository = new BiddingRepository(param.UserId);
+            var result = repository.GetBiddingDetailById(param.PostingId, out message);
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
@@ -56,11 +57,11 @@ namespace QTrans.WebAPI.Controllers
 
         [Route("GetBiddingListById")]
         [HttpGet]
-        public IHttpActionResult GetBiddingListById(long postingId, long userId)
+        public IHttpActionResult GetBiddingListById(PostingParam param)
         {
             string message = string.Empty;
-            BiddingRepository repository = new BiddingRepository(userId);
-            var result = repository.GetBiddingDetailById(postingId, userId, out message);
+            BiddingRepository repository = new BiddingRepository(param.UserId);
+            var result = repository.GetBiddingDetailById(param.PostingId, param.UserId, out message);
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
@@ -75,11 +76,11 @@ namespace QTrans.WebAPI.Controllers
 
         [Route("GetBiddingListByUserId")]
         [HttpGet]
-        public IHttpActionResult GetBiddingListByUserId(long userId)
+        public IHttpActionResult GetBiddingListByUserId(PostingParam param)
         {
             string message = string.Empty;
-            BiddingRepository repository = new BiddingRepository(userId);
-            var result = repository.GetListBiddingDetailByUserId(userId, out message);
+            BiddingRepository repository = new BiddingRepository(param.UserId);
+            var result = repository.GetListBiddingDetailByUserId(param.UserId, param.IsPast, out message);
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);

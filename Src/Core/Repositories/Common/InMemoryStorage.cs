@@ -44,7 +44,11 @@ namespace QTrans.Utility.Common
 
             this.StateStorage = new ConcurrentDictionary<int, CountryState>();
             this.CityStorage = new ConcurrentDictionary<int, StateCity>();
-            this.PincodeStorage = new ConcurrentDictionary<int, CityPincode>();
+            this.PincodeStorage = new ConcurrentDictionary<int, CityPincode>();            
+        }
+
+        public void Int()
+        {
             this.LoadLocationDetails();
         }
 

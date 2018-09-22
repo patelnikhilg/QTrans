@@ -78,16 +78,16 @@ namespace QTrans.WebPortal.Common
                     }
                     else
                     {
-                        ////TODO: database call to check the user is available or not.
                         ///TODO: redirect ot login screen.
-                        this.sessionStorage.SetValue("UserSession", userInformation);
+                        RedirectToAction("../login/login");
+                        ///this.sessionStorage.SetValue("UserSession", userInformation);
                     }
 
                     if (userInformation != null)
                     {
                        ViewBag.LoginUserName = userInformation.LoginUserName;// string.Concat(userInformation.FirstName, " ", userInformation.LastName);
                        ViewBag.UserId = userInformation.UserId;
-                    }
+                    }                   
                 }
             }
 
