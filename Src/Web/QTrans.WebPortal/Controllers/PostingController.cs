@@ -10,13 +10,13 @@ using System.Web.Mvc;
 namespace QTrans.WebPortal.Controllers
 {
     public class PostingController : BaseController
-    {      
+    {
         // GET: Posting
         public ActionResult Index(long postingId)
         {
             var message = string.Empty;
             PostingRepository postingRepository = new PostingRepository(this.UserId);
-            var post=postingRepository.GetPostingProfileById(postingId, out message);
+            var post = postingRepository.GetPostingProfileById(postingId, out message);
             return View(post);
         }
 
@@ -31,10 +31,10 @@ namespace QTrans.WebPortal.Controllers
         public ActionResult Create(PostingProfile profile)
         {
             try
-            {
+            {                
                 if (ModelState.IsValid)
                 {
-                    var message = string.Empty;
+                    var message = string.Empty;                    
                     PostingRepository repository = new PostingRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
                     var profileresult = repository.PostingPorfileCreation(profile, out message);
@@ -50,7 +50,11 @@ namespace QTrans.WebPortal.Controllers
                 }
                 else
                 {
-                    ViewData["Message"] = "Data is not validate properly";
+                    var errors = ModelState.Select(x => x.Value.Errors)
+                           .Where(y => y.Count > 0)
+                           .ToList();
+                    ViewData["Message"] = errors;
+
                 }
             }
             catch (Exception exp)
@@ -59,7 +63,7 @@ namespace QTrans.WebPortal.Controllers
                 ViewData["Message"] = "Unexpected error occured";
             }
 
-            return View();
+            return View(profile);
         }
 
         // GET: posting/Edit/5
@@ -103,7 +107,7 @@ namespace QTrans.WebPortal.Controllers
 
             return View();
         }
-        
+
 
         public ActionResult List()
         {

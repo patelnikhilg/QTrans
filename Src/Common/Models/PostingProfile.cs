@@ -19,34 +19,41 @@ namespace QTrans.Models
         public PostingProfile()
         {
         }
-    
-        public long postingid { get; set; }
+
+        public long postingid { get; set; } = 0;
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [Required(ErrorMessage = "The Post Type is required")]
         [DisplayName("Post Type")]
         [StringLength(10)]
         public string posttype { get; set; }
         public long userid { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [Required(ErrorMessage = "The Address is required")]
         [DisplayName("Source Address")]
         [StringLength(200)]
         public string soureaddress { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [Required(ErrorMessage = "The Address Type is required")]
         [DisplayName("Destination Address")]
         [StringLength(200)]
         public string destinationadress { get; set; }
 
         [RegularExpression(Constants.RegexIntInput, ErrorMessage = Constants.StringNumeric)]
+        [Required(ErrorMessage = "The Material Type is required")]
         [DisplayName("Material Type")]
         public short materialtypeid { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [Required(ErrorMessage = "The Description is required")]
         [DisplayName("Material Description")]
         [StringLength(200)]
         public string description { get; set; }
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [Required(ErrorMessage = "The Package Type is required")]
         [DisplayName("Package Type")]
         public short packagetypeid { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [Required(ErrorMessage = "The Description is required")]
         [DisplayName("Package Description")]
         [StringLength(200)]
         public string packagetypedesc { get; set; }
@@ -56,33 +63,41 @@ namespace QTrans.Models
         public virtual ICollection<PostingDetails> tbldtlpostings { get; set; }
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [Required(ErrorMessage = "The State is required")]
         [DisplayName("State")]
         [StringLength(20)]
         public string src_state { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [Required(ErrorMessage = "The City is required")]
         [DisplayName("City")]
         [StringLength(20)]
         public string src_city { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.RegexIntInput)]
+        [Required(ErrorMessage = "The Pincode is required")]
         [DisplayName("Pincode")]
         public int src_pincode { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [Required(ErrorMessage = "The Land Mark is required")]
         [DisplayName("LandMark")]
         [StringLength(30)]
         public string src_landmark { get; set; }
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [Required(ErrorMessage = "The State is required")]
         [DisplayName("State")]
         [StringLength(20)]
         public string dst_state { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [Required(ErrorMessage = "The City is required")]
         [DisplayName("City")]
         [StringLength(20)]
         public string dst_city { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.RegexIntInput)]
+        [Required(ErrorMessage = "The Pincode is required")]
         [DisplayName("Pincode")]
         public int dst_pincode { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
+        [Required(ErrorMessage = "The Land Mark is required")]
         [DisplayName("LandMark")]
         [StringLength(20)]
         public string dst_landmark { get; set; }

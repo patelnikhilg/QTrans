@@ -22,14 +22,7 @@
                 <strong>Create Posting Profile</strong>
             </div>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="card-body card-block">
-                <div class="row form-group" style="visibility:hidden;display:none ">
-                    @Html.LabelFor(model => model.postingid, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
-                        @Html.EditorFor(model => model.postingid, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.postingid, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="card-body card-block">             
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.posttype, htmlAttributes: new { @class = "form-control-label" })
