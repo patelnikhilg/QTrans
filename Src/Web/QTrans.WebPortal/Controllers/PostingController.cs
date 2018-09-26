@@ -48,6 +48,10 @@ namespace QTrans.WebPortal.Controllers
                         ViewData["Message"] = message;
                     }
                 }
+                else
+                {
+                    ViewData["Message"] = "Data is not validate properly";
+                }
             }
             catch (Exception exp)
             {

@@ -64,11 +64,11 @@
     <Compile Include="UserProfile.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Vehicletype.cs" />
+    <Compile Include="ViewModel\Posting\PostingProfileView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\Bidding\" />
     <Folder Include="ViewModel\Common\" />
-    <Folder Include="ViewModel\Posting\" />
     <Folder Include="ViewModel\Users\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

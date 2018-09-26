@@ -45,6 +45,35 @@
                         @Html.ValidationMessageFor(model => model.soureaddress, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.src_landmark, htmlAttributes: new { @class = "form-control-label" })
+                    <div class="col-12 col-sm-6">
+                        @Html.EditorFor(model => model.src_landmark, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.src_landmark, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.src_city, htmlAttributes: new { @class = "form-control-label" })
+                    <div class="col-12 col-sm-6">
+                        @Html.EditorFor(model => model.src_city, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.src_city, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.src_state, htmlAttributes: new { @class = "form-control-label" })
+                    <div class="col-12 col-sm-6">
+                        @Html.EditorFor(model => model.src_state, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.src_state, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.src_pincode, htmlAttributes: new { @class = "form-control-label" })
+                    <div class="col-12 col-sm-6">
+                        @Html.EditorFor(model => model.src_pincode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.src_pincode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.destinationadress, htmlAttributes: new { @class = "form-control-label" })
@@ -54,6 +83,35 @@
                     </div>
                 </div>
 
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.dst_landmark, htmlAttributes: new { @class = "form-control-label" })
+                    <div class="col-12 col-sm-6">
+                        @Html.EditorFor(model => model.dst_landmark, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.dst_landmark) } })
+                        @Html.ValidationMessageFor(model => model.dst_landmark, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.dst_city, htmlAttributes: new { @class = "form-control-label" })
+                    <div class="col-12 col-sm-6">
+                        @Html.EditorFor(model => model.dst_city, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.dst_city) } })
+                        @Html.ValidationMessageFor(model => model.dst_city, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.dst_state, htmlAttributes: new { @class = "form-control-label" })
+                    <div class="col-12 col-sm-6">
+                        @Html.EditorFor(model => model.dst_state, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.dst_state) } })
+                        @Html.ValidationMessageFor(model => model.dst_state, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.dst_pincode, htmlAttributes: new { @class = "form-control-label" })
+                    <div class="col-12 col-sm-6">
+                        @Html.EditorFor(model => model.dst_pincode, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.dst_pincode) } })
+                        @Html.ValidationMessageFor(model => model.dst_pincode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
                 <div class="row form-group">
                     @Html.LabelFor(model => model.materialtypeid, htmlAttributes: new { @class = "form-control-label" })
                     <div class="col-12 col-sm-6">

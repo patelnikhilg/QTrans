@@ -39,7 +39,7 @@ namespace QTrans.Models
         [DisplayName("Material Type")]
         public short materialtypeid { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
-        [DisplayName("Description")]
+        [DisplayName("Material Description")]
         [StringLength(200)]
         public string description { get; set; }
 
@@ -56,34 +56,34 @@ namespace QTrans.Models
         public virtual ICollection<PostingDetails> tbldtlpostings { get; set; }
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
-        [DisplayName("Source State")]
+        [DisplayName("State")]
         [StringLength(20)]
         public string src_state { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
-        [DisplayName("Source City")]
+        [DisplayName("City")]
         [StringLength(20)]
         public string src_city { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.RegexIntInput)]
-        [DisplayName("Source Pincode")]
+        [DisplayName("Pincode")]
         public int src_pincode { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
-        [DisplayName("Source LandMark")]
+        [DisplayName("LandMark")]
         [StringLength(30)]
         public string src_landmark { get; set; }
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
-        [DisplayName("Destination State")]
+        [DisplayName("State")]
         [StringLength(20)]
         public string dst_state { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
-        [DisplayName("Destination City")]
+        [DisplayName("City")]
         [StringLength(20)]
         public string dst_city { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.RegexIntInput)]
-        [DisplayName("Destination Pincode")]
+        [DisplayName("Pincode")]
         public int dst_pincode { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
-        [DisplayName("Destination LandMark")]
+        [DisplayName("LandMark")]
         [StringLength(20)]
         public string dst_landmark { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿@model QTrans.Models.PostingProfile
+﻿@model QTrans.Models.ViewModel.Posting.PostingProfileView
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_PrivateLayout.cshtml";
@@ -43,6 +44,46 @@
             <div class="row form-group" style="visibility:hidden">
                 <div class="col col-md-3">
                     <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.src_landmark)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.src_landmark)</p>
+                </div>
+            </div>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.src_city)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.src_city)</p>
+                </div>
+            </div>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.src_state)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.src_state)</p>
+                </div>
+            </div>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.src_pincode)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.src_pincode)</p>
+                </div>
+            </div>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
                         @Html.DisplayNameFor(model => model.destinationadress)
                     </label>
                 </div>
@@ -53,11 +94,51 @@
             <div class="row form-group" style="visibility:hidden">
                 <div class="col col-md-3">
                     <label class=" form-control-label">
-                        @Html.DisplayNameFor(model => model.materialtypeid)
+                        @Html.DisplayNameFor(model => model.dst_landmark)
                     </label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <p class="form-control-static">@Html.DisplayFor(model => model.materialtypeid)</p>
+                    <p class="form-control-static">@Html.DisplayFor(model => model.dst_landmark)</p>
+                </div>
+            </div>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.dst_city)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.dst_city)</p>
+                </div>
+            </div>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.dst_state)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.dst_state)</p>
+                </div>
+            </div>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.dst_pincode)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.dst_pincode)</p>
+                </div>
+            </div>
+            <div class="row form-group" style="visibility:hidden">
+                <div class="col col-md-3">
+                    <label class=" form-control-label">
+                        @Html.DisplayNameFor(model => model.materialtype)
+                    </label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <p class="form-control-static">@Html.DisplayFor(model => model.materialtype)</p>
                 </div>
             </div>
             <div class="row form-group" style="visibility:hidden">
@@ -73,11 +154,11 @@
             <div class="row form-group" style="visibility:hidden">
                 <div class="col col-md-3">
                     <label class=" form-control-label">
-                        @Html.DisplayNameFor(model => model.packagetypeid)
+                        @Html.DisplayNameFor(model => model.packagetype)
                     </label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <p class="form-control-static">@Html.DisplayFor(model => model.packagetypeid)</p>
+                    <p class="form-control-static">@Html.DisplayFor(model => model.packagetype)</p>
                 </div>
             </div>
             <div class="row form-group" style="visibility:hidden">
