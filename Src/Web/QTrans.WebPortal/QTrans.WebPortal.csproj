@@ -186,6 +186,7 @@
     <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
     <Compile Include="Infrastructure\WindsorDependencyResolver.cs" />
     <Compile Include="Models\Login\Login.cs" />
+    <Compile Include="Models\Posting\PostingData.cs" />
     <Compile Include="Models\Users\Company.cs" />
     <Compile Include="Models\Users\UserPersonalDetails.cs" />
     <Compile Include="Models\Users\UserProfile.cs" />
@@ -1479,7 +1480,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\Bidding\" />
     <Folder Include="Models\Common\" />
-    <Folder Include="Models\Posting\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -89,6 +89,10 @@ namespace QTrans.WebPortal.Common
                        ViewBag.UserId = userInformation.UserId;
                     }                   
                 }
+                else
+                {
+                    RedirectToAction("../login/login");
+                }
             }
 
             base.OnActionExecuting(filterContext);

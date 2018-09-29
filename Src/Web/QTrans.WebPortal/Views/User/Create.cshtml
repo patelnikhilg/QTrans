@@ -57,10 +57,7 @@
                 </li>
                 <li role="CompanyDetails">
                     <a href="#CompanyDetails" role="tab" data-toggle="tab">Company Details</a>
-                </li>
-                <li role="AreaPeferance">
-                    <a href="#AreaPeferance" role="tab" data-toggle="tab">Area Peferance</a>
-                </li>
+                </li>             
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
@@ -132,72 +129,72 @@
                 <div role="tabpanel" class="tab-pane" id="Address" style="margin-top:15px">
                     <!-- Input fields -->
                     <div class="form-group">
-                        @Html.LabelFor(model =>   model.userProfile.landlinenumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.userProfile.landlinenumber, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model =>   model.userProfile.landlinenumber, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.landlinenumber) } })
-                            @Html.ValidationMessageFor(model =>   model.userProfile.landlinenumber, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.userProfile.landlinenumber, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.landlinenumber) } })
+                            @Html.ValidationMessageFor(model => model.userProfile.landlinenumber, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model =>   model.userProfile.addressline1, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.userProfile.addressline1, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model =>   model.userProfile.addressline1, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.addressline1) } })
-                            @Html.ValidationMessageFor(model =>   model.userProfile.addressline1, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.userProfile.addressline1, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.addressline1) } })
+                            @Html.ValidationMessageFor(model => model.userProfile.addressline1, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model =>   model.userProfile.addressline2, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.userProfile.addressline2, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model =>   model.userProfile.addressline2, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.addressline2) } })
-                            @Html.ValidationMessageFor(model =>   model.userProfile.addressline2, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.userProfile.addressline2, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.addressline2) } })
+                            @Html.ValidationMessageFor(model => model.userProfile.addressline2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.userProfile.country, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.userProfile.country, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.country) } })
+                            @Html.ValidationMessageFor(model => model.userProfile.country, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model =>   model.userProfile.pincode, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.userProfile.state, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model =>   model.userProfile.pincode, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.pincode) } })
-                            @Html.ValidationMessageFor(model =>   model.userProfile.pincode, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.userProfile.state, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.state) } })
+                            @Html.ValidationMessageFor(model => model.userProfile.state, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(model =>   model.userProfile.country, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.userProfile.city, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model =>   model.userProfile.country, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.country) } })
-                            @Html.ValidationMessageFor(model =>   model.userProfile.country, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.userProfile.city, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.city) } })
+                            @Html.ValidationMessageFor(model => model.userProfile.city, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.userProfile.area, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.userProfile.area, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.area) } })
+                            @Html.ValidationMessageFor(model => model.userProfile.area, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.userProfile.pincode, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.userProfile.pincode, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.pincode) } })
+                            @Html.ValidationMessageFor(model => model.userProfile.pincode, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model =>   model.userProfile.state, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model =>   model.userProfile.state, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.state) } })
-                            @Html.ValidationMessageFor(model =>   model.userProfile.state, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model =>   model.userProfile.district, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model =>   model.userProfile.district, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.district) } })
-                            @Html.ValidationMessageFor(model =>   model.userProfile.district, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model =>   model.userProfile.city, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model =>   model.userProfile.city, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.city) } })
-                            @Html.ValidationMessageFor(model =>   model.userProfile.city, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             @*<a class="btn-all btnPrevious">Previous</a>
-                                <a class="btn-all btnNext">Next</a>*@
+                <a class="btn-all btnNext">Next</a>*@
                             <input value="Previous" class="btn btn-default btnPrevious" />
                             <input value="Next" class="btn btn-default btnNext" />
                         </div>
@@ -311,30 +308,17 @@
                         </div>
                     </div>*@
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            @*<a class="btn-all btnPrevious">Previous</a>
-                                <a class="btn-all btnNext">Next</a>*@
-                            <input value="Previous" class="btn btn-default btnPrevious" />
-                            <input value="Next" class="btn btn-default btnNext" />
+                       
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10" style="float:left;">
+                                <input value="Previous" class="btn btn-default btnPrevious" />
+                                <span></span>
+                                <input type="submit" value="Submit" class="btn btn-default" />
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="AreaPeferance" style="margin-top:15px">
-                    <div class="form-group">
-                        @Html.LabelFor(model =>  model.userProfile.area, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model =>  model.userProfile.area, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.area) } })
-                            @Html.ValidationMessageFor(model =>  model.userProfile.area, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10" style="float:left;">
-                            <input value="Previous" class="btn btn-default btnPrevious" />
-                            <span></span>
-                            <input type="submit" value="Submit" class="btn btn-default" />
-                        </div>
-                    </div>
-                </div>
+                
             </div>
 
         </div>

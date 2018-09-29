@@ -38,7 +38,7 @@ namespace QTrans.WebAPI.Controllers
 
         [Route("GetBiddingByPostingId")]
         [HttpGet]
-        public IHttpActionResult GetBiddingById(PostingParam param)
+        public IHttpActionResult GetBiddingById([FromUri] PostingParam param)
         {
             string message = string.Empty;
             BiddingRepository repository = new BiddingRepository(param.UserId);
@@ -57,7 +57,7 @@ namespace QTrans.WebAPI.Controllers
 
         [Route("GetBiddingListById")]
         [HttpGet]
-        public IHttpActionResult GetBiddingListById(PostingParam param)
+        public IHttpActionResult GetBiddingListById([FromUri] PostingParam param)
         {
             string message = string.Empty;
             BiddingRepository repository = new BiddingRepository(param.UserId);
@@ -76,7 +76,7 @@ namespace QTrans.WebAPI.Controllers
 
         [Route("GetBiddingListByUserId")]
         [HttpGet]
-        public IHttpActionResult GetBiddingListByUserId(PostingParam param)
+        public IHttpActionResult GetBiddingListByUserId([FromUri] PostingParam param)
         {
             string message = string.Empty;
             BiddingRepository repository = new BiddingRepository(param.UserId);

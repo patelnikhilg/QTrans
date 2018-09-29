@@ -65,6 +65,7 @@
     <Compile Include="Vehicle.cs" />
     <Compile Include="Vehicletype.cs" />
     <Compile Include="ViewModel\Common\Location.cs" />
+    <Compile Include="ViewModel\Common\LoggingMessage.cs" />
     <Compile Include="ViewModel\Posting\PostingList.cs" />
     <Compile Include="ViewModel\Posting\PostingProfileView.cs" />
   </ItemGroup>

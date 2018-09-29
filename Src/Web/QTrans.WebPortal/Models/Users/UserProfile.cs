@@ -65,7 +65,7 @@ namespace QTrans.WebPortal.Models
         [StringLength(15)]
         public string landlinenumber { get; set; }
 
-        [DisplayName("DOB Name")]
+        [DisplayName("DOB")]
         public Nullable<System.DateTime> dob { get; set; }
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]

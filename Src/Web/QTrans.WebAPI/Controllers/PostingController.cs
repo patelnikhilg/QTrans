@@ -52,7 +52,7 @@ namespace QTrans.WebAPI.Controllers
 
         [Route("GetPostingDetailsById")]
         [HttpGet]
-        public IHttpActionResult GetpostingById(PostingParam param)
+        public IHttpActionResult GetpostingById([FromUri] PostingParam param)
         {
             string message = string.Empty;
             PostingRepository repository = new PostingRepository(param.UserId);
@@ -71,7 +71,7 @@ namespace QTrans.WebAPI.Controllers
 
         [Route("GetPostingProfileById")]
         [HttpGet]
-        public IHttpActionResult GetPostingProfileById(PostingParam param)
+        public IHttpActionResult GetPostingProfileById([FromUri] PostingParam param)
         {
             string message = string.Empty;
             PostingRepository repository = new PostingRepository(param.UserId);
@@ -90,7 +90,7 @@ namespace QTrans.WebAPI.Controllers
 
         [Route("GetPostingListById")]
         [HttpGet]
-        public IHttpActionResult GetPostingProfileListById(PostingParam param)
+        public IHttpActionResult GetPostingProfileListById([FromUri] PostingParam param)
         {
             string message = string.Empty;
             PostingRepository repository = new PostingRepository(param.UserId);

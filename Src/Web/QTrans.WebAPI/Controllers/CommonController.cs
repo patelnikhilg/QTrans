@@ -1,16 +1,16 @@
-﻿using QTrans.Models;
+﻿using QTrans.Logging;
+using QTrans.Models;
+using QTrans.Models.ViewModel.Common;
 using QTrans.Repositories.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace QTrans.WebAPI.Controllers
 {
     public class CommonController : ApiController
     {
+        private AppLogger log = new AppLogger("QTransAPILogger");
+        private AppLogger Devicelog = new AppLogger("QTransDeviceAPILogger");
+
         [Route("GetMaterialType")]
         [HttpGet]
         public IHttpActionResult GetMaterialType()
@@ -38,13 +38,41 @@ namespace QTrans.WebAPI.Controllers
             return Ok(new { Status = "OK", data = result });
         }
 
+
+        [Route("SubmitLog")]
+        [HttpPost]
+        public IHttpActionResult SubmitLog([FromBody] LoggingMessage logging)
+        {
+            switch(logging.LogType)
+            {
+                case 1:
+                    Devicelog.Info(null, logging.PrepareLogMessage());
+                    break;
+                case 2:
+                    Devicelog.Warn(null, logging.PrepareLogMessage());
+                    break;
+                case 3:
+                    Devicelog.Debug(null, logging.PrepareLogMessage());
+                    break;
+                case 4:
+                    Devicelog.Error(logging.ExceptionObj, logging.PrepareLogMessage());
+                    break;
+                default:
+                    Devicelog.Info(null, logging.PrepareLogMessage());
+                    break;
+            }
+           
+            return Ok(new { Status = "OK", data = "Success" });
+        }
+
+       
         #region=============== Area Preference ============
         [Route("AddAreaPeference")]
         [HttpPost]
         public IHttpActionResult CreateAreaPeference(AreaPreferenceParam area)
         {
             CommonRepository repository = new CommonRepository();
-            var result = repository.InsertAreaPeference(area.UserId,area.CityId);
+            var result = repository.InsertAreaPeference(area.UserId, area.CityId);
             return Ok(new { Status = "OK", data = result ? "Inserted successfully" : "Records not inserted" });
         }
 
@@ -54,7 +82,7 @@ namespace QTrans.WebAPI.Controllers
         {
             CommonRepository repository = new CommonRepository();
             var result = repository.DeleteAreaPeference(area.UserId, area.CityId);
-            return Ok(new { Status = "OK", data = result?"Delete successfully" : "Records not found" });
+            return Ok(new { Status = "OK", data = result ? "Delete successfully" : "Records not found" });
         }
 
         [Route("GetAreaPeference")]

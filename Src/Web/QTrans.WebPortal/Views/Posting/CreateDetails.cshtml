@@ -4,6 +4,30 @@
     ViewBag.Title = "CreateDetails";
     Layout = "~/Views/Shared/_PrivateLayout.cshtml";
 }
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "dd/M/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
+            });
+
+        });
+    </script>
+
+}
+
+@{
+    List<QTrans.Models.VehicleType> listVehicleTypeItems = new QTrans.Repositories.Repositories.CommonRepository().GetVehicleType();
+
+}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -14,25 +38,17 @@
             </div>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="card-body card-block">
-                <div class="row form-group" style="visibility:hidden">
-                    @Html.LabelFor(model => model.dtlpostingid, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
-                        @Html.EditorFor(model => model.dtlpostingid, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.dtlpostingid, "", new { @class = "text-danger" })
-                    </div>
-                </div>
 
-                <div class="row form-group">
+                <div class="row form-group" style="visibility:hidden">
                     @Html.LabelFor(model => model.postingid, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
-                        @Html.EditorFor(model => model.postingid, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.postingid, "", new { @class = "text-danger" })
+                    <div class="col-12">
+                        @Html.ViewBag.PostingId
                     </div>
                 </div>
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.materialweight, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.materialweight, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.materialweight, "", new { @class = "text-danger" })
                     </div>
@@ -40,15 +56,14 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.materialphotos, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.materialphotos, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.materialphotos, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
                 <div class="row form-group">
                     @Html.LabelFor(model => model.packingdimension, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.packingdimension, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.packingdimension, "", new { @class = "text-danger" })
                     </div>
@@ -56,7 +71,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.numberpackets, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.numberpackets, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.numberpackets, "", new { @class = "text-danger" })
                     </div>
@@ -64,15 +79,14 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.vehicletype, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
-                        @Html.EditorFor(model => model.vehicletype, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.vehicletype, "", new { @class = "text-danger" })
-                    </div>
+                        <div class="col-12 col-sm-3">
+                            @Html.DropDownListFor(model => model.vehicletype, new SelectList(listVehicleTypeItems, "VehicleTypeId", "VehicleType"), "-- Select --", htmlAttributes: new { @class = "form-control" })
+                        </div>
                 </div>
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.novehicle, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.novehicle, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.novehicle, "", new { @class = "text-danger" })
                     </div>
@@ -80,7 +94,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.deliveryperiodday, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.deliveryperiodday, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.deliveryperiodday, "", new { @class = "text-danger" })
                     </div>
@@ -88,7 +102,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.pickupdatetime, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.pickupdatetime, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.pickupdatetime, "", new { @class = "text-danger" })
                     </div>
@@ -96,7 +110,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.postamount, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.postamount, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.postamount, "", new { @class = "text-danger" })
                     </div>
@@ -104,7 +118,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.onpickuppercentage, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.onpickuppercentage, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.onpickuppercentage, "", new { @class = "text-danger" })
                     </div>
@@ -112,7 +126,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.onunloadingpercentage, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.onunloadingpercentage, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.onunloadingpercentage, "", new { @class = "text-danger" })
                     </div>
@@ -120,7 +134,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.creditday, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12  col-sm-3">
                         @Html.EditorFor(model => model.creditday, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.creditday, "", new { @class = "text-danger" })
                     </div>
@@ -128,7 +142,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.contractstartdatetime, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.contractstartdatetime, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.contractstartdatetime, "", new { @class = "text-danger" })
                     </div>
@@ -136,7 +150,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.contractenddatetime, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.contractenddatetime, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.contractenddatetime, "", new { @class = "text-danger" })
                     </div>
@@ -144,7 +158,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.ordertype, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.ordertype, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.ordertype, "", new { @class = "text-danger" })
                     </div>
@@ -152,7 +166,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.biddingactivatedatetime, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.biddingactivatedatetime, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.biddingactivatedatetime, "", new { @class = "text-danger" })
                     </div>
@@ -160,7 +174,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.biddingclosedatetime, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.biddingclosedatetime, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.biddingclosedatetime, "", new { @class = "text-danger" })
                     </div>
@@ -168,7 +182,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.poststatus, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.poststatus, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.poststatus, "", new { @class = "text-danger" })
                     </div>
@@ -176,7 +190,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.gprs, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         <div class="checkbox">
                             @Html.EditorFor(model => model.gprs)
                             @Html.ValidationMessageFor(model => model.gprs, "", new { @class = "text-danger" })
@@ -186,7 +200,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.menpowerloading, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         <div class="checkbox">
                             @Html.EditorFor(model => model.menpowerloading)
                             @Html.ValidationMessageFor(model => model.menpowerloading, "", new { @class = "text-danger" })
@@ -196,7 +210,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.menpowerunloading, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         <div class="checkbox">
                             @Html.EditorFor(model => model.menpowerunloading)
                             @Html.ValidationMessageFor(model => model.menpowerunloading, "", new { @class = "text-danger" })
@@ -206,7 +220,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.transporterinsurance, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         <div class="checkbox">
                             @Html.EditorFor(model => model.transporterinsurance)
                             @Html.ValidationMessageFor(model => model.transporterinsurance, "", new { @class = "text-danger" })
@@ -216,7 +230,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.tolltaxinclude, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         <div class="checkbox">
                             @Html.EditorFor(model => model.tolltaxinclude)
                             @Html.ValidationMessageFor(model => model.tolltaxinclude, "", new { @class = "text-danger" })
@@ -226,7 +240,7 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.remark, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         @Html.EditorFor(model => model.remark, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.remark, "", new { @class = "text-danger" })
                     </div>
@@ -234,27 +248,11 @@
 
                 <div class="row form-group">
                     @Html.LabelFor(model => model.loadingtype, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-3">
                         <div class="checkbox">
                             @Html.EditorFor(model => model.loadingtype)
                             @Html.ValidationMessageFor(model => model.loadingtype, "", new { @class = "text-danger" })
                         </div>
-                    </div>
-                </div>
-
-                <div class="row form-group">
-                    @Html.LabelFor(model => model.createddate, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
-                        @Html.EditorFor(model => model.createddate, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.createddate, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="row form-group">
-                    @Html.LabelFor(model => model.modifydate, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
-                        @Html.EditorFor(model => model.modifydate, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.modifydate, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="card-footer">

@@ -1,6 +1,7 @@
 ﻿using QTrans.Models;
 using QTrans.Repositories;
 using QTrans.WebPortal.Common;
+using QTrans.WebPortal.Models.Posting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,20 +29,31 @@ namespace QTrans.WebPortal.Controllers
 
         // POST: posting/Create
         [HttpPost]
-        public ActionResult Create(PostingProfile profile)
+        public ActionResult Create(PostingData data)
         {
             try
             {                
                 if (ModelState.IsValid)
                 {
-                    var message = string.Empty;                    
+                    var message = string.Empty;
+                    data.profile.userid = this.UserId;
                     PostingRepository repository = new PostingRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
-                    var profileresult = repository.PostingPorfileCreation(profile, out message);
+                    var profileresult = repository.PostingPorfileCreation(data.profile, out message);
                     if (profileresult != null)
                     {
-                        ViewData["Message"] = message;
-                        return RedirectToAction("CreateDetails");
+                        TempData.Add("PostingId",profileresult.postingid);
+                        data.details.postingid = profileresult.postingid;
+                        var details = repository.PostingDetailCreation(data.details, out message);
+                        if (details != null)
+                        {
+                            ViewData["Message"] = message;
+                            return RedirectToAction("CreateDetails");
+                        }
+                        else
+                        {
+                            ViewData["Message"] = message;
+                        }
                     }
                     else
                     {
@@ -63,7 +75,7 @@ namespace QTrans.WebPortal.Controllers
                 ViewData["Message"] = "Unexpected error occured";
             }
 
-            return View(profile);
+            return View(data);
         }
 
         // GET: posting/Edit/5
@@ -138,6 +150,7 @@ namespace QTrans.WebPortal.Controllers
         // GET: posting/CreateDetails
         public ActionResult CreateDetails()
         {
+            ViewBag.PostingId = TempData.Peek("PostingId");
             return View();
         }
 
@@ -150,6 +163,7 @@ namespace QTrans.WebPortal.Controllers
                 if (ModelState.IsValid)
                 {
                     var message = string.Empty;
+                    details.postingid = ViewBag.PostingId;
                     PostingRepository repository = new PostingRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
                     var profileresult = repository.PostingDetailCreation(details, out message);

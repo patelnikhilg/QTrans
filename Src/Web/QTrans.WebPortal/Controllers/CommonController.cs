@@ -28,8 +28,11 @@ namespace QTrans.WebPortal.Controllers
         {
             try
             {
-                CommonRepository repository = new CommonRepository();
-                var result = repository.InsertAreaPeference(this.UserId, cityId);
+                if (cityId > 0)
+                {
+                    CommonRepository repository = new CommonRepository();
+                    var result = repository.InsertAreaPeference(this.UserId, cityId);
+                }
             }
             catch (Exception exp)
             {
@@ -39,12 +42,12 @@ namespace QTrans.WebPortal.Controllers
             return Json("Successfully Add", JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult DeleteAreaPeference(int cityId)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (cityId > 0)
                 {
                     CommonRepository repository = new CommonRepository();
                     var result = repository.DeleteAreaPeference(this.UserId, cityId);
@@ -61,12 +64,15 @@ namespace QTrans.WebPortal.Controllers
         [HttpGet]
         public ActionResult GetCity(int stateId)
         {
-            List<SelectListItem> citynames = new List<SelectListItem>();  
+            List<SelectListItem> citynames = new List<SelectListItem>();
+            if (stateId > 0)
+            {
                 List<QTrans.Models.ViewModel.Common.StateCity> city = new CommonRepository().GetCityByStateId(stateId).Where(x => x.StateId == stateId).ToList();
                 city.ForEach(x =>
                 {
                     citynames.Add(new SelectListItem { Text = x.CityName, Value = x.CityId.ToString() });
                 });
+            }
             return Json(citynames, JsonRequestBehavior.AllowGet);
         }
     }

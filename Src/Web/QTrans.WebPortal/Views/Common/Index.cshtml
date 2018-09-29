@@ -50,7 +50,7 @@
                                         @Html.DisplayFor(modelItem => item.CreateDate)
                                     </td>
                                     <td>
-                                        <a href="#" onclick="Delele(' + @Html.DisplayFor(modelItem => item.CityId)+ ')">Delete</a>
+                                        <span class="ti-trash">@Html.ActionLink("Delete", "DeleteAreaPeference", new { id = item.CityId })</span>
                                     </td>
                                 </tr>
                             }
@@ -68,10 +68,12 @@
         var ans = confirm("Are you sure you want to delete this Record?");
         if (ans) {
             $.ajax({
-                url: "../Common/DeleteAreaPeference/" + ID,
-                type: "Get",               
+                type: "Get", 
+                url: "~/Common/DeleteAreaPeference",
+                data: { cityId: ID },                             
                 dataType: "json",
-                success:"Ok",
+                traditional: true,
+                success: location.href = "/Common/Index",
                 error: function (errormessage) {
                     alert(errormessage.responseText);
                 }
