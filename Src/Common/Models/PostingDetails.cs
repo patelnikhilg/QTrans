@@ -49,7 +49,7 @@ namespace QTrans.Models
         [DisplayName("Delivery Period in days")]
         public Nullable<short> deliveryperiodday { get; set; }
 
-        [DisplayName("Pickup DateTime")]
+        [DisplayName("Pickup Date")]
         public System.DateTime pickupdatetime { get; set; }
         [RegularExpression(Constants.RegexDecimalInput, ErrorMessage = Constants.StringDecimal)]
         [DisplayName("Post Amount")]
@@ -64,19 +64,19 @@ namespace QTrans.Models
         public short onunloadingpercentage { get; set; }
         public int creditday { get; set; }
 
-        [DisplayName("Contract Start DateTime")]
+        [DisplayName("Contract Start Date")]
         public Nullable<System.DateTime> contractstartdatetime { get; set; }
-        [DisplayName("Contract End DateTime")]
+        [DisplayName("Contract End Date")]
         public Nullable<System.DateTime> contractenddatetime { get; set; }
 
         [RegularExpression(Constants.RegexIntInput, ErrorMessage = Constants.StringNumeric)]
         [DisplayName("Order Type")]
         public short ordertype { get; set; }
 
-        [DisplayName("Bidding Activation DateTime")]
+        [DisplayName("Bidding Activation Date")]
         public System.DateTime biddingactivatedatetime { get; set; }
 
-        [DisplayName("Bidding Close DateTime")]
+        [DisplayName("Bidding Close Date")]
         public System.DateTime biddingclosedatetime { get; set; }
 
         [DisplayName("Status of Post")]

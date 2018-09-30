@@ -1,11 +1,11 @@
 ﻿using QTrans.Models;
 using QTrans.Repositories;
+using QTrans.Utility;
 using QTrans.WebPortal.Common;
 using QTrans.WebPortal.Models.Posting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace QTrans.WebPortal.Controllers
@@ -24,7 +24,39 @@ namespace QTrans.WebPortal.Controllers
         // GET: posting/Create
         public ActionResult Create()
         {
+            TempDataFilling();
             return View();
+        }
+
+        private void TempDataFilling()
+        {
+            List<SelectListItem> postStatus = new List<SelectListItem>() {
+                                        new SelectListItem {
+                                            Text = PostStatus.None.ToString(), Value = "0"
+                                        },
+                                        new SelectListItem {
+                                            Text = PostStatus.Open.ToString(), Value = "1"
+                                        },
+                                        new SelectListItem {
+                                             Text = PostStatus.Close.ToString(), Value = "2"
+                                        },
+
+                                         };
+            ViewBag.PostStatus = postStatus;
+
+            List<SelectListItem> orderType = new List<SelectListItem>() {
+                                        new SelectListItem {
+                                            Text =OrderType.None.ToString(), Value = "0"
+                                        },
+                                        new SelectListItem {
+                                            Text = OrderType.SingleParty.ToString(), Value = "1"
+                                        },
+                                        new SelectListItem {
+                                             Text = OrderType.Distributive.ToString(), Value = "2"
+                                        },
+
+                                         };
+            ViewBag.OrderType = orderType;
         }
 
         // POST: posting/Create
@@ -32,7 +64,7 @@ namespace QTrans.WebPortal.Controllers
         public ActionResult Create(PostingData data)
         {
             try
-            {                
+            {
                 if (ModelState.IsValid)
                 {
                     var message = string.Empty;
@@ -42,7 +74,6 @@ namespace QTrans.WebPortal.Controllers
                     var profileresult = repository.PostingPorfileCreation(data.profile, out message);
                     if (profileresult != null)
                     {
-                        TempData.Add("PostingId",profileresult.postingid);
                         data.details.postingid = profileresult.postingid;
                         var details = repository.PostingDetailCreation(data.details, out message);
                         if (details != null)
@@ -74,6 +105,8 @@ namespace QTrans.WebPortal.Controllers
                 ////TODO: log the error
                 ViewData["Message"] = "Unexpected error occured";
             }
+
+            TempDataFilling();
 
             return View(data);
         }
@@ -125,7 +158,7 @@ namespace QTrans.WebPortal.Controllers
         {
             var message = string.Empty;
             PostingRepository postingRepository = new PostingRepository(this.UserId);
-            var post = postingRepository.GetPostingListByUserId(this.UserId,true, out message);
+            var post = postingRepository.GetPostingListByUserId(this.UserId, true, out message);
             return View(post);
         }
 

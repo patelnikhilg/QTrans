@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using QTrans.DataAccess;
+﻿using QTrans.DataAccess;
 using QTrans.Models;
 using QTrans.Models.ViewModel.Posting;
+using System.Collections.Generic;
 
 namespace QTrans.Repositories
 {
@@ -23,30 +21,24 @@ namespace QTrans.Repositories
             message = string.Empty;
             if (this.instancePosting.InsertUpdatePosting(posting, out postingId, out message))
             {
-                posting.postingid = postingId; 
+                posting.postingid = postingId;
             }
 
             return posting;
         }
 
-        public PostingDetails PostingDetailCreation(PostingDetails posting, out string message)
+        public PostingDetails PostingDetailCreation(PostingDetails postingDetails, out string message)
         {
             long postingId = 0;
-             message = string.Empty;
-            PostingDetails postingDetails = null;
-            //if (this.instancePosting.InsertUpdatePosting(posting.postingProfile, out postingId, out message))
-            //{
-               // postingDetails.postingid = postingId;
-                if(this.instancePosting.InsertUpdatePostingDetails(postingDetails, out message))
-                {
-                    var ds = this.instancePosting.GetByPostingDetailsId(postingId, out message);
-                    var lstProfile = DataAccessUtility.ConvertToList<QTrans.Models.ViewModel.Posting.PostingProfileView>(ds.Tables[0]);
-                    var lstDetails = DataAccessUtility.ConvertToList<PostingDetails>(ds.Tables[1]);
-                    postingDetails = lstDetails.Count > 0 ? lstDetails[0] : null;
-                    postingDetails.postingProfile = lstProfile.Count > 0 ? lstProfile[0] : null;                    
-                }
-                
-            //}
+            message = string.Empty;
+            if (this.instancePosting.InsertUpdatePostingDetails(postingDetails, out message))
+            {
+                var ds = this.instancePosting.GetByPostingDetailsId(postingId, out message);
+                var lstProfile = DataAccessUtility.ConvertToList<QTrans.Models.ViewModel.Posting.PostingProfileView>(ds.Tables[0]);
+                var lstDetails = DataAccessUtility.ConvertToList<PostingDetails>(ds.Tables[1]);
+                postingDetails = lstDetails.Count > 0 ? lstDetails[0] : null;
+                postingDetails.postingProfile = lstProfile.Count > 0 ? lstProfile[0] : null;
+            }
 
             return postingDetails;
         }
@@ -80,7 +72,7 @@ namespace QTrans.Repositories
             var dt = this.instancePosting.GetListPostingByUserId(userId, isPast, out message);
             var lstProfile = DataAccessUtility.ConvertToList<PostingList>(dt);
 
-            return lstProfile.Count > 0 ? lstProfile : null; 
+            return lstProfile.Count > 0 ? lstProfile : null;
         }
     }
 }

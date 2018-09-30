@@ -60,6 +60,7 @@ namespace QTrans.WebPortal.Controllers
                     CompanyRepository repository = new CompanyRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
                     var comp = Mapper.Map<QTrans.Models.Company>(company);
+                    comp.UserId = this.UserId;
                     comp = repository.CompanyRegistration(comp, out message);
                     if (comp != null)
                     {
@@ -100,6 +101,7 @@ namespace QTrans.WebPortal.Controllers
                     CompanyRepository repository = new CompanyRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
                     var comp = Mapper.Map<QTrans.Models.Company>(company);
+                    comp.UserId = this.UserId;
                     comp = repository.CompanyRegistration(comp, out message);
                     if (comp != null)
                     {

@@ -42,7 +42,7 @@ namespace QTrans.WebPortal.Controllers
             return Json("Successfully Add", JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult DeleteAreaPeference(int cityId)
         {
             try
@@ -58,7 +58,7 @@ namespace QTrans.WebPortal.Controllers
                 ////TODO: log the error.
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("../common/Index");
         }       
 
         [HttpGet]

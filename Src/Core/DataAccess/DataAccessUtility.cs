@@ -84,7 +84,7 @@ namespace QTrans.DataAccess
                 {
                     try
                     {
-                        if (pro.Name == column.ColumnName)
+                        if (pro.Name.ToLower() == column.ColumnName.ToLower())
                             pro.SetValue(obj, dr[column.ColumnName], null);
                         else
                             continue;

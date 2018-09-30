@@ -38,7 +38,7 @@
 
                             @foreach (var item in Model)
                             {
-                                <tr>
+                                <tr id="@item.CityId">
 
                                     <td>
                                         @Html.DisplayFor(modelItem => item.CityName)
@@ -50,7 +50,7 @@
                                         @Html.DisplayFor(modelItem => item.CreateDate)
                                     </td>
                                     <td>
-                                        <span class="ti-trash">@Html.ActionLink("Delete", "DeleteAreaPeference", new { id = item.CityId })</span>
+                                        <span class="ti-trash"><a href="#" OnClick="Delete(@item.CityId)">Delete</a> </span>
                                     </td>
                                 </tr>
                             }
@@ -64,11 +64,11 @@
 </div>
 <script type="text/javascript">
     //function for deleting employee's record  
-    function Delele(ID) {
+    function Delete(ID) {
         var ans = confirm("Are you sure you want to delete this Record?");
         if (ans) {
             $.ajax({
-                type: "Get", 
+                type: "Post", 
                 url: "~/Common/DeleteAreaPeference",
                 data: { cityId: ID },                             
                 dataType: "json",

@@ -19,7 +19,7 @@ namespace QTrans.Repositories
         public Company CompanyRegistration(Company company, out string message)
         {
             long companyId = 0;
-            message = string.Empty;
+            message = string.Empty;            
             if (this.instanceCompany.InsertUpdateCompanyDetails(company, out companyId, out message))
             {
                 company.companyid = companyId;
@@ -31,8 +31,7 @@ namespace QTrans.Repositories
         public Company GetCompanyDetailById(long companyId, out string message)
         {
             message = string.Empty;
-            Company companyDetail = null;
-            companyDetail.companyid = companyId;
+            Company companyDetail = null;            
             var dt = this.instanceCompany.GetById(companyId, out message);
             var lst = DataAccessUtility.ConvertToList<Company>(dt);
             companyDetail = lst.Count > 0 ? lst[0] : null;

@@ -1,95 +1,84 @@
 ﻿@model IEnumerable<QTrans.Models.ViewModel.Posting.PostingProfileView>
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Completed Post List";
     Layout = "~/Views/Shared/_PrivateLayout.cshtml";
 }
-<p>
+<span class="ti-plus">    
     @Html.ActionLink("New Post", "Create")
-</p>
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">Completed Posting List</strong>
-                    </div>
-                    <div class="card-body">
-                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.postingid)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.posttype)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.soureaddress)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.destinationadress)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.materialtype)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.packagetype)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.createddate)
-                                    </th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (Model != null)
-                                {
-                                    foreach (var item in Model)
+</span>
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Completed Posting List</strong>
+                        </div>
+                        <div class="card-body">
+                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                       
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.posttype)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.soureaddress)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.destinationadress)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.materialtype)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.packagetype)
+                                       
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
                                     {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.postingid)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.posttype)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.soureaddress)
-                                                @Html.DisplayFor(modelItem => item.src_landmark),
-                                                @Html.DisplayFor(modelItem => item.src_city),
-                                                @Html.DisplayFor(modelItem => item.src_state),
-                                                @Html.DisplayFor(modelItem => item.src_pincode)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.destinationadress),
-                                                @Html.DisplayFor(modelItem => item.dst_landmark),
-                                                @Html.DisplayFor(modelItem => item.dst_city),
-                                                @Html.DisplayFor(modelItem => item.dst_state),
-                                                @Html.DisplayFor(modelItem => item.dst_pincode)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.materialtype)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.packagetype)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.createddate)
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("Edit", "Edit", new { id = item.postingid }) |
-                                                @Html.ActionLink("Details", "Details", new { id = item.postingid }) |
-                                            </td>
-                                        </tr>
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>                                                
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.posttype)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.soureaddress)
+                                                    @Html.DisplayFor(modelItem => item.src_landmark),
+                                                    @Html.DisplayFor(modelItem => item.src_city),
+                                                    @Html.DisplayFor(modelItem => item.src_state),
+                                                    @Html.DisplayFor(modelItem => item.src_pincode)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.destinationadress),
+                                                    @Html.DisplayFor(modelItem => item.dst_landmark),
+                                                    @Html.DisplayFor(modelItem => item.dst_city),
+                                                    @Html.DisplayFor(modelItem => item.dst_state),
+                                                    @Html.DisplayFor(modelItem => item.dst_pincode)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.materialtype)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.packagetype)
+                                                </td>                                               
+                                                <td>
+                                                    @Html.ActionLink("Edit", "Edit", new { id = item.postingid }) |
+                                                    @Html.ActionLink("Details", "Details", new { id = item.postingid }) |
+                                                </td>
+                                            </tr>
+                                        }
                                     }
-                                }
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

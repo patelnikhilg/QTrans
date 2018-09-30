@@ -260,9 +260,10 @@
 
                 <div class="row form-group col-sm-6">
                     @Html.LabelFor(model => model.details.ordertype, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12  col-sm-6">
-                        @Html.EditorFor(model => model.details.ordertype, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.details.ordertype) } })
-                        @Html.ValidationMessageFor(model => model.details.ordertype, "", new { @class = "text-danger" })
+                    <div class="col-12 col-sm-6">
+                        @Html.DropDownListFor(model => model.details.ordertype, (IEnumerable<SelectListItem>)ViewBag.OrderType, "-- Select --", htmlAttributes: new { @class = "form-control col-sm-8" })
+                        @*@Html.EditorFor(model => model.details.ordertype, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.details.ordertype) } })
+        @Html.ValidationMessageFor(model => model.details.ordertype, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
@@ -284,9 +285,10 @@
 
                 <div class="row form-group col-sm-6">
                     @Html.LabelFor(model => model.details.poststatus, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12  col-sm-6">
-                        @Html.EditorFor(model => model.details.poststatus, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.details.poststatus) } })
-                        @Html.ValidationMessageFor(model => model.details.poststatus, "", new { @class = "text-danger" })
+                    <div class="col-12 col-sm-6">
+                        @Html.DropDownListFor(model => model.details.poststatus, (IEnumerable<SelectListItem>)ViewBag.PostStatus, "-- Select --", htmlAttributes: new { @class = "form-control col-sm-8" })
+                        @*@Html.EditorFor(model => model.details.poststatus, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.details.poststatus) } })
+        @Html.ValidationMessageFor(model => model.details.poststatus, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 

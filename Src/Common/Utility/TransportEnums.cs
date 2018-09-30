@@ -41,6 +41,13 @@ namespace QTrans.Utility
         Close = 2,
     }
 
+    public enum OrderType
+    {
+        None = 0,
+        SingleParty = 1,
+        Distributive = 2,
+    }
+
     public enum BiddingStatus
     {
         None = 0,

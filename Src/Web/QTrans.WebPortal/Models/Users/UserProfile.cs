@@ -100,11 +100,9 @@ namespace QTrans.WebPortal.Models
         [StringLength(20)]
         public string state { get; set; }
 
-        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("District")]
-        [Required(ErrorMessage = "The District is required")]
         [StringLength(20)]
-        public string district { get; set; }
+        public string district { get; set; } = "NA";
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("City")]

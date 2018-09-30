@@ -21,7 +21,7 @@ namespace QTrans.Models
     
         public long companyid { get; set; }
         [DefaultValue("NA")]
-        public string companyname { get; set; } = "DEMO";
+        public string companyname { get; set; } = "NA";
         [DefaultValue("NA")]
         public string address { get; set; } = "NA";
         [DefaultValue("NA")]
