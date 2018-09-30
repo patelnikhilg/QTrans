@@ -72,6 +72,8 @@ namespace QTrans.Models
         [RegularExpression(Constants.RegexIntInput, ErrorMessage = Constants.StringNumeric)]
         [DisplayName("Order Type")]
         public short ordertype { get; set; }
+        [DisplayName("Order Type")]
+        public string ordertypeValue { get { return ((QTrans.Utility.OrderType)ordertype).ToString(); } }
 
         [DisplayName("Bidding Activation Date")]
         public System.DateTime biddingactivatedatetime { get; set; }
@@ -79,8 +81,11 @@ namespace QTrans.Models
         [DisplayName("Bidding Close Date")]
         public System.DateTime biddingclosedatetime { get; set; }
 
-        [DisplayName("Status of Post")]
+        [DisplayName("Status")]
         public short poststatus { get; set; }
+
+        [DisplayName("Status")]
+        public string poststatusvalue { get { return ((QTrans.Utility.PostStatus)ordertype).ToString(); } }
 
         [DisplayName("GPRS Enable")]
         public bool gprs { get; set; }

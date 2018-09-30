@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,12 +17,22 @@ namespace QTrans.Models.ViewModel.Posting
         public string src_city { get; set; }
         [DisplayName("State")]
         public string src_state { get; set; }
-        
+        [DisplayName("Address")]
+        public string soureaddress { get; set; }
+        [DisplayName("LandMark")]
+        public string src_landmark { get; set; }
+        [DisplayName("Pincode")]
+        public int src_pincode { get; set; }
         [DisplayName("City")]
         public string dst_city { get; set; }
         [DisplayName("State")]
         public string dst_state { get; set; }
-        
+        [DisplayName("Address")]
+        public string destinationadress { get; set; }
+        [DisplayName("LandMark")]
+        public string dst_landmark { get; set; }
+        [DisplayName("Pincode")]
+        public int dst_pincode { get; set; }
         [DisplayName("Material Type")]
         public string materialtype { get; set; }
         
@@ -31,19 +42,25 @@ namespace QTrans.Models.ViewModel.Posting
         [DisplayName("Material Weight")]
         public int materialweight { get; set; }
         [DisplayName("Vehicle Type")]
-        public short vehicletype { get; set; }
+        public string vehicletype { get; set; }
         [DisplayName("No of Vehicle")]
         public short novehicle { get; set; }
         [DisplayName("Pickup DateTime")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public System.DateTime pickupdatetime { get; set; }
 
         [DisplayName("Order Type")]
         public short ordertype { get; set; }
 
+        [DisplayName("Order Type")]
+        public string ordertypeValue { get { return ((QTrans.Utility.OrderType)ordertype).ToString(); } }
+
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         [DisplayName("Bidding Activation DateTime")]
         public System.DateTime biddingactivatedatetime { get; set; }
 
         [DisplayName("Bidding Close DateTime")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public System.DateTime biddingclosedatetime { get; set; }
 
         [DisplayName("Status of Post")]

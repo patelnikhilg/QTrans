@@ -13,11 +13,11 @@ namespace QTrans.WebPortal.Controllers
     public class PostingController : BaseController
     {
         // GET: Posting
-        public ActionResult Index(long postingId)
+        public ActionResult Index(long id)
         {
             var message = string.Empty;
             PostingRepository postingRepository = new PostingRepository(this.UserId);
-            var post = postingRepository.GetPostingProfileById(postingId, out message);
+            var post = postingRepository.GetPostingProfileById(id, out message);
             return View(post);
         }
 
@@ -123,25 +123,43 @@ namespace QTrans.WebPortal.Controllers
 
         // POST: posting/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, PostingProfile profile)
+        public ActionResult Edit(int id, PostingData data)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     var message = string.Empty;
-                    profile.postingid = id;
+                    data.profile.userid = this.UserId;
                     PostingRepository repository = new PostingRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
-                    var profileresult = repository.PostingPorfileCreation(profile, out message);
+                    var profileresult = repository.PostingPorfileCreation(data.profile, out message);
                     if (profileresult != null)
                     {
-                        ViewData["Message"] = message;
+                        data.details.postingid = id;
+                        var details = repository.PostingDetailCreation(data.details, out message);
+                        if (details != null)
+                        {
+                            ViewData["Message"] = message;
+                            return RedirectToAction("CreateDetails");
+                        }
+                        else
+                        {
+                            ViewData["Message"] = message;
+                        }
                     }
                     else
                     {
                         ViewData["Message"] = message;
                     }
+                }
+                else
+                {
+                    var errors = ModelState.Select(x => x.Value.Errors)
+                           .Where(y => y.Count > 0)
+                           .ToList();
+                    ViewData["Message"] = errors;
+
                 }
             }
             catch (Exception exp)
@@ -152,8 +170,7 @@ namespace QTrans.WebPortal.Controllers
 
             return View();
         }
-
-
+        
         public ActionResult PastList()
         {
             var message = string.Empty;

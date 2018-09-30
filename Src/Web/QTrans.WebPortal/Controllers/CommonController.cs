@@ -43,14 +43,14 @@ namespace QTrans.WebPortal.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteAreaPeference(int cityId)
+        public ActionResult DeleteAreaPeference(int id)
         {
             try
             {
-                if (cityId > 0)
+                if (id > 0)
                 {
                     CommonRepository repository = new CommonRepository();
-                    var result = repository.DeleteAreaPeference(this.UserId, cityId);
+                    var result = repository.DeleteAreaPeference(this.UserId, id);
                 }
             }
             catch (Exception exp)

@@ -73,5 +73,11 @@
     <Folder Include="ViewModel\Bidding\" />
     <Folder Include="ViewModel\Users\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{1d606dfc-04ed-4d0b-989c-21a6b4984887}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
