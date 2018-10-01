@@ -14,12 +14,12 @@ namespace QTrans.Models
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
-    public  class PostingDetails
+    public class PostingDetails
     {
         public PostingDetails()
         {
         }
-    
+
         public QTrans.Models.ViewModel.Posting.PostingProfileView postingProfile { get; set; }
         public long dtlpostingid { get; set; }
         public long postingid { get; set; }
@@ -107,7 +107,10 @@ namespace QTrans.Models
         [DisplayName("Loading Type (Fullloading or Half loading)")]
         public bool loadingtype { get; set; }
         public Nullable<System.DateTime> createddate { get; set; }
+
+        [DisplayName("Last modify date")]
+        public Nullable<System.DateTime> LastModifyDate { get { return modifydate == null ? createddate : modifydate; } }
         public Nullable<System.DateTime> modifydate { get; set; }
-    
+
     }
 }

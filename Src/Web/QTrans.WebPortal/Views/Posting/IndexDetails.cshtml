@@ -1,271 +1,259 @@
 ﻿@model QTrans.Models.PostingDetails
 
 <div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.dtlpostingid)
         </label>
         &nbsp; : &nbsp;
-
-        <p class="form-control-static">@Html.DisplayFor(model => model.dtlpostingid)</p>
+        @Html.DisplayFor(model => model.dtlpostingid)
     </div>
 </div>
 <div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.postingid)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.postingid)</p>
+        @Html.DisplayFor(model => model.postingid)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.materialweight)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.materialweight)</p>
+        @Html.DisplayFor(model => model.materialweight)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.materialphotos)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.materialphotos)</p>
+        @Html.DisplayFor(model => model.materialphotos)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.packingdimension)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.packingdimension)</p>
+        @Html.DisplayFor(model => model.packingdimension)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group" >
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.numberpackets)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.numberpackets)</p>
+        @Html.DisplayFor(model => model.numberpackets)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.vehicletype)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.vehicletype)</p>
+        @Html.DisplayFor(model => model.vehicletype)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.novehicle)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.novehicle)</p>
+        @Html.DisplayFor(model => model.novehicle)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.deliveryperiodday)
         </label>
     </div>
     <div class="col-12 col-md-9">
-        <p class="form-control-static">@Html.DisplayFor(model => model.deliveryperiodday)</p>
+        @Html.DisplayFor(model => model.deliveryperiodday)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.pickupdatetime)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.pickupdatetime)</p>
+        @Html.DisplayFor(model => model.pickupdatetime)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.postamount)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.postamount)</p>
+        @Html.DisplayFor(model => model.postamount)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.onpickuppercentage)
         </label>
     </div>
     <div class="col-12 col-md-9">
-        <p class="form-control-static">@Html.DisplayFor(model => model.onpickuppercentage)</p>
+        @Html.DisplayFor(model => model.onpickuppercentage)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.onunloadingpercentage)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.onunloadingpercentage)</p>
+        @Html.DisplayFor(model => model.onunloadingpercentage)
     </div>
 </div>
 
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.creditday)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.creditday)</p>
+        @Html.DisplayFor(model => model.creditday)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.contractstartdatetime)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.contractstartdatetime)</p>
+        @Html.DisplayFor(model => model.contractstartdatetime)
     </div>
 </div>
 
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.contractenddatetime)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.contractenddatetime)</p>
+        @Html.DisplayFor(model => model.contractenddatetime)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
-            @Html.DisplayNameFor(model => model.ordertype)
+            @Html.DisplayNameFor(model => model.ordertypeValue)
         </label>
-    </div>
-    <div class="col-12 col-md-9">
-        <p class="form-control-static">@Html.DisplayFor(model => model.ordertype)</p>
+        &nbsp; : &nbsp;
+        @Html.DisplayFor(model => model.ordertypeValue)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.biddingactivatedatetime)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.biddingactivatedatetime)</p>
+        @Html.DisplayFor(model => model.biddingactivatedatetime)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.biddingclosedatetime)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.biddingclosedatetime)</p>
+        @Html.DisplayFor(model => model.biddingclosedatetime)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
-            @Html.DisplayNameFor(model => model.poststatus)
+            @Html.DisplayNameFor(model => model.poststatusvalue)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.poststatus)</p>
+        @Html.DisplayFor(model => model.poststatusvalue)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.gprs)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.gprs)</p>
+        @Html.DisplayFor(model => model.gprs)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.menpowerloading)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.menpowerloading)</p>
+        @Html.DisplayFor(model => model.menpowerloading)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.menpowerunloading)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.menpowerunloading)</p>
+        @Html.DisplayFor(model => model.menpowerunloading)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.transporterinsurance)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.transporterinsurance)</p>
+        @Html.DisplayFor(model => model.transporterinsurance)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.tolltaxinclude)
         </label>
     </div>
     <div class="col-12 col-md-9">
-        <p class="form-control-static">@Html.DisplayFor(model => model.tolltaxinclude)</p>
+        @Html.DisplayFor(model => model.tolltaxinclude)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.remark)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.remark)</p>
+        @Html.DisplayFor(model => model.remark)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.loadingtype)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.loadingtype)</p>
+        @Html.DisplayFor(model => model.loadingtype)
     </div>
 </div>
-
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
+<div class="row form-group">
+    <div class="col col-md-6">
         <label class=" form-control-label">
-            @Html.DisplayNameFor(model => model.createddate)
+            @Html.DisplayNameFor(model => model.LastModifyDate)
         </label>
         &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.createddate)</p>
-    </div>
-</div>
-<div class="row form-group" style="visibility:hidden">
-    <div class="col col-md-3">
-        <label class=" form-control-label">
-            @Html.DisplayNameFor(model => model.modifydate)
-        </label>
-        &nbsp; : &nbsp;
-        <p class="form-control-static">@Html.DisplayFor(model => model.modifydate)</p>
+        @Html.DisplayFor(model => model.LastModifyDate)
     </div>
 </div>

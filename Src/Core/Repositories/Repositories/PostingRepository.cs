@@ -29,11 +29,10 @@ namespace QTrans.Repositories
 
         public PostingDetails PostingDetailCreation(PostingDetails postingDetails, out string message)
         {
-            long postingId = 0;
             message = string.Empty;
             if (this.instancePosting.InsertUpdatePostingDetails(postingDetails, out message))
             {
-                var ds = this.instancePosting.GetByPostingDetailsId(postingId, out message);
+                var ds = this.instancePosting.GetByPostingDetailsId(postingDetails.postingid, out message);
                 var lstProfile = DataAccessUtility.ConvertToList<QTrans.Models.ViewModel.Posting.PostingProfileView>(ds.Tables[0]);
                 var lstDetails = DataAccessUtility.ConvertToList<PostingDetails>(ds.Tables[1]);
                 postingDetails = lstDetails.Count > 0 ? lstDetails[0] : null;
