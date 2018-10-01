@@ -1501,10 +1501,10 @@
     <Content Include="Views\Bidding\Index.cshtml" />
     <Content Include="Views\Bidding\Create.cshtml" />
     <Content Include="Views\Bidding\Edit.cshtml" />
-    <Content Include="Views\Posting\Index.cshtml" />
+    <Content Include="Views\Posting\Details.cshtml" />
     <Content Include="Views\Posting\Create.cshtml" />
     <Content Include="Views\Posting\Edit.cshtml" />
-    <Content Include="Views\Posting\IndexDetails.cshtml" />
+    <Content Include="Views\Posting\PostDetails.cshtml" />
     <Content Include="Views\Posting\CreateDetails.cshtml" />
     <Content Include="Views\Posting\EditDetails.cshtml" />
     <Content Include="Views\Posting\PastList.cshtml" />

@@ -27,5 +27,9 @@ namespace QTrans.Models
         public const string StringMobileNumber = "Mobile must be 10 digit";
 
         public const string StringDecimal = "Only Decimal allowed. e.g 12.50";
+
+        public const string FormatShortDate = "{0:dd-MMM-yyyy}";
+
+        public const string FormatDateTime = "{0:dd-MMM-yyyy HH:mm:ss}";
     }
 }

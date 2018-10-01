@@ -58,6 +58,7 @@ namespace QTrans.Models
         [StringLength(200)]
         public string packagetypedesc { get; set; }
         public System.DateTime createddate { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = Constants.FormatDateTime)]
         public Nullable<System.DateTime> modifydate { get; set; }
     
         public virtual ICollection<PostingDetails> tbldtlpostings { get; set; }

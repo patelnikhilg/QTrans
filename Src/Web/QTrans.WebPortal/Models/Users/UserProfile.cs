@@ -66,6 +66,7 @@ namespace QTrans.WebPortal.Models
         public string landlinenumber { get; set; }
 
         [DisplayName("DOB")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatShortDate)]
         public Nullable<System.DateTime> dob { get; set; }
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
@@ -132,6 +133,7 @@ namespace QTrans.WebPortal.Models
         [DisplayName("Aadhar No.")]
         public Nullable<long> aadhaarno { get; set; }
         public DateTime createddate { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = Constants.FormatDateTime)]
         public Nullable<DateTime> modifydate { get; set; }
 
         public int OTP { get; set; }

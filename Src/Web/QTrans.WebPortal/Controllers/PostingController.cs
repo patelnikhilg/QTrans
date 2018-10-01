@@ -1,4 +1,5 @@
-﻿using QTrans.Models;
+﻿using AutoMapper;
+using QTrans.Models;
 using QTrans.Repositories;
 using QTrans.Utility;
 using QTrans.WebPortal.Common;
@@ -13,11 +14,11 @@ namespace QTrans.WebPortal.Controllers
     public class PostingController : BaseController
     {
         // GET: Posting
-        public ActionResult Index(long id)
+        public ActionResult Details(long id)
         {
             var message = string.Empty;
             PostingRepository postingRepository = new PostingRepository(this.UserId);
-            var post = postingRepository.GetPostingProfileById(id, out message);
+            var post = postingRepository.GetPostingDetailById(id, out message);
             return View(post);
         }
 
@@ -79,7 +80,7 @@ namespace QTrans.WebPortal.Controllers
                         if (details != null)
                         {
                             ViewData["Message"] = message;
-                            return RedirectToAction("CreateDetails");
+                            //return RedirectToAction("CreateDetails");
                         }
                         else
                         {
@@ -114,11 +115,14 @@ namespace QTrans.WebPortal.Controllers
         // GET: posting/Edit/5
         public ActionResult Edit(int id)
         {
+            TempDataFilling();
             var message = string.Empty;
             PostingRepository repository = new PostingRepository(this.UserId);
+            PostingProfile postProfile;
             //Perform the conversion and fetch the destination view model
-            var profile = repository.GetPostingDetailById(id, out message);
-            return View(profile);
+            var profileDetails = repository.GetPostingDetailByPostId(id,out postProfile, out message);
+            PostingData data = new PostingData() { profile = postProfile, details = profileDetails };
+            return View(data);
         }
 
         // POST: posting/Edit/5
@@ -131,6 +135,7 @@ namespace QTrans.WebPortal.Controllers
                 {
                     var message = string.Empty;
                     data.profile.userid = this.UserId;
+                    data.profile.postingid = id;
                     PostingRepository repository = new PostingRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
                     var profileresult = repository.PostingPorfileCreation(data.profile, out message);
@@ -141,7 +146,7 @@ namespace QTrans.WebPortal.Controllers
                         if (details != null)
                         {
                             ViewData["Message"] = message;
-                            return RedirectToAction("CreateDetails");
+                            return RedirectToAction("Details/" + id.ToString());
                         }
                         else
                         {

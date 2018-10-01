@@ -30,7 +30,7 @@ namespace QTrans.DataAccess
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);              
                 rowEffected = connector.ExceuteNonQuery();
                 message = connector.GetParamaeterValue("@Message").ToString();
-                identity = Convert.ToInt64(connector.GetParamaeterValue("@identity"));
+                identity = bidding.biddingid == 0? Convert.ToInt64(connector.GetParamaeterValue("@identity")) : bidding.biddingid;
             }
 
             return rowEffected > 0;

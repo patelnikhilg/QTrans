@@ -28,7 +28,7 @@ namespace QTrans.DataAccess
                 connector.AddOutParameterWithType("@identity", SqlDbType.BigInt);
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
-                identity = Convert.ToInt64(connector.GetParamaeterValue("@identity"));
+                identity = company.companyid == 0 ? Convert.ToInt64(connector.GetParamaeterValue("@identity")) : company.companyid;
                 message = connector.GetParamaeterValue("@Message").ToString();
                                
             }

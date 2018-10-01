@@ -51,6 +51,7 @@ namespace QTrans.Models
         public string cancellationreason { get; set; }
 
         [DisplayName("Bidding Date")]
+        [DisplayFormat(DataFormatString = Constants.FormatDateTime)]
         public Nullable<System.DateTime> createddate { get; set; }
         public Nullable<System.DateTime> modifydate { get; set; }
     

@@ -55,6 +55,18 @@ namespace QTrans.Repositories
             return postingDetails;
         }
 
+        public PostingDetails GetPostingDetailByPostId(long postingId,out PostingProfile profile, out string message)
+        {
+            message = string.Empty;
+            PostingDetails postingDetails = null;
+            var ds = this.instancePosting.GetByPostingDetailsId(postingId, out message);
+            var lstProfile = DataAccessUtility.ConvertToList<PostingProfile>(ds.Tables[0]);
+            var lstDetails = DataAccessUtility.ConvertToList<PostingDetails>(ds.Tables[1]);
+            profile= lstProfile.Count > 0 ? lstProfile[0] : null; 
+            postingDetails = lstDetails.Count > 0 ? lstDetails[0] : null;
+            return postingDetails;
+        }
+
         public Models.ViewModel.Posting.PostingProfileView GetPostingProfileById(long postingId, out string message)
         {
             message = string.Empty;

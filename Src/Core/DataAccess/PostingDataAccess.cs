@@ -37,7 +37,7 @@ namespace QTrans.DataAccess
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
                 message = connector.GetParamaeterValue("@Message").ToString();
-                identity = Convert.ToInt64(connector.GetParamaeterValue("@identity"));
+                identity = posting.postingid == 0 ? Convert.ToInt64(connector.GetParamaeterValue("@identity")): posting.postingid;
             }
 
             return rowEffected > 0;

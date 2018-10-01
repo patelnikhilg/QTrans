@@ -46,7 +46,7 @@ namespace QTrans.Models.ViewModel.Posting
         [DisplayName("No of Vehicle")]
         public short novehicle { get; set; }
         [DisplayName("Pickup DateTime")]
-        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DisplayFormat(DataFormatString = Constants.FormatShortDate)]
         public System.DateTime pickupdatetime { get; set; }
 
         [DisplayName("Order Type")]

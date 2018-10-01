@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<QTrans.Models.ViewModel.Posting.PostingList>
 
 @{
-    ViewBag.Title = "Completed Post List";
+    ViewBag.Title = "Active Post List";
     Layout = "~/Views/Shared/_PrivateLayout.cshtml";
 }
 
@@ -43,7 +43,7 @@
                                 @Html.DisplayFor(modelItem => item.dst_landmark)- @Html.DisplayFor(modelItem => item.dst_pincode)
                             </span>
                             <br /><br />
-                            <span style="float:right;padding-top:5%;color:orange;font-weight:bold">@Html.ActionLink("Details", "Index", new { Id = item.postingid }, new { htmlAttributes = new { color = "orange" } } ) <span class="ti-arrow-circle-right"></span></span>
+                            <span style="float:right;padding-top:5%;color:orange;font-weight:bold">@Html.ActionLink("Details", "Details", new { Id = item.postingid }, new { htmlAttributes = new { color = "orange" } } ) <span class="ti-arrow-circle-right"></span></span>
                         </div>
                     </div>
                     <div class="row form-group">
