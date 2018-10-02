@@ -36,44 +36,50 @@ namespace QTrans.DataAccess
             return rowEffected > 0;
         }
 
-        public DataTable GetById(long biddingId, out string message)
+        public DataTable GetById(long biddingId)
         {
             DataTable dt = null;
             using (DBConnector connector = new DBConnector("Usp_GetBiddingDetailsById", true))
             {
                 connector.AddInParameterWithValue("@biddingId", biddingId);
-                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 dt = connector.GetDataTable();
-                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return dt;
         }
 
-        public DataTable GetByPostingUserId(long postingId,long userId, out string message)
+        public DataTable GetPostingDetailsByDtlPostingId(long dtlpostingId)
         {
             DataTable dt = null;
-            using (DBConnector connector = new DBConnector("Usp_GetBiddingDetailsByPostingId", true))
+            using (DBConnector connector = new DBConnector("Usp_GetBiddingDetailsByDtlPostingId", true))
             {
-                connector.AddInParameterWithValue("@postingId", postingId);
-                connector.AddInParameterWithValue("@userId", userId);
-                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                connector.AddInParameterWithValue("@DtlpostingId", dtlpostingId);
                 dt = connector.GetDataTable();
-                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return dt;
         }
 
-        public DataTable GetByUserId(long userId, out string message)
+        public DataTable GetByUserId(long userId)
         {
             DataTable dt = null;
             using (DBConnector connector = new DBConnector("Usp_GetBiddingDetailsByUserId", true))
             {
                 connector.AddInParameterWithValue("@userId", userId);
-                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 dt = connector.GetDataTable();
-                message = connector.GetParamaeterValue("@Message").ToString();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetPostingList(long userId,bool isPast)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetPostingList", true))
+            {
+                connector.AddInParameterWithValue("@UserId", userId);
+                connector.AddInParameterWithValue("@isPast", isPast);
+                dt = connector.GetDataTable();
             }
 
             return dt;

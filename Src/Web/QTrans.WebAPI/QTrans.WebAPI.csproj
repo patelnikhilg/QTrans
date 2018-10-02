@@ -198,6 +198,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\RequestValidatorAttribute.cs" />
+    <Compile Include="Models\BiddingParam.cs" />
     <Compile Include="Models\DeviceRegistration.cs" />
     <Compile Include="Models\PostingParam.cs" />
     <Compile Include="Models\UserPersonalDetail.cs" />

@@ -4,34 +4,35 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="">
  <!--<![endif]-->
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title -Quick Transport</title>
-    @*@Styles.Render("~/Content/css")
+                       <head>
+                           <meta charset="utf-8" />
+                           <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                           <title>@ViewBag.Title -Quick Transport</title>
+                           @*@Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")*@
-    @Scripts.Render("~/bundles/jquery")
-    @*@Scripts.Render("~/bundles/bootstrap")*@
-    @RenderSection("scripts", required: false)
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sufee Admin - HTML5 Admin TemplateQick Transport</title>
-    <meta name="description" content="Quick Transport">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="apple-icon.png">
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="../../content/desgin/assets/css/normalize.css">
-    <link rel="stylesheet" href="../../content/desgin/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../content/desgin/assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../content/desgin/assets/css/themify-icons.css">
-    <link rel="stylesheet" href="../../content/desgin/assets/css/flag-icon.min.css">
-    <link rel="stylesheet" href="../../content/desgin/assets/css/cs-skin-elastic.css">
-    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
-    <link rel="stylesheet" href="../../content/desgin/assets/scss/style.css">
-    <link href="../../content/desgin/assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+                           @Scripts.Render("~/bundles/jquery")
+                           @*@Scripts.Render("~/bundles/bootstrap")*@
+                           @RenderSection("scripts", required: false)
+                           <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                           <title>Sufee Admin - HTML5 Admin TemplateQick Transport</title>
+                           <meta name="description" content="Quick Transport">
+                           <meta name="viewport" content="width=device-width, initial-scale=1">
+                           <link rel="apple-touch-icon" href="apple-icon.png">
+                           <link rel="shortcut icon" href="favicon.ico">
+                           <link rel="stylesheet" href="../../content/desgin/assets/css/normalize.css">
+                           <link rel="stylesheet" href="../../content/desgin/assets/css/bootstrap.min.css">
+                           <link rel="stylesheet" href="../../content/desgin/assets/css/font-awesome.min.css">
+                           <link rel="stylesheet" href="../../content/desgin/assets/css/themify-icons.css">
+                           <link rel="stylesheet" href="../../content/desgin/assets/css/flag-icon.min.css">
+                           <link rel="stylesheet" href="../../content/desgin/assets/css/cs-skin-elastic.css">
+                           <link rel="stylesheet" href="../../content/desgin/assets/css/lib/datatable/dataTables.bootstrap.min.css">
+                           <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+                           <link rel="stylesheet" href="../../content/desgin/assets/scss/style.css">
+                           <link href="../../content/desgin/assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
+                           <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+                           <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
-</head>
+                       </head>
 
 <body>
 
@@ -49,9 +50,9 @@
                 </div>
                 <div id="main-menu" class="main-menu collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        @*<li class="active">
-                                <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
-                            </li>*@
+                        <li class="active">
+                            <a href="#"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        </li>
                         <h3 class="menu-title">User Mangement</h3><!-- /.menu-title -->
                         <li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa ti-user"></i>Manage User</a>
@@ -61,18 +62,18 @@
                                 <li><i class="fa fa-key"></i><a href="../User/UpdatePassword">Update Password</a></li>
                                 <li><i class="fa fa-building-o"></i><a href="~/company/Index">Company</a></li>
                                 @*<li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Cards</a></li>
-        <li><i class="fa fa-exclamation-triangle"></i><a href="ui-alerts.html">Alerts</a></li>
-        <li><i class="fa fa-spinner"></i><a href="ui-progressbar.html">Progress Bars</a></li>
-        <li><i class="fa fa-fire"></i><a href="ui-modals.html">Modals</a></li>
-        <li><i class="fa fa-book"></i><a href="ui-switches.html">Switches</a></li>
-        <li><i class="fa fa-th"></i><a href="ui-grids.html">Grids</a></li>
-        <li><i class="fa fa-file-word-o"></i><a href="ui-typgraphy.html">Typography</a></li>*@
+                                <li><i class="fa fa-exclamation-triangle"></i><a href="ui-alerts.html">Alerts</a></li>
+                                <li><i class="fa fa-spinner"></i><a href="ui-progressbar.html">Progress Bars</a></li>
+                                <li><i class="fa fa-fire"></i><a href="ui-modals.html">Modals</a></li>
+                                <li><i class="fa fa-book"></i><a href="ui-switches.html">Switches</a></li>
+                                <li><i class="fa fa-th"></i><a href="ui-grids.html">Grids</a></li>
+                                <li><i class="fa fa-file-word-o"></i><a href="ui-typgraphy.html">Typography</a></li>*@
                             </ul>
                         </li>
                         @*<li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Manage Company</a>
                             <ul class="sub-menu children dropdown-menu">
-                               
+
                             </ul>
                         </li>*@
                         <h3 class="menu-title">Post</h3><!-- /.menu-title -->
@@ -88,7 +89,8 @@
                         <li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Bidding</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="ti-list"></i><a href="#">Active Post</a></li>
+                                <li><i class="ti-list"></i><a href="~/bidding/CurrentPost">Active Post</a></li>
+                                <li><i class="ti-list"></i><a href="~/bidding/ClosePost">Close Post</a></li>
                                 <li><i class="ti-list"></i><a href="#">List bidding</a></li>
                             </ul>
                         </li>
@@ -98,7 +100,7 @@
                             <ul class="sub-menu children dropdown-menu">
                                 <li><i class="menu-icon fa fa-sign-in"></i><a href="#">Logout</a></li>
                                 @*<li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
-                                    <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>*@
+                                <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>*@
                             </ul>
                         </li>
                     </ul>
@@ -122,21 +124,21 @@
             <!-- Header-->
             <div class="breadcrumbs">
                 @*<div class="col-sm-4">
-                        <div class="page-header float-left">
-                            <div class="page-title">
-                                <h1>Dashboard</h1>
-                            </div>
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Dashboard</h1>
                         </div>
                     </div>
-                    <div class="col-sm-8">
-                        <div class="page-header float-right">
-                            <div class="page-title">
-                                <ol class="breadcrumb text-right">
-                                    <li class="active">Dashboard</li>
-                                </ol>
-                            </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li class="active">Dashboard</li>
+                            </ol>
                         </div>
-                    </div>*@
+                    </div>
+                </div>*@
                 <div class="container body-content">
                     @RenderBody()
 
@@ -148,30 +150,30 @@
         @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>*@
         <script src="../../content/desgin/assets/js/plugins.js"></script>
         <script src="../../content/desgin/assets/js/main.js"></script>
-
+        
         @*<script src="../../content/desgin/assets/js/lib/chart-js/Chart.bundle.js"></script>
-            <script src="../../content/desgin/assets/js/dashboard.js"></script>
-            <script src="../../content/desgin/assets/js/widgets.js"></script>
-            <script src="../../content/desgin/assets/js/lib/vector-map/jquery.vmap.js"></script>
-            <script src="../../content/desgin/assets/js/lib/vector-map/jquery.vmap.min.js"></script>
-            <script src="../../content/desgin/assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
-            <script src="../../content/desgin/assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>*@
+        <script src="../../content/desgin/assets/js/dashboard.js"></script>
+        <script src="../../content/desgin/assets/js/widgets.js"></script>
+        <script src="../../content/desgin/assets/js/lib/vector-map/jquery.vmap.js"></script>
+        <script src="../../content/desgin/assets/js/lib/vector-map/jquery.vmap.min.js"></script>
+        <script src="../../content/desgin/assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
+        <script src="../../content/desgin/assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>*@
         @*<script>( function ( $ ) {
-                "use strict";
+            "use strict";
 
-                jQuery( '#vmap' ).vectorMap( {
-                    map: 'world_en',
-                    backgroundColor: null,
-                    color: '#ffffff',
-                    hoverOpacity: 0.7,
-                    selectedColor: '#1de9b6',
-                    enableZoom: true,
-                    showTooltip: true,
-                    values: sample_data,
-                    scaleColors: [ '#1de9b6', '#03a9f5' ],
-                    normalizeFunction: 'polynomial'
-                } );
-            } )( jQuery );</script>*@
+            jQuery( '#vmap' ).vectorMap( {
+                map: 'world_en',
+                backgroundColor: null,
+                color: '#ffffff',
+                hoverOpacity: 0.7,
+                selectedColor: '#1de9b6',
+                enableZoom: true,
+                showTooltip: true,
+                values: sample_data,
+                scaleColors: [ '#1de9b6', '#03a9f5' ],
+                normalizeFunction: 'polynomial'
+            } );
+        } )( jQuery );</script>*@
     </body>
 
 </body>

@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QTrans.Models.ViewModel.Posting
+namespace QTrans.Models.ViewModel.Bidding
 {
-    public class PostingList
+    public class PostingListBid
     {
         public long postingid { get; set; }
-        public long dtlpostingid { get; set; }               
+        public long dtlpostingid { get; set; }
         [DisplayName("Post Type")]
         public string posttype { get; set; }
         [DisplayName("City")]
@@ -36,7 +36,7 @@ namespace QTrans.Models.ViewModel.Posting
         public int dst_pincode { get; set; }
         [DisplayName("Material Type")]
         public string materialtype { get; set; }
-        
+
         [DisplayName("Package Type")]
         public string packagetype { get; set; }
 
@@ -69,6 +69,12 @@ namespace QTrans.Models.ViewModel.Posting
 
         [DisplayName("Post Amount")]
         public Nullable<decimal> postamount { get; set; }
+        [DisplayName("Bid Status")]
+        public short BidStatus { get; set; }
 
+        [DisplayName("Bid Status")]
+        public string BidStatusValue { get { return ((QTrans.Utility.BiddingStatus)BidStatus).ToString(); } }
+
+        public short rating { get; set; }
     }
 }

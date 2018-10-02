@@ -1,0 +1,72 @@
+﻿@model IEnumerable<QTrans.Models.BiddingProfile>
+
+@{
+    ViewBag.Title = "BiddingList";
+    Layout = "~/Views/Shared/_PrivateLayout.cshtml";
+}
+
+
+<table class="table">
+    <tr>       
+        <th>
+            @Html.DisplayNameFor(model => model.amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.biddercomment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.servicecharges)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paymentmethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cancellationreason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastModifyDate)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>        
+        <td>
+            @Html.DisplayFor(modelItem => item.amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.biddercomment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.servicecharges)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paymentmethod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cancellationreason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastModifyDate)
+        </td>
+      
+        <td>           
+            @Html.ActionLink("Details", "Details", new { id=item.biddingid }) 
+        </td>
+    </tr>
+}
+
+</table>
