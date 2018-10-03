@@ -50,6 +50,7 @@ namespace QTrans.Models
         public Nullable<short> deliveryperiodday { get; set; }
 
         [DisplayName("Pickup Date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatDateTime)]
         public System.DateTime pickupdatetime { get; set; }
         [RegularExpression(Constants.RegexDecimalInput, ErrorMessage = Constants.StringDecimal)]
         [DisplayName("Post Amount")]
@@ -65,10 +66,10 @@ namespace QTrans.Models
         public int creditday { get; set; }
 
         [DisplayName("Contract Start Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatShortDate)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatDateTime)]
         public Nullable<System.DateTime> contractstartdatetime { get; set; }
         [DisplayName("Contract End Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatShortDate)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatDateTime)]
         public Nullable<System.DateTime> contractenddatetime { get; set; }
 
         [RegularExpression(Constants.RegexIntInput, ErrorMessage = Constants.StringNumeric)]
@@ -78,11 +79,11 @@ namespace QTrans.Models
         public string ordertypeValue { get { return ((QTrans.Utility.OrderType)ordertype).ToString(); } }
 
         [DisplayName("Bidding Start Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatShortDate)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatDateTime)]
         public System.DateTime biddingactivatedatetime { get; set; }
 
         [DisplayName("Bidding Close Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatShortDate)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatDateTime)]
         public System.DateTime biddingclosedatetime { get; set; }
 
         [DisplayName("Status")]

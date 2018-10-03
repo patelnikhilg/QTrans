@@ -14,9 +14,11 @@ namespace QTrans.WebPortal.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Configuration;
 
     public  class UserProfile
     {
+        string defaultPhotoPath = ConfigurationManager.AppSettings["DefaultPhotoPath"].ToString();
         public UserProfile()
         {
            // this.areaPreferences =  new HashSet<AreaPreference>();
@@ -88,6 +90,9 @@ namespace QTrans.WebPortal.Models
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Photo")]
         public string photo { get; set; }
+      
+        [DisplayName("DefaultPhoto")]
+        public string defaultPhoto { get { return defaultPhotoPath; } }
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
         [DisplayName("Country")]

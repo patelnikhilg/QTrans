@@ -156,5 +156,19 @@ namespace QTrans.Repositories
 
             return false;
         }
+
+        public int UpdateUserPhoto(Int64 userID, string filePath, out string message)
+        {
+            try
+            {
+                int rowsAffected = 0;
+                rowsAffected = instanceUser.UpdateUserPhoto(userID, filePath, out message);
+                return rowsAffected;
+            }
+            catch (Exception exp)
+            {
+                throw exp;
+            }
+        }
     }
 }

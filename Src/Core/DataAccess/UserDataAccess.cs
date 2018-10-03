@@ -227,5 +227,20 @@ namespace QTrans.DataAccess
 
             return dt;
         }
+
+        public int UpdateUserPhoto(Int64 userID, string filePath, out string message)
+        {
+            int rowEffected = 0;
+            using (DBConnector connector = new DBConnector("Usp_UpdateUserPhoto", true))
+            {
+                connector.AddInParameterWithValue("@UserId", userID);
+                connector.AddInParameterWithValue("@photo", filePath);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                rowEffected = connector.ExceuteNonQuery();
+                message = connector.GetParamaeterValue("@Message").ToString();
+            }
+
+            return rowEffected;
+        }
     }
 }

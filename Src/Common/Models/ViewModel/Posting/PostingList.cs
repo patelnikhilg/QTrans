@@ -47,7 +47,7 @@ namespace QTrans.Models.ViewModel.Posting
         [DisplayName("No of Vehicle")]
         public short novehicle { get; set; }
         [DisplayName("Pickup DateTime")]
-        [DisplayFormat(DataFormatString = Constants.FormatShortDate)]
+        [DisplayFormat(DataFormatString = Constants.FormatDateTime)]
         public System.DateTime pickupdatetime { get; set; }
 
         [DisplayName("Order Type")]
@@ -56,12 +56,12 @@ namespace QTrans.Models.ViewModel.Posting
         [DisplayName("Order Type")]
         public string ordertypeValue { get { return ((QTrans.Utility.OrderType)ordertype).ToString(); } }
 
-        [DisplayFormat(DataFormatString = Constants.FormatShortDate)]
-        [DisplayName("Bidding Activation DateTime")]
+        [DisplayName("Bidding Start DateTime")]
+        [DisplayFormat(DataFormatString = Constants.FormatDateTime)]
         public System.DateTime biddingactivatedatetime { get; set; }
 
         [DisplayName("Bidding Close DateTime")]
-        [DisplayFormat(DataFormatString = Constants.FormatShortDate)]
+        [DisplayFormat(DataFormatString = Constants.FormatDateTime)]
         public System.DateTime biddingclosedatetime { get; set; }
 
         [DisplayName("Status of Post")]

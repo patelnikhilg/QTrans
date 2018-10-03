@@ -6,6 +6,7 @@ using QTrans.WebPortal.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -162,6 +163,72 @@ namespace QTrans.WebPortal.Controllers
         {
             this.sessionStorage.RemoveValue("UserSession");
             return RedirectToAction("../Home/Index");
+        }
+
+        [HttpPost]
+        public ActionResult UploadFile()
+        {
+            string fname = string.Empty;
+            string filePath = string.Empty;
+            int userID = 0;
+            string message = string.Empty;
+            if (Request.Files.Count > 0)
+            {
+                try
+                {
+                    //  Get all files from Request object  
+                    HttpFileCollectionBase files = Request.Files;
+                    if (Request.Form["userid"] != null)
+                    {
+                        userID = Convert.ToInt32(Request.Form["userid"]);
+                        for (int i = 0; i < files.Count; i++)
+                        {
+                            HttpPostedFileBase file = files[i];
+                            filePath = ConfigurationManager.AppSettings["FileUploadPath"] + "/" + userID + "/" + file.FileName;
+                            // Checking for Internet Explorer  
+                            if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
+                            {
+                                string[] testfiles = file.FileName.Split(new char[] { '\\' });
+                                fname = testfiles[testfiles.Length - 1];
+                            }
+                            else
+                            {
+                                fname = file.FileName;
+                            }
+
+                            // Get the complete folder path and store the file inside it.
+                            string imageFolderPath = Server.MapPath("~/Uploads/") + userID.ToString() + "/";
+                            if (!Directory.Exists(imageFolderPath))
+                                Directory.CreateDirectory(imageFolderPath);
+
+                            //delete all existing files for current user
+                            DirectoryInfo di = new DirectoryInfo(imageFolderPath);
+
+                            foreach (FileInfo fileToDelete in di.GetFiles())
+                            {
+                                fileToDelete.Delete();
+                            }
+
+                            fname = Path.Combine(imageFolderPath, fname);
+                            file.SaveAs(fname);
+                        }
+
+                        UserRepository res = new UserRepository();
+                        int rowsAffected = res.UpdateUserPhoto(userID, filePath, out message);
+                    }
+                    // Returns message that successfully uploaded  
+                    return Json("" + filePath);
+                }
+                catch (Exception ex)
+                {
+                    return Json("Error occurred. Error details: " + ex.Message);
+                }
+            }
+            else
+            {
+                filePath = ConfigurationManager.AppSettings["DefaultPhotoPath"].ToString();
+                return Json("" + filePath);
+            }
         }
     }
 }

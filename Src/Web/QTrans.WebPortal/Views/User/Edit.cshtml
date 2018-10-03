@@ -3,6 +3,18 @@
 @{
     ViewBag.Title = "Edit User";
     Layout = "~/Views/Shared/_PrivateLayout.cshtml";
+    var photoPath = "";
+    if (Model != null)
+    {
+        if (Model.photo.Length > 0 && Model.photo != "NA")
+        {
+            photoPath = Model.photo;
+        }
+        else
+        {
+            photoPath = Model.defaultPhoto;
+        }
+    }
 }
 
 @section Scripts {
@@ -14,13 +26,74 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('input[type=datetime]').datepicker({
-                dateFormat: "dd-M-yy",
+                dateFormat: "dd/M/yy",
                 changeMonth: true,
                 changeYear: true,
                 yearRange: "-60:+0"
             });
 
+
+
+            $('#btnUpload').click(function () {
+                // Checking whether FormData is available in browser
+                var model = @Html.Raw(Json.Encode(Model));
+                console.log(model.userid);
+                if (window.FormData !== undefined) {
+
+                    var fileUpload = $("#FileUpload1").get(0);
+                    var files = fileUpload.files;
+
+                    if (files.length > 0) {
+                        // Create FormData object
+                        var fileData = new FormData();
+
+                        // Looping over all files and add it to FormData object
+                        for (var i = 0; i < files.length; i++) {
+                            fileData.append(files[i].name, files[i]);
+                        }
+
+                        // Adding one more key to FormData object
+                        fileData.append('username', 'Rahul');
+                        fileData.append('userid', model.userid);
+                        $.ajax({
+                            url: '/User/UploadFile',
+                            type: "POST",
+                            contentType: false, // Not to set any content header
+                            processData: false, // Not to process data
+                            data: fileData,
+                            success: function (result) {
+                                //alert(result);
+                                $("#imgProfilePic").attr("src", result);
+                            },
+                            error: function (err) {
+                                alert(err.statusText);
+                            }
+                        });
+                    }
+                    else {
+                        alert("Please select file to upload");
+                    }
+
+
+                } else {
+                    alert("FormData is not supported.");
+                }
+            });
         });
+
+
+        function showHideFileUpload(showhide) {
+            if (showhide == 'show') {
+                $("#divProfileEdit").hide();
+                $("#divFileUpload").show();
+                //$("#divFileUpload").attr("visibility", "visible");
+            }
+            else {
+                $("#divProfileEdit").show();
+                $("#divFileUpload").hide();
+                //$("#divFileUpload").attr("visibility", "hidden");
+            }
+        }
     </script>
 
 }
@@ -38,6 +111,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="card-body card-block">
                 <div class="row form-group" style="visibility:hidden ">
+
                     @Html.LabelFor(model => model.userid, htmlAttributes: new { @class = "form-control-label" })
                     <div class="col-12 col-sm-6">
                         @Html.EditorFor(model => model.userid, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userid) } })
@@ -64,25 +138,40 @@
                         @Html.ValidationMessageFor(model => model.lastname, "", new { @class = "text-danger" })
                     </div>
                     <div class="row form-group ">
-                        @Html.LabelFor(model => model.dob, htmlAttributes: new { @class = "form-control-label" }) &nbsp;
-                        @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @class = "form-control  col-sm-6", placeholder = "Date Of Birth", @readonly = "true" } })
-                        @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="row form-group">
-                        @Html.LabelFor(model => model.emailaddress, htmlAttributes: new { @class = " form-control-label" })&nbsp;
-                        @Html.EditorFor(model => model.emailaddress, new { htmlAttributes = new { @class = "form-control col-sm-6", placeholder = @Html.DisplayNameFor(m => m.emailaddress) } })
-                        @Html.ValidationMessageFor(model => model.emailaddress, "", new { @class = "text-danger" })
-                    </div>
+                          
+                            <div class="input-group date" id="ContractStartDateDiv">
+                                @Html.LabelFor(model => model.dob, htmlAttributes: new { @class = "form-control-label" }) &nbsp;
+                                @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @class = "form-control col-sm-5", placeholder = "DD/MM/YYYY", autocomplete = "off", @readonly = "true" } })
+                                <label class="input-group-addon btn" for="date">
+                                    <span class="fa fa-calendar open-datetimepicker"></span>
+                                </label>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="row form-group">
+                            @Html.LabelFor(model => model.emailaddress, htmlAttributes: new { @class = " form-control-label" })&nbsp;
+                            @Html.EditorFor(model => model.emailaddress, new { htmlAttributes = new { @class = "form-control col-sm-6", placeholder = @Html.DisplayNameFor(m => m.emailaddress) } })
+                            @Html.ValidationMessageFor(model => model.emailaddress, "", new { @class = "text-danger" })
+                        </div>
 
-                    <div class="row form-group">
-                        @Html.LabelFor(model => model.mobilenumber, htmlAttributes: new { @class = " form-control-label" })&nbsp;
-                        @Html.EditorFor(model => model.mobilenumber, new { htmlAttributes = new { @class = "form-control col-sm-6", placeholder = @Html.DisplayNameFor(m => m.mobilenumber) } })
-                        @Html.ValidationMessageFor(model => model.mobilenumber, "", new { @class = "text-danger" })
+                        <div class="row form-group">
+                            @Html.LabelFor(model => model.mobilenumber, htmlAttributes: new { @class = " form-control-label" })&nbsp;
+                            @Html.EditorFor(model => model.mobilenumber, new { htmlAttributes = new { @class = "form-control col-sm-6", placeholder = @Html.DisplayNameFor(m => m.mobilenumber) } })
+                            @Html.ValidationMessageFor(model => model.mobilenumber, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
                 <div class="form-group col-lg-6">
-                    <div class="form-group"><img src="~/Content/Desgin/images/admin.jpg" /></div>
-                    <a href="#">Edit</a>
+                    <div class="form-group"><img src="@photoPath" id="imgProfilePic" /></div>
+                    <div id="divProfileEdit">
+                        <span onclick="showHideFileUpload('show')" style="cursor:pointer;"><i class="fa fa-pencil"></i></span>
+                    </div>
+                    <div id="divFileUpload" style="display:none;">                      
+                        <input class="btn btn-sm"  type="file" id="FileUpload1" />
+                        <button type="button" id="btnUpload" class="btn btn-success btn-sm" onclick="showHideFileUpload('hide')">
+                            <i class="fa fa-dot-circle-o"></i> Upload Photo
+                        </button>
+                        @*<input type="button" id="btnUpload" class="btn btn-success btn-sm" value="Upload File" onclick="showHideFileUpload('hide')" />*@
+                    </div>
                 </div>
 
                 <div class="col-lg-12">
@@ -182,12 +271,12 @@
 
                 </div>
                 <div class="row form-group col-12">
-                        <button type="submit" class="btn btn-success btn-sm">
-                            <i class="fa fa-dot-circle-o"></i> Submit
-                        </button>
-                        <button type="reset" class="btn btn-danger btn-sm">
-                            <i class="fa fa-ban"></i> Reset
-                        </button>
+                    <button type="submit" class="btn btn-success btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button> &nbsp;&nbsp;
+                    <button type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Cancel
+                    </button>
                 </div>
             </div>
         </div>

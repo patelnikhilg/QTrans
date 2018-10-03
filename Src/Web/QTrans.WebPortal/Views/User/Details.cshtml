@@ -1,8 +1,22 @@
 ﻿@model QTrans.WebPortal.Models.UserProfile
 
 @{
-    ViewBag.Title = "User Details";
-    Layout = "~/Views/Shared/_PrivateLayout.cshtml";
+                /**/
+
+                ViewBag.Title = "User Details";
+                Layout = "~/Views/Shared/_PrivateLayout.cshtml";
+                var photoPath = "";
+                if (Model != null)
+                {
+                    if (Model.photo.Length > 0 && Model.photo != "NA")
+                    {
+                        photoPath = Model.photo;
+                    }
+                    else
+                    {
+                        photoPath = Model.defaultPhoto;
+                    }
+                }
 }
 @section Scripts {
 
@@ -41,7 +55,7 @@
 
             </div>
             <div class="form-group col-lg-6">
-                <div class="form-group"><img src="~/Content/Desgin/images/admin.jpg" /></div>
+                <div class="form-group"><img src="@photoPath" /></div>
 
                 <div class="col-12 col-md-9">
                     <span class="ti-mobile"></span> &nbsp;<span class="form-control-static">@Html.DisplayFor(model => model.mobilenumber)</span>
