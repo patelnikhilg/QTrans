@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BADA55A7-3DBB-4F00-9372-9FBF790475FB}</ProjectGuid>
+    <ProjectGuid>{1FF4DB41-B4EC-4A72-AA20-25106722EC4F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>QTrans.Contract</RootNamespace>
-    <AssemblyName>QTrans.Contract</AssemblyName>
+    <RootNamespace>QTrans.Alert.Core</RootNamespace>
+    <AssemblyName>QTrans.Alert.Core</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,11 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IConfiguration.cs" />
-    <Compile Include="IManager.cs" />
-    <Compile Include="IProcessor.cs" />
-    <Compile Include="IService.cs" />
+    <Compile Include="AlertManager.cs" />
+    <Compile Include="Processor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common\Common.csproj">
+      <Project>{4f348b66-920b-4fcf-b553-5ee577514a6c}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Contract\Contract.csproj">
+      <Project>{bada55a7-3dbb-4f00-9372-9fbf790475fb}</Project>
+      <Name>Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Logging\Logging.csproj">
+      <Project>{862009bf-ccc6-45ef-a82e-3195b86fcd6e}</Project>
+      <Name>Logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

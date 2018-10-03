@@ -14,42 +14,42 @@ namespace QTrans.Logging
             this._loggerName = loggerName ?? "QTransLogger";
         }
 
-        public void Debug(Exception exception, string format, params object[] args)
+        public new void Debug(Exception exception, string format, params object[] args)
         {
             if (!base.IsDebugEnabled) return;
             var logEvent = GetLogEvent(_loggerName, LogLevel.Debug, exception, format, args);
             base.Log(typeof(AppLogger), logEvent);
         }
 
-        public void Error(Exception exception, string format, params object[] args)
+        public new void Error(Exception exception, string format, params object[] args)
         {
             if (!base.IsErrorEnabled) return;
             var logEvent = GetLogEvent(_loggerName, LogLevel.Error, exception, format, args);
             base.Log(typeof(AppLogger), logEvent);
         }
 
-        public void Fatal(Exception exception, string format, params object[] args)
+        public new void Fatal(Exception exception, string format, params object[] args)
         {
             if (!base.IsFatalEnabled) return;
             var logEvent = GetLogEvent(_loggerName, LogLevel.Fatal, exception, format, args);
             base.Log(typeof(AppLogger), logEvent);
         }
 
-        public void Info(Exception exception, string format, params object[] args)
+        public new void Info(Exception exception, string format, params object[] args)
         {
             if (!base.IsInfoEnabled) return;
             var logEvent = GetLogEvent(_loggerName, LogLevel.Info, exception, format, args);
             base.Log(typeof(AppLogger), logEvent);
         }
 
-        public void Trace(Exception exception, string format, params object[] args)
+        public new void Trace(Exception exception, string format, params object[] args)
         {
             if (!base.IsTraceEnabled) return;
             var logEvent = GetLogEvent(_loggerName, LogLevel.Trace, exception, format, args);
             base.Log(typeof(AppLogger), logEvent);
         }
 
-        public void Warn(Exception exception, string format, params object[] args)
+        public new void Warn(Exception exception, string format, params object[] args)
         {
             if (!base.IsWarnEnabled) return;
             var logEvent = GetLogEvent(_loggerName, LogLevel.Warn, exception, format, args);

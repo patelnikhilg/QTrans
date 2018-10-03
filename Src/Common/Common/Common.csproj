@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BADA55A7-3DBB-4F00-9372-9FBF790475FB}</ProjectGuid>
+    <ProjectGuid>{4F348B66-920B-4FCF-B553-5EE577514A6C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>QTrans.Contract</RootNamespace>
-    <AssemblyName>QTrans.Contract</AssemblyName>
+    <RootNamespace>QTrans.Common</RootNamespace>
+    <AssemblyName>QTrans.Common</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,11 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IConfiguration.cs" />
-    <Compile Include="IManager.cs" />
-    <Compile Include="IProcessor.cs" />
-    <Compile Include="IService.cs" />
+    <Compile Include="ApplicationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Contract\Contract.csproj">
+      <Project>{bada55a7-3dbb-4f00-9372-9fbf790475fb}</Project>
+      <Name>Contract</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

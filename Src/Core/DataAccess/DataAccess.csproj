@@ -48,6 +48,7 @@
     <Compile Include="DBConnector.cs" />
     <Compile Include="PostingDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\AlertDataAccess.cs" />
     <Compile Include="UserDataAccess.cs" />
     <Compile Include="DataAccessUtility.cs" />
   </ItemGroup>
