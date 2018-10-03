@@ -1,6 +1,6 @@
 ﻿@model QTrans.Models.PostingDetails
 
-<div class="row form-group" style="visibility:hidden">
+@*<div class="form-group" style="visibility:hidden;">
     <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.dtlpostingid)
@@ -9,7 +9,7 @@
         @Html.DisplayFor(model => model.dtlpostingid)
     </div>
 </div>
-<div class="row form-group" style="visibility:hidden">
+<div class="form-group" style="visibility:hidden;">
     <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.postingid)
@@ -17,7 +17,9 @@
         &nbsp; : &nbsp;
         @Html.DisplayFor(model => model.postingid)
     </div>
-</div>
+</div>*@
+<span>Detail Information</span>
+<hr />
 <div class="row form-group">
     <div class="col col-md-6">
         <label class=" form-control-label">
@@ -26,8 +28,6 @@
         &nbsp; : &nbsp;
         @Html.DisplayFor(model => model.materialweight)
     </div>
-</div>
-<div class="row form-group">
     <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.materialphotos)
@@ -35,6 +35,7 @@
         &nbsp; : &nbsp;
         @Html.DisplayFor(model => model.materialphotos)
     </div>
+
 </div>
 <div class="row form-group">
     <div class="col col-md-6">
@@ -72,17 +73,15 @@
         @Html.DisplayFor(model => model.novehicle)
     </div>
 </div>
+
 <div class="row form-group">
     <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.deliveryperiodday)
         </label>
-    </div>
-    <div class="col-12 col-md-9">
+        &nbsp; : &nbsp;
         @Html.DisplayFor(model => model.deliveryperiodday)
     </div>
-</div>
-<div class="row form-group">
     <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.pickupdatetime)
@@ -99,28 +98,6 @@
         &nbsp; : &nbsp;
         @Html.DisplayFor(model => model.postamount)
     </div>
-</div>
-<div class="row form-group">
-    <div class="col col-md-6">
-        <label class=" form-control-label">
-            @Html.DisplayNameFor(model => model.onpickuppercentage)
-        </label>
-    </div>
-    <div class="col-12 col-md-9">
-        @Html.DisplayFor(model => model.onpickuppercentage)
-    </div>
-</div>
-<div class="row form-group">
-    <div class="col col-md-6">
-        <label class=" form-control-label">
-            @Html.DisplayNameFor(model => model.onunloadingpercentage)
-        </label>
-        &nbsp; : &nbsp;
-        @Html.DisplayFor(model => model.onunloadingpercentage)
-    </div>
-</div>
-
-<div class="row form-group">
     <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.creditday)
@@ -132,14 +109,27 @@
 <div class="row form-group">
     <div class="col col-md-6">
         <label class=" form-control-label">
+            @Html.DisplayNameFor(model => model.onpickuppercentage)
+        </label>
+        &nbsp; : &nbsp;
+        @Html.DisplayFor(model => model.onpickuppercentage)
+    </div>
+    <div class="col col-md-6">
+        <label class=" form-control-label">
+            @Html.DisplayNameFor(model => model.onunloadingpercentage)
+        </label>
+        &nbsp; : &nbsp;
+        @Html.DisplayFor(model => model.onunloadingpercentage)
+    </div>
+</div>
+<div class="row form-group">
+    <div class="col col-md-6">
+        <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.contractstartdatetime)
         </label>
         &nbsp; : &nbsp;
         @Html.DisplayFor(model => model.contractstartdatetime)
     </div>
-</div>
-
-<div class="row form-group">
     <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.contractenddatetime)
@@ -156,26 +146,6 @@
         &nbsp; : &nbsp;
         @Html.DisplayFor(model => model.ordertypeValue)
     </div>
-</div>
-<div class="row form-group">
-    <div class="col col-md-6">
-        <label class=" form-control-label">
-            @Html.DisplayNameFor(model => model.biddingactivatedatetime)
-        </label>
-        &nbsp; : &nbsp;
-        @Html.DisplayFor(model => model.biddingactivatedatetime)
-    </div>
-</div>
-<div class="row form-group">
-    <div class="col col-md-6">
-        <label class=" form-control-label">
-            @Html.DisplayNameFor(model => model.biddingclosedatetime)
-        </label>
-        &nbsp; : &nbsp;
-        @Html.DisplayFor(model => model.biddingclosedatetime)
-    </div>
-</div>
-<div class="row form-group">
     <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.poststatusvalue)
@@ -187,10 +157,33 @@
 <div class="row form-group">
     <div class="col col-md-6">
         <label class=" form-control-label">
+            @Html.DisplayNameFor(model => model.biddingactivatedatetime)
+        </label>
+        &nbsp; : &nbsp;
+        @Html.DisplayFor(model => model.biddingactivatedatetime)
+    </div>
+    <div class="col col-md-6">
+        <label class=" form-control-label">
+            @Html.DisplayNameFor(model => model.biddingclosedatetime)
+        </label>
+        &nbsp; : &nbsp;
+        @Html.DisplayFor(model => model.biddingclosedatetime)
+    </div>
+</div>
+<div class="row form-group">
+    <div class="col col-md-6">
+        <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.gprs)
         </label>
         &nbsp; : &nbsp;
         @Html.DisplayFor(model => model.gprs)
+    </div>
+    <div class="col col-md-6">
+        <label class=" form-control-label">
+            @Html.DisplayNameFor(model => model.loadingtype)
+        </label>
+        &nbsp; : &nbsp;
+        @Html.DisplayFor(model => model.loadingtype)
     </div>
 </div>
 <div class="row form-group">
@@ -201,8 +194,6 @@
         &nbsp; : &nbsp;
         @Html.DisplayFor(model => model.menpowerloading)
     </div>
-</div>
-<div class="row form-group">
     <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.menpowerunloading)
@@ -219,14 +210,11 @@
         &nbsp; : &nbsp;
         @Html.DisplayFor(model => model.transporterinsurance)
     </div>
-</div>
-<div class="row form-group">
     <div class="col col-md-6">
         <label class=" form-control-label">
             @Html.DisplayNameFor(model => model.tolltaxinclude)
         </label>
-    </div>
-    <div class="col-12 col-md-9">
+        &nbsp; : &nbsp;
         @Html.DisplayFor(model => model.tolltaxinclude)
     </div>
 </div>
@@ -237,15 +225,6 @@
         </label>
         &nbsp; : &nbsp;
         @Html.DisplayFor(model => model.remark)
-    </div>
-</div>
-<div class="row form-group">
-    <div class="col col-md-6">
-        <label class=" form-control-label">
-            @Html.DisplayNameFor(model => model.loadingtype)
-        </label>
-        &nbsp; : &nbsp;
-        @Html.DisplayFor(model => model.loadingtype)
     </div>
 </div>
 <div class="row form-group">

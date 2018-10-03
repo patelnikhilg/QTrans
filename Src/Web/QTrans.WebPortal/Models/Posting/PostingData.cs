@@ -12,4 +12,5 @@ namespace QTrans.WebPortal.Models.Posting
 
         public PostingDetails details { get; set; }
     }
+
 }

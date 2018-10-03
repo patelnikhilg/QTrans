@@ -38,6 +38,7 @@ namespace QTrans.Models
         public string Usertype { get; set; }
 
         [DisplayName("Last Modify Date")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = Constants.FormatDateTime)]
         public DateTime LastUpdateDate { get; set; }
     }
 }

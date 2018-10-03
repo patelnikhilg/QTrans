@@ -64,13 +64,14 @@
     <Compile Include="UserProfile.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Vehicletype.cs" />
+    <Compile Include="ViewModel\Bidding\PostingDetailsBid.cs" />
+    <Compile Include="ViewModel\Bidding\PostingListBid.cs" />
     <Compile Include="ViewModel\Common\Location.cs" />
     <Compile Include="ViewModel\Common\LoggingMessage.cs" />
     <Compile Include="ViewModel\Posting\PostingList.cs" />
     <Compile Include="ViewModel\Posting\PostingProfileView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModel\Bidding\" />
     <Folder Include="ViewModel\Users\" />
   </ItemGroup>
   <ItemGroup>

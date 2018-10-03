@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace QTrans.Models
 {
@@ -9,7 +10,7 @@ namespace QTrans.Models
         public int CityId { get; set; }
         public string CityName { get; set; }
         public string State { get; set; }
-
+        [DisplayFormat(DataFormatString = Constants.FormatDateTime)]
         public DateTime CreateDate { get; set; }
     }
     public class AreaPreferenceParam

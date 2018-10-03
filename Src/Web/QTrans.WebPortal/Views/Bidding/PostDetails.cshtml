@@ -1,0 +1,310 @@
+﻿@model QTrans.Models.ViewModel.Bidding.PostingDetailsBid
+
+@{
+    ViewBag.Title = "PostDetails";
+    Layout = "~/Views/Shared/_PrivateLayout.cshtml";
+}
+
+<div class="card" style="border:none">
+    <div class="card-header">
+        <strong>Post Details</strong>
+    </div>
+    <div style="visibility:hidden;display:none;">
+        <span class="form-control-static" id="DtlPostingId">@Html.DisplayFor(model => model.dtlpostingid)</span>
+    </div>
+    <div class="card-body">
+        <div class="row form-group">
+
+            <div class="col col-sm-3">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.posttype)
+                </label>
+                &nbsp; : &nbsp;
+                <span class="form-control-static">@Html.DisplayFor(model => model.posttype)</span>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-6">
+                <label class=" form-control-label">
+                    @*@Html.DisplayNameFor(model => model.soureaddress)*@
+                    From Address:
+                </label>&nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.soureaddress),
+                @Html.DisplayFor(model => model.src_landmark)
+                @Html.DisplayFor(model => model.src_city),
+                @Html.DisplayFor(model => model.src_state)-@Html.DisplayFor(model => model.src_pincode)
+            </div>
+            <div class="col-sm-6">
+                <label class=" form-control-label">
+                    @*@Html.DisplayNameFor(model => model.destinationadress)*@
+                    To Address:
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.destinationadress),
+                @Html.DisplayFor(model => model.dst_landmark),
+                @Html.DisplayFor(model => model.dst_city),
+                @Html.DisplayFor(model => model.dst_state)-@Html.DisplayFor(model => model.dst_pincode)
+
+            </div>
+        </div>
+        <div class="form-group">
+
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.materialtype)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.materialtype)
+            </div>
+            <div class="col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.description)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.description)
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.packagetype)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.packagetype)
+            </div>
+            <div class="col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.packagetypedesc)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.packagetypedesc)
+            </div>
+        </div>
+
+
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.materialweight)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.materialweight)
+            </div>
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.materialphotos)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.materialphotos)
+            </div>
+
+        </div>
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.packingdimension)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.packingdimension)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.numberpackets)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.numberpackets)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.vehicletype)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.vehicletype)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.novehicle)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.novehicle)
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.deliveryperiodday)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.deliveryperiodday)
+            </div>
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.pickupdatetime)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.pickupdatetime)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.postamount)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.postamount)
+            </div>
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.creditday)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.creditday)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.onpickuppercentage)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.onpickuppercentage)
+            </div>
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.onunloadingpercentage)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.onunloadingpercentage)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.contractstartdatetime)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.contractstartdatetime)
+            </div>
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.contractenddatetime)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.contractenddatetime)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.ordertypeValue)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.ordertypeValue)
+            </div>
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.poststatusvalue)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.poststatusvalue)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.biddingactivatedatetime)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.biddingactivatedatetime)
+            </div>
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.biddingclosedatetime)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.biddingclosedatetime)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.gprs)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.gprs)
+            </div>
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.loadingtype)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.loadingtype)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.menpowerloading)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.menpowerloading)
+            </div>
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.menpowerunloading)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.menpowerunloading)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.transporterinsurance)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.transporterinsurance)
+            </div>
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.tolltaxinclude)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.tolltaxinclude)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.remark)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.remark)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-sm-6">
+                <label class=" form-control-label">
+                    @Html.DisplayNameFor(model => model.LastModifyDate)
+                </label>
+                &nbsp; : &nbsp;
+                @Html.DisplayFor(model => model.LastModifyDate)
+            </div>
+        </div>
+        <div id="biddingview">
+            @Html.Partial("Create", new QTrans.Models.BiddingProfile())
+        </div>      
+    </div>
+</div>
+

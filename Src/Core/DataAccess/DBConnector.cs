@@ -85,7 +85,7 @@ namespace QTrans.DataAccess
 
         public object GetParamaeterValue(string parameter)
         {
-            return sqlCommand.Parameters[parameter].Value;
+            return sqlCommand.Parameters[parameter].Value??0;
         }
 
         public int ExceuteNonQuery()

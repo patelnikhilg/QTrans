@@ -15,7 +15,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('input[type=datetime]').datepicker({
-                dateFormat: "dd/M/yy",
+                dateFormat: "dd-M-yy",
                 changeMonth: true,
                 changeYear: true,
                 yearRange: "-60:+0"
@@ -30,24 +30,23 @@
     List<QTrans.Models.MaterialType> listMaterialItems = new QTrans.Repositories.Repositories.CommonRepository().GetMaterialType();
     List<QTrans.Models.PackageType> listPackageItems = new QTrans.Repositories.Repositories.CommonRepository().GetPackageType();
     List<QTrans.Models.VehicleType> listVehicleTypeItems = new QTrans.Repositories.Repositories.CommonRepository().GetVehicleType();
+    List<SelectListItem> listOrderType = (dynamic)ViewBag.OrderType;
+    List<SelectListItem> listPostStatus = (dynamic)ViewBag.PostStatus;
 }
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="col-lg-12">
+    <div class="col-sm-12">
         <div class="card" style="border:none">
             <div class="card-header">
                 <strong>Create Posting Profile</strong>
             </div>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="card-body card-block">
-                <div class="row form-group">
-                    @Html.LabelFor(model => model.profile.postingid, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12 col-sm-6">
+                <div class="row form-group" style="visibility:hidden;display:none">
                         @Html.EditorFor(model => model.profile.postingid, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.profile.postingid, "", new { @class = "text-danger" })
-                    </div>
+                        @Html.EditorFor(model => model.details.dtlpostingid, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
                 <div class="row form-group">
                     @Html.LabelFor(model => model.profile.posttype, htmlAttributes: new { @class = "form-control-label" })
@@ -57,7 +56,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-sm-6">
                     <div class="card-header" style="margin-bottom:15px;background-color:white;">Form Address :</div>
 
                     <div class="row form-group">
@@ -97,7 +96,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-sm-6">
                     <div class="card-header" style="margin-bottom:15px;background-color:white;">To Address :</div>
                     <div class="row form-group">
                         @Html.LabelFor(model => model.profile.destinationadress, htmlAttributes: new { @class = "form-control-label" })
@@ -203,8 +202,13 @@
                 </div>
                 <div class="row form-group col-sm-6">
                     @Html.LabelFor(model => model.details.pickupdatetime, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12  col-sm-6">
-                        @Html.EditorFor(model => model.details.pickupdatetime, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.details.pickupdatetime) } })
+                    <div class="col-12  col-sm-8">
+                        <div class="input-group date" id="ContractStartDateDiv">
+                            @Html.EditorFor(model => model.details.pickupdatetime, new { htmlAttributes = new { @class = "form-control", placeholder = "DD/MM/YYYY", id = "ContractStartDate", autocomplete = "off", @readonly = "true" } })
+                            <label class="input-group-addon btn" for="date">
+                                <span class="fa fa-calendar open-datetimepicker"></span>
+                            </label>
+                        </div>
                         @Html.ValidationMessageFor(model => model.details.pickupdatetime, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -249,54 +253,67 @@
 
                 <div class="row form-group col-sm-6">
                     @Html.LabelFor(model => model.details.contractstartdatetime, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12  col-sm-6">
-                        @Html.EditorFor(model => model.details.contractstartdatetime, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.details.contractstartdatetime) } })
-                        @Html.ValidationMessageFor(model => model.details.contractstartdatetime, "", new { @class = "text-danger" })
+                    <div class="col-12  col-sm-8">
+                        <div class="input-group date" id="ContractStartDateDiv">
+                            @Html.EditorFor(model => model.details.contractstartdatetime, new { htmlAttributes = new { @class = "form-control",  autocomplete = "off", @readonly = "true" } })
+                            <label class="input-group-addon btn" for="date">
+                                <span class="fa fa-calendar open-datetimepicker"></span>
+                            </label>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.details.contractstartdatetime, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
                 <div class="row form-group col-sm-6">
                     @Html.LabelFor(model => model.details.contractenddatetime, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12  col-sm-6">
-                        @Html.EditorFor(model => model.details.contractenddatetime, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.details.contractenddatetime) } })
-                        @Html.ValidationMessageFor(model => model.details.contractenddatetime, "", new { @class = "text-danger" })
+                    <div class="col-12  col-sm-8">
+                        <div class="input-group date" id="ContractEndDateDiv">
+                            @Html.EditorFor(model => model.details.contractenddatetime, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", @readonly = "true" } })
+                            <label class="input-group-addon btn" for="date">
+                                <span class="fa fa-calendar open-datetimepicker"></span>
+                            </label>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.details.contractenddatetime, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
                 <div class="row form-group col-sm-6">
                     @Html.LabelFor(model => model.details.ordertype, htmlAttributes: new { @class = "form-control-label" })
                     <div class="col-12 col-sm-6">
-                        @Html.DropDownListFor(model => model.details.ordertype, (IEnumerable<SelectListItem>)ViewBag.OrderType, "-- Select --", htmlAttributes: new { @class = "form-control col-sm-8" })
-                        @*@Html.EditorFor(model => model.details.ordertype, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.details.ordertype) } })
-                @Html.ValidationMessageFor(model => model.details.ordertype, "", new { @class = "text-danger" })*@
+                        @Html.DropDownListFor(model => model.details.ordertype, listOrderType, "-- Select --", htmlAttributes: new { @class = "form-control col-sm-8" })
                     </div>
                 </div>
-
-                <div class="row form-group col-sm-6">
-                    @Html.LabelFor(model => model.details.biddingactivatedatetime, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12  col-sm-6">
-                        @Html.EditorFor(model => model.details.biddingactivatedatetime, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.details.biddingactivatedatetime) } })
-                        @Html.ValidationMessageFor(model => model.details.biddingactivatedatetime, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="row form-group col-sm-6">
-                    @Html.LabelFor(model => model.details.biddingclosedatetime, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12  col-sm-6">
-                        @Html.EditorFor(model => model.details.biddingclosedatetime, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.details.biddingclosedatetime) } })
-                        @Html.ValidationMessageFor(model => model.details.biddingclosedatetime, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
                 <div class="row form-group col-sm-6">
                     @Html.LabelFor(model => model.details.poststatus, htmlAttributes: new { @class = "form-control-label" })
                     <div class="col-12 col-sm-6">
-                        @Html.DropDownListFor(model => model.details.poststatus, (IEnumerable<SelectListItem>)ViewBag.PostStatus, "-- Select --", htmlAttributes: new { @class = "form-control col-sm-8" })
-                        @*@Html.EditorFor(model => model.details.poststatus, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.details.poststatus) } })
-                @Html.ValidationMessageFor(model => model.details.poststatus, "", new { @class = "text-danger" })*@
+                        @Html.DropDownListFor(model => model.details.poststatus, listPostStatus, "-- Select --", htmlAttributes: new { @class = "form-control col-sm-6" })
                     </div>
                 </div>
+                <div class="row form-group col-sm-6">
+                    @Html.LabelFor(model => model.details.biddingactivatedatetime, htmlAttributes: new { @class = "form-control-label" })
+                    <div class="col-12  col-sm-8">
+                        <div class="input-group date" id="ContractEndDateDiv">
+                            @Html.EditorFor(model => model.details.biddingactivatedatetime, new { htmlAttributes = new { @class = "form-control",  autocomplete = "off", @readonly = "true" } })
+                            <label class="input-group-addon btn" for="date">
+                                <span class="fa fa-calendar open-datetimepicker"></span>
+                            </label>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.details.biddingactivatedatetime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
+                <div class="row form-group col-sm-6">
+                    @Html.LabelFor(model => model.details.biddingclosedatetime, htmlAttributes: new { @class = "form-control-label" })
+                    <div class="col-12  col-sm-8">
+                        <div class="input-group date" id="ContractEndDateDiv">
+                            @Html.EditorFor(model => model.details.biddingclosedatetime, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", @readonly = "true" } })
+                            <label class="input-group-addon btn" for="date">
+                                <span class="fa fa-calendar open-datetimepicker"></span>
+                            </label>
+                        </div>
+                            @Html.ValidationMessageFor(model => model.details.biddingclosedatetime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 <div class="row form-group col-sm-6">
                     @Html.LabelFor(model => model.details.gprs, htmlAttributes: new { @class = "form-control-label" })
                     <div class="col-12  col-sm-6">
@@ -306,7 +323,15 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="row form-group col-sm-6">
+                    @Html.LabelFor(model => model.details.transporterinsurance, htmlAttributes: new { @class = "form-control-label" })
+                    <div class="col-12  col-sm-3">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.details.transporterinsurance)
+                            @Html.ValidationMessageFor(model => model.details.transporterinsurance, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
                 <div class="row form-group col-sm-6">
                     @Html.LabelFor(model => model.details.menpowerloading, htmlAttributes: new { @class = "form-control-label" })
                     <div class="col-12 col-sm-3">
@@ -327,15 +352,7 @@
                     </div>
                 </div>
 
-                <div class="row form-group col-sm-6">
-                    @Html.LabelFor(model => model.details.transporterinsurance, htmlAttributes: new { @class = "form-control-label" })
-                    <div class="col-12  col-sm-3">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.details.transporterinsurance)
-                            @Html.ValidationMessageFor(model => model.details.transporterinsurance, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
+
 
                 <div class="row form-group col-sm-6">
                     @Html.LabelFor(model => model.details.tolltaxinclude, htmlAttributes: new { @class = "form-control-label" })

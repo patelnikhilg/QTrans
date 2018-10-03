@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using QTrans.DataAccess;
 using QTrans.Models;
+using QTrans.Models.ViewModel.Bidding;
 
 namespace QTrans.Repositories
 {
@@ -22,7 +23,7 @@ namespace QTrans.Repositories
             if (this.instanceBidding.InsertUpdateBiddingDetails(bidding, out biddingId, out message))
             {
                 biddingDetails.biddingid = biddingId;
-                var dt = this.instanceBidding.GetById(biddingId, out message);
+                var dt = this.instanceBidding.GetById(biddingId);
                 var lst = DataAccessUtility.ConvertToList<BiddingProfile>(dt);
                 biddingDetails = lst.Count > 0 ? lst[0] : null;
             }
@@ -30,11 +31,10 @@ namespace QTrans.Repositories
             return biddingDetails;
         }      
 
-        public BiddingProfile GetBiddingDetailById(long biddingId, out string message)
+        public BiddingProfile GetBiddingDetailById(long biddingId)
         {
-            message = string.Empty;
             BiddingProfile biddingDetails = null;
-            var dt = this.instanceBidding.GetById(biddingId, out message);
+            var dt = this.instanceBidding.GetById(biddingId);
             var lst = DataAccessUtility.ConvertToList<BiddingProfile>(dt);
             biddingDetails = lst.Count > 0 ? lst[0] : null;
             return biddingDetails;
@@ -44,15 +44,13 @@ namespace QTrans.Repositories
         /// Get list of bidding by posting and user id.
         /// </summary>
         /// <param name="postingId"></param>
-        /// <param name="userId"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public List<BiddingProfile> GetBiddingDetailById(long postingId,long userId, out string message)
+        public PostingDetailsBid GetPostingDetailByDtlPostingId(long dtlpostingId)
         {
-            message = string.Empty;
-            var dt = this.instanceBidding.GetByPostingUserId(postingId, userId, out message);
-            var lst = DataAccessUtility.ConvertToList<BiddingProfile>(dt);
-            return lst.Count > 0 ? lst : null;
+            var dt = this.instanceBidding.GetPostingDetailsByDtlPostingId(dtlpostingId);
+            var lst = DataAccessUtility.ConvertToList<PostingDetailsBid>(dt);
+            return lst.Count > 0 ? lst[0] : null;
         }
 
         /// <summary>
@@ -61,11 +59,24 @@ namespace QTrans.Repositories
         /// <param name="userId"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public List<BiddingProfile> GetListBiddingDetailByUserId(long userId, bool isPast, out string message)
+        public List<BiddingProfile> GetBiddingDetailListByUserId(long userId)
         {
-            message = string.Empty;
-            var dt = this.instanceBidding.GetByUserId(userId, out message);
+            var dt = this.instanceBidding.GetByUserId(userId);
             var lst = DataAccessUtility.ConvertToList<BiddingProfile>(dt);
+            return lst;
+        }
+
+
+        /// <summary>
+        /// Get list of bidding done by userid (false means Current posting otherwise close posting).
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="isPast"></param>
+        /// <returns></returns>
+        public List<PostingListBid> GetPostingList(long userId,bool isPast)
+        {
+            var dt = this.instanceBidding.GetPostingList(userId,isPast);
+            var lst = DataAccessUtility.ConvertToList<PostingListBid>(dt);
             return lst;
         }
     }
