@@ -43,7 +43,7 @@ namespace QTrans.DataAccess
             return rowEffected > 0;
         }
 
-        public bool InsertUpdatePostingDetails(PostingDetails postingDetails, out string message)
+        public bool InsertUpdatePostingDetails(PostingDetails postingDetails, out long identity, out string message)
         {
             int rowEffected = 0;
             using (DBConnector connector = new DBConnector("Usp_InsertUpdatePostingDetails", true))
@@ -76,8 +76,10 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@remark", postingDetails.remark);
                 connector.AddInParameterWithValue("@loadingtype", postingDetails.loadingtype);
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                connector.AddOutParameterWithType("@identity", SqlDbType.BigInt);
                 rowEffected = connector.ExceuteNonQuery();
                 message = connector.GetParamaeterValue("@Message").ToString();
+                identity = postingDetails.dtlpostingid == 0 ? Convert.ToInt64(connector.GetParamaeterValue("@identity")) : postingDetails.dtlpostingid;
             }
 
             return rowEffected > 0;

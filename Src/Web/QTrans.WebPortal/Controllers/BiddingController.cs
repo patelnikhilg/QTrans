@@ -29,6 +29,15 @@ namespace QTrans.WebPortal.Controllers
         }
 
         // GET: Bidding
+        public ActionResult ActivePost()
+        {
+            var message = string.Empty;
+            BiddingRepository postingRepository = new BiddingRepository(this.UserId);
+            var post = postingRepository.GetPostingList(this.UserId, false);
+            return View(post);
+        }
+
+        // GET: Bidding
         public ActionResult BiddingList()
         {
             var message = string.Empty;

@@ -70,5 +70,8 @@ namespace QTrans.Models.ViewModel.Posting
         [DisplayName("Post Amount")]
         public Nullable<decimal> postamount { get; set; }
 
+        [DisplayName("Loading Type")]
+        public string loadingtype { get; set; }
+
     }
 }

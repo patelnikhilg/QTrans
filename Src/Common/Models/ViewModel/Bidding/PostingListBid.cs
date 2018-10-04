@@ -76,5 +76,8 @@ namespace QTrans.Models.ViewModel.Bidding
         public string BidStatusValue { get { return ((QTrans.Utility.BiddingStatus)BidStatus).ToString(); } }
 
         public short rating { get; set; }
+
+        [DisplayName("Loading Type")]
+        public string loadingtype { get; set; }
     }
 }

@@ -29,14 +29,16 @@ namespace QTrans.Repositories
 
         public PostingDetails PostingDetailCreation(PostingDetails postingDetails, out string message)
         {
+            long dtlpostingid;
             message = string.Empty;
-            if (this.instancePosting.InsertUpdatePostingDetails(postingDetails, out message))
+            if (this.instancePosting.InsertUpdatePostingDetails(postingDetails,out dtlpostingid, out message))
             {
                 var ds = this.instancePosting.GetByPostingDetailsId(postingDetails.postingid, out message);
                 var lstProfile = DataAccessUtility.ConvertToList<QTrans.Models.ViewModel.Posting.PostingProfileView>(ds.Tables[0]);
                 var lstDetails = DataAccessUtility.ConvertToList<PostingDetails>(ds.Tables[1]);
                 postingDetails = lstDetails.Count > 0 ? lstDetails[0] : null;
                 postingDetails.postingProfile = lstProfile.Count > 0 ? lstProfile[0] : null;
+                postingDetails.dtlpostingid = dtlpostingid;
             }
 
             return postingDetails;

@@ -12,9 +12,10 @@ namespace QTrans.WebPortal.Controllers
 {
     public class CompanyController : BaseController
     {
-
         #region =============== Company details================
-        public ActionResult Index()
+       
+        // GET: User/Details/
+        public ActionResult Details()
         {
             var message = string.Empty;
             CompanyRepository repository = new CompanyRepository(this.UserId);
@@ -27,17 +28,6 @@ namespace QTrans.WebPortal.Controllers
             }
 
             return RedirectToAction("Create");
-        }
-
-        // GET: User/Details/5
-        public ActionResult Details(int id)
-        {
-            var message = string.Empty;
-            CompanyRepository repository = new CompanyRepository(this.UserId);
-            //Perform the conversion and fetch the destination view model
-            var comp = repository.GetCompanyDetailById(id, out message);
-            var Company = Mapper.Map<QTrans.WebPortal.Models.Company>(comp);
-            return View(Company);
         }
 
         [AllowAnonymous]

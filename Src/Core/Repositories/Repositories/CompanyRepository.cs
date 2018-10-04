@@ -31,10 +31,13 @@ namespace QTrans.Repositories
         public Company GetCompanyDetailById(long companyId, out string message)
         {
             message = string.Empty;
-            Company companyDetail = null;            
-            var dt = this.instanceCompany.GetById(companyId, out message);
-            var lst = DataAccessUtility.ConvertToList<Company>(dt);
-            companyDetail = lst.Count > 0 ? lst[0] : null;
+            Company companyDetail = null;
+            if (companyId > 0)
+            {
+                var dt = this.instanceCompany.GetById(companyId, out message);
+                var lst = DataAccessUtility.ConvertToList<Company>(dt);
+                companyDetail = lst.Count > 0 ? lst[0] : null;
+            }
             return companyDetail;
         }
 

@@ -1477,6 +1477,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Uploads\default.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1510,7 +1511,6 @@
     <Content Include="Views\Company\Create.cshtml" />
     <Content Include="Views\Company\Edit.cshtml" />
     <Content Include="Views\User\UpdatePassword.cshtml" />
-    <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Views\Posting\CurrentList.cshtml" />
     <Content Include="Views\Common\Index.cshtml" />
     <Content Include="Views\Common\CreateAreaPeference.cshtml" />
@@ -1518,6 +1518,7 @@
     <Content Include="Views\Bidding\ClosePost.cshtml" />
     <Content Include="Views\Bidding\BiddingList.cshtml" />
     <Content Include="Views\Bidding\PostDetails.cshtml" />
+    <Content Include="Views\Bidding\ActivePost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
