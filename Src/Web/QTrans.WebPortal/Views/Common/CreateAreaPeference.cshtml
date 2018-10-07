@@ -9,27 +9,43 @@
 <div class="card-header" style="margin-bottom:15px;">
     <strong>Area Preference</strong>
 </div>
+@if (@ViewBag.Message != null)
+{
+    <div id="popupdiv" class="alert alert-success">
+        @ViewBag.Message
+    </div>
+}
+else if (@ViewBag.MessageFail != null)
+{
+    <div id="popupdiv" class="alert alert-danger">
+        @ViewBag.Message
+    </div>
+}
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-<div class="row form-group">
-    <label class="form-control-label" style="padding-left:20px;">
+<div class="row form-group col-12">
+    <label class="form-control-label col-md-1" style="padding-left:20px;">
         State
     </label>
-    <div class="col-md-10 ">
-        @Html.DropDownList("State", new SelectList(lstState, "StateId", "State"), "-- Select --", new { @id = "ddlState", @class = "form-control col-sm-4" })
+    <div class="col-8">
+        @Html.DropDownList("State", new SelectList(lstState, "StateId", "State"), "-- Select --", new { @id = "ddlState", @class = "form-control col-md-5" })
     </div>
 </div>
-<div class="row form-group">
-    <label class=" form-control-label" style="padding-left:20px;">
+<div class="row form-group col-12">
+    <label class=" form-control-label col-md-1" style="padding-left:20px;">
         City
     </label>
-    <div class="col-md-10" id="City">
-        @Html.DropDownListFor(model => model.CityId, new List<SelectListItem>(), "--Select--", new { @id = "ddlCity", @class = "form-control col-sm-4" })
+    <div class="col-8" id="City">
+        @Html.DropDownListFor(model => model.CityId, new List<SelectListItem>(), "--Select--", new { @id = "ddlCity", @class = "form-control col-md-5" })
     </div>
 </div>
-<div>
-    <button type="submit" class="btn btn-success btn-sm" id="submit">
-        <i class="fa fa-dot-circle-o"></i> Submit
-    </button>
+<div class="row form-group col-12">
+    <div class="col-md-1" id="City">
+    </div>
+    <div class="col-8" id="City">
+        <button type="submit" class="btn btn-success btn-sm" id="submit">
+            <i class="fa fa-dot-circle-o"></i> Submit
+        </button>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -43,7 +59,7 @@
                 datatype: "json",
                 traditional: true,
                 success: function (data) {
-                    var City = "<select id='ddlCity'  class = 'form-control col-sm-4' >";
+                    var City = "<select id='ddlCity'  class = 'form-control  col-md-5' >";
                     City = City + '<option value="">--Select--</option>';
                     for (var i = 0; i < data.length; i++) {
                         City = City + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
@@ -63,7 +79,7 @@
                 data: { cityId: $('#ddlCity').val() },
                 datatype: "json",
                 traditional: true,
-                success: location.href ="/Common/Index" ,
+                success: location.href = "/Common/Index",
             });
         });
     });

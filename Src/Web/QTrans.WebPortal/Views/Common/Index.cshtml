@@ -69,11 +69,10 @@
         if (ans) {
             $.ajax({
                 type: "Post", 
-                url: "~/Common/DeleteAreaPeference",
+                url: "../../Common/DeleteAreaPeference",
                 data: { cityId: ID },                             
                 dataType: "json",
-                traditional: true,
-                success: location.href = "/Common/Index",
+                success: location.href = "../../Common/Index",
                 error: function (errormessage) {
                     alert(errormessage.responseText);
                 }

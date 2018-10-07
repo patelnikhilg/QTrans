@@ -23,7 +23,7 @@ namespace QTrans.Utility
         Transporter = 1,
         TruckOwner = 2,
         Broker = 3,
-        Supplier = 4
+        Customer = 4 //Supplier
     }
 
     public enum PaymentMethod

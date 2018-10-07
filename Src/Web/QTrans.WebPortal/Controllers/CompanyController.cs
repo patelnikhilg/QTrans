@@ -56,6 +56,10 @@ namespace QTrans.WebPortal.Controllers
                     {
                         return RedirectToAction("Details/" + comp.companyid.ToString());
                     }
+                    else
+                    {
+                        ViewBag.Message = string.IsNullOrEmpty(message) ? "Operation fail due to some reason." :message;
+                    }
                 }
             }
             catch (Exception exp)
@@ -96,6 +100,10 @@ namespace QTrans.WebPortal.Controllers
                     if (comp != null)
                     {
                         return RedirectToAction("Details/" + id.ToString());
+                    }
+                    else
+                    {
+                        ViewBag.Message = string.IsNullOrEmpty(message) ? "Operation fail due to some reason." : message;
                     }
                 }
                 /// return RedirectToAction("Details/" + id.ToString());

@@ -25,14 +25,14 @@ namespace QTrans.Models
         public long postingid { get; set; }
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
-        [DisplayName("Material Weight")]
+        [DisplayName("Weight")]
         public int materialweight { get; set; }
 
-        [DisplayName("Material Photo")]
+        [DisplayName("Photo")]
         [StringLength(100)]
         public string materialphotos { get; set; }
 
-        [DisplayName("Packing Dimension")]
+        [DisplayName("Dimension")]
         [StringLength(50)]
         public string packingdimension { get; set; }
 
@@ -46,7 +46,7 @@ namespace QTrans.Models
         [DisplayName("No of Vehicle")]
         public short novehicle { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
-        [DisplayName("Delivery Period in days")]
+        [DisplayName("Delivery Period")]
         public Nullable<short> deliveryperiodday { get; set; }
 
         [DisplayName("Pickup Date")]
@@ -63,12 +63,13 @@ namespace QTrans.Models
         [RegularExpression(Constants.RegexIntInput, ErrorMessage = Constants.StringNumeric)]
         [DisplayName("On unload payment in percentage(%)")]
         public short onunloadingpercentage { get; set; }
+        [DisplayName("Credit Day(s)")]
         public int creditday { get; set; }
 
-        [DisplayName("Contract Start Date")]
+        [DisplayName("Contract Start")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatDateTime)]
         public Nullable<System.DateTime> contractstartdatetime { get; set; }
-        [DisplayName("Contract End Date")]
+        [DisplayName("Contract End")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatDateTime)]
         public Nullable<System.DateTime> contractenddatetime { get; set; }
 
@@ -78,11 +79,11 @@ namespace QTrans.Models
         [DisplayName("Order Type")]
         public string ordertypeValue { get { return ((QTrans.Utility.OrderType)ordertype).ToString(); } }
 
-        [DisplayName("Bidding Start Date")]
+        [DisplayName("Bidding Start")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatDateTime)]
         public System.DateTime biddingactivatedatetime { get; set; }
 
-        [DisplayName("Bidding Close Date")]
+        [DisplayName("Bidding Close")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatDateTime)]
         public System.DateTime biddingclosedatetime { get; set; }
 

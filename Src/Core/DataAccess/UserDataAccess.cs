@@ -172,7 +172,7 @@ namespace QTrans.DataAccess
             return dt;
         }
 
-        public bool UpdateUserPassword(string mobilenumber, string emailaddres, string password, out string message)
+        public bool UpdateUserPassword(string mobilenumber, string emailaddres, string oldPassword, string password, out string message)
         {
             int rowEffected = 0;
             using (DBConnector connector = new DBConnector("Usp_UpdatePassword", true))
@@ -180,6 +180,7 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@MobileNumber", mobilenumber);
                 connector.AddInParameterWithValue("@emailaddres", emailaddres);
                 connector.AddInParameterWithValue("@password", password);
+                connector.AddInParameterWithValue("@oldPassword", oldPassword);
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
                 message = connector.GetParamaeterValue("@Message").ToString();

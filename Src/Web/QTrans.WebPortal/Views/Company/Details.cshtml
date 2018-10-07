@@ -1,87 +1,55 @@
 ﻿@model QTrans.WebPortal.Models.Company
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Details";
-                Layout = "~/Views/Shared/_PrivateLayout.cshtml";
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_PrivateLayout.cshtml";
 }
 
-<div class="col-lg-12">
-    <div class="card" style="border:none">
-        <div class="card-header">
-            <strong>Company</strong>
+<div class="card" style="border:none">
+    <div class="card-header">
+        <strong>Company</strong>
+    </div>
+    <div class="card-body">
+        <div class="row form-group col-12">
+            <label class=" form-control-label col-md-2"> @Html.DisplayNameFor(model => model.companyname)</label>&nbsp; :  &nbsp;
+            <span class="form-control-static">@Html.DisplayFor(model => model.companyname)</span>
         </div>
-        <div class="card-body card-block">
-            <div class="row form-group">
-                <label class=" form-control-label"> @Html.DisplayNameFor(model => model.companyname)</label>&nbsp; :  &nbsp;
-                <div class="col-12 col-md-6">
-                    <p class="form-control-static">@Html.DisplayFor(model => model.companyname)</p>
-                </div>
-            </div>
 
-            <div class="row form-group">
-                <label class=" form-control-label"> @Html.DisplayNameFor(model => model.address)</label> &nbsp; :  &nbsp;
-                <div class="col col-md-3">
-                    <div class="col-12 col-md-6">
-                        <p class="form-control-static">@Html.DisplayFor(model => model.address)</p>
-                    </div>
-                </div>
+        <div class="row form-group col-12">
+            <label class=" form-control-label col-md-2"> @Html.DisplayNameFor(model => model.address)</label> &nbsp; :  &nbsp;
+            <span class="form-control-static">@Html.DisplayFor(model => model.address)</span>
+        </div>
 
-                <div class="row form-group">
-                    <label class=" form-control-label"> @Html.DisplayNameFor(model => model.telenumber)</label> &nbsp; :  &nbsp;
-                    <div class="col col-md-3">
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">@Html.DisplayFor(model => model.telenumber)</p>
-                        </div>
-                    </div>
+        <div class="row form-group col-12">
+            <label class=" form-control-label col-md-2"> @Html.DisplayNameFor(model => model.telenumber)</label> &nbsp; :  &nbsp;
+            <span class="form-control-static">@Html.DisplayFor(model => model.telenumber)</span>
+        </div>
+        <div class="row form-group col-12">
+            <label class=" form-control-label  col-md-2"> @Html.DisplayNameFor(model => model.alternettelnumber)</label> &nbsp; :  &nbsp;
+            <span class="form-control-static">@Html.DisplayFor(model => model.alternettelnumber)</span>
+        </div>
+        <div class="row form-group col-12">
+            <label class=" form-control-label col-md-2"> @Html.DisplayNameFor(model => model.city)</label>&nbsp; :  &nbsp;
 
-                    <div class="row form-group">
-                        <label class=" form-control-label"> @Html.DisplayNameFor(model => model.alternettelnumber)</label> &nbsp; :  &nbsp;
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">@Html.DisplayFor(model => model.alternettelnumber)</p>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class=" form-control-label"> @Html.DisplayNameFor(model => model.country)</label>&nbsp; :  &nbsp;
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">@Html.DisplayFor(model => model.country)</p>
-                        </div>
-                    </div>
+            <span class="form-control-static">@Html.DisplayFor(model => model.city)</span>
+        </div>
 
-                    <div class="row form-group">
-                        <label class=" form-control-label"> @Html.DisplayNameFor(model => model.state)</label>                <div class="col col-md-3">
-
-                            <div class="col-12 col-md-9">
-                                <p class="form-control-static">@Html.DisplayFor(model => model.state)</p>
-                            </div>
-                        </div>
-
-
-                        <div class="row form-group">
-                            <label class=" form-control-label"> @Html.DisplayNameFor(model => model.city)</label>                <div class="col col-md-3">
-
-                                <div class="col-12 col-md-9">
-                                    <p class="form-control-static">@Html.DisplayFor(model => model.city)</p>
-                                </div>
-                            </div>
-
-                            @*<div class="row form-group">
-                                    <div class="col col-md-3"><label class=" form-control-label"> @Html.DisplayNameFor(model => model.companytype)</label></div>
-                                    <div class="col-12 col-md-9">
-                                        <p class="form-control-static">@Html.DisplayFor(model => model.companytype)</p>
-                                    </div>
-                                </div>*@
-
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label class=" form-control-label"> @Html.DisplayNameFor(model => model.modifydate)</label></div>
-                                <div class="col-12 col-md-9">
-                                    <p class="form-control-static">@Html.DisplayFor(model => model.modifydate)</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="fa-hover col-lg-3 col-md-6"><i class="fa fa-edit"></i>@Html.ActionLink("Edit", "Edit", new { id = Model.companyid })</div>
-                </div>
+        <div class="row form-group col-12">
+            <label class=" form-control-label  col-md-2"> @Html.DisplayNameFor(model => model.state)</label>&nbsp; :  &nbsp;
+            <span class="form-control-static">@Html.DisplayFor(model => model.state)</span>
+        </div>
+        <div class="row form-group col-12">
+            <label class=" form-control-label   col-md-2"> @Html.DisplayNameFor(model => model.country)</label>&nbsp; :  &nbsp;
+            <span class="form-control-static">@Html.DisplayFor(model => model.country)</span>
+        </div>
+        <div class="row form-group col-12">
+            <label class=" form-control-label  col-md-2"> @Html.DisplayNameFor(model => model.modifydate)</label>&nbsp; :  &nbsp;
+            <span class="form-control-static">@Html.DisplayFor(model => model.modifydate)</span>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="fa-hover col-lg-3 col-md-6"><i class="fa fa-edit"></i>@Html.ActionLink("Edit", "Edit", new { id = Model.companyid })</div>
+</div>

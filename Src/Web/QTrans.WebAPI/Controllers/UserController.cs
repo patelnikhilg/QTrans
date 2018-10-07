@@ -86,7 +86,7 @@ namespace QTrans.WebAPI.Controllers
         {
             string message = string.Empty;
             UserRepository userRepository = new UserRepository();
-            var result = userRepository.ChangePassword(changePassword.mobilenumber, changePassword.emailaddres, changePassword.password, out message);
+            var result = userRepository.ChangePassword(changePassword.mobilenumber, changePassword.emailaddres,changePassword.oldpassword, changePassword.password, out message);
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);

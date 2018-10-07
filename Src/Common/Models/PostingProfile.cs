@@ -40,21 +40,21 @@ namespace QTrans.Models
 
         [RegularExpression(Constants.RegexIntInput, ErrorMessage = Constants.StringNumeric)]
         [Required(ErrorMessage = "The Material Type is required")]
-        [DisplayName("Material Type")]
+        [DisplayName("Type")]
         public short materialtypeid { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
-        [Required(ErrorMessage = "The Description is required")]
-        [DisplayName("Material Description")]
+        [Required(ErrorMessage = "The Material Description is required")]
+        [DisplayName("Description")]
         [StringLength(200)]
         public string description { get; set; }
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
         [Required(ErrorMessage = "The Package Type is required")]
-        [DisplayName("Package Type")]
+        [DisplayName("Type")]
         public short packagetypeid { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
-        [Required(ErrorMessage = "The Description is required")]
-        [DisplayName("Package Description")]
+        [Required(ErrorMessage = "The Package Description is required")]
+        [DisplayName("Description")]
         [StringLength(200)]
         public string packagetypedesc { get; set; }
         public System.DateTime createddate { get; set; }

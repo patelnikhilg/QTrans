@@ -10,5 +10,7 @@ namespace QTrans.WebAPI.Models
         public string mobilenumber { get; set; }
         public string emailaddres { get; set; }
         public string password { get; set; }
+
+        public string oldpassword { get; set; }
     }
 }

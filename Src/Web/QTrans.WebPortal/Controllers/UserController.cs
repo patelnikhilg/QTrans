@@ -104,6 +104,10 @@ namespace QTrans.WebPortal.Controllers
                     {
                         return RedirectToAction("Details/" + id.ToString());
                     }
+                    else
+                    {
+                        ViewBag.Message = string.IsNullOrEmpty(message) ? "Operation fail due to some reason." : message;
+                    }
                 }
                /// return RedirectToAction("Details/" + id.ToString());
             }
@@ -134,19 +138,19 @@ namespace QTrans.WebPortal.Controllers
                         var message = string.Empty;
                         UserRepository repository = new UserRepository();
                         var user = this.sessionStorage.GetValue("UserSession") as UserSession;
-                        var result = repository.ChangePassword(user.MobileNo, user.EmailAddress, userProfile.Newpassword, out message);
+                        var result = repository.ChangePassword(user.MobileNo, user.EmailAddress, userProfile.OldPassword, userProfile.Newpassword, out message);
                         if (result)
                         {
-                            ViewData["Message"] = message;
+                            ViewBag.Message  = message;
                         }
                         else
                         {
-                            ViewData["Message"] = "Update is fail.";
+                            ViewBag.Message  = string.IsNullOrEmpty(message) ? "Password Update is fail.":message;
                         }
                     }
                     else
                     {
-                        ViewData["Message"] = "Password not match";
+                        ViewBag.Message  = "Password not match";
                     }
                 }
                 /// return RedirectToAction("Details/" + id.ToString());

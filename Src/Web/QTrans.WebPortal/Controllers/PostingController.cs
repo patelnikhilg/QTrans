@@ -79,17 +79,17 @@ namespace QTrans.WebPortal.Controllers
                         var details = repository.PostingDetailCreation(data.details, out message);
                         if (details != null)
                         {
-                            ViewData["Message"] = message;
-                            //return RedirectToAction("CreateDetails");
+                            ViewBag.Message  = string.IsNullOrEmpty(message) ? "Post saved successfully" : message; ;
+                            return RedirectToAction("Details/" + profileresult.postingid);
                         }
                         else
                         {
-                            ViewData["Message"] = message;
+                            ViewBag.Message = string.IsNullOrEmpty(message) ? "Operation fail due to some reason." : message;
                         }
                     }
                     else
                     {
-                        ViewData["Message"] = message;
+                        ViewBag.Message = string.IsNullOrEmpty(message) ? "Operation fail due to some reason." : message;
                     }
                 }
                 else
@@ -97,14 +97,14 @@ namespace QTrans.WebPortal.Controllers
                     var errors = ModelState.Select(x => x.Value.Errors)
                            .Where(y => y.Count > 0)
                            .ToList();
-                    ViewData["Message"] = errors;
+                    ViewBag.Message  = errors;
 
                 }
             }
             catch (Exception exp)
             {
                 ////TODO: log the error
-                ViewData["Message"] = "Unexpected error occured";
+                ViewBag.Message  = "Unexpected error occured";
             }
 
             TempDataFilling();
@@ -145,17 +145,17 @@ namespace QTrans.WebPortal.Controllers
                         var details = repository.PostingDetailCreation(data.details, out message);
                         if (details != null)
                         {
-                            ViewData["Message"] = message;
-                            return RedirectToAction("Details/" + id.ToString());
+                            ViewBag.Message = string.IsNullOrEmpty(message) ? "Post updated successfully" : message; ;
+                           // return RedirectToAction("Details/" + id.ToString());
                         }
                         else
                         {
-                            ViewData["Message"] = message;
+                            ViewBag.Message = string.IsNullOrEmpty(message) ? "Operation fail due to some reason." : message;
                         }
                     }
                     else
                     {
-                        ViewData["Message"] = message;
+                        ViewBag.Message = string.IsNullOrEmpty(message) ? "Operation fail due to some reason." : message;
                     }
                 }
                 else
@@ -163,14 +163,14 @@ namespace QTrans.WebPortal.Controllers
                     var errors = ModelState.Select(x => x.Value.Errors)
                            .Where(y => y.Count > 0)
                            .ToList();
-                    ViewData["Message"] = errors;
+                    ViewBag.Message  = errors;
 
                 }
             }
             catch (Exception exp)
             {
                 ////TODO: log the error
-                ViewData["Message"] = "Unexpected error occured";
+                ViewBag.Message  = "Unexpected error occured";
             }
 
             return View();

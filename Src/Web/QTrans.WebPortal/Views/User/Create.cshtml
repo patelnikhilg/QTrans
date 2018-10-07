@@ -29,6 +29,19 @@
                 $('.nav-tabs > .active').prev('li').find('a').trigger('click');
             });
         })
+
+        // cache elements that you repeatedly reference
+        var UserType = $('#UserType');
+        UserType.hide();
+        $('input[type=radio][name=rbtuserType]').change(function () {
+            if ($(this).val() === 'Vendor') {
+                UserType.show();              
+            } else {
+                UserType.hide();
+                
+            }
+        });
+       
     </script>
 
 }
@@ -39,8 +52,20 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>User Personal Details</h4>
+        <h4>User Profile</h4>
         <hr />
+        @if (@ViewBag.Message != null)
+        {
+            <div id="popupdiv" class="alert alert-success">
+                @ViewBag.Message
+            </div>
+        }
+        else if (@ViewBag.MessageFail != null)
+        {
+            <div id="popupdiv" class="alert alert-danger">
+                @ViewBag.Message
+            </div>
+        }
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div id="wizard">
@@ -200,22 +225,32 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             @*<a class="btn-all btnPrevious">Previous</a>
-                                <a class="btn-all btnNext">Next</a>*@
+                            <a class="btn-all btnNext">Next</a>*@
                             <input value="Previous" class="btn btn-default btnPrevious" />
                             <input value="Next" class="btn btn-default btnNext" />
                         </div>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="Identity" style="margin-top:15px">
-                    <!-- Input fields -->
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.userProfile.photo, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.userProfile.photo, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.userProfile.photo) } })
-                            @Html.ValidationMessageFor(model => model.userProfile.photo, "", new { @class = "text-danger" })
+                    
+                    <div class="row" id="UserTypeSection">
+                        <div class="form-group">
+                            @Html.Label("User Type:", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.RadioButtonFor(model => model.userDetails.transporttypeid, "Customer", htmlAttributes: new { @Name = "rbtuserType", @id = "Customer" }) Customer &nbsp; &nbsp;
+                                @Html.RadioButtonFor(model => model.userDetails.transporttypeid, "Vendor", htmlAttributes: new { @Name = "rbtuserType", @id = "Vendor" })  Vendor
+                            </div>
+                        </div>
+                        <div id="UserType" class="form-group">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-6">
+                                @foreach (var item in new QTrans.WebPortal.Models.Users.UserCompany().GetVendorType())
+                                {
+                                    <div class="col-md-10"><input id="chk@(item.ToString())" type="checkbox" value="@item.ToString()" />@item.ToString()</div>
+                                }
+                            </div>
                         </div>
                     </div>
-
                     <div class="form-group">
                         @Html.LabelFor(model => model.userProfile.pan, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
@@ -242,7 +277,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             @*<a class="btn-all btnPrevious">Previous</a>
-                                <a class="btn-all btnNext">Next</a>*@
+                            <a class="btn-all btnNext">Next</a>*@
                             <input value="Previous" class="btn btn-default btnPrevious" />
                             <input value="Next" class="btn btn-default btnNext" />
                         </div>
@@ -305,21 +340,13 @@
                             @Html.ValidationMessageFor(model => model.company.city, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
-                    @*<div class="row form-group">
-                            @Html.LabelFor(model =>  model.company.companytype, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model =>  model.company.companytype, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.companytype) } })
-                                @Html.ValidationMessageFor(model =>  model.company.companytype, "", new { @class = "text-danger" })
-                            </div>
-                        </div>*@
                     <div class="form-group">
 
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10" style="float:left;">
                                 <input value="Previous" class="btn btn-default btnPrevious" />
                                 <span></span>
-                                <input type="submit" value="Submit" class="btn btn-default" />
+                                <input type="submit" value="Register" class="btn btn-default" />
                             </div>
                         </div>
                     </div>

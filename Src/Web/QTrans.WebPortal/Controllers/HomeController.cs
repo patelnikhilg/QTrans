@@ -34,17 +34,17 @@ namespace QTrans.WebPortal.Controllers
                     //Perform the conversion and fetch the destination view model
                     if (repository.InsertContactDetails(contact))
                     {
-                        ViewData["Message"] = "Successfully Submitted";
+                        ViewBag.Message  = "Successfully Submitted";
                     }
                     else
                     {
-                        ViewData["Message"] = "Fail to Submit";
+                        ViewBag.Message  = "Fail to Submit";
                     }
                 }
             }
             catch
             {
-                ViewData["Message"] = "Fail to Submit";
+                ViewBag.Message  = "Fail to Submit";
             }
 
             return View();

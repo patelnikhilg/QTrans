@@ -82,10 +82,10 @@ namespace QTrans.Repositories
             return null;
         }
 
-        public bool ChangePassword(string mobileNo, string emailAddress, string password, out string message)
+        public bool ChangePassword(string mobileNo, string emailAddress,string oldPassword, string password, out string message)
         {
             message = string.Empty;
-            return instanceUser.UpdateUserPassword(mobileNo, emailAddress, password, out message);
+            return instanceUser.UpdateUserPassword(mobileNo, emailAddress, oldPassword, password, out message);
         }
 
         public bool VerificationMobileEmail(long userId, int OTP, bool isMobile, out string token, out string message)

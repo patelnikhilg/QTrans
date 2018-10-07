@@ -1,9 +1,9 @@
-﻿using System;
+﻿using QTrans.Models;
+using QTrans.Utility;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace QTrans.WebPortal.Models.Users
 {
@@ -27,5 +27,20 @@ namespace QTrans.WebPortal.Models.Users
         public UserProfile userProfile { get; set; }
 
         public Company company { get; set; }
+
+        public UserDetails userDetails { get; set; }
+
+        public List<UserType> GetVendorType()
+        {
+            //Additng items to the list
+            List<UserType> ChkItem = new List<UserType>
+            {
+                UserType.Transporter,
+                UserType.TruckOwner,
+                UserType.Broker
+            };
+
+            return ChkItem;
+        }
     }
 }

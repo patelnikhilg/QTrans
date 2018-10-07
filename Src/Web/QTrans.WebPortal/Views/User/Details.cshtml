@@ -1,22 +1,22 @@
 ﻿@model QTrans.WebPortal.Models.UserProfile
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "User Details";
-                Layout = "~/Views/Shared/_PrivateLayout.cshtml";
-                var photoPath = "";
-                if (Model != null)
-                {
-                    if (Model.photo.Length > 0 && Model.photo != "NA")
-                    {
-                        photoPath = Model.photo;
-                    }
-                    else
-                    {
-                        photoPath = Model.defaultPhoto;
-                    }
-                }
+    ViewBag.Title = "User Details";
+    Layout = "~/Views/Shared/_PrivateLayout.cshtml";
+    var photoPath = "";
+    if (Model != null)
+    {
+        if (Model.photo.Length > 0 && Model.photo != "NA")
+        {
+            photoPath = Model.photo;
+        }
+        else
+        {
+            photoPath = Model.defaultPhoto;
+        }
+    }
 }
 @section Scripts {
 
@@ -24,98 +24,126 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Styles.Render("~/Content/cssjqryUi")
 }
-<div class="col-lg-12">
-    <div class="card" style="border:none">
-        <div class="card-header">
-            <strong>User Profile</strong>
+<div class="card" style="border:none">
+    <div class="card-header">
+        <strong>User Profile</strong>
+    </div>
+
+    <div class="card-body">
+        <div class="col-lg-6">
+            <div class="row form-group">
+                <div class="col-md-4">
+                    @Html.DisplayNameFor(model => model.firstname) &nbsp;:
+                </div>
+                <div class="col-md-6">@Html.DisplayFor(model => model.firstname)</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    @Html.DisplayNameFor(model => model.middlename) &nbsp;:
+                </div>
+                <div class="col-md-6">@Html.DisplayFor(model => model.middlename)</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    @Html.DisplayNameFor(model => model.lastname) &nbsp;:
+                </div>
+                <div class="col-md-6">@Html.DisplayFor(model => model.lastname)</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    @Html.DisplayNameFor(model => model.dob) &nbsp;:
+                </div>
+                <div class="col-md-6">@Html.DisplayFor(model => model.dob)</div>
+            </div>
         </div>
-        <dv class="card-body card-block">
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class=" form-control-label">@Html.DisplayNameFor(model => model.firstname)</label>&nbsp; :&nbsp;
-                    <span class="form-control-static">@Html.DisplayFor(model => model.firstname)</span>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label">  @Html.DisplayNameFor(model => model.middlename)</label>&nbsp; :&nbsp;
-                    <span class="form-control-static">@Html.DisplayFor(model => model.middlename)</span>
-                </div>
+        <div class="form-group col-6">
+            <div class="form-group"><img src="@photoPath" width="35%" height="35%" /></div>
 
-                <div class="form-group">
-                    <label class=" form-control-label">  @Html.DisplayNameFor(model => model.lastname)</label>&nbsp; :&nbsp;
-                    <span class="form-control-static">@Html.DisplayFor(model => model.lastname)</span>
-                </div>
-                <div class="form-group">
-                    <label class=" form-control-label">  @Html.DisplayNameFor(model => model.dob)</label>&nbsp; :&nbsp;
-                    <span class="form-control-static">@Html.DisplayFor(model => model.dob)</span>
-                </div>
-                <div class="form-group">
-                    <label class=" form-control-label">  @Html.DisplayNameFor(model => model.landlinenumber)</label>&nbsp; :&nbsp;
-                    <span class="form-control-static">@Html.DisplayFor(model => model.landlinenumber)</span>
-                </div>
-
+            <div class="col-12 col-sm-9">
+                <span class="ti-mobile"></span> &nbsp;<span class="form-control-static">@Html.DisplayFor(model => model.mobilenumber)</span>
             </div>
-            <div class="form-group col-lg-6">
-                <div class="form-group"><img src="@photoPath" /></div>
 
-                <div class="col-12 col-md-9">
-                    <span class="ti-mobile"></span> &nbsp;<span class="form-control-static">@Html.DisplayFor(model => model.mobilenumber)</span>
-                </div>
-
-                <div class="col-12 col-md-9">
-                    <span class="ti-email"></span>&nbsp; <span class="form-control-static">@Html.DisplayFor(model => model.emailaddress)</span>
-                </div>
+            <div class="col-12 col-sm-9">
+                <span class="ti-email"></span>&nbsp; <span class="form-control-static">@Html.DisplayFor(model => model.emailaddress)</span>
             </div>
-            <div style="text-decoration:solid;">Address Details :</div>
+        </div>
+
+        <div class="col-6 form-group">
+            <div style="margin-bottom:15px;"><strong>Address Details :</strong></div>
             <hr />
-            <div class="form-group">
-                <label class=" form-control-label">@Html.DisplayNameFor(model => model.addressline1)</label>&nbsp; :&nbsp;
-                <span class="form-control-static">@Html.DisplayFor(model => model.addressline1)</span>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    @Html.DisplayNameFor(model => model.landlinenumber)&nbsp;:
+                </div>
+                <div class="col-md-6">@Html.DisplayFor(model => model.landlinenumber)</div>
             </div>
-            <div class="form-group">
-                <label class=" form-control-label">  @Html.DisplayNameFor(model => model.addressline2)</label>&nbsp; :&nbsp;
-                <span class="form-control-static">@Html.DisplayFor(model => model.addressline2)</span>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    @Html.DisplayNameFor(model => model.addressline1)&nbsp;:
+                </div>
+                <div class="col-md-6">@Html.DisplayFor(model => model.addressline1)</div>
             </div>
-            <div class="form-group">
-                <label class=" form-control-label">  @Html.DisplayNameFor(model => model.country)</label>&nbsp; :&nbsp;
-                <span class="form-control-static">@Html.DisplayFor(model => model.country)</span>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    @Html.DisplayNameFor(model => model.addressline2)&nbsp;:
+                </div>
+                <div class="col-md-6">@Html.DisplayFor(model => model.addressline2)</div>
             </div>
-            <div class="form-group">
-                <label class=" form-control-label">  @Html.DisplayNameFor(model => model.state)</label>&nbsp; :&nbsp;
-                <span class="form-control-static">@Html.DisplayFor(model => model.state) </span>
-            </div>
-            <div class="form-group">
-                <label class=" form-control-label">  @Html.DisplayNameFor(model => model.district)</label>&nbsp; :&nbsp;
-                <span class="form-control-static">@Html.DisplayFor(model => model.district)</span>
-            </div>
-            <div class="form-group">
-                <label class=" form-control-label">  @Html.DisplayNameFor(model => model.city)</label>&nbsp; :&nbsp;
-                <span class="form-control-static">@Html.DisplayFor(model => model.city)</span>
-            </div>
-            <div class="form-group">
-                <label class=" form-control-label">  @Html.DisplayNameFor(model => model.pincode)</label>&nbsp; :&nbsp;
-                <span class="form-control-static">@Html.DisplayFor(model => model.pincode)</span>
-            </div>
-            <div style="text-decoration:solid;">Identity :</div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        @Html.DisplayNameFor(model => model.area)&nbsp;:
+                    </div>
+                    <div class="col-md-6">&nbsp;@Html.DisplayFor(model => model.area)</div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        @Html.DisplayNameFor(model => model.city)&nbsp;:
+                    </div>
+                    <div class="col-md-6">@Html.DisplayFor(model => model.city)</div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        @Html.DisplayNameFor(model => model.state)&nbsp;:
+                    </div>
+                    <div class="col-md-6">&nbsp;@Html.DisplayFor(model => model.state)</div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        @Html.DisplayNameFor(model => model.pincode)&nbsp;:
+                    </div>
+                    <div class="col-md-6">@Html.DisplayFor(model => model.pincode)</div>
+                </div>
+        </div>
+        <div class="col-6">
+            <div style="margin-bottom:15px;"><strong>Identity Details:</strong></div>
             <hr />
-            <div class="form-group">
-                <label class=" form-control-label">  @Html.DisplayNameFor(model => model.pan)</label>&nbsp; :&nbsp;
-                <span class="form-control-static">@Html.DisplayFor(model => model.pan)</span>
-            </div>
-            <div class="form-group">
-                <label class=" form-control-label">  @Html.DisplayNameFor(model => model.gst)</label>&nbsp; :&nbsp;
-                <span class="form-control-static">@Html.DisplayFor(model => model.gst)</span>
-            </div>
-            <div class="form-group">
-                <label class=" form-control-label">  @Html.DisplayNameFor(model => model.aadhaarno)</label>&nbsp; :&nbsp;
-                <span class="form-control-static">@Html.DisplayFor(model => model.aadhaarno)</span>
-            </div>
-            <div class="form-group">
-                <label class=" form-control-label">  @Html.DisplayNameFor(model => model.area)</label>&nbsp; :&nbsp;
-                <span class="form-control-static">@Html.DisplayFor(model => model.area)</span>
-            </div>
+                <div class="form-group col-12">
+                    <div class="col-md-4">
+                        @Html.DisplayNameFor(model => model.pan)&nbsp;:
+                    </div>
+                    <div class="col-md-8">@Html.DisplayFor(model => model.pan)</div>
+                </div>
+
+                <div class="form-group col-12">
+                    <div class="col-md-4">
+                        @Html.DisplayNameFor(model => model.gst)&nbsp;:
+                    </div>
+                    <div class="col-md-8">@Html.DisplayFor(model => model.gst)</div>
+                </div>
+
+                <div class="form-group col-12">
+                    <div class="col-md-4">
+                        @Html.DisplayNameFor(model => model.aadhaarno)&nbsp;:
+                    </div>
+                    <div class="col-md-8">@Html.DisplayFor(model => model.aadhaarno)</div>
+                </div>
+        </div>
+    </div>
+    <div style="padding-left:5%">
+        <div class="fa-hover col-lg-3 col-md-6"><i class="fa fa-edit"></i>@Html.ActionLink("Edit", "Edit", new { id = Model.userid })</div>
     </div>
 </div>
-<div>
-    <div class="fa-hover col-lg-3 col-md-6"><i class="fa fa-edit"></i>@Html.ActionLink("Edit", "Edit", new { id = Model.userid })</div>
-</div>
+
+
+
 

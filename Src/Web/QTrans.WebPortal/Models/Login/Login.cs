@@ -25,8 +25,11 @@ namespace QTrans.WebPortal.Models.Login
     public class Forgotpassword
     {
         [StringLength(50)]
+        [Required(ErrorMessage = "Email Address is required")]
         [DisplayName("Email Address")]
+
         public string EmailAddress { get; set; }
+        [Required(ErrorMessage = "Mobile No. is required")]
         [DisplayName("Mobile No.")]
         [StringLength(12)]
         public string MobileNo { get; set; }

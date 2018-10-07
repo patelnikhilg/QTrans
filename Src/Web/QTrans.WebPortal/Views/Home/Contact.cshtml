@@ -4,18 +4,18 @@
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        @if (ViewData["Message"] != null)
+        @if (ViewBag.Message  != null)
         {
-            if (!ViewData["Message"].ToString().Contains("Fail"))
+            if (!ViewBag.Message .ToString().Contains("Fail"))
             {
                 <div class="alert alert-success">
-                    @ViewData["Message"]
+                    @ViewBag.Message 
                 </div>
             }
             else
             {
                 <div class="alert alert-danger">
-                    @ViewData["Message"]
+                    @ViewBag.Message 
                 </div>
             }
         }

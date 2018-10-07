@@ -75,18 +75,18 @@ namespace QTrans.WebPortal.Controllers
                     var profileresult = repository.BiddingSubmition(profile, out message);
                     if (profileresult != null)
                     {
-                        ViewData["Message"] = message;
+                        ViewBag.Message  = message;
                     }
                     else
                     {
-                        ViewData["Message"] = message;
+                        ViewBag.MessageFail  = message;
                     }
                 }
             }
             catch (Exception exp)
             {
                 ////TODO: log the error
-                ViewData["Message"] = "Unexpected error occured";
+                ViewBag.Message  = "Unexpected error occured";
             }
 
             return View();
@@ -116,18 +116,18 @@ namespace QTrans.WebPortal.Controllers
                     var profileresult = repository.BiddingSubmition(profile, out message);
                     if (profileresult != null)
                     {
-                        ViewData["Message"] = "Successfully updated";
+                        ViewBag.Message  = "Successfully updated";
                     }
                     else
                     {
-                        ViewData["Message"] = "Updation fail."; ;
+                        ViewBag.Message  = "Updation fail."; ;
                     }
                 }
             }
             catch (Exception exp)
             {
                 ////TODO: log the error
-                ViewData["Message"] = "Unexpected error occured";
+                ViewBag.Message  = "Unexpected error occured";
             }
 
             return View();

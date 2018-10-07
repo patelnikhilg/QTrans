@@ -67,6 +67,10 @@ namespace QTrans.WebPortal.Controllers
                         this.sessionStorage.SetValue("UserSession", session);
                         return RedirectToAction("../user/Details/" + user.userid.ToString());
                     }
+                    else
+                    {
+                        ViewBag.Message = "UserName or password is wrong";
+                    }
                 }
             }
             catch(Exception exp)
@@ -113,6 +117,11 @@ namespace QTrans.WebPortal.Controllers
                     if (result)
                     {
                         output = "Send password details on your email address";
+                        ViewBag.Message = "Send password details on your email address";
+                    }
+                    else
+                    {
+                        ViewBag.Message = string.IsNullOrEmpty(message) ? "Operation fail due to some reason." : message;
                     }
                 }
             }
