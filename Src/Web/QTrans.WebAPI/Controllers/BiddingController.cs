@@ -38,16 +38,16 @@ namespace QTrans.WebAPI.Controllers
 
         [Route("GetBiddingDetailById")]
         [HttpGet]
-        public IHttpActionResult GetBiddingById([FromUri] BiddingParam param)
+        public IHttpActionResult GetBiddingById([FromUri] BiddingDetailsParam param)
         {
             BiddingRepository repository = new BiddingRepository(param.UserId);
-            var result = repository.GetBiddingDetailById(param.DtlPostingId);
+            var result = repository.GetBiddingDetailById(param.biddingId);
             return Ok(new { Status = "OK", data = result });
         }
 
-        [Route("GetBiddingByDtlPostId")]
+        [Route("GetPostingDetailsByDtlPostId")]
         [HttpGet]
-        public IHttpActionResult GetBiddingByDtlPostId([FromUri] BiddingParam param)
+        public IHttpActionResult GetPostingDetailsByDtlPostId([FromUri] BiddingParam param)
         {
             BiddingRepository repository = new BiddingRepository(param.UserId);
             var result = repository.GetPostingDetailByDtlPostingId(param.DtlPostingId); 
@@ -70,6 +70,16 @@ namespace QTrans.WebAPI.Controllers
         {
             BiddingRepository repository = new BiddingRepository(UserId);
             var result = repository.GetBiddingDetailListByUserId(UserId);          
+
+            return Ok(new { Status = "OK", data = result });
+        }
+
+        [Route("GetBiddingListByDtlPostinId")]
+        [HttpGet]
+        public IHttpActionResult GetBiddingListByDtlPostinId([FromUri] BiddingParam param)
+        {
+            BiddingRepository repository = new BiddingRepository(param.UserId);
+            var result = repository.GetBiddingListByDtPostingId(param.DtlPostingId);
 
             return Ok(new { Status = "OK", data = result });
         }

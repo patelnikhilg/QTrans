@@ -12,6 +12,13 @@ namespace QTrans.WebAPI.Models
         public long DtlPostingId { get; set; }
     }
 
+    public class BiddingDetailsParam
+    {
+        public long UserId { get; set; }
+
+        public long biddingId { get; set; }
+    }
+
     public class BiddingUserParam
     {
         public long UserId { get; set; }

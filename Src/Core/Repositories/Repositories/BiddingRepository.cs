@@ -2,6 +2,7 @@
 using QTrans.DataAccess;
 using QTrans.Models;
 using QTrans.Models.ViewModel.Bidding;
+using System.Linq;
 
 namespace QTrans.Repositories
 {
@@ -36,11 +37,10 @@ namespace QTrans.Repositories
 
         public BiddingProfile GetBiddingDetailById(long biddingId)
         {
-            BiddingProfile biddingDetails = null;
-            var dt = this.instanceBidding.GetById(biddingId);
-            var lst = DataAccessUtility.ConvertToList<BiddingProfile>(dt);
-            biddingDetails = lst.Count > 0 ? lst[0] : null;
-            return biddingDetails;
+            var ds = this.instanceBidding.GetById(biddingId);
+            BiddingProfile biddingProfile = DataAccessUtility.ConvertToList<BiddingProfile>(ds.Tables[0])[0];
+            biddingProfile.biddingDetails = DataAccessUtility.ConvertToList<BiddingDetails>(ds.Tables[1]);
+            return biddingProfile;
         }
 
         /// <summary>
@@ -69,6 +69,24 @@ namespace QTrans.Repositories
             return lst;
         }
 
+        /// <summary>
+        /// Get list of bidding done by userid.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public List<BiddingListDetails> GetBiddingListByDtPostingId(long DtlPostingId)
+        {
+            var ds = this.instanceBidding.GetBiddingListByDtlPostId(DtlPostingId);
+            var lstbidding = DataAccessUtility.ConvertToList<BiddingListDetails>(ds.Tables[0]);
+            var lstBidDetails = DataAccessUtility.ConvertToList<BiddingDetails>(ds.Tables[1]);
+            foreach(var bid in lstbidding)
+            {
+                bid.biddingDetails = lstBidDetails.Where(item => item.biddingid == bid.biddingid).ToList(); 
+            }
+
+            return lstbidding;
+        }
 
         /// <summary>
         /// Get list of bidding done by userid (false means Current posting otherwise close posting).

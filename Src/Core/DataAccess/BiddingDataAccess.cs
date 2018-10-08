@@ -17,7 +17,7 @@ namespace QTrans.DataAccess
                 {
                     userType.Add(new BiddinguserType() { vehicleno = details.vehicleno, capacity = details.capacity });
                 }
-                connector.AddInParameterWithValue("@dtlbiddingid", bidding.biddingid);
+                connector.AddInParameterWithValue("@biddingid", bidding.biddingid);
                 connector.AddInParameterWithValue("@dtlpostingid", bidding.dtlpostingid);
                 connector.AddInParameterWithValue("@userid", bidding.userid);
                 connector.AddInParameterWithValue("@amount", bidding.amount);
@@ -38,16 +38,16 @@ namespace QTrans.DataAccess
             return rowEffected > 0;
         }
 
-        public DataTable GetById(long biddingId)
+        public DataSet GetById(long biddingId)
         {
-            DataTable dt = null;
+            DataSet ds = null;
             using (DBConnector connector = new DBConnector("Usp_GetBiddingDetailsById", true))
             {
                 connector.AddInParameterWithValue("@biddingId", biddingId);
-                dt = connector.GetDataTable();
+                ds = connector.GetDataSet();
             }
 
-            return dt;
+            return ds;
         }
 
         public DataTable GetPostingDetailsByDtlPostingId(long dtlpostingId)
@@ -72,6 +72,18 @@ namespace QTrans.DataAccess
             }
 
             return dt;
+        }
+
+        public DataSet GetBiddingListByDtlPostId(long dtlPostingId)
+        {
+            DataSet ds = null;
+            using (DBConnector connector = new DBConnector("Usp_GetBiddingListByDtlPostingId", true))
+            {
+                connector.AddInParameterWithValue("@DtlPostingId", dtlPostingId);
+                ds = connector.GetDataSet();
+            }
+
+            return ds;
         }
 
         public DataTable GetPostingList(long userId, bool isPast)
