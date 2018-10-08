@@ -39,7 +39,7 @@ namespace QTrans.WebPortal.Models
         public string telenumber { get; set; }
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
-        [DisplayName("Alternet Tel.No.")]
+        [DisplayName("Alternat Tel.No.")]
         [StringLength(16)]
         public string alternettelnumber { get; set; }
 

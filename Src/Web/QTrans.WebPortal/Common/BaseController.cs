@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace QTrans.WebPortal.Common
@@ -14,7 +11,9 @@ namespace QTrans.WebPortal.Common
         /// <summary>
         /// An object of the session storage information
         /// </summary>
-        protected readonly ISessionStorage sessionStorage;            
+        protected readonly ISessionStorage sessionStorage;
+
+        private long userId;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseController" /> class.
@@ -25,7 +24,7 @@ namespace QTrans.WebPortal.Common
 
         public long UserId
         {
-            get { return (this.sessionStorage.GetValue("UserSession") as UserSession).UserId; }
+            get { return this.userId; }
         }
 
         /// <summary>
@@ -85,9 +84,10 @@ namespace QTrans.WebPortal.Common
 
                     if (userInformation != null)
                     {
-                       ViewBag.LoginUserName = userInformation.LoginUserName;// string.Concat(userInformation.FirstName, " ", userInformation.LastName);
-                       ViewBag.UserId = userInformation.UserId;
-                    }                   
+                        userId = userInformation.UserId;
+                        ViewBag.LoginUserName = userInformation.LoginUserName;// string.Concat(userInformation.FirstName, " ", userInformation.LastName);
+                        ViewBag.UserId = userInformation.UserId;
+                    }
                 }
                 else
                 {

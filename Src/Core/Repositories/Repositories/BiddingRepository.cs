@@ -19,16 +19,19 @@ namespace QTrans.Repositories
         {
             long biddingId = 0;
             message = string.Empty;            
-            BiddingProfile biddingDetails = null;
             if (this.instanceBidding.InsertUpdateBiddingDetails(bidding, out biddingId, out message))
             {
-                biddingDetails.biddingid = biddingId;
-                var dt = this.instanceBidding.GetById(biddingId);
-                var lst = DataAccessUtility.ConvertToList<BiddingProfile>(dt);
-                biddingDetails = lst.Count > 0 ? lst[0] : null;
+                bidding.biddingid = biddingId;
+                foreach(var details in bidding.biddingDetails)
+                {
+                    details.biddingid = biddingId;
+                }
+               // var dt = this.instanceBidding.GetById(biddingId);
+               // var lst = DataAccessUtility.ConvertToList<BiddingProfile>(dt);
+               // bidding = lst.Count > 0 ? lst[0] : null;
             }
 
-            return biddingDetails;
+            return bidding;
         }      
 
         public BiddingProfile GetBiddingDetailById(long biddingId)

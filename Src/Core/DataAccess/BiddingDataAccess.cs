@@ -1,10 +1,7 @@
-﻿using System;
+﻿using QTrans.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using QTrans.Models;
 
 namespace QTrans.DataAccess
 {
@@ -15,7 +12,12 @@ namespace QTrans.DataAccess
             int rowEffected = 0;
             using (DBConnector connector = new DBConnector("Usp_InsertBidding", true))
             {
-                connector.AddInParameterWithValue("@@dtlbiddingid", bidding.biddingid);
+                List<BiddinguserType> userType = new List<BiddinguserType>();
+                foreach (var details in bidding.biddingDetails)
+                {
+                    userType.Add(new BiddinguserType() { vehicleno = details.vehicleno, capacity = details.capacity });
+                }
+                connector.AddInParameterWithValue("@dtlbiddingid", bidding.biddingid);
                 connector.AddInParameterWithValue("@dtlpostingid", bidding.dtlpostingid);
                 connector.AddInParameterWithValue("@userid", bidding.userid);
                 connector.AddInParameterWithValue("@amount", bidding.amount);
@@ -25,12 +27,12 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@paymentmethod", bidding.paymentmethod);
                 connector.AddInParameterWithValue("@rating", bidding.rating);
                 connector.AddInParameterWithValue("@cancellationreason", bidding.cancellationreason);
-                connector.AddInParameterWithValue("@biggingDetails", DataAccessUtility.ToDataTable<BiddingDetails>(bidding.biddingDetails.ToList()));
+                connector.AddInParameterWithValue("@biddingDetails", DataAccessUtility.ToDataTable<BiddinguserType>(userType));
                 connector.AddOutParameterWithType("@identity", SqlDbType.BigInt);
-                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);              
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
                 message = connector.GetParamaeterValue("@Message").ToString();
-                identity = bidding.biddingid == 0? Convert.ToInt64(connector.GetParamaeterValue("@identity")) : bidding.biddingid;
+                identity = bidding.biddingid == 0 ? Convert.ToInt64(connector.GetParamaeterValue("@identity")) : bidding.biddingid;
             }
 
             return rowEffected > 0;
@@ -72,7 +74,7 @@ namespace QTrans.DataAccess
             return dt;
         }
 
-        public DataTable GetPostingList(long userId,bool isPast)
+        public DataTable GetPostingList(long userId, bool isPast)
         {
             DataTable dt = null;
             using (DBConnector connector = new DBConnector("Usp_GetPostingList", true))

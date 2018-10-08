@@ -26,14 +26,14 @@ namespace QTrans.Models
         public Nullable<long> biddingid { get; set; }
     }
 
-    ////public class BiddinguserType
-    ////{
-    ////    [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
-    ////    [DisplayName("No of Vehicle")]        
-    ////    public short vehicleno { get; set; }
+    public class BiddinguserType
+    {
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [DisplayName("No of Vehicle")]
+        public short vehicleno { get; set; }
 
-    ////    [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
-    ////    [DisplayName("Capacity of Vehicle")]
-    ////    public short capacity { get; set; }
-    ////}
+        [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
+        [DisplayName("Capacity of Vehicle")]
+        public short capacity { get; set; }
+    }
 }

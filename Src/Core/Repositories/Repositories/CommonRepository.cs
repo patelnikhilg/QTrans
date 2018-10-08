@@ -112,7 +112,7 @@ namespace QTrans.Repositories.Repositories
 
         public bool DeleteAreaPeference(long userId, int cityId)
         {
-            return instance.InsertAreaPeference(userId, cityId);
+            return instance.DeleteAreaPeference(userId, cityId);
         }
 
         public List<AreaPreference> GetAreaPeferenceByUserId(long userId)
