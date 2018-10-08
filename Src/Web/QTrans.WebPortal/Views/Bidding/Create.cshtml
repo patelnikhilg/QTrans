@@ -3,64 +3,113 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-<div class="card" style="border:none">
-    <div class="card-header">
-        <strong>Bidding</strong>
-    </div>
-    @if (@ViewBag.Message != null)
-    {
-        <div id="popupdiv" class="alert alert-success">
-            @ViewBag.Message
+    <div class="card" style="border:none">
+        <div class="card-header">
+            <strong>Bidding</strong>
         </div>
-    }
-    else if (@ViewBag.MessageFail != null)
-    {
-        <div id="popupdiv" class="alert alert-danger">
-            @ViewBag.Message
-        </div>
-    }
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="card-body card-block">
-        <div class="row form-group" style="visibility:hidden;display:none;">
-            @Html.LabelFor(model => model.dtlpostingid, htmlAttributes: new { @class = "form-control-label" })
-            <div class="col-12 col-sm-6">
-                @Html.EditorFor(model => model.dtlpostingid, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-sm-1">
-                @Html.LabelFor(model => model.amount, htmlAttributes: new { @class = "form-control-label" })
-            </div>
-            <div class="col-sm-3">
-                @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.amount), autocomplete = "off" } })
-                @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-sm-1">
-                @Html.LabelFor(model => model.biddercomment, htmlAttributes: new { @class = "form-control-label" })
-            </div>
-            <div class="col-sm-9">
-                @Html.TextAreaFor(model => model.biddercomment, 5, 70, new { htmlAttributes = new { @class = "form-control col-sm-8", placeholder = @Html.DisplayNameFor(m => m.biddercomment) } })
-                @Html.ValidationMessageFor(model => model.biddercomment, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        @*<div class="row form-group">
-                @Html.LabelFor(model => model.paymentmethod, htmlAttributes: new { @class = "form-control-label" })
-                <div class="col-12 col-sm-6">
-                    @Html.EditorFor(model => model.paymentmethod, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.paymentmethod, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="card-body card-block">
+            <div class="row form-group" style="visibility:hidden;display:none;">
+                @Html.LabelFor(model => model.dtlpostingid, htmlAttributes: new { @class = "form-control-label" })
+                <div class="col-sm-6">
+                    @Html.EditorFor(model => model.dtlpostingid, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
-            </div>*@
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-1">
+                    @Html.LabelFor(model => model.amount, htmlAttributes: new { @class = "form-control-label" })
+                </div>
+                <div class="col-sm-3">
+                    @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.amount), autocomplete = "off" } })
+                    @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-1">
+                    @Html.LabelFor(model => model.biddercomment, htmlAttributes: new { @class = "form-control-label" })
+                </div>
+                <div class="col-sm-9">
+                    @Html.TextAreaFor(model => model.biddercomment, 5, 70, new { htmlAttributes = new { @class = "form-control col-sm-8", placeholder = @Html.DisplayNameFor(m => m.biddercomment) } })
+                    @Html.ValidationMessageFor(model => model.biddercomment, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-1">
+                    <label class=" form-control-label">
+                        Total Vehicle :
+                    </label>
 
-        <div>
-            <button type="submit" class="btn btn-success btn-sm">
-                <i class="fa fa-dot-circle-o"></i> Bid
-            </button>
-            <button type="reset" class="btn btn-danger btn-sm">
-                <i class="fa fa-ban"></i> Reset
-            </button>
+                </div>
+                <div class="col-sm-3">
+                    @Html.TextBox("TotalVehicle", "", new { @class = "form-control col-sm-3", @Id = "TotalVehicle" });
+                </div>
+            </div>
+            <div class="row form-group">
+                <table id="formTable">
+                    <thead>
+                        <tr>
+                            <th>Vehicle No.</th>
+                            <th>Capacity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" name="Vehicle" /></td>
+                            <td><input type="text" name="Capacity" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-success btn-sm">
+                    <i class="fa fa-dot-circle-o"></i> Bid
+                </button>
+                <button type="reset" class="btn btn-danger btn-sm">
+                    <i class="fa fa-ban"></i> Cancel
+                </button>
+            </div>
         </div>
     </div>
-</div>
 }
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $('#formTable').hide();
+    var x = document.getElementById("TotalVehicle");
+    x.addEventListener("focusout", TotalVehicleDetails, true);
+    var load = 1;
+    function TotalVehicleDetails() {
+        if (load != 1) {
+            DeleteRow();
+        }
+        load = 2;
+        var totalRow = $("#TotalVehicle").val();
+        if (totalRow > 0) {
+            $('#formTable').show();
+            var rowCount = $('#formTable tbody tr').length;
+            if (rowCount == 0) {
+                $("#formTable tbody:last-child").append('<tr id="vehiclerow"><td> <input type="text" name="No" /></td> <td><input type="text" name="Capacity" /></td> </tr>');
+            }
+
+            AddRow(totalRow);
+        }
+    }
+
+    function AddRow(totalRow) {
+        for (i = 1; i < totalRow; i++) {
+            $("#formTable tbody tr:first").clone().find("input").each(function () {
+                $(this).val('');
+            }).end().appendTo("#formTable");
+        }
+    }
+
+    // Find and remove selected table rows
+    function DeleteRow() {
+        var rowCount = $('#formTable tbody tr').length - 1;
+        $("#formTable tbody").find('input[name="Capacity"]').each(function () {
+            $(this).parents("tr").remove();
+        });
+    }
+
+</script>

@@ -15,16 +15,16 @@ namespace QTrans.DataAccess
             int rowEffected = 0;
             using (DBConnector connector = new DBConnector("Usp_InsertBidding", true))
             {
-                connector.AddInParameterWithValue("@BiddingId", bidding.biddingid);
-                connector.AddInParameterWithValue("@PostingId", bidding.postingid);
-                connector.AddInParameterWithValue("@UserId", bidding.userid);
-                connector.AddInParameterWithValue("@Amount", bidding.amount);
-                connector.AddInParameterWithValue("@BidderComment", bidding.biddercomment);
-                connector.AddInParameterWithValue("@Status", bidding.status);
-                connector.AddInParameterWithValue("@ServiceCharges", bidding.servicecharges);
-                connector.AddInParameterWithValue("@PaymentMethod", bidding.paymentmethod);
-                connector.AddInParameterWithValue("@Rating", bidding.rating);
-                connector.AddInParameterWithValue("@CancellationReson", bidding.cancellationreason);
+                connector.AddInParameterWithValue("@@dtlbiddingid", bidding.biddingid);
+                connector.AddInParameterWithValue("@dtlpostingid", bidding.dtlpostingid);
+                connector.AddInParameterWithValue("@userid", bidding.userid);
+                connector.AddInParameterWithValue("@amount", bidding.amount);
+                connector.AddInParameterWithValue("@biddercomment", bidding.biddercomment);
+                connector.AddInParameterWithValue("@status", bidding.status);
+                connector.AddInParameterWithValue("@servicecharges", bidding.servicecharges);
+                connector.AddInParameterWithValue("@paymentmethod", bidding.paymentmethod);
+                connector.AddInParameterWithValue("@rating", bidding.rating);
+                connector.AddInParameterWithValue("@cancellationreason", bidding.cancellationreason);
                 connector.AddInParameterWithValue("@biggingDetails", DataAccessUtility.ToDataTable<BiddingDetails>(bidding.biddingDetails.ToList()));
                 connector.AddOutParameterWithType("@identity", SqlDbType.BigInt);
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);              

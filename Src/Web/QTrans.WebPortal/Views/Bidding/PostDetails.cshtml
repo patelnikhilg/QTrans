@@ -14,297 +14,178 @@
     </div>
     <div class="card-body">
         <div class="row form-group">
+            <label class=" form-control-label">
+                @Html.DisplayNameFor(model => model.posttype)
+            </label>
+            &nbsp; : &nbsp;
+            <span class="form-control-static">@Html.DisplayFor(model => model.posttype)</span>
+        </div>
+        <div class="row col-12">
+            <div class="col-6">
+                <div class="card-header" style="margin-bottom:15px;background-color:white;"><strong>From Address :</strong></div>               
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.src_city, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                    @Html.DisplayFor(model => model.src_city, new { htmlAttributes = new { @class = "form-control col-md-7" } })
+                </div>
 
-            <div class="col col-sm-3">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.posttype)
-                </label>
-                &nbsp; : &nbsp;
-                <span class="form-control-static">@Html.DisplayFor(model => model.posttype)</span>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.src_state, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                    @Html.DisplayFor(model => model.src_state, new { htmlAttributes = new { @class = "form-control col-md-7" } })
+                </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.src_pincode, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                    @Html.DisplayFor(model => model.src_pincode, new { htmlAttributes = new { @class = "form-control col-md-7" } })
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card-header" style="margin-bottom:15px;background-color:white;"><strong>To Address :</strong></div>               
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.dst_city, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                    @Html.DisplayFor(model => model.dst_city, new { htmlAttributes = new { @class = "form-control col-md-7" } })
+                </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.dst_state, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                    @Html.DisplayFor(model => model.dst_state, new { htmlAttributes = new { @class = "form-control col-md-7" } })
+                </div>
+
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.dst_pincode, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                    @Html.DisplayFor(model => model.dst_pincode, new { htmlAttributes = new { @class = "form-control col-md-7" } })
+                </div>
             </div>
         </div>
-
-        <div class="row form-group">
-            <div class="col-sm-6">
-                <label class=" form-control-label">
-                    @*@Html.DisplayNameFor(model => model.soureaddress)*@
-                    From Address:
-                </label>&nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.soureaddress),
-                @Html.DisplayFor(model => model.src_landmark)
-                @Html.DisplayFor(model => model.src_city),
-                @Html.DisplayFor(model => model.src_state)-@Html.DisplayFor(model => model.src_pincode)
+        <div class="row col-12">
+            <div class="col-6">
+                <div class="card-header" style="margin-bottom:15px;background-color:white;"><strong>Material Details :</strong></div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.materialtype, htmlAttributes: new { @class = "form-control-label  col-md-4" })
+                    @Html.DisplayFor(model => model.materialtype, new { htmlAttributes = new { @class = "form-control col-md-7" } })
+                </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.materialweight, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                    @Html.DisplayFor(model => model.materialweight, new { htmlAttributes = new { @class = "form-control col-md-6", placeholder = @Html.DisplayNameFor(m => m.materialweight) } })
+                </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                    @Html.DisplayFor(model => model.description, new { htmlAttributes = new { @class = "form-control col-md-8", placeholder = @Html.DisplayNameFor(m => m.description) } })
+                </div>
             </div>
-            <div class="col-sm-6">
-                <label class=" form-control-label">
-                    @*@Html.DisplayNameFor(model => model.destinationadress)*@
-                    To Address:
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.destinationadress),
-                @Html.DisplayFor(model => model.dst_landmark),
-                @Html.DisplayFor(model => model.dst_city),
-                @Html.DisplayFor(model => model.dst_state)-@Html.DisplayFor(model => model.dst_pincode)
-
-            </div>
-        </div>
-        <div class="form-group">
-
-        </div>
-        <div class="row form-group">
-            <div class="col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.materialtype)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.materialtype)
-            </div>
-            <div class="col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.description)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.description)
+            <div class="col-6">
+                <div class="card-header" style="margin-bottom:15px;background-color:white;"><strong>Package Details :</strong></div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.packagetype, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                    @Html.DisplayFor(model => model.packagetype, new { htmlAttributes = new { @class = "form-control col-md-7" } })
+                </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.packingdimension, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                    @Html.DisplayFor(model => model.packingdimension, new { htmlAttributes = new { @class = "form-control col-md-6" } })
+                </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.numberpackets, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                    @Html.DisplayFor(model => model.numberpackets, new { htmlAttributes = new { @class = "form-control col-md-6" } })
+                </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.packagetypedesc, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                    @Html.DisplayFor(model => model.packagetypedesc, new { htmlAttributes = new { @class = "form-control col-md-8" } })
+                </div>
             </div>
         </div>
-
-        <div class="row form-group">
-            <div class="col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.packagetype)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.packagetype)
+        <div class="row col-12">
+            <div class="card-header col-md-12" style="margin-bottom:15px;background-color:white;"><strong>Post Details :</strong></div>
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.vehicletype, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                @Html.DisplayFor(model => model.vehicletype, new { htmlAttributes = new { @class = "form-control col-md-8" } })
             </div>
-            <div class="col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.packagetypedesc)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.packagetypedesc)
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.novehicle, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                @Html.DisplayFor(model => model.novehicle, new { htmlAttributes = new { @class = "form-control col-md-7" } })
             </div>
-        </div>
-
-
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.materialweight)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.materialweight)
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.pickupdatetime, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                @Html.DisplayFor(model => model.pickupdatetime, new { htmlAttributes = new { @class = "form-control col-md-6" } })
             </div>
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.materialphotos)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.materialphotos)
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.postamount, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                @Html.DisplayFor(model => model.postamount, new { htmlAttributes = new { @class = "form-control col-md-6" } })
+            </div>
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.contractstartdatetime, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                @Html.DisplayFor(model => model.contractstartdatetime, new { htmlAttributes = new { @class = "form-control col-md-6" } })
             </div>
 
-        </div>
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.packingdimension)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.packingdimension)
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.contractenddatetime, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                @Html.DisplayFor(model => model.contractenddatetime, new { htmlAttributes = new { @class = "form-control col-md-6" } })
             </div>
-        </div>
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.numberpackets)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.numberpackets)
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.vehicletype)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.vehicletype)
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.novehicle)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.novehicle)
-            </div>
-        </div>
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.biddingactivatedatetime, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                @Html.DisplayFor(model => model.biddingactivatedatetime, new { htmlAttributes = new { @class = "form-control col-md-6" } })
 
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.deliveryperiodday)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.deliveryperiodday)
             </div>
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.pickupdatetime)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.pickupdatetime)
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.biddingclosedatetime, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                @Html.DisplayFor(model => model.biddingclosedatetime, new { htmlAttributes = new { @class = "form-control col-md-6" } })
             </div>
-        </div>
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.postamount)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.postamount)
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.ordertypeValue, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                @Html.DisplayFor(model => model.ordertypeValue, new { htmlAttributes = new { @class = "form-control col-md-6" } })
             </div>
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.creditday)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.creditday)
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.poststatusvalue, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                @Html.DisplayFor(model => model.poststatusvalue, new { htmlAttributes = new { @class = "form-control col-md-6" } })
             </div>
-        </div>
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.onpickuppercentage)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.onpickuppercentage)
+
+            <div class="row form-group col-12">
+                @Html.LabelFor(model => model.onpickuppercentage, htmlAttributes: new { @class = "form-control-label col-md-8" })
+                @Html.DisplayFor(model => model.onpickuppercentage, new { htmlAttributes = new { @class = "form-control col-md-2" } })
             </div>
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.onunloadingpercentage)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.onunloadingpercentage)
+            <div class="row form-group col-12">
+                @Html.LabelFor(model => model.onunloadingpercentage, htmlAttributes: new { @class = "form-control-label col-md-8" })
+                @Html.DisplayFor(model => model.onunloadingpercentage, new { htmlAttributes = new { @class = "form-control col-md-2" } })
             </div>
-        </div>
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.contractstartdatetime)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.contractstartdatetime)
+
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.deliveryperiodday, htmlAttributes: new { @class = "form-control-label col-md-6" })
+                @Html.DisplayFor(model => model.deliveryperiodday, new { htmlAttributes = new { @class = "form-control col-md-4" } })
             </div>
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.contractenddatetime)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.contractenddatetime)
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.creditday, htmlAttributes: new { @class = "form-control-label col-md-4" })
+                @Html.DisplayFor(model => model.creditday, new { htmlAttributes = new { @class = "form-control col-md-4" } })
             </div>
-        </div>
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.ordertypeValue)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.ordertypeValue)
+
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.gprs, htmlAttributes: new { @class = "form-control-label col-md-10" })
+                @Html.DisplayFor(model => model.gprs, new { htmlAttributes = new { @class = "form-control col-md-4" } })
             </div>
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.poststatusvalue)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.poststatusvalue)
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.transporterinsurance, htmlAttributes: new { @class = "form-control-label col-md-10" })
+                @Html.DisplayFor(model => model.transporterinsurance, new { htmlAttributes = new { @class = "form-control col-md-4" } })
             </div>
-        </div>
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.biddingactivatedatetime)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.biddingactivatedatetime)
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.menpowerloading, htmlAttributes: new { @class = "form-control-label col-md-10" })
+                @Html.DisplayFor(model => model.menpowerloading, new { htmlAttributes = new { @class = "form-control col-md-4" } })
             </div>
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.biddingclosedatetime)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.biddingclosedatetime)
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.tolltaxinclude, htmlAttributes: new { @class = "form-control-label col-md-10" })
+                @Html.DisplayFor(model => model.tolltaxinclude, new { htmlAttributes = new { @class = "form-control col-md-4" } })
             </div>
-        </div>
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.gprs)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.gprs)
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.menpowerunloading, htmlAttributes: new { @class = "form-control-label col-md-10" })
+                @Html.DisplayFor(model => model.menpowerunloading, new { htmlAttributes = new { @class = "form-control col-md-4" } })
             </div>
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.loadingtype)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.loadingtype)
+
+            <div class="row form-group col-6">
+                @Html.LabelFor(model => model.loadingtype, htmlAttributes: new { @class = "form-control-label col-md-10" })
+                @Html.DisplayFor(model => model.loadingtype, new { htmlAttributes = new { @class = "form-control col-md-4" } })
             </div>
-        </div>
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.menpowerloading)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.menpowerloading)
-            </div>
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.menpowerunloading)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.menpowerunloading)
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.transporterinsurance)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.transporterinsurance)
-            </div>
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.tolltaxinclude)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.tolltaxinclude)
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.remark)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.remark)
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col col-sm-6">
-                <label class=" form-control-label">
-                    @Html.DisplayNameFor(model => model.LastModifyDate)
-                </label>
-                &nbsp; : &nbsp;
-                @Html.DisplayFor(model => model.LastModifyDate)
+            <div class="row form-group col-12">
+                @Html.LabelFor(model => model.remark, htmlAttributes: new { @class = "form-control-label col-md-2" })
+                @Html.DisplayFor(model => model.remark, new { htmlAttributes = new { @class = "form-control  col-md-10" } })
             </div>
         </div>
         <div id="biddingview">
             @Html.Partial("Create", new QTrans.Models.BiddingProfile())
-        </div>      
+        </div>
     </div>
 </div>
 
