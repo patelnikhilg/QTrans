@@ -34,14 +34,12 @@ namespace QTrans.WebPortal.Controllers
         // GET: Bidding
         public ActionResult ActivePost()
         {
-            var message = string.Empty;
-            BiddingRepository postingRepository = new BiddingRepository(this.UserId);
-            var post = postingRepository.GetPostingList(this.UserId, false);
-            return View(post);
+            ////var message = string.Empty;
+            ////BiddingRepository postingRepository = new BiddingRepository(this.UserId);
+            ////var post = postingRepository.GetPostingList(this.UserId, false);
+            return View();
         }
 
-        [OutputCache(Duration = 300)]
-        [HttpGet]
         public ActionResult GetActivePost([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest requestModel)
         {
             var message = string.Empty;
@@ -59,6 +57,54 @@ namespace QTrans.WebPortal.Controllers
                                          p.To.Contains(value) ||
                                          p.materialtype.Contains(value) ||
                                          p.packagetype.Contains(value) 
+                                   );
+            }
+
+            var filteredCount = query.Count();
+
+            #endregion Filtering
+
+            #region Sorting
+            // Sorting
+            var sortedColumns = requestModel.Columns.GetSortedColumns();
+            var orderByString = String.Empty;
+
+            foreach (var column in sortedColumns)
+            {
+                orderByString += orderByString != String.Empty ? "," : "";
+                orderByString += (column.Data) + (column.SortDirection == Column.OrderDirection.Ascendant ? " asc" : " desc");
+            }
+
+            query = query.OrderBy(orderByString == string.Empty ? "biddingclosedatetime asc" : orderByString);
+
+            #endregion Sorting
+
+            // Paging
+            query = query.Skip(requestModel.Start).Take(requestModel.Length);
+
+
+            var data = query.ToList();
+
+            return Json(new DataTablesResponse(requestModel.Draw, data, filteredCount, totalCount), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Get([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest requestModel)
+        {
+            var message = string.Empty;
+            BiddingRepository postingRepository = new BiddingRepository(this.UserId);
+            var post = postingRepository.GetPostingList(this.UserId, false);
+            IQueryable<PostingListBid> query = post.AsQueryable();
+            var totalCount = query.Count();
+
+            #region Filtering
+            // Apply filters for searching
+            if (requestModel.Search.Value != string.Empty)
+            {
+                var value = requestModel.Search.Value.Trim();
+                query = query.Where(p => p.From.Contains(value) ||
+                                         p.To.Contains(value) ||
+                                         p.materialtype.Contains(value) ||
+                                         p.packagetype.Contains(value)
                                    );
             }
 
@@ -116,7 +162,7 @@ namespace QTrans.WebPortal.Controllers
 
         // POST: posting/Create (FormCollection profile)
         [HttpPost]
-        public ActionResult Create(BiddingProfile profile)
+        public ActionResult Create(FormCollection controll, BiddingProfile profile)
         {
             try
             {

@@ -8,8 +8,8 @@
                            <meta charset="utf-8" />
                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
                            <title>@ViewBag.Title -Quick Transport Partner</title>
-                           @*@Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")*@
+                           @*@Styles.Render("~/Content/css")*@
+        @*@Scripts.Render("~/bundles/modernizr")*@
                            @Scripts.Render("~/bundles/jquery")
                            @*@Scripts.Render("~/bundles/bootstrap")*@
                            @RenderSection("scripts", required: false)
@@ -34,96 +34,96 @@
 
                        </head>
 
-<body>
+                       <body>
 
 
-        <!-- Left Panel -->
-        <aside id="left-panel" class="left-panel">
-            <nav class="navbar navbar-expand-sm navbar-default">
-                <div class="navbar-header">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fa fa-bars"></i>
-                    </button>
-                    <a class="navbar-brand" href="./"><img src="../../content/icons/Quick_Trans_Logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="../../content/desgin/images/logo2.png" alt="Logo"></a>
-                </div>
-                <div id="main-menu" class="main-menu collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="#"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
-                        </li>
-                        <h3 class="menu-title">User Mangement</h3><!-- /.menu-title -->
-                        <li class="menu-item-has-children dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa ti-user"></i>Manage User</a>
-                            <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-address-card"></i><a href="~/User/Details/0">Details</a></li>
-                                <li><i class="fa ti-location-pin"></i><a href="~/Common/Index">Area Peference</a></li>
-                                <li><i class="fa fa-key"></i><a href="~/User/UpdatePassword">Update Password</a></li>
-                                <li><i class="fa fa-building-o"></i><a href="~/company/Details">Company</a></li>
-                                @*<li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Cards</a></li>
+                           <!-- Left Panel -->
+                           <aside id="left-panel" class="left-panel">
+                               <nav class="navbar navbar-expand-sm navbar-default">
+                                   <div class="navbar-header">
+                                       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                                           <i class="fa fa-bars"></i>
+                                       </button>
+                                       <a class="navbar-brand" href="./"><img src="../../content/icons/Quick_Trans_Logo.png" alt="Logo"></a>
+                                       <a class="navbar-brand hidden" href="./"><img src="../../content/desgin/images/logo2.png" alt="Logo"></a>
+                                   </div>
+                                   <div id="main-menu" class="main-menu collapse navbar-collapse">
+                                       <ul class="nav navbar-nav">
+                                           <li class="active">
+                                               <a href="#"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                                           </li>
+                                           <h3 class="menu-title">User Mangement</h3><!-- /.menu-title -->
+                                           <li class="menu-item-has-children dropdown">
+                                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa ti-user"></i>Manage User</a>
+                                               <ul class="sub-menu children dropdown-menu">
+                                                   <li><i class="fa fa-address-card"></i><a href="~/User/Details/0">Details</a></li>
+                                                   <li><i class="fa ti-location-pin"></i><a href="~/Common/Index">Area Peference</a></li>
+                                                   <li><i class="fa fa-key"></i><a href="~/User/UpdatePassword">Update Password</a></li>
+                                                   <li><i class="fa fa-building-o"></i><a href="~/company/Details">Company</a></li>
+                                                   @*<li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Cards</a></li>
                                 <li><i class="fa fa-exclamation-triangle"></i><a href="ui-alerts.html">Alerts</a></li>
                                 <li><i class="fa fa-spinner"></i><a href="ui-progressbar.html">Progress Bars</a></li>
                                 <li><i class="fa fa-fire"></i><a href="ui-modals.html">Modals</a></li>
                                 <li><i class="fa fa-book"></i><a href="ui-switches.html">Switches</a></li>
                                 <li><i class="fa fa-th"></i><a href="ui-grids.html">Grids</a></li>
                                 <li><i class="fa fa-file-word-o"></i><a href="ui-typgraphy.html">Typography</a></li>*@
-                            </ul>
-                        </li>
-                        @*<li class="menu-item-has-children dropdown">
+                                               </ul>
+                                           </li>
+                                           @*<li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Manage Company</a>
                             <ul class="sub-menu children dropdown-menu">
 
                             </ul>
                         </li>*@
-                        <h3 class="menu-title">Post</h3><!-- /.menu-title -->
-                        <li class="menu-item-has-children dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa ti-layout-list-post"></i>Post</a>
-                            <ul class="sub-menu children dropdown-menu">
-                                <li><i class="ti-new-window"></i><a href="~/posting/create">Create Posting</a></li>
-                                <li><i class="ti-view-list-alt"></i><a href="~/posting/Pastlist">Completed Posting</a></li>
-                                <li><i class="ti-view-list-alt"></i><a href="~/posting/Currentlist">Active Posting</a></li>
-                            </ul>
-                        </li>
-                        <h3 class="menu-title">Bidding</h3><!-- /.menu-title -->
-                        <li class="menu-item-has-children dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Bidding</a>
-                            <ul class="sub-menu children dropdown-menu">
-                                <li><i class="ti-list"></i><a href="~/bidding/CurrentPost">Active Post</a></li>
-                                <li><i class="ti-list"></i><a href="~/bidding/ClosePost">Close Post</a></li>
-                                <li><i class="ti-list"></i><a href="~/bidding/ActivePost">TableView</a></li>
-                                <li><i class="ti-list"></i><a href="#">List bidding</a></li>
-                            </ul>
-                        </li>
-                        <h3 class="menu-title">Extras</h3><!-- /.menu-title -->
-                        <li class="menu-item-has-children dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
-                            <ul class="sub-menu children dropdown-menu">
-                                <li><i class="menu-icon fa fa-sign-in"></i><a href="#">Logout</a></li>
-                                @*<li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
+                                           <h3 class="menu-title">Post</h3><!-- /.menu-title -->
+                                           <li class="menu-item-has-children dropdown">
+                                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa ti-layout-list-post"></i>Post</a>
+                                               <ul class="sub-menu children dropdown-menu">
+                                                   <li><i class="ti-new-window"></i><a href="~/posting/create">Create Posting</a></li>
+                                                   <li><i class="ti-view-list-alt"></i><a href="~/posting/Pastlist">Completed Posting</a></li>
+                                                   <li><i class="ti-view-list-alt"></i><a href="~/posting/Currentlist">Active Posting</a></li>
+                                               </ul>
+                                           </li>
+                                           <h3 class="menu-title">Bidding</h3><!-- /.menu-title -->
+                                           <li class="menu-item-has-children dropdown">
+                                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Bidding</a>
+                                               <ul class="sub-menu children dropdown-menu">
+                                                   <li><i class="ti-list"></i><a href="~/bidding/CurrentPost">Active Post</a></li>
+                                                   <li><i class="ti-list"></i><a href="~/bidding/ClosePost">Close Post</a></li>
+                                                   <li><i class="ti-list"></i><a href="~/bidding/ActivePost">TableView</a></li>
+                                                   <li><i class="ti-list"></i><a href="#">List bidding</a></li>
+                                               </ul>
+                                           </li>
+                                           <h3 class="menu-title">Extras</h3><!-- /.menu-title -->
+                                           <li class="menu-item-has-children dropdown">
+                                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
+                                               <ul class="sub-menu children dropdown-menu">
+                                                   <li><i class="menu-icon fa fa-sign-in"></i><a href="#">Logout</a></li>
+                                                   @*<li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
                                 <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>*@
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </nav>
-        </aside><!-- /#left-panel -->
-        <!-- Left Panel -->
-        <!-- Right Panel -->
-        <div id="right-panel" class="right-panel">
-            <!-- Header-->
-            <header id="header" class="header">
-                <div class="header-menu">
-                    <div class="col-sm-7">
-                        @ViewBag.LoginUserName
-                        <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                                               </ul>
+                                           </li>
+                                       </ul>
+                                   </div><!-- /.navbar-collapse -->
+                               </nav>
+                           </aside><!-- /#left-panel -->
+                           <!-- Left Panel -->
+                           <!-- Right Panel -->
+                           <div id="right-panel" class="right-panel">
+                               <!-- Header-->
+                               <header id="header" class="header">
+                                   <div class="header-menu">
+                                       <div class="col-sm-7">
+                                           @ViewBag.LoginUserName
+                                           <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
 
-                    </div>
+                                       </div>
 
-                </div>
-            </header><!-- /header -->
-            <!-- Header-->
-            <div class="breadcrumbs">
-                @*<div class="col-sm-4">
+                                   </div>
+                               </header><!-- /header -->
+                               <!-- Header-->
+                               <div class="breadcrumbs">
+                                   @*<div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
                             <h1>Dashboard</h1>
@@ -139,26 +139,26 @@
                         </div>
                     </div>
                 </div>*@
-                <div class="container body-content">
-                    @RenderBody()
+                                   <div class="container body-content">
+                                       @RenderBody()
 
-                </div>
-            </div>
-        </div><!-- /#right-panel -->
-        <!-- Right Panel -->
-        <script src="../../content/desgin/assets/js/vendor/jquery-2.1.4.min.js"></script>
-        @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>*@
-        <script src="../../content/desgin/assets/js/plugins.js"></script>
-        <script src="../../content/desgin/assets/js/main.js"></script>
-        
-        @*<script src="../../content/desgin/assets/js/lib/chart-js/Chart.bundle.js"></script>
+                                   </div>
+                               </div>
+                           </div><!-- /#right-panel -->
+                           <!-- Right Panel -->
+                           <script src="../../content/desgin/assets/js/vendor/jquery-2.1.4.min.js"></script>
+                           @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>*@
+                           <script src="../../content/desgin/assets/js/plugins.js"></script>
+                           <script src="../../content/desgin/assets/js/main.js"></script>
+
+                           @*<script src="../../content/desgin/assets/js/lib/chart-js/Chart.bundle.js"></script>
         <script src="../../content/desgin/assets/js/dashboard.js"></script>
         <script src="../../content/desgin/assets/js/widgets.js"></script>
         <script src="../../content/desgin/assets/js/lib/vector-map/jquery.vmap.js"></script>
         <script src="../../content/desgin/assets/js/lib/vector-map/jquery.vmap.min.js"></script>
         <script src="../../content/desgin/assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
         <script src="../../content/desgin/assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>*@
-        @*<script>( function ( $ ) {
+                           @*<script>( function ( $ ) {
             "use strict";
 
             jQuery( '#vmap' ).vectorMap( {
@@ -174,6 +174,10 @@
                 normalizeFunction: 'polynomial'
             } );
         } )( jQuery );</script>*@
-    </body>
+
+
+                         
+                   
+                       </body>
 
 </html>

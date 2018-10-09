@@ -1,6 +1,6 @@
 ﻿@model QTrans.Models.BiddingProfile
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "bidding", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div class="card" style="border:none">
@@ -8,67 +8,60 @@
             <strong>Bidding</strong>
         </div>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="card-body card-block">
+        <div class="card-body">
             <div class="row form-group" style="visibility:hidden;display:none;">
-                @Html.LabelFor(model => model.dtlpostingid, htmlAttributes: new { @class = "form-control-label" })
+                @Html.LabelFor(model => model.dtlpostingid, htmlAttributes: new { @class = "form-control-label col-sm-3" })
                 <div class="col-sm-6">
                     @Html.EditorFor(model => model.dtlpostingid, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-1">
+                <div class="col-sm-3">
                     @Html.LabelFor(model => model.amount, htmlAttributes: new { @class = "form-control-label" })
                 </div>
                 <div class="col-sm-3">
                     @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.amount), autocomplete = "off" } })
                     @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
                 </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-sm-1">
-                    @Html.LabelFor(model => model.biddercomment, htmlAttributes: new { @class = "form-control-label" })
-                </div>
-                <div class="col-sm-9">
-                    @Html.TextAreaFor(model => model.biddercomment, 5, 70, new { htmlAttributes = new { @class = "form-control col-sm-8", placeholder = @Html.DisplayNameFor(m => m.biddercomment) } })
-                    @Html.ValidationMessageFor(model => model.biddercomment, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-sm-1">
-                    <label class=" form-control-label">
-                        Total Vehicle :
-                    </label>
-
+                <div class="col-sm-3">
+                    <label class=" form-control-label">Total Vehicle</label>
                 </div>
                 <div class="col-sm-3">
-                    @Html.TextBox("TotalVehicle", "", new { @class = "form-control col-sm-3", @Id = "TotalVehicle" });
+                    @Html.TextBox("TotalVehicle", "", new { @class = "form-control", @Id = "TotalVehicle" })
                 </div>
             </div>
-            <div class="row form-group">
-                <table id="formTable">
-                    <thead>
-                        <tr>
-                            <th>Vehicle No.</th>
-                            <th>Capacity</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td><input type="text" name="Capacity" /></td>
-                        </tr>
-                    </tbody>
-                </table>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3">
+                @Html.LabelFor(model => model.biddercomment, htmlAttributes: new { @class = "form-control-label" })
             </div>
+            <div class="col-sm-9">
+                @Html.TextAreaFor(model => model.biddercomment, 5, 70, new { htmlAttributes = new { @class = "form-control col-sm-8", placeholder = @Html.DisplayNameFor(m => m.biddercomment) } })
+                @Html.ValidationMessageFor(model => model.biddercomment, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-            <div>
-                <button type="submit" class="btn btn-success btn-sm">
-                    <i class="fa fa-dot-circle-o"></i> Bid
-                </button>
-                <button type="reset" class="btn btn-danger btn-sm">
-                    <i class="fa fa-ban"></i> Cancel
-                </button>
+        <div class="row form-group" style="padding-left:20%">
+            <div class="panel-heading list-panel-heading" id="VehicleDetails">
+                <h4 class="panel-title list-panel-title">Vehicle Details</h4>
             </div>
+            <table id="formTable" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Capacity</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-success btn-sm">
+                <i class="fa fa-dot-circle-o"></i> Bid
+            </button>
+            <button type="reset" class="btn btn-danger btn-sm">
+                <i class="fa fa-ban"></i> Cancel
+            </button>
         </div>
     </div>
 }
@@ -76,6 +69,7 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
     $('#formTable').hide();
+    $('#VehicleDetails').hide();
     var x = document.getElementById("TotalVehicle");
     x.addEventListener("focusout", TotalVehicleDetails, true);
     var load = 1;
@@ -86,28 +80,25 @@
         load = 2;
         var totalRow = $("#TotalVehicle").val();
         if (totalRow > 0) {
+            $('#VehicleDetails').show();
             $('#formTable').show();
-            //var rowCount = $('#formTable tbody tr').length;
-            //if (rowCount == 0) {
-            //    $("#formTable tbody:last-child").append('<tr id="vehiclerow"><td><label name="VehicleNo" /></td> <td><input type="text" name="Capacity" /></td> </tr>');
-            //}
-
             AddRow(totalRow);
+        }
+        else {
+            $('#VehicleDetails').hide();
+            $('#formTable').hide();
         }
     }
 
     function AddRow(totalRow) {
         for (i = 1; i <= totalRow; i++) {
             $("#formTable tbody:last-child").append('<tr id="vehiclerow"><td><label name="VehicleNo" > ' + i + ' </lable></td> <td><input type="text" name="Capacity" /></td> </tr>');
-            //$("#formTable tbody tr:first").clone().find("input").each(function () {
-            //    $(this).val('');
-            //}).end().appendTo("#formTable");
         }
     }
 
     // Find and remove selected table rows
     function DeleteRow() {
-        var rowCount = $('#formTable tbody tr').length - 1;
+      //  var rowCount = $('#formTable tbody tr').length - 1;
         $("#formTable tbody").find('input[name="Capacity"]').each(function () {
             $(this).parents("tr").remove();
         });

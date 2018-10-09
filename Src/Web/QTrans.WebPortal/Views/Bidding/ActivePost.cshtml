@@ -4,13 +4,14 @@
     ViewBag.Title = "ActivePost";
     Layout = "~/Views/Shared/_PrivateLayout.cshtml";
 }
+
 <div class="card" style="border-style:none">
     <div class="card-header">
         <strong class="card-title">Active Posting</strong>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-primary list-panel" id="list-panel">                
+            <div class="panel panel-primary list-panel" id="list-panel">
                 <div class="panel-body">
                     <table id="ActivePost-data-table" class="table table-striped table-bordered" style="width:100%;"></table>
                 </div>
@@ -18,6 +19,8 @@
         </div>
     </div>
 </div>
+@Styles.Render("~/Content/datatables")
+@Scripts.Render("~/bundles/datatables")
 @section Scripts
 {
     <script type="text/javascript">
@@ -31,7 +34,7 @@
                         "serverSide": true,
                         "processing": true,
                         "ajax": {
-                            "url": "@Url.Action("GetActivePost", "Bidding")"
+                            "url": "@Url.Action("Get", "Bidding")"
                         },
                         "columns": [
                             { "title": "From", "data": "From", "searchable": true },
@@ -42,7 +45,7 @@
                             { "title": "Vehicle", "data": "vehicletype" },
                             { "title": "Pickup", "data": "pickupdatetime" },
                             { "title": "biddingclosedatetime", "data": "biddingclosedatetime" },
-                            { "title": "postamount", "data": "postamount" },
+                            { "title": "postamount", "data": "postamount" }
                         ],
                         "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
                     });

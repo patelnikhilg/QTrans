@@ -30,44 +30,45 @@
     </div>
 
     <div class="card-body">
-        <div class="col-lg-6">
-            <div class="row form-group">
-                <div class="col-md-4">
-                    @Html.DisplayNameFor(model => model.firstname) &nbsp;:
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        @Html.DisplayNameFor(model => model.firstname) &nbsp;:
+                    </div>
+                    <div class="col-md-6">@Html.DisplayFor(model => model.firstname)</div>
                 </div>
-                <div class="col-md-6">@Html.DisplayFor(model => model.firstname)</div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        @Html.DisplayNameFor(model => model.middlename) &nbsp;:
+                    </div>
+                    <div class="col-md-6">@Html.DisplayFor(model => model.middlename)</div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        @Html.DisplayNameFor(model => model.lastname) &nbsp;:
+                    </div>
+                    <div class="col-md-6">@Html.DisplayFor(model => model.lastname)</div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        @Html.DisplayNameFor(model => model.dob) &nbsp;:
+                    </div>
+                    <div class="col-md-6">@Html.DisplayFor(model => model.dob)</div>
+                </div>
             </div>
-            <div class="row form-group">
-                <div class="col-md-4">
-                    @Html.DisplayNameFor(model => model.middlename) &nbsp;:
+            <div class="form-group col-6">
+                <div class="form-group"><img src="@photoPath" width="35%" height="35%" /></div>
+
+                <div class="col-sm-9">
+                    <span class="ti-mobile"></span> &nbsp;<span class="form-control-static">@Html.DisplayFor(model => model.mobilenumber)</span>
                 </div>
-                <div class="col-md-6">@Html.DisplayFor(model => model.middlename)</div>
-            </div>
-            <div class="row form-group">
-                <div class="col-md-4">
-                    @Html.DisplayNameFor(model => model.lastname) &nbsp;:
+
+                <div class="col-sm-9">
+                    <span class="ti-email"></span>&nbsp; <span class="form-control-static">@Html.DisplayFor(model => model.emailaddress)</span>
                 </div>
-                <div class="col-md-6">@Html.DisplayFor(model => model.lastname)</div>
-            </div>
-            <div class="row form-group">
-                <div class="col-md-4">
-                    @Html.DisplayNameFor(model => model.dob) &nbsp;:
-                </div>
-                <div class="col-md-6">@Html.DisplayFor(model => model.dob)</div>
             </div>
         </div>
-        <div class="form-group col-6">
-            <div class="form-group"><img src="@photoPath" width="35%" height="35%" /></div>
-
-            <div class="col-12 col-sm-9">
-                <span class="ti-mobile"></span> &nbsp;<span class="form-control-static">@Html.DisplayFor(model => model.mobilenumber)</span>
-            </div>
-
-            <div class="col-12 col-sm-9">
-                <span class="ti-email"></span>&nbsp; <span class="form-control-static">@Html.DisplayFor(model => model.emailaddress)</span>
-            </div>
-        </div>
-
         <div class="col-6 form-group">
             <div style="margin-bottom:15px;"><strong>Address Details :</strong></div>
             <hr />
