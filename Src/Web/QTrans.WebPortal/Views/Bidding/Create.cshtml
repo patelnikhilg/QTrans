@@ -54,7 +54,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><input type="text" name="Vehicle" /></td>
+                            <td></td>
                             <td><input type="text" name="Capacity" /></td>
                         </tr>
                     </tbody>
@@ -87,20 +87,21 @@
         var totalRow = $("#TotalVehicle").val();
         if (totalRow > 0) {
             $('#formTable').show();
-            var rowCount = $('#formTable tbody tr').length;
-            if (rowCount == 0) {
-                $("#formTable tbody:last-child").append('<tr id="vehiclerow"><td> <input type="text" name="No" /></td> <td><input type="text" name="Capacity" /></td> </tr>');
-            }
+            //var rowCount = $('#formTable tbody tr').length;
+            //if (rowCount == 0) {
+            //    $("#formTable tbody:last-child").append('<tr id="vehiclerow"><td><label name="VehicleNo" /></td> <td><input type="text" name="Capacity" /></td> </tr>');
+            //}
 
             AddRow(totalRow);
         }
     }
 
     function AddRow(totalRow) {
-        for (i = 1; i < totalRow; i++) {
-            $("#formTable tbody tr:first").clone().find("input").each(function () {
-                $(this).val('');
-            }).end().appendTo("#formTable");
+        for (i = 1; i <= totalRow; i++) {
+            $("#formTable tbody:last-child").append('<tr id="vehiclerow"><td><label name="VehicleNo" > ' + i + ' </lable></td> <td><input type="text" name="Capacity" /></td> </tr>');
+            //$("#formTable tbody tr:first").clone().find("input").each(function () {
+            //    $(this).val('');
+            //}).end().appendTo("#formTable");
         }
     }
 

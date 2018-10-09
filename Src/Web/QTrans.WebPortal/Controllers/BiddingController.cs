@@ -1,9 +1,12 @@
-﻿using QTrans.Models;
+﻿using DataTables.Mvc;
+using QTrans.Models;
+using QTrans.Models.ViewModel.Bidding;
 using QTrans.Repositories;
 using QTrans.WebPortal.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Web;
 using System.Web.Mvc;
 
@@ -37,6 +40,56 @@ namespace QTrans.WebPortal.Controllers
             return View(post);
         }
 
+        [OutputCache(Duration = 300)]
+        [HttpGet]
+        public ActionResult GetActivePost([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest requestModel)
+        {
+            var message = string.Empty;
+            BiddingRepository postingRepository = new BiddingRepository(this.UserId);
+            var post = postingRepository.GetPostingList(this.UserId, false);
+            IQueryable<PostingListBid> query = post.AsQueryable();
+            var totalCount = query.Count();
+
+            #region Filtering
+            // Apply filters for searching
+            if (requestModel.Search.Value != string.Empty)
+            {
+                var value = requestModel.Search.Value.Trim();
+                query = query.Where(p => p.From.Contains(value) ||
+                                         p.To.Contains(value) ||
+                                         p.materialtype.Contains(value) ||
+                                         p.packagetype.Contains(value) 
+                                   );
+            }
+
+            var filteredCount = query.Count();
+
+            #endregion Filtering
+
+            #region Sorting
+            // Sorting
+            var sortedColumns = requestModel.Columns.GetSortedColumns();
+            var orderByString = String.Empty;
+
+            foreach (var column in sortedColumns)
+            {
+                orderByString += orderByString != String.Empty ? "," : "";
+                orderByString += (column.Data) + (column.SortDirection == Column.OrderDirection.Ascendant ? " asc" : " desc");
+            }
+
+            query = query.OrderBy(orderByString == string.Empty ? "biddingclosedatetime asc" : orderByString);
+
+            #endregion Sorting
+
+            // Paging
+            query = query.Skip(requestModel.Start).Take(requestModel.Length);
+
+
+            var data = query.ToList();
+
+            return Json(new DataTablesResponse(requestModel.Draw, data, filteredCount, totalCount), JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Bidding
         public ActionResult BiddingList()
         {
@@ -61,7 +114,7 @@ namespace QTrans.WebPortal.Controllers
             return View();
         }
 
-        // POST: posting/Create
+        // POST: posting/Create (FormCollection profile)
         [HttpPost]
         public ActionResult Create(BiddingProfile profile)
         {

@@ -18,6 +18,11 @@ namespace QTrans.Models.ViewModel.Bidding
         public string src_city { get; set; }
         [DisplayName("State")]
         public string src_state { get; set; }
+
+        public string From { get { return this.src_city + "," + this.src_state; } }
+
+        public string To { get { return this.dst_city + "," + this.dst_state; } }
+
         [DisplayName("Address")]
         public string soureaddress { get; set; }
         [DisplayName("LandMark")]

@@ -4,131 +4,58 @@
     ViewBag.Title = "ActivePost";
     Layout = "~/Views/Shared/_PrivateLayout.cshtml";
 }
-<script src="~/Content/Desgin/assets/js/vendor/jquery-2.1.4.min.js"></script>
-<script src="~/Content/Desgin/assets/js/popper.min.js"></script>
-<script src="~/Content/Desgin/assets/js/plugins.js"></script>
-<script src="~/Content/Desgin/assets/js/main.js"></script>
-
-<script src="~/Content/Desgin/assets/js/lib/data-table/datatables.min.js"></script>
-<script src="~/Content/Desgin/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
-<script src="~/Content/Desgin/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-<script src="~/Content/Desgin/assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
-<script src="~/Content/Desgin/assets/js/lib/data-table/jszip.min.js"></script>
-<script src="~/Content/Desgin/assets/js/lib/data-table/pdfmake.min.js"></script>
-<script src="~/Content/Desgin/assets/js/lib/data-table/vfs_fonts.js"></script>
-<script src="~/Content/Desgin/assets/js/lib/data-table/buttons.html5.min.js"></script>
-<script src="~/Content/Desgin/assets/js/lib/data-table/buttons.print.min.js"></script>
-<script src="~/Content/Desgin/assets/js/lib/data-table/buttons.colVis.min.js"></script>
-<script src="~/Content/Desgin/assets/js/lib/data-table/datatables-init.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#bootstrap-data-table-export').DataTable();
-    });</script>
-
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="card" style="border-style:none">
-            <div class="card-header">
-                <strong class="card-title">Active Posting</strong>
-            </div>
-            <div>
-                <div class="row">                        </div>
-
-                <div class="card-body">
-                    <table id="bootstrap-data-table" class="table table-striped">
-                        <tr>
-                            @*<th>
-                                    @Html.DisplayNameFor(model => model.posttype)
-                                </th>*@
-                            <th>
-                                From Address
-                            </th>
-                            <th>
-                                To Adddress
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.materialtype)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.packagetype)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.materialweight)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.vehicletype)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.pickupdatetime)
-                            </th>
-                            @*<th>
-                                    @Html.DisplayNameFor(model => model.ordertypeValue)
-                                </th>*@
-                            <th>
-                                @Html.DisplayNameFor(model => model.biddingclosedatetime)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.postamount)
-                            </th>
-                            @*<td>
-                                    @Html.DisplayNameFor(model => model.loadingtype)
-                                </td>*@
-                            <th></th>
-                        </tr>
-
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                @*<td>
-                                        @Html.DisplayFor(modelItem => item.posttype)
-                                    </td>*@
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.src_city),
-                                    @Html.DisplayFor(modelItem => item.src_state)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.dst_city),
-                                    @Html.DisplayFor(modelItem => item.dst_state)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.materialtype)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.packagetype)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.materialweight)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.vehicletype)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.pickupdatetime)
-                                </td>
-                                @*<td>
-                                        @Html.DisplayFor(modelItem => item.ordertypeValue)
-                                    </td>*@
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.biddingclosedatetime)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.postamount)
-                                </td>
-                                @*<td>
-                                        @Html.DisplayFor(modelItem => item.loadingtype)
-                                    </td>*@
-                                <td>
-                                    @Html.ActionLink("Details", "PostDetails", new { id = item.dtlpostingid })
-                                </td>
-                            </tr>
-                        }
-
-                    </table>
-
+<div class="card" style="border-style:none">
+    <div class="card-header">
+        <strong class="card-title">Active Posting</strong>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary list-panel" id="list-panel">                
+                <div class="panel-body">
+                    <table id="ActivePost-data-table" class="table table-striped table-bordered" style="width:100%;"></table>
                 </div>
             </div>
         </div>
-</div>
     </div>
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        var ActivePostListVM;
+        $(function () {
+            ActivePostListVM = {
+                dt: null,
+
+                init: function () {
+                    dt = $('#ActivePost-data-table').DataTable({
+                        "serverSide": true,
+                        "processing": true,
+                        "ajax": {
+                            "url": "@Url.Action("GetActivePost", "Bidding")"
+                        },
+                        "columns": [
+                            { "title": "From", "data": "From", "searchable": true },
+                            { "title": "To", "data": "To", "searchable": true },
+                            { "title": "Material", "data": "materialtype", "searchable": true },
+                            { "title": "Package", "data": "packagetype", "searchable": true },
+                            { "title": "Weight", "data": "materialweight" },
+                            { "title": "Vehicle", "data": "vehicletype" },
+                            { "title": "Pickup", "data": "pickupdatetime" },
+                            { "title": "biddingclosedatetime", "data": "biddingclosedatetime" },
+                            { "title": "postamount", "data": "postamount" },
+                        ],
+                        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    });
+                }
+            }
+
+            // initialize the datatables
+            ActivePostListVM.init();
+
+        });
+
+    </script>
+
+}
 
 
