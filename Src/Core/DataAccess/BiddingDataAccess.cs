@@ -62,16 +62,16 @@ namespace QTrans.DataAccess
             return dt;
         }
 
-        public DataTable GetByUserId(long userId)
+        public DataSet GetByUserId(long userId)
         {
-            DataTable dt = null;
+            DataSet ds = null;
             using (DBConnector connector = new DBConnector("Usp_GetBiddingDetailsByUserId", true))
             {
                 connector.AddInParameterWithValue("@userId", userId);
-                dt = connector.GetDataTable();
+                ds = connector.GetDataSet();
             }
 
-            return dt;
+            return ds;
         }
 
         public DataSet GetBiddingListByDtlPostId(long dtlPostingId)

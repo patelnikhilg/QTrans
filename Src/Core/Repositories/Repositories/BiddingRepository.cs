@@ -64,9 +64,14 @@ namespace QTrans.Repositories
         /// <returns></returns>
         public List<BiddingProfile> GetBiddingDetailListByUserId(long userId)
         {
-            var dt = this.instanceBidding.GetByUserId(userId);
-            var lst = DataAccessUtility.ConvertToList<BiddingProfile>(dt);
-            return lst;
+            var ds = this.instanceBidding.GetByUserId(userId);
+            var lstbidding = DataAccessUtility.ConvertToList<BiddingProfile>(ds.Tables[0]);
+            var lstBidDetails = DataAccessUtility.ConvertToList<BiddingDetails>(ds.Tables[1]);
+            foreach (var bid in lstbidding)
+            {
+                bid.biddingDetails = lstBidDetails.Where(item => item.biddingid == bid.biddingid).ToList();
+            }
+            return lstbidding;
         }
 
         /// <summary>
