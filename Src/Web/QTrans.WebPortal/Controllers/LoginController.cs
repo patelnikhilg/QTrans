@@ -3,6 +3,7 @@ using QTrans.WebPortal.Common;
 using QTrans.WebPortal.Models.Login;
 using System;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace QTrans.WebPortal.Controllers
 {
@@ -65,6 +66,7 @@ namespace QTrans.WebPortal.Controllers
                         var session = new UserSession();
                         session.SetValue(user);
                         this.sessionStorage.SetValue("UserSession", session);
+                        FormsAuthentication.SetAuthCookie(session.LoginUserName, false);
                         return RedirectToAction("../user/Details/" + user.userid.ToString());
                     }
                     else

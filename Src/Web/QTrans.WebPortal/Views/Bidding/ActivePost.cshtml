@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<QTrans.Models.ViewModel.Bidding.PostingListBid>
 
 @{
-    ViewBag.Title = "ActivePost";
-    Layout = "~/Views/Shared/_PrivateLayout.cshtml";
+                ViewBag.Title = "ActivePost";
+                Layout = "~/Views/Shared/_PrivateLayout.cshtml";
 }
+<link rel="stylesheet" type="text/css" href="~/Content/DataTables/css/jquery.dataTables.css">
 
 <div class="card" style="border-style:none">
     <div class="card-header">
@@ -19,8 +20,6 @@
         </div>
     </div>
 </div>
-@Styles.Render("~/Content/datatables")
-@Scripts.Render("~/bundles/datatables")
 @section Scripts
 {
     <script type="text/javascript">
@@ -33,9 +32,14 @@
                     dt = $('#ActivePost-data-table').DataTable({
                         "serverSide": true,
                         "processing": true,
-                        "ajax": {
-                            "url": "@Url.Action("Get", "Bidding")"
+                        "oLanguage": {
+                            "sLengthMenu": "Page length: _MENU_",
+                            "sSearch": "Filter:",
+                            "sZeroRecords": "No records found"
                         },
+                        "ajax": {
+                            "url": "@Url.Action("GetActivePost", "Bidding")"
+                        },                        
                         "columns": [
                             { "title": "From", "data": "From", "searchable": true },
                             { "title": "To", "data": "To", "searchable": true },
@@ -43,22 +47,34 @@
                             { "title": "Package", "data": "packagetype", "searchable": true },
                             { "title": "Weight", "data": "materialweight" },
                             { "title": "Vehicle", "data": "vehicletype" },
-                            { "title": "Pickup", "data": "pickupdatetime" },
-                            { "title": "biddingclosedatetime", "data": "biddingclosedatetime" },
-                            { "title": "postamount", "data": "postamount" }
+                            { "title": "Pickup", "data": "pickupdatetime", "render": function (data) { return convertToDate(data); }},
+                            { "title": "BidClose", "data": "biddingclosedatetime","render": function (data) { return convertToDate(data); }},
+                           // { "title": "postamount", "data": "postamount" },
+                            //{ "title": "DtlPostingId", "data": "DtlPostingId" },
                         ],
+                       
                         "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
                     });
                 }
             }
-
             // initialize the datatables
             ActivePostListVM.init();
 
         });
 
+        //--------------------------------------------------------------------------------------------------
+        // Call From:  columns..."render" for dateTime columns below.
+        // Purpose  :  The Controller returned System.Web.Mvcreturn.Json(). That contained dates in format "/Date(1367218800000)/".
+        //             Convert that to a "MM/DD/YYYY" Date(?)
+        //-----------------------------------------------------------------------------------------------------
+        function convertToDate(data) {
+            // The 6th+ positions contain the number of milliseconds in Universal Coordinated Time between the specified date and midnight January 1, 1970.
+            var dtStart = new Date(parseInt(data.substr(6)));
+            return dtStart.toDateString("yyyy-mm-dd'T'HH:MM:ss");
+        }
     </script>
 
 }
+
 
 

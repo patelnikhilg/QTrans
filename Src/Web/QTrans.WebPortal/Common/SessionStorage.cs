@@ -13,7 +13,7 @@ namespace QTrans.WebPortal.Common
         /// <param name="key">Provide Key</param>
         /// <param name="value">Provide Value</param>
         public void SetValue(string key, object value)
-        {
+        {            
             HttpContext.Current.Session[key] = value;
         }
 

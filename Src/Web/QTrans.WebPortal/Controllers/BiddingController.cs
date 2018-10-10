@@ -39,7 +39,7 @@ namespace QTrans.WebPortal.Controllers
             ////var post = postingRepository.GetPostingList(this.UserId, false);
             return View();
         }
-
+        [HttpGet]
         public ActionResult GetActivePost([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest requestModel)
         {
             var message = string.Empty;
@@ -57,54 +57,6 @@ namespace QTrans.WebPortal.Controllers
                                          p.To.Contains(value) ||
                                          p.materialtype.Contains(value) ||
                                          p.packagetype.Contains(value) 
-                                   );
-            }
-
-            var filteredCount = query.Count();
-
-            #endregion Filtering
-
-            #region Sorting
-            // Sorting
-            var sortedColumns = requestModel.Columns.GetSortedColumns();
-            var orderByString = String.Empty;
-
-            foreach (var column in sortedColumns)
-            {
-                orderByString += orderByString != String.Empty ? "," : "";
-                orderByString += (column.Data) + (column.SortDirection == Column.OrderDirection.Ascendant ? " asc" : " desc");
-            }
-
-            query = query.OrderBy(orderByString == string.Empty ? "biddingclosedatetime asc" : orderByString);
-
-            #endregion Sorting
-
-            // Paging
-            query = query.Skip(requestModel.Start).Take(requestModel.Length);
-
-
-            var data = query.ToList();
-
-            return Json(new DataTablesResponse(requestModel.Draw, data, filteredCount, totalCount), JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult Get([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest requestModel)
-        {
-            var message = string.Empty;
-            BiddingRepository postingRepository = new BiddingRepository(this.UserId);
-            var post = postingRepository.GetPostingList(this.UserId, false);
-            IQueryable<PostingListBid> query = post.AsQueryable();
-            var totalCount = query.Count();
-
-            #region Filtering
-            // Apply filters for searching
-            if (requestModel.Search.Value != string.Empty)
-            {
-                var value = requestModel.Search.Value.Trim();
-                query = query.Where(p => p.From.Contains(value) ||
-                                         p.To.Contains(value) ||
-                                         p.materialtype.Contains(value) ||
-                                         p.packagetype.Contains(value)
                                    );
             }
 
@@ -162,14 +114,30 @@ namespace QTrans.WebPortal.Controllers
 
         // POST: posting/Create (FormCollection profile)
         [HttpPost]
-        public ActionResult Create(FormCollection controll, BiddingProfile profile)
+        public ActionResult Create(FormCollection form, BiddingProfile profile)
         {
             try
             {
+                //the form values becomes comma delimited array when it come to server side
+                string[] no = form["VehicleNo"].Split(char.Parse(","));
+                string[] capacity = form["capacity"].Split(char.Parse(","));
+
+                //process values
+                List<BiddingDetails> biddingDetailslist = new List<BiddingDetails>();
+
+                for (int i = 0; i < no.Length; i++)
+                {
+                    BiddingDetails bd = new BiddingDetails();
+                    bd.vehicleno = Convert.ToInt16(no[i]);
+                    bd.capacity = Convert.ToInt16(capacity[i]);
+                    biddingDetailslist.Add(bd);
+                }
+
                 if (ModelState.IsValid)
                 {
                     var message = string.Empty;
                     BiddingRepository repository = new BiddingRepository(this.UserId);
+                    profile.biddingDetails = biddingDetailslist;
                     //Perform the conversion and fetch the destination view model
                     var profileresult = repository.BiddingSubmition(profile, out message);
                     if (profileresult != null)

@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -32,11 +33,11 @@
                     <li>@Html.ActionLink("Signup", "Create", "User")</li>
                     <li>@Html.ActionLink("Login", "Login", "Login")</li>
                     @*<li>
-                        <a onclick="document.getElementById('id01').style.display='block'"
-                           style="width:auto;">UserLogin
-                           @Html.Partial("../Login/UserLogin")
-                        </a>
-                    </li>*@
+                            <a onclick="document.getElementById('id01').style.display='block'"
+                               style="width:auto;">UserLogin
+                               @Html.Partial("../Login/UserLogin")
+                            </a>
+                        </li>*@
                 </ul>
             </div>
         </div>
@@ -49,9 +50,10 @@
             <p>&copy; @DateTime.Now.Year - Quick Transport Partner</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/datatables")
+    @Scripts.Render("~/bundles/datatables")
     @RenderSection("scripts", required: false)
 </body>
 </html>
