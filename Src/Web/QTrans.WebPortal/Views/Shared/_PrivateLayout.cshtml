@@ -11,8 +11,8 @@
     <title>@ViewBag.Title -Quick Transport Partner</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+   
+    
     @RenderSection("scripts", required: false)
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Quick Transport</title>
@@ -20,8 +20,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-icon.png">
     @*<link rel="shortcut icon" href="favicon.ico">*@
-    @*<link rel="stylesheet" href="~/content/desgin/assets/css/normalize.css">
-        <link rel="stylesheet" href="~/content/desgin/assets/css/bootstrap.min.css">*@
+    @*<link rel="stylesheet" href="~/content/desgin/assets/css/normalize.css">*@
+        <link rel="stylesheet" href="~/content/desgin/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/content/desgin/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/content/desgin/assets/css/themify-icons.css">
     <link rel="stylesheet" href="~/content/desgin/assets/css/flag-icon.min.css">
@@ -29,7 +29,7 @@
     @*<link rel="stylesheet" href="~/content/desgin/assets/css/lib/datatable/dataTables.bootstrap.min.css">*@
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
     <link rel="stylesheet" href="~/content/desgin/assets/scss/style.css">
-    <link href="~/content/desgin/assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
+    @*<link href="~/content/desgin/assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">*@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
@@ -45,8 +45,8 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./"><img src="../../content/icons/Quick_Trans_Logo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href="./"><img src="../../content/desgin/images/logo2.png" alt="Logo"></a>
+                <a class="navbar-brand" href="#"><img src="../../content/icons/Quick_Trans_Logo.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="#"><img src="../../content/desgin/images/logo2.png" alt="Logo"></a>
             </div>
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -115,11 +115,13 @@
         <header id="header" class="header">
             <div class="header-menu">
                 <div class="col-sm-7">
-                    @ViewBag.LoginUserName
+
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
 
                 </div>
-
+                <div style="float:right;">
+                    @ViewBag.LoginUserName
+                </div>
             </div>
         </header><!-- /header -->
         <!-- Header-->
@@ -155,32 +157,11 @@
     @*<script src="../../content/desgin/assets/js/lib/chart-js/Chart.bundle.js"></script>
         <script src="../../content/desgin/assets/js/dashboard.js"></script>
         <script src="../../content/desgin/assets/js/widgets.js"></script>
-        <script src="../../content/desgin/assets/js/lib/vector-map/jquery.vmap.js"></script>
-        <script src="../../content/desgin/assets/js/lib/vector-map/jquery.vmap.min.js"></script>
-        <script src="../../content/desgin/assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
-        <script src="../../content/desgin/assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>*@
-    @*<script>( function ( $ ) {
-            "use strict";
-
-            jQuery( '#vmap' ).vectorMap( {
-                map: 'world_en',
-                backgroundColor: null,
-                color: '#ffffff',
-                hoverOpacity: 0.7,
-                selectedColor: '#1de9b6',
-                enableZoom: true,
-                showTooltip: true,
-                values: sample_data,
-                scaleColors: [ '#1de9b6', '#03a9f5' ],
-                normalizeFunction: 'polynomial'
-            } );
-        } )( jQuery );</script>*@
 
 
-
+    *@
     @Scripts.Render("~/bundles/jquery")
-    @Styles.Render("~/Content/datatables")
-    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/bootstrap")
 </body>
 
 </html>

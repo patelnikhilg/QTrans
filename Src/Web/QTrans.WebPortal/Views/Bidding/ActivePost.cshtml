@@ -1,11 +1,13 @@
 ﻿@model IEnumerable<QTrans.Models.ViewModel.Bidding.PostingListBid>
 
 @{
-                ViewBag.Title = "ActivePost";
-                Layout = "~/Views/Shared/_PrivateLayout.cshtml";
+    ViewBag.Title = "ActivePost";
+    Layout = "~/Views/Shared/_PrivateLayout.cshtml";
 }
 <link rel="stylesheet" type="text/css" href="~/Content/DataTables/css/jquery.dataTables.css">
-
+@Scripts.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/datatables")
+@Scripts.Render("~/bundles/datatables")
 <div class="card" style="border-style:none">
     <div class="card-header">
         <strong class="card-title">Active Posting</strong>
@@ -32,14 +34,22 @@
                     dt = $('#ActivePost-data-table').DataTable({
                         "serverSide": true,
                         "processing": true,
+                        "orderMulti": false,
                         "oLanguage": {
-                            "sLengthMenu": "Page length: _MENU_",
                             "sSearch": "Filter:",
                             "sZeroRecords": "No records found"
                         },
                         "ajax": {
                             "url": "@Url.Action("GetActivePost", "Bidding")"
-                        },                        
+                        },
+                        //"columnDefs":
+                        //    [
+                        //    {
+                        //        "targets": [8],
+                        //        "searchable": false,
+                        //        "orderable": false
+                        //    }
+                        //   ],
                         "columns": [
                             { "title": "From", "data": "From", "searchable": true },
                             { "title": "To", "data": "To", "searchable": true },
@@ -50,9 +60,9 @@
                             { "title": "Pickup", "data": "pickupdatetime", "render": function (data) { return convertToDate(data); }},
                             { "title": "BidClose", "data": "biddingclosedatetime","render": function (data) { return convertToDate(data); }},
                            // { "title": "postamount", "data": "postamount" },
-                            //{ "title": "DtlPostingId", "data": "DtlPostingId" },
+                           // { "title": "DtlPostingId", "data": "DtlPostingId" },
                         ],
-                       
+
                         "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
                     });
                 }

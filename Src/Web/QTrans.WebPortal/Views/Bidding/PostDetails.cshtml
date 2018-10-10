@@ -4,12 +4,29 @@
     ViewBag.Title = "PostDetails";
     Layout = "~/Views/Shared/_PrivateLayout.cshtml";
 }
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 
-<div class="card" style="border:none">
+
+<style>
+    .modal-dialog-center {
+        margin-top: 15%;
+    }
+</style>
+<div class="card" style="border:none; ">
     <div class="card-header">
         <strong>Post Details</strong>
-        <div style="float:right"></div>
-        <a class="details" href="javascript:ShowBidding();">Bid</a>
+        <div style="float:right">
+            @using (Html.BeginForm("Create", "Bidding", FormMethod.Get, new { id = "CreateBid" }))
+            {
+                @*@Html.ActionLink("Bid", "Create", "Bidding", new { id = "searchForm" })*@
+                <input type="submit" id="btnGet" value="Bid" />
+                <a href="#" id="linkBtn" >Bid</a>
+            }
+        </div>
     </div>
     <div style="visibility:hidden;display:none;">
         <span class="form-control-static" id="DtlPostingId">@Html.DisplayFor(model => model.dtlpostingid)</span>
@@ -186,13 +203,71 @@
             </div>
         </div>
         <div id="Bidding" class="row col-12">
-            @Html.Partial("Create", new QTrans.Models.BiddingProfile())          
-        </div>
+                @Html.Partial("Create", new QTrans.Models.BiddingProfile())
+            </div>
     </div>
 </div>
-<script type="text/javascript">  
-    function ShowBidding() {
-        $("#Bidding").show();
-    }
-</script>
 
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-dialog-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Bid on Post</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#CreateBid').submit(function (e) {
+            e.preventDefault();
+            var $form = $(this);
+            $.get("/Bidding/Create?" + 'dtlPostId=' + $("#DtlPostingId").text(), $form.serialize()).done(function (res) {
+                $mymodal = $("#myModal");
+                //alert(res);
+                //update the modal's body with the response received
+                $mymodal.find("div.modal-body").html(res);
+                // Show the modal
+                $mymodal.modal("show");
+            });
+        });
+
+    });
+
+
+    $(function () {
+        $("#linkBtn").click(function () {
+  //  function GetBidding() {
+        $.ajax({
+            type: "GET",
+            url: "/Bidding/Create",
+            data: 'dtlPostId=' + $("#DtlPostingId").text(),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                $mymodal = $("#myModal");
+                //update the modal's body with the response received
+                $mymodal.find("div.modal-body").html(response);
+                // Show the modal
+                $mymodal.modal("show");
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+ //   }
+        });
+    });
+
+</script>

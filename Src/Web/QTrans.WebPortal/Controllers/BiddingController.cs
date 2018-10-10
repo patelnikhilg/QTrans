@@ -107,9 +107,10 @@ namespace QTrans.WebPortal.Controllers
         }
 
         // GET: posting/Create
-        public ActionResult Create(long DtlPostingId)
+        public ActionResult Create(int dtlPostId)
         {
-            return View();
+            var biddingDetail = new QTrans.Models.BiddingProfile() { dtlpostingid = dtlPostId };
+            return PartialView(biddingDetail);
         }
 
         // POST: posting/Create (FormCollection profile)
