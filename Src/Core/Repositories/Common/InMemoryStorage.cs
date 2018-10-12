@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
-using System.Collections.Concurrent;
-using QTrans.Models;
-using QTrans.Repositories.Repositories;
-using System.Timers;
+﻿using QTrans.Models;
 using QTrans.Models.ViewModel.Common;
+using QTrans.Repositories.Repositories;
+using System;
+using System.Collections.Concurrent;
+using System.Timers;
 
 namespace QTrans.Utility.Common
 {
@@ -44,12 +39,12 @@ namespace QTrans.Utility.Common
 
             this.StateStorage = new ConcurrentDictionary<int, CountryState>();
             this.CityStorage = new ConcurrentDictionary<int, StateCity>();
-            this.PincodeStorage = new ConcurrentDictionary<int, CityPincode>();            
+            this.PincodeStorage = new ConcurrentDictionary<int, CityPincode>();
         }
 
         public void Int()
         {
-            this.LoadLocationDetails();
+            this.LoadLocationDetails(0);
         }
 
         public static InMemoryStorage Instance
@@ -67,7 +62,29 @@ namespace QTrans.Utility.Common
 
         public long TimeInterval { get; set; }
 
-        public void LoadLocationDetails()
+        public void LoadLocationDetails(int loadSeq)
+        {
+            switch (loadSeq)
+            {
+                case 1:
+                    LoadState();
+                    break;
+                case 2:
+                    LoadCity();
+                    break;
+                case 3:
+                    LoadPinCode();
+                    break;
+                default:
+                    LoadState();
+                    LoadCity();
+                    LoadPinCode();
+                    break;
+            }
+
+        }
+
+        private void LoadState()
         {
             CommonRepository repository = new CommonRepository();
             foreach (var item in repository.GetState())
@@ -81,7 +98,11 @@ namespace QTrans.Utility.Common
                     this.StateStorage.TryAdd(item.StateId, item);
                 }
             }
+        }
 
+        private void LoadCity()
+        {
+            CommonRepository repository = new CommonRepository();
             foreach (var item in repository.GetCity())
             {
                 if (this.CityStorage.Keys.Contains(item.CityId))
@@ -93,7 +114,11 @@ namespace QTrans.Utility.Common
                     this.CityStorage.TryAdd(item.CityId, item);
                 }
             }
+        }
 
+        private void LoadPinCode()
+        {
+            CommonRepository repository = new CommonRepository();
             foreach (var item in repository.GetPincode())
             {
                 if (this.PincodeStorage.Keys.Contains(item.PincodeId))
@@ -114,7 +139,7 @@ namespace QTrans.Utility.Common
             {
                 if (this.MaterialTypeStorage.Keys.Contains(item.materialtypeid))
                 {
-                    this.MaterialTypeStorage.AddOrUpdate(item.materialtypeid,item,(key, oldValue) => item);
+                    this.MaterialTypeStorage.AddOrUpdate(item.materialtypeid, item, (key, oldValue) => item);
                 }
                 else
                 {
@@ -195,7 +220,11 @@ namespace QTrans.Utility.Common
         /// </summary>
         private void DisposeCleanUpTimer()
         {
-            if (this.reloadData == null) return;
+            if (this.reloadData == null)
+            {
+                return;
+            }
+
             this.reloadData.Enabled = false;
             this.reloadData.Stop();
             this.reloadData.Elapsed -= this.objReloadTimer_Elapsed;

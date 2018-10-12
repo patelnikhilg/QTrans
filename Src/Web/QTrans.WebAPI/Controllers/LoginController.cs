@@ -28,7 +28,7 @@ namespace QTrans.WebAPI.Controllers
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
             return Ok(new { Status = message, data = result });
         }
@@ -46,7 +46,7 @@ namespace QTrans.WebAPI.Controllers
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
             return Ok(new { Status = message, data = result });
         }
@@ -106,10 +106,11 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+                message = Constants.WebApiStatusFail;
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
             if (!string.IsNullOrEmpty(token) && userid > 0)
             {
@@ -129,10 +130,11 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+                message = Constants.WebApiStatusFail;
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
 
             return Ok(new { Status = message, data = result });

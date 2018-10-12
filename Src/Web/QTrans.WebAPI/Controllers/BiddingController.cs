@@ -26,10 +26,11 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+                message = Constants.WebApiStatusFail;
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
 
             return Ok(new { Status = message, data = result });
@@ -42,7 +43,7 @@ namespace QTrans.WebAPI.Controllers
         {
             BiddingRepository repository = new BiddingRepository(param.UserId);
             var result = repository.GetBiddingDetailById(param.biddingId);
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
 
         [Route("GetPostingDetailsByDtlPostId")]
@@ -51,7 +52,7 @@ namespace QTrans.WebAPI.Controllers
         {
             BiddingRepository repository = new BiddingRepository(param.UserId);
             var result = repository.GetPostingDetailByDtlPostingId(param.DtlPostingId); 
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
 
         [Route("GetPostingListByUserId")]
@@ -61,7 +62,7 @@ namespace QTrans.WebAPI.Controllers
             BiddingRepository repository = new BiddingRepository(param.UserId);
             var result = repository.GetPostingList(param.UserId, param.IsPast);
 
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
 
         [Route("GetBiddingListByUserId")]
@@ -71,7 +72,7 @@ namespace QTrans.WebAPI.Controllers
             BiddingRepository repository = new BiddingRepository(UserId);
             var result = repository.GetBiddingDetailListByUserId(UserId);          
 
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
 
         [Route("GetBiddingListByDtlPostinId")]
@@ -81,7 +82,38 @@ namespace QTrans.WebAPI.Controllers
             BiddingRepository repository = new BiddingRepository(param.UserId);
             var result = repository.GetBiddingListByDtPostingId(param.DtlPostingId);
 
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
+
+        [Route("GetBidMinMaxAmountById")]
+        [HttpGet]
+        public IHttpActionResult GetBidMinMaxAmountById([FromUri] BiddingParam param)
+        {
+            BiddingRepository repository = new BiddingRepository(param.UserId);
+            var result = repository.GetBidMinMaxByDtlPostId(param.DtlPostingId);
+
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
+        }
+
+        [Route("SubmitRatingByDtlPostId")]
+        [HttpPost]
+        public IHttpActionResult SubmitRatingByDtlPostId([FromUri] BidRateParam param)
+        {
+            string message = string.Empty;
+            BiddingRepository repository = new BiddingRepository(param.UserId);
+            var result = repository.SubmitRatingByDtlPostId(param.DtlPostingId, param.UserId, param.Rating, param.RatingComment);
+            if (result)
+            {
+                log.Info("Bidding Rating operation is fail");
+                message = Constants.WebApiStatusFail;
+            }
+            else
+            {
+                message = Constants.WebApiStatusOk;
+            }
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
+        }
+
+
     }
 }

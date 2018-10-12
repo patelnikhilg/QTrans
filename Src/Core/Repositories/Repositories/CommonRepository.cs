@@ -133,8 +133,16 @@ namespace QTrans.Repositories.Repositories
             }
             else
             {
-                var data = instance.GetState();
-                return DataAccessUtility.ConvertToList<CountryState>(data);
+                InMemoryStorage.Instance.LoadLocationDetails(1);
+                if (InMemoryStorage.Instance.StateStorage.Count > 0)
+                {
+                    return InMemoryStorage.Instance.StateStorage.Values.ToList();
+                }
+                else
+                {
+                    var data = instance.GetState();
+                    return DataAccessUtility.ConvertToList<CountryState>(data);
+                }
             }
         }
 
@@ -146,8 +154,16 @@ namespace QTrans.Repositories.Repositories
             }
             else
             {
-                var data = instance.GetCity();
-                return DataAccessUtility.ConvertToList<StateCity>(data);
+                InMemoryStorage.Instance.LoadLocationDetails(2);
+                if (InMemoryStorage.Instance.CityStorage.Count > 0)
+                {
+                    return InMemoryStorage.Instance.CityStorage.Values.ToList();
+                }
+                else
+                {
+                    var data = instance.GetCity();
+                    return DataAccessUtility.ConvertToList<StateCity>(data);
+                }
             }
         }
 
@@ -159,29 +175,37 @@ namespace QTrans.Repositories.Repositories
             }
             else
             {
-                var data = instance.GetPincode();
-                return DataAccessUtility.ConvertToList<CityPincode>(data);
+                InMemoryStorage.Instance.LoadLocationDetails(3);
+                if (InMemoryStorage.Instance.PincodeStorage.Count > 0)
+                {
+                    return InMemoryStorage.Instance.PincodeStorage.Values.ToList();
+                }
+                else
+                {
+                    var data = instance.GetPincode();
+                    return DataAccessUtility.ConvertToList<CityPincode>(data);
+                }
             }
         }
 
         public List<StateCity> GetCityByStateId(int stateId)
         {
-            if (InMemoryStorage.Instance.CityStorage.Count > 0)
+            if (InMemoryStorage.Instance.CityStorage.Count == 0)
             {
-                return InMemoryStorage.Instance.CityStorage.Values.Where(x => x.StateId == stateId).ToList();
+                this.GetCity();
             }
 
-            return null;
+            return InMemoryStorage.Instance.CityStorage.Values.Where(x => x.StateId == stateId).ToList();
         }
 
         public List<CityPincode> GetPincodeByCityId(int cityId)
         {
-            if (InMemoryStorage.Instance.PincodeStorage.Count > 0)
+            if (InMemoryStorage.Instance.PincodeStorage.Count == 0)
             {
-                return InMemoryStorage.Instance.PincodeStorage.Values.Where(x => x.CityId == cityId).ToList();  
+                this.GetPincode();
             }
 
-            return null;
+            return InMemoryStorage.Instance.PincodeStorage.Values.Where(x => x.CityId == cityId).ToList();
         }
 
         #endregion

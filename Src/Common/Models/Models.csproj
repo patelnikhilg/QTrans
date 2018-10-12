@@ -65,6 +65,7 @@
     <Compile Include="Vehicle.cs" />
     <Compile Include="Vehicletype.cs" />
     <Compile Include="ViewModel\Bidding\BiddingListDetails.cs" />
+    <Compile Include="ViewModel\Bidding\BidMinMaxAmount.cs" />
     <Compile Include="ViewModel\Bidding\PostingDetailsBid.cs" />
     <Compile Include="ViewModel\Bidding\PostingListBid.cs" />
     <Compile Include="ViewModel\Common\Location.cs" />

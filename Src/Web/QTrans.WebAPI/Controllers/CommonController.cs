@@ -17,7 +17,7 @@ namespace QTrans.WebAPI.Controllers
         {
             CommonRepository repository = new CommonRepository();
             var result = repository.GetMaterialType();
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
 
         [Route("GetPackageType")]
@@ -26,7 +26,7 @@ namespace QTrans.WebAPI.Controllers
         {
             CommonRepository repository = new CommonRepository();
             var result = repository.GetPackageType();
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
 
         [Route("GetVehicleType")]
@@ -35,7 +35,7 @@ namespace QTrans.WebAPI.Controllers
         {
             CommonRepository repository = new CommonRepository();
             var result = repository.GetVehicleType();
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
 
 
@@ -62,7 +62,7 @@ namespace QTrans.WebAPI.Controllers
                     break;
             }
            
-            return Ok(new { Status = "OK", data = "Success" });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = "Success" });
         }
 
        
@@ -73,7 +73,7 @@ namespace QTrans.WebAPI.Controllers
         {
             CommonRepository repository = new CommonRepository();
             var result = repository.InsertAreaPeference(area.UserId, area.CityId);
-            return Ok(new { Status = "OK", data = result ? "Inserted successfully" : "Records not inserted" });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result ? "Inserted successfully" : "Records not inserted" });
         }
 
         [Route("DeleteAreaPeference")]
@@ -82,7 +82,7 @@ namespace QTrans.WebAPI.Controllers
         {
             CommonRepository repository = new CommonRepository();
             var result = repository.DeleteAreaPeference(area.UserId, area.CityId);
-            return Ok(new { Status = "OK", data = result ? "Delete successfully" : "Records not found" });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result ? "Delete successfully" : "Records not found" });
         }
 
         [Route("GetAreaPeference")]
@@ -91,7 +91,7 @@ namespace QTrans.WebAPI.Controllers
         {
             CommonRepository repository = new CommonRepository();
             var result = repository.GetAreaPeferenceByUserId(userId);
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
         #endregion
 
@@ -103,7 +103,7 @@ namespace QTrans.WebAPI.Controllers
         {
             CommonRepository repository = new CommonRepository();
             var result = repository.GetState();
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
 
         [Route("GetCity")]
@@ -112,7 +112,7 @@ namespace QTrans.WebAPI.Controllers
         {
             CommonRepository repository = new CommonRepository();
             var result = repository.GetCity();
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
 
         [Route("GetPincode")]
@@ -121,7 +121,7 @@ namespace QTrans.WebAPI.Controllers
         {
             CommonRepository repository = new CommonRepository();
             var result = repository.GetPincode();
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
 
         [Route("GetCityByStateId")]
@@ -130,7 +130,7 @@ namespace QTrans.WebAPI.Controllers
         {
             CommonRepository repository = new CommonRepository();
             var result = repository.GetCityByStateId(stateId);
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
 
         [Route("GetPincodeByCityId")]
@@ -139,7 +139,7 @@ namespace QTrans.WebAPI.Controllers
         {
             CommonRepository repository = new CommonRepository();
             var result = repository.GetPincodeByCityId(cityId);
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
         #endregion
     }

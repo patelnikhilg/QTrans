@@ -21,10 +21,11 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+                message = Constants.WebApiStatusFail;
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
 
             return Ok(new { Status = message, data = result });
@@ -40,10 +41,11 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+                message = Constants.WebApiStatusFail;
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
 
             return Ok(new { Status = message, data = result });
@@ -60,10 +62,11 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+                message = Constants.WebApiStatusFail;
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
 
             return Ok(new { Status = message, data = result });
@@ -79,10 +82,11 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+                message = Constants.WebApiStatusFail;
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
 
             return Ok(new { Status = message, data = result });
@@ -98,12 +102,32 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+                message = Constants.WebApiStatusFail;
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
 
+            return Ok(new { Status = message, data = result });
+        }
+
+        [Route("SubmitRatingByDtlPostId")]
+        [HttpPost]
+        public IHttpActionResult SubmitRatingByDtlPostId([FromUri] BidRateParam param)
+        {
+            string message = string.Empty;
+            PostingRepository repository = new PostingRepository(param.UserId);
+            var result = repository.SubmitRatingByDtlPostId(param.DtlPostingId, param.UserId, param.Rating, param.RatingComment);
+            if (result)
+            {
+                log.Info("Bidding Rating operation is fail");
+                message = Constants.WebApiStatusFail;
+            }
+            else
+            {
+                message = Constants.WebApiStatusOk;
+            }
             return Ok(new { Status = message, data = result });
         }
     }

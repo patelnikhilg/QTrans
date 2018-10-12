@@ -127,5 +127,21 @@ namespace QTrans.DataAccess
 
             return dt;
         }
+
+        public bool RatingByDtlPostUserId(long dtlpostId, long userId, Int16 rating, string comments)
+        {
+            int rowEffected = 0;
+            using (DBConnector connector = new DBConnector("Usp_PostRatingByDtlPostUserId", true))
+            {
+
+                connector.AddInParameterWithValue("@dtlpostingid", dtlpostId);
+                connector.AddInParameterWithValue("@UserId", userId);
+                connector.AddInParameterWithValue("@rating", rating);
+                connector.AddInParameterWithValue("@RatingComment", comments);
+                rowEffected = connector.ExceuteNonQuery();
+            }
+
+            return rowEffected > 0;
+        }
     }
 }

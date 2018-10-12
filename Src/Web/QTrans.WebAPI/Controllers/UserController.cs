@@ -26,10 +26,11 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+                message = Constants.WebApiStatusFail;
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
             return Ok(new { Status = message, data = result });
         }
@@ -44,10 +45,11 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+                message = Constants.WebApiStatusFail;
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
             return Ok(new { Status = message, data = result });
         }
@@ -58,7 +60,7 @@ namespace QTrans.WebAPI.Controllers
         {
             UserRepository userRepository = new UserRepository();
             var result = userRepository.GetTransportType();            
-            return Ok(new { Status = "OK", data = result });
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
 
 
@@ -72,10 +74,11 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+                message = Constants.WebApiStatusFail;
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
             return Ok(new { Status = message, data = result });
         }
@@ -90,10 +93,11 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+                message = Constants.WebApiStatusFail;
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
             return Ok(new { Status = message, data = result });
         }
@@ -108,10 +112,11 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
+                message = Constants.WebApiStatusFail;
             }
             else
             {
-                message = "OK";
+                message = Constants.WebApiStatusOk;
             }
 
             return Ok(new { Status = message, data = result });

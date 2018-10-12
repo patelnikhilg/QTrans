@@ -3,6 +3,7 @@ using QTrans.DataAccess;
 using QTrans.Models;
 using QTrans.Models.ViewModel.Bidding;
 using System.Linq;
+using System;
 
 namespace QTrans.Repositories
 {
@@ -104,6 +105,24 @@ namespace QTrans.Repositories
             var dt = this.instanceBidding.GetPostingList(userId,isPast);
             var lst = DataAccessUtility.ConvertToList<PostingListBid>(dt);
             return lst;
+        }
+
+        /// <summary>
+        /// Get Min Max Amount of bidding by DtlPostId.
+        /// </summary>
+        /// <param name="dtlpostId"></param>
+        /// <returns>return bid min max amount and total bid</returns>
+        public BidMinMaxAmount GetBidMinMaxByDtlPostId(long dtlpostId)
+        {
+            var dt = this.instanceBidding.GetMinMaxBidAmount(dtlpostId);
+            var result = DataAccessUtility.ConvertToList<BidMinMaxAmount>(dt);
+            return result != null && result.Count > 0 ? result[0] : new BidMinMaxAmount() { dtlpostingid = dtlpostId };
+        }
+
+       
+        public bool SubmitRatingByDtlPostId(long dtlpostId,long userId,Int16 rating, string comments)
+        {
+            return this.instanceBidding.RatingByDtlPostUserId(dtlpostId, userId, rating, comments);
         }
     }
 }

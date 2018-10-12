@@ -31,5 +31,9 @@ namespace QTrans.Models
         public const string FormatShortDate = "{0:dd-MMM-yyyy}";
 
         public const string FormatDateTime = "{0:dd-MMM-yyyy HH:mm:ss}";
+
+        public const string WebApiStatusFail = "Fail";
+
+        public const string WebApiStatusOk = "Ok";
     }
 }
