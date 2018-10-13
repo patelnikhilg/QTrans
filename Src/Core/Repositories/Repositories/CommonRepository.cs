@@ -22,16 +22,19 @@ namespace QTrans.Repositories.Repositories
         }
 
         #region ==================== System Type ====================
-        public List<MaterialType> GetMaterialType()
+        public ResponseCollectionModel<MaterialType> GetMaterialType()
         {
+            var response = new ResponseCollectionModel<MaterialType>();
             if (InMemoryStorage.Instance.MaterialTypeStorage.Count > 0)
             {
-                return InMemoryStorage.Instance.MaterialTypeStorage.Values.ToList();
+                var lst= InMemoryStorage.Instance.MaterialTypeStorage.Values.ToList();
+                response.Response = lst;
             }
             else
             {
                 var data = instance.GetMaterialType();
                 var lst = DataAccessUtility.ConvertToList<MaterialType>(data);
+                response.Response = lst;
                 foreach (var item in lst)
                 {
                     if (InMemoryStorage.Instance.MaterialTypeStorage.Keys.Contains(item.materialtypeid))
@@ -43,21 +46,26 @@ namespace QTrans.Repositories.Repositories
                         InMemoryStorage.Instance.MaterialTypeStorage.TryAdd(item.materialtypeid, item);
                     }
                 }
-
-                return lst;
             }
+
+            response.Status = Constants.WebApiStatusOk;
+
+            return response;
         }
 
-        public List<PackageType> GetPackageType()
+        public ResponseCollectionModel<PackageType> GetPackageType()
         {
+            var response = new ResponseCollectionModel<PackageType>();
             if (InMemoryStorage.Instance.PackageTypeStorage.Count > 0)
             {
-                return InMemoryStorage.Instance.PackageTypeStorage.Values.ToList();
+                var lst= InMemoryStorage.Instance.PackageTypeStorage.Values.ToList();
+                response.Response = lst;
             }
             else
             {
                 var data = instance.GetPackageType();
                 var lst = DataAccessUtility.ConvertToList<PackageType>(data);
+                response.Response = lst;
                 foreach (var item in lst)
                 {
                     if (InMemoryStorage.Instance.PackageTypeStorage.Keys.Contains(item.packagetypeid))
@@ -69,21 +77,26 @@ namespace QTrans.Repositories.Repositories
                         InMemoryStorage.Instance.PackageTypeStorage.TryAdd(item.packagetypeid, item);
                     }
                 }
-
-                return lst;
             }
+
+            response.Status = Constants.WebApiStatusOk;
+
+            return response;
         }
 
-        public List<VehicleType> GetVehicleType()
+        public ResponseCollectionModel<VehicleType> GetVehicleType()
         {
+            var response = new ResponseCollectionModel<VehicleType>();
             if (InMemoryStorage.Instance.VehicleTypeStorage.Count > 0)
             {
-                return InMemoryStorage.Instance.VehicleTypeStorage.Values.ToList();
+                var lst= InMemoryStorage.Instance.VehicleTypeStorage.Values.ToList();
+                response.Response = lst;
             }
             else
             {
                 var data = instance.GetVehicleType();
                 var lst = DataAccessUtility.ConvertToList<VehicleType>(data);
+                response.Response = lst;
                 foreach (var item in lst)
                 {
                     if (InMemoryStorage.Instance.VehicleTypeStorage.Keys.Contains(item.vehicletypeid))
@@ -95,45 +108,62 @@ namespace QTrans.Repositories.Repositories
                         InMemoryStorage.Instance.VehicleTypeStorage.TryAdd(item.vehicletypeid, item);
                     }
                 }
-
-                return lst;
             }
+
+            response.Status = Constants.WebApiStatusOk;
+            return response;
         }
 
         #endregion
 
         #region =============== Area Peference ============
-        public bool InsertAreaPeference(long userId, int cityId)
+        public ResponseSingleModel<bool> InsertAreaPeference(long userId, int cityId)
         {
-            return instance.InsertAreaPeference(userId, cityId);
+            var response = new ResponseSingleModel<bool>();
+            response.Response = instance.InsertAreaPeference(userId, cityId);
+            response.Status = Constants.WebApiStatusOk;
+            return response;
         }
 
-        public bool DeleteAreaPeference(long userId, int cityId)
+        public ResponseSingleModel<bool> DeleteAreaPeference(long userId, int cityId)
         {
-            return instance.DeleteAreaPeference(userId, cityId);
+            var response = new ResponseSingleModel<bool>();
+            response.Response = instance.DeleteAreaPeference(userId, cityId);
+            response.Status = Constants.WebApiStatusOk;
+            return response;
         }
 
-        public List<AreaPreference> GetAreaPeferenceByUserId(long userId)
+        public ResponseCollectionModel<AreaPreference> GetAreaPeferenceByUserId(long userId)
         {
+            var response = new ResponseCollectionModel<AreaPreference>();
             var data = instance.GetAreaPeferenceByUserId(userId);
-            return DataAccessUtility.ConvertToList<AreaPreference>(data);
+            response.Response= DataAccessUtility.ConvertToList<AreaPreference>(data);
+            response.Status = Constants.WebApiStatusOk;
+            return response;
         }
 
         #endregion
 
         #region =========== State,City,Pincode==============
 
-        public List<CountryState> GetState()
+        public ResponseCollectionModel<CountryState> GetState()
         {
+            var response = new ResponseCollectionModel<CountryState>();
             if (InMemoryStorage.Instance.StateStorage.Count > 0)
             {
-                return InMemoryStorage.Instance.StateStorage.Values.ToList();
+                var lst= InMemoryStorage.Instance.StateStorage.Values.ToList();
+                response.Response = lst;
+                
             }
             else
             {
                 var data = instance.GetState();
-                return DataAccessUtility.ConvertToList<CountryState>(data);
+                var lst= DataAccessUtility.ConvertToList<CountryState>(data);
+                response.Response = lst;
             }
+
+            response.Status = Constants.WebApiStatusOk;
+            return response;
         }
 
         public ResponseCollectionModel<StateCity> GetCity()
@@ -148,41 +178,52 @@ namespace QTrans.Repositories.Repositories
                 var data = instance.GetCity();
                 result.Response = DataAccessUtility.ConvertToList<StateCity>(data);
             }
+
             result.Status = Constants.WebApiStatusOk;
             return result;
         }
 
-        public List<CityPincode> GetPincode()
+        public ResponseCollectionModel<CityPincode> GetPincode()
         {
+            var result = new ResponseCollectionModel<CityPincode>();
             if (InMemoryStorage.Instance.PincodeStorage.Count > 0)
             {
-                return InMemoryStorage.Instance.PincodeStorage.Values.ToList();
+                result.Response= InMemoryStorage.Instance.PincodeStorage.Values.ToList();
             }
             else
             {
                 var data = instance.GetPincode();
-                return DataAccessUtility.ConvertToList<CityPincode>(data);
+                result.Response= DataAccessUtility.ConvertToList<CityPincode>(data);
             }
+
+            result.Status = Constants.WebApiStatusOk;
+            return result;
         }
 
-        public List<StateCity> GetCityByStateId(int stateId)
+        public ResponseCollectionModel<StateCity> GetCityByStateId(int stateId)
         {
+            var result = new ResponseCollectionModel<StateCity>();
             if (InMemoryStorage.Instance.CityStorage.Count == 0)
             {
                 InMemoryStorage.Instance.LoadLocationDetails(2);
             }
 
-            return InMemoryStorage.Instance.CityStorage.Values.Where(x => x.StateId == stateId).ToList();
+            result.Response = InMemoryStorage.Instance.CityStorage.Values.Where(x => x.StateId == stateId).ToList();
+            result.Status = Constants.WebApiStatusOk;
+            return result;
         }
 
-        public List<CityPincode> GetPincodeByCityId(int cityId)
+        public ResponseCollectionModel<CityPincode> GetPincodeByCityId(int cityId)
         {
+            var result = new ResponseCollectionModel<CityPincode>();
             if (InMemoryStorage.Instance.PincodeStorage.Count == 0)
             {
                 InMemoryStorage.Instance.LoadLocationDetails(3);
             }
 
-            return InMemoryStorage.Instance.PincodeStorage.Values.Where(x => x.CityId == cityId).ToList();
+            result.Response = InMemoryStorage.Instance.PincodeStorage.Values.Where(x => x.CityId == cityId).ToList();
+            result.Status = Constants.WebApiStatusOk;
+            return result;
         }
 
         #endregion

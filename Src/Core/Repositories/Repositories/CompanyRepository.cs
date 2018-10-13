@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using QTrans.DataAccess;
 using QTrans.Models;
+using QTrans.Models.ResponseModel;
 
 namespace QTrans.Repositories
 {
@@ -16,38 +17,57 @@ namespace QTrans.Repositories
             this.instanceCompany = new CompanyDataAccess();
         }
 
-        public Company CompanyRegistration(Company company, out string message)
+        public ResponseSingleModel<Company> CompanyRegistration(Company company, out string message)
         {
+            var result = new ResponseSingleModel<Company>();
             long companyId = 0;
             message = string.Empty;            
             if (this.instanceCompany.InsertUpdateCompanyDetails(company, out companyId, out message))
             {
                 company.companyid = companyId;
+                result.Status = Constants.WebApiStatusOk;
             }
-
-            return company;
+            else
+            {
+                result.Status = Constants.WebApiStatusFail;
+                result.Message = message;
+            }
+            result.Response = company;
+           
+            return result;
         }
 
-        public Company GetCompanyDetailById(long companyId, out string message)
+        public ResponseSingleModel<Company> GetCompanyDetailById(long companyId, out string message)
         {
+            var result = new ResponseSingleModel<Company>();
             message = string.Empty;
-            Company companyDetail = null;
             if (companyId > 0)
             {
                 var dt = this.instanceCompany.GetById(companyId, out message);
                 var lst = DataAccessUtility.ConvertToList<Company>(dt);
-                companyDetail = lst.Count > 0 ? lst[0] : null;
+                result.Response = lst !=null && lst.Count > 0 ? lst[0] : null;
+                result.Status = lst != null && lst.Count > 0 ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+                result.Message = message;
             }
-            return companyDetail;
+            else
+            {
+                result.Status = Constants.WebApiStatusFail;
+                result.Message = "Company Id is not supply.";
+            }
+
+            return result;
         }
 
-        public Company GetCompanyDetailByUserId(long userId, out string message)
+        public ResponseSingleModel<Company> GetCompanyDetailByUserId(long userId, out string message)
         {
+            var result = new ResponseSingleModel<Company>();
             message = string.Empty;
             var dt = this.instanceCompany.GetByUserId(userId, out message);
             var lst = DataAccessUtility.ConvertToList<Company>(dt);
-            Company companyDetail = lst.Count > 0 ? lst[0] : null;
-            return companyDetail;
+            result.Response = lst != null && lst.Count > 0 ? lst[0] : null;
+            result.Status = lst != null && lst.Count > 0 ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+            result.Message = message;
+            return result;
         }
     }
 }

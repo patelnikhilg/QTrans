@@ -57,8 +57,8 @@ namespace QTrans.WebPortal.Controllers
                     var user = repository.WebRegistration(userProf, out message);
                     if (user != null)
                     {
-                        CompanyRepository cmprepository = new CompanyRepository(user.userid);
-                        userCompany.company.userid = user.userid;
+                        CompanyRepository cmprepository = new CompanyRepository(user.Response.userid);
+                        userCompany.company.userid = user.Response.userid;
                         //Perform the conversion and fetch the destination view model
                         var comp = Mapper.Map<QTrans.Models.Company>(userCompany.company);
                         var company=cmprepository.CompanyRegistration(comp, out message);
@@ -139,7 +139,7 @@ namespace QTrans.WebPortal.Controllers
                         UserRepository repository = new UserRepository();
                         var user = this.sessionStorage.GetValue("UserSession") as UserSession;
                         var result = repository.ChangePassword(user.MobileNo, user.EmailAddress, userProfile.OldPassword, userProfile.Newpassword, out message);
-                        if (result)
+                        if (result.Response)
                         {
                             ViewBag.Message  = message;
                         }
@@ -218,7 +218,7 @@ namespace QTrans.WebPortal.Controllers
                         }
 
                         UserRepository res = new UserRepository();
-                        int rowsAffected = res.UpdateUserPhoto(userID, filePath, out message);
+                        int rowsAffected = res.UpdateUserPhoto(userID, filePath, out message).Response;
                     }
                     // Returns message that successfully uploaded  
                     return Json("" + filePath);

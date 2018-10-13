@@ -38,7 +38,7 @@ namespace QTrans.WebPortal.Controllers
                     var user = repository.Login(login.UserName, login.Password, out message);
                     if (user != null)
                     {
-                        return RedirectToAction("Details/" + user.userid);
+                        return RedirectToAction("Details/" + user.Response.userid);
                     }
                 }
             }
@@ -64,10 +64,10 @@ namespace QTrans.WebPortal.Controllers
                     if (user != null)
                     {
                         var session = new UserSession();
-                        session.SetValue(user);
+                        session.SetValue(user.Response);
                         this.sessionStorage.SetValue("UserSession", session);
                         FormsAuthentication.SetAuthCookie(session.LoginUserName, false);
-                        return RedirectToAction("../user/Details/" + user.userid.ToString());
+                        return RedirectToAction("../user/Details/" + user.Response.userid.ToString());
                     }
                     else
                     {
@@ -116,7 +116,7 @@ namespace QTrans.WebPortal.Controllers
                     var message = string.Empty;
                     UserRepository repository = new UserRepository();
                     var result = repository.ForgotUserLoginDetail(forgotpassword.MobileNo, forgotpassword.EmailAddress, out message);
-                    if (result)
+                    if (result.Response)
                     {
                         output = "Send password details on your email address";
                         ViewBag.Message = "Send password details on your email address";

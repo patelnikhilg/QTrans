@@ -1,5 +1,6 @@
 ﻿using QTrans.DataAccess;
 using QTrans.Models;
+using QTrans.Models.ResponseModel;
 using QTrans.Models.ViewModel.Common;
 using QTrans.Models.ViewModel.Posting;
 using QTrans.Utility;
@@ -19,23 +20,33 @@ namespace QTrans.Repositories
             this.instancePosting = new PostingDataAccess();
         }
 
-        public PostingProfile PostingPorfileCreation(PostingProfile posting, out string message)
+        public ResponseSingleModel<PostingProfile> PostingPorfileCreation(PostingProfile posting, out string message)
         {
+            var result = new ResponseSingleModel<PostingProfile>();
             long postingId = 0;
             message = string.Empty;
             if (this.instancePosting.InsertUpdatePosting(posting, out postingId, out message))
             {
                 posting.postingid = postingId;
+                result.Response = posting;
+                result.Status = Constants.WebApiStatusOk;
+                result.Message = message;
+            }
+            else
+            {
+                result.Status = Constants.WebApiStatusFail;
+                result.Message = message;
             }
 
-            return posting;
+            return result;
         }
 
-        public PostingDetails PostingDetailCreation(PostingDetails postingDetails, out string message)
+        public ResponseSingleModel<PostingDetails> PostingDetailCreation(PostingDetails postingDetails, out string message)
         {
+            var result = new ResponseSingleModel<PostingDetails>();
             long dtlpostingid;
             message = string.Empty;
-            if (this.instancePosting.InsertUpdatePostingDetails(postingDetails,out dtlpostingid, out message))
+            if (this.instancePosting.InsertUpdatePostingDetails(postingDetails, out dtlpostingid, out message))
             {
                 var ds = this.instancePosting.GetByPostingDetailsId(postingDetails.postingid, out message);
                 var lstProfile = DataAccessUtility.ConvertToList<QTrans.Models.ViewModel.Posting.PostingProfileView>(ds.Tables[0]);
@@ -43,13 +54,22 @@ namespace QTrans.Repositories
                 postingDetails = lstDetails.Count > 0 ? lstDetails[0] : null;
                 postingDetails.postingProfile = lstProfile.Count > 0 ? lstProfile[0] : null;
                 postingDetails.dtlpostingid = dtlpostingid;
+                result.Response = postingDetails;
+                result.Status = Constants.WebApiStatusOk;
+                result.Message = message;
+            }
+            else
+            {
+                result.Status = Constants.WebApiStatusFail;
+                result.Message = message;
             }
 
-            return postingDetails;
+            return result;
         }
 
-        public PostingDetails GetPostingDetailById(long postingId, out string message)
+        public ResponseSingleModel<PostingDetails> GetPostingDetailById(long postingId, out string message)
         {
+            var result = new ResponseSingleModel<PostingDetails>();
             message = string.Empty;
             PostingDetails postingDetails = null;
             var ds = this.instancePosting.GetByPostingDetailsId(postingId, out message);
@@ -57,102 +77,92 @@ namespace QTrans.Repositories
             var lstDetails = DataAccessUtility.ConvertToList<PostingDetails>(ds.Tables[1]);
             postingDetails = lstDetails.Count > 0 ? lstDetails[0] : null;
             postingDetails.postingProfile = lstProfile.Count > 0 ? lstProfile[0] : null;
-
-            return postingDetails;
+            result.Response = postingDetails;
+            result.Status = Constants.WebApiStatusOk;
+            result.Message = message;
+            return result;
         }
 
-        public PostingDetails GetPostingDetailByPostId(long postingId,out PostingProfile profile, out string message)
+        public ResponseSingleModel<PostingDetails> GetPostingDetailByPostId(long postingId, out PostingProfile profile, out string message)
         {
+            var result = new ResponseSingleModel<PostingDetails>();
             message = string.Empty;
             PostingDetails postingDetails = null;
             var ds = this.instancePosting.GetByPostingDetailsId(postingId, out message);
             var lstProfile = DataAccessUtility.ConvertToList<PostingProfile>(ds.Tables[0]);
             var lstDetails = DataAccessUtility.ConvertToList<PostingDetails>(ds.Tables[1]);
-            profile= lstProfile.Count > 0 ? lstProfile[0] : null; 
+            profile = lstProfile.Count > 0 ? lstProfile[0] : null;
             postingDetails = lstDetails.Count > 0 ? lstDetails[0] : null;
-            return postingDetails;
+            result.Response = postingDetails;
+            result.Status = Constants.WebApiStatusOk;
+            result.Message = message;
+            return result;
         }
 
-        public Models.ViewModel.Posting.PostingProfileView GetPostingProfileById(long postingId, out string message)
+        public ResponseSingleModel<PostingProfileView> GetPostingProfileById(long postingId, out string message)
         {
+            var result = new ResponseSingleModel<PostingProfileView>();
             message = string.Empty;
-            QTrans.Models.ViewModel.Posting.PostingProfileView postingProfile = null;
             var dt = this.instancePosting.GetById(postingId, out message);
             var lstProfile = DataAccessUtility.ConvertToList<QTrans.Models.ViewModel.Posting.PostingProfileView>(dt);
-            postingProfile = lstProfile.Count > 0 ? lstProfile[0] : null;
-            return postingProfile;
+            result.Response = lstProfile!= null && lstProfile.Count > 0 ? lstProfile[0] : null; ;
+            result.Status = Constants.WebApiStatusOk;
+            result.Message = message;
+            return result;
         }
 
-        public List<PostingList> GetPostingListByUserId(long userId, bool isPast, out string message)
+        public ResponseCollectionModel<PostingList> GetPostingListByUserId(long userId, bool isPast, out string message)
         {
+            var result = new ResponseCollectionModel<PostingList>();
             message = string.Empty;
             var dt = this.instancePosting.GetListPostingByUserId(userId, isPast, out message);
-            var lstProfile = DataAccessUtility.ConvertToList<PostingList>(dt);
-
-            return lstProfile.Count > 0 ? lstProfile : null;
+            result.Response = DataAccessUtility.ConvertToList<PostingList>(dt);
+            result.Status = Constants.WebApiStatusOk;
+            result.Message = message;
+            return result;
         }
 
-        public bool SubmitRatingByDtlPostId(long dtlpostId, long userId, Int16 rating, string comments, Int16 isRate)
+        public ResponseSingleModel<bool> SubmitRatingByDtlPostId(long dtlpostId, long userId, Int16 rating, string comments, Int16 isRate)
         {
-            return this.instancePosting.RatingByDtlPostUserId(dtlpostId, userId, rating, comments, isRate);
+            var result = new ResponseSingleModel<bool>();
+            result.Response= this.instancePosting.RatingByDtlPostUserId(dtlpostId, userId, rating, comments, isRate);
+            result.Status = Constants.WebApiStatusOk;
+            return result;
         }
 
-        public List<Rating> PendingPostRatingByUserId(long userId)
+        public ResponseCollectionModel<Rating> PendingPostRatingByUserId(long userId)
         {
+            var result = new ResponseCollectionModel<Rating>();
             var dt = this.instancePosting.PendingPostRatingByUserId(userId);
-            return DataAccessUtility.ConvertToList<Rating>(dt);
+            result.Response = DataAccessUtility.ConvertToList<Rating>(dt);
+            result.Status = Constants.WebApiStatusOk;
+            return result;
         }
 
-        public Dictionary<PostStatus,int> GetPostingStatsByUserId(long userId)
+        public ResponseCollectionModel<PostStats> GetPostingStatsByUserId(long userId)
         {
-            Dictionary<PostStatus, int> postStatus = new Dictionary<PostStatus, int>();
-            postStatus.Add(Utility.PostStatus.None, 0);
-            postStatus.Add(Utility.PostStatus.Open, 0);
-            postStatus.Add(Utility.PostStatus.Close, 0);
-            postStatus.Add(Utility.PostStatus.InProgress, 0);
-            postStatus.Add(Utility.PostStatus.ConfirmPending, 0);
-            postStatus.Add(Utility.PostStatus.ConfirmCompleted, 0);
             var dt = this.instancePosting.GetPostingStatsByUserId(userId);
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                foreach (DataRow dr in dt.Rows)
-                {
-                    switch (Convert.ToInt16(dr["PostStatus"].ToString()))
-                    {
-                        case 1:
-                            postStatus[Utility.PostStatus.Open] = Convert.ToInt32(dr["Stats"].ToString());
-                            break;
-                        case 2:
-                            postStatus[Utility.PostStatus.Close] = Convert.ToInt32(dr["Stats"].ToString());
-                            break;
-                        case 3:
-                            postStatus[Utility.PostStatus.InProgress] = Convert.ToInt32(dr["Stats"].ToString());
-                            break;
-                        case 4:
-                            postStatus[Utility.PostStatus.ConfirmPending] = Convert.ToInt32(dr["Stats"].ToString());
-                            break;
-                        case 5:
-                            postStatus[Utility.PostStatus.ConfirmCompleted] = Convert.ToInt32(dr["Stats"].ToString());
-                            break;
-                        default:
-                            postStatus[Utility.PostStatus.None] = Convert.ToInt32(dr["Stats"].ToString());
-                            break;
-                    }
-                }
-            }
-
-            return postStatus;
+            var result = new ResponseCollectionModel<PostStats>();
+            result.Response = DataAccessUtility.ConvertToList<PostStats>(dt); ;
+            result.Status = Constants.WebApiStatusOk;
+            return result;
         }
 
-        public List<PostStatusList> GetPostingStatusByUserId(long userId, Int16 PostStatus)
+        public ResponseCollectionModel<PostStatusList> GetPostingStatusByUserId(long userId, Int16 PostStatus)
         {
+            var result = new ResponseCollectionModel<PostStatusList>();
             var dt = this.instancePosting.GetPostingStatusByUserId(userId, PostStatus);
-            return DataAccessUtility.ConvertToList<PostStatusList>(dt);
+            result.Response = DataAccessUtility.ConvertToList<PostStatusList>(dt);
+            result.Status = Constants.WebApiStatusOk;
+            return result;
         }
 
-        public bool UpdatePostingStatus(long dtlpostId,  Int16 PostStatus)
+        public ResponseSingleModel<bool> UpdatePostingStatus(long dtlpostId, Int16 PostStatus)
         {
-            return this.instancePosting.UpdatePostingStatus(dtlpostId, PostStatus);
+            var result = new ResponseSingleModel<bool>();
+            result.Response = this.instancePosting.UpdatePostingStatus(dtlpostId, PostStatus);
+            result.Status = Constants.WebApiStatusOk;
+            return result;
         }
     }
 }

@@ -51,7 +51,7 @@ namespace QTrans.WebPortal.Controllers
                     //Perform the conversion and fetch the destination view model
                     var comp = Mapper.Map<QTrans.Models.Company>(company);
                     comp.UserId = this.UserId;
-                    comp = repository.CompanyRegistration(comp, out message);
+                    comp = repository.CompanyRegistration(comp, out message).Response;
                     if (comp != null)
                     {
                         return RedirectToAction("Details/" + comp.companyid.ToString());
@@ -96,7 +96,7 @@ namespace QTrans.WebPortal.Controllers
                     //Perform the conversion and fetch the destination view model
                     var comp = Mapper.Map<QTrans.Models.Company>(company);
                     comp.UserId = this.UserId;
-                    comp = repository.CompanyRegistration(comp, out message);
+                    comp = repository.CompanyRegistration(comp, out message).Response;
                     if (comp != null)
                     {
                         return RedirectToAction("Details/" + id.ToString());

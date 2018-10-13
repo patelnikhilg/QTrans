@@ -45,7 +45,7 @@ namespace QTrans.WebPortal.Controllers
             var message = string.Empty;
             BiddingRepository postingRepository = new BiddingRepository(this.UserId);
             var post = postingRepository.GetPostingList(this.UserId, false);
-            IQueryable<PostingListBid> query = post.AsQueryable();
+            IQueryable<PostingListBid> query = post.Response.AsQueryable();
             var totalCount = query.Count();
 
             #region Filtering

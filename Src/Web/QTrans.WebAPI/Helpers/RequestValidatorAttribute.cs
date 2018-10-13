@@ -105,7 +105,7 @@ namespace QTrans.WebAPI.Helpers
                                 var user = instance.GetUserDetailByToken(value, out message);
                                 if (user != null)
                                 {
-                                    UsersSession.userTokenDic.TryAdd(user.Token, user.userid);
+                                    UsersSession.userTokenDic.TryAdd(user.Response.Token, user.Response.userid);
                                     _isValidUser = true;
                                 }                                
                                 //Databse call and store in usersession.

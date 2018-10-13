@@ -75,12 +75,12 @@ namespace QTrans.WebPortal.Controllers
                     var profileresult = repository.PostingPorfileCreation(data.profile, out message);
                     if (profileresult != null)
                     {
-                        data.details.postingid = profileresult.postingid;
+                        data.details.postingid = profileresult.Response.postingid;
                         var details = repository.PostingDetailCreation(data.details, out message);
                         if (details != null)
                         {
                             ViewBag.Message  = string.IsNullOrEmpty(message) ? "Post saved successfully" : message; ;
-                            return RedirectToAction("Details/" + profileresult.postingid);
+                            return RedirectToAction("Details/" + profileresult.Response.postingid);
                         }
                         else
                         {
@@ -121,7 +121,7 @@ namespace QTrans.WebPortal.Controllers
             PostingProfile postProfile;
             //Perform the conversion and fetch the destination view model
             var profileDetails = repository.GetPostingDetailByPostId(id,out postProfile, out message);
-            PostingData data = new PostingData() { profile = postProfile, details = profileDetails };
+            PostingData data = new PostingData() { profile = postProfile, details = profileDetails.Response };
             return View(data);
         }
 

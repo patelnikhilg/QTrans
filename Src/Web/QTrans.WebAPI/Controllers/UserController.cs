@@ -26,13 +26,9 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
-                message = Constants.WebApiStatusFail;
             }
-            else
-            {
-                message = Constants.WebApiStatusOk;
-            }
-            return Ok(new { Status = message, data = result });
+
+            return Ok(new { result.Status, data = result });
         }
 
         [Route("TransportTypeRegistration")]
@@ -45,13 +41,9 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
-                message = Constants.WebApiStatusFail;
             }
-            else
-            {
-                message = Constants.WebApiStatusOk;
-            }
-            return Ok(new { Status = message, data = result });
+
+            return Ok(new { result.Status, data = result });
         }
 
         [Route("GetTransportType")]
@@ -59,8 +51,8 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult GetTransportType()
         {
             UserRepository userRepository = new UserRepository();
-            var result = userRepository.GetTransportType();            
-            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
+            var result = userRepository.GetTransportType();
+            return Ok(new { result.Status, data = result });
         }
 
 
@@ -74,13 +66,9 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
-                message = Constants.WebApiStatusFail;
             }
-            else
-            {
-                message = Constants.WebApiStatusOk;
-            }
-            return Ok(new { Status = message, data = result });
+
+            return Ok(new { result.Status, data = result });
         }
 
         [Route("ChangePassword")]
@@ -93,13 +81,9 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
-                message = Constants.WebApiStatusFail;
             }
-            else
-            {
-                message = Constants.WebApiStatusOk;
-            }
-            return Ok(new { Status = message, data = result });
+
+            return Ok(new { result.Status, data = result });
         }
 
         [Route("UpdateUserProfile")]
@@ -112,14 +96,9 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
-                message = Constants.WebApiStatusFail;
-            }
-            else
-            {
-                message = Constants.WebApiStatusOk;
             }
 
-            return Ok(new { Status = message, data = result });
+            return Ok(new { result.Status, data = result });
         }
     }
 }

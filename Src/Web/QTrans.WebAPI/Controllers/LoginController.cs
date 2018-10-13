@@ -1,5 +1,6 @@
 ﻿using QTrans.Logging;
 using QTrans.Models;
+using QTrans.Models.ResponseModel;
 using QTrans.Repositories;
 using QTrans.Utility;
 using QTrans.WebAPI.Models;
@@ -26,11 +27,8 @@ namespace QTrans.WebAPI.Controllers
             {
                 log.Info(message);
             }
-            else
-            {
-                message = Constants.WebApiStatusOk;
-            }
-            return Ok(new { Status = message, data = result });
+
+            return Ok(new { result.Status, data = result });
         }
 
         [Route("DeviceRegistration")]
@@ -44,11 +42,8 @@ namespace QTrans.WebAPI.Controllers
             {
                 log.Info(message);
             }
-            else
-            {
-                message = Constants.WebApiStatusOk;
-            }
-            return Ok(new { Status = message, data = result });
+
+            return Ok(new { result.Status, data = result });
         }
 
         [Route("OTPVerificationByUser")]
@@ -57,18 +52,19 @@ namespace QTrans.WebAPI.Controllers
         {
             string Platform = HttpContext.Current.Request.Headers["platform"].ToString();
             string message = string.Empty;
-            bool result = false;
+            var result = false;
+            var response = new ResponseSingleModel<string>();
             string token = string.Empty;
             if (Platform.ToLower() == "web")
             {
                 UserRepository userRepository = new UserRepository();
-                result = userRepository.VerificationMobileEmail(OTP.userId, OTP.OTP, false, out token, out message);
+                result = userRepository.VerificationMobileEmail(OTP.userId, OTP.OTP, false, out token, out message).Response;
 
             }
             else if (Platform.ToLower() == "mobile")
             {
                 UserRepository userRepository = new UserRepository();
-                result = userRepository.VerificationMobileEmail(OTP.userId, OTP.OTP, true, out token, out message);
+                result = userRepository.VerificationMobileEmail(OTP.userId, OTP.OTP, true, out token, out message).Response;
             }
             if (!string.IsNullOrEmpty(message))
             {
@@ -80,7 +76,10 @@ namespace QTrans.WebAPI.Controllers
                 UsersSession.userTokenDic.TryAdd(token, OTP.userId);
             }
 
-            return Ok(new { Status = message, data = token });
+            response.Response = token;
+            response.Status = result ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+            response.Message = message;
+            return Ok(new { response.Status, data = response });
         }
 
         [Route("OTPVerification")]
@@ -91,17 +90,18 @@ namespace QTrans.WebAPI.Controllers
             string message = string.Empty;
             bool result = false;
             string token = string.Empty;
+            var response = new ResponseSingleModel<string>();
             long userid = 0;
             if (Platform.ToLower() == "web")
             {
                 UserRepository userRepository = new UserRepository();
-                result = userRepository.UpdateMobileEmailVerification(OTP.mobileno, OTP.emailaddres, false, OTP.OTP, out userid, out token, out message);
+                result = userRepository.UpdateMobileEmailVerification(OTP.mobileno, OTP.emailaddres, false, OTP.OTP, out userid, out token, out message).Response;
 
             }
             else if (Platform.ToLower() == "mobile")
             {
                 UserRepository userRepository = new UserRepository();
-                result = userRepository.UpdateMobileEmailVerification(OTP.mobileno, OTP.emailaddres, true, OTP.OTP, out userid, out token, out message);
+                result = userRepository.UpdateMobileEmailVerification(OTP.mobileno, OTP.emailaddres, true, OTP.OTP, out userid, out token, out message).Response;
             }
             if (!string.IsNullOrEmpty(message))
             {
@@ -117,7 +117,10 @@ namespace QTrans.WebAPI.Controllers
                 UsersSession.userTokenDic.TryAdd(token, userid);
             }
 
-            return Ok(new { Status = message, data = token });
+            response.Response = token;
+            response.Status = result ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+            response.Message = message;
+            return Ok(new { response.Status, data = response });
         }
 
         [Route("ForgotUserLoginDetail")]
@@ -130,14 +133,9 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
-                message = Constants.WebApiStatusFail;
             }
-            else
-            {
-                message = Constants.WebApiStatusOk;
-            }
-
-            return Ok(new { Status = message, data = result });
+          
+            return Ok(new { result.Status, data = result });
         }
 
     }

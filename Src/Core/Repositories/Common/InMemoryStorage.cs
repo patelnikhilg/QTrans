@@ -87,7 +87,7 @@ namespace QTrans.Utility.Common
         private void LoadState()
         {
             CommonRepository repository = new CommonRepository();
-            foreach (var item in repository.GetState())
+            foreach (var item in repository.GetState().Response)
             {
                 if (this.StateStorage.Keys.Contains(item.StateId))
                 {
@@ -119,7 +119,7 @@ namespace QTrans.Utility.Common
         private void LoadPinCode()
         {
             CommonRepository repository = new CommonRepository();
-            foreach (var item in repository.GetPincode())
+            foreach (var item in repository.GetPincode().Response)
             {
                 if (this.PincodeStorage.Keys.Contains(item.PincodeId))
                 {
@@ -135,7 +135,7 @@ namespace QTrans.Utility.Common
         public void LoadData()
         {
             CommonRepository repository = new CommonRepository();
-            foreach (var item in repository.GetMaterialType())
+            foreach (var item in repository.GetMaterialType().Response)
             {
                 if (this.MaterialTypeStorage.Keys.Contains(item.materialtypeid))
                 {
@@ -148,7 +148,7 @@ namespace QTrans.Utility.Common
 
             }
 
-            foreach (var item in repository.GetPackageType())
+            foreach (var item in repository.GetPackageType().Response)
             {
                 if (this.PackageTypeStorage.Keys.Contains(item.packagetypeid))
                 {
@@ -160,7 +160,7 @@ namespace QTrans.Utility.Common
                 }
             }
 
-            foreach (var item in repository.GetVehicleType())
+            foreach (var item in repository.GetVehicleType().Response)
             {
                 if (this.VehicleTypeStorage.Keys.Contains(item.vehicletypeid))
                 {

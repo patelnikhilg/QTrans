@@ -21,14 +21,9 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
-                message = Constants.WebApiStatusFail;
-            }
-            else
-            {
-                message = Constants.WebApiStatusOk;
             }
 
-            return Ok(new { Status = message, data = result });
+            return Ok(new { result.Status, data = result });
         }
 
         [Route("PostingDetail")]
@@ -41,14 +36,9 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
-                message = Constants.WebApiStatusFail;
-            }
-            else
-            {
-                message = Constants.WebApiStatusOk;
             }
 
-            return Ok(new { Status = message, data = result });
+            return Ok(new { result.Status, data = result });
         }
 
 
@@ -62,14 +52,9 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
-                message = Constants.WebApiStatusFail;
-            }
-            else
-            {
-                message = Constants.WebApiStatusOk;
             }
 
-            return Ok(new { Status = message, data = result });
+            return Ok(new { result.Status, data = result });
         }
 
         [Route("GetPostingProfileById")]
@@ -82,14 +67,9 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
-                message = Constants.WebApiStatusFail;
-            }
-            else
-            {
-                message = Constants.WebApiStatusOk;
             }
 
-            return Ok(new { Status = message, data = result });
+            return Ok(new { result.Status, data = result });
         }
 
         [Route("GetPostingListById")]
@@ -102,17 +82,12 @@ namespace QTrans.WebAPI.Controllers
             if (!string.IsNullOrEmpty(message))
             {
                 log.Info(message);
-                message = Constants.WebApiStatusFail;
-            }
-            else
-            {
-                message = Constants.WebApiStatusOk;
             }
 
-            return Ok(new { Status = message, data = result });
+            return Ok(new { result.Status, data = result });
         }
 
-#region ============= Rating ===================
+        #region ============= Rating ===================
         [Route("SubmitRatingByDtlPostId")]
         [HttpPost]
         public IHttpActionResult SubmitRatingByDtlPostId([FromUri] RatingParam param)
@@ -120,16 +95,12 @@ namespace QTrans.WebAPI.Controllers
             string message = string.Empty;
             PostingRepository repository = new PostingRepository(param.UserId);
             var result = repository.SubmitRatingByDtlPostId(param.DtlPostingId, param.UserId, param.Rating, param.RatingComment, param.IsRate);
-            if (result)
+            if (result.Response)
             {
                 log.Info("Bidding Rating operation is fail");
-                message = Constants.WebApiStatusFail;
             }
-            else
-            {
-                message = Constants.WebApiStatusOk;
-            }
-            return Ok(new { Status = message, data = result });
+
+            return Ok(new { result.Status, data = result });
         }
 
         [Route("PendingPostingRatebyUserId")]
@@ -137,30 +108,26 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult PendingPostingRatebyUserId(long Userid)
         {
             PostingRepository repository = new PostingRepository(Userid);
-            var result = repository.PendingPostRatingByUserId(Userid);          
-            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
+            var result = repository.PendingPostRatingByUserId(Userid);
+            return Ok(new { result.Status, data = result });
         }
 
         #endregion
 
         #region===================== Posting Status====================
-        [Route("SubmitRatingByDtlPostId")]
+        [Route("UpdatePostingStatus")]
         [HttpPost]
         public IHttpActionResult UpdatePostingStatus([FromUri] PostingStatusParam param)
         {
             string message = string.Empty;
             PostingRepository repository = new PostingRepository(param.UserId);
-            if (repository.UpdatePostingStatus(param.DtlPostingId,param.Status))
+            var result = repository.UpdatePostingStatus(param.DtlPostingId, param.Status);
+            if (result.Response)
             {
                 log.Info("Update Posting status operation is fail");
-                message = Constants.WebApiStatusFail;
-            }
-            else
-            {
-                message = Constants.WebApiStatusOk;
             }
 
-            return Ok(new { Status = message, data = "Successfully Updated" });
+            return Ok(new { result.Status, data = result });
         }
 
         [Route("GetPostingStatsByUserId")]
@@ -169,7 +136,7 @@ namespace QTrans.WebAPI.Controllers
         {
             PostingRepository repository = new PostingRepository(param.UserId);
             var result = repository.GetPostingStatsByUserId(param.UserId);
-            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
+            return Ok(new { result.Status, data = result });
         }
 
         [Route("GetPostingStatusByUserId")]
@@ -178,7 +145,7 @@ namespace QTrans.WebAPI.Controllers
         {
             PostingRepository repository = new PostingRepository(param.UserId);
             var result = repository.GetPostingStatusByUserId(param.UserId, param.Status);
-            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
+            return Ok(new { result.Status, data = result });
         }
 
         #endregion

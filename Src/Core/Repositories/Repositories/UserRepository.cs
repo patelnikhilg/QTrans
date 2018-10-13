@@ -1,5 +1,6 @@
 ﻿using QTrans.DataAccess;
 using QTrans.Models;
+using QTrans.Models.ResponseModel;
 using QTrans.Utility;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,9 @@ namespace QTrans.Repositories
             this.instanceUser = new UserDataAccess();
         }
 
-        public UserProfile DeviceRegistration(string mobileNo, out string message)
+        public ResponseSingleModel<UserProfile> DeviceRegistration(string mobileNo, out string message)
         {
+            var result = new ResponseSingleModel<UserProfile>();
             message = string.Empty;
             UserProfile user = new UserProfile();
             user.mobilenumber = mobileNo;
@@ -26,144 +28,206 @@ namespace QTrans.Repositories
                 user.userid = identity;
                 var cmp = new Company() { UserId = identity };
                 new CompanyRepository(identity).CompanyRegistration(cmp, out message);
-                return user;
+                result.Response = user;
+                result.Status = Constants.WebApiStatusOk;
+                result.Message = message;
+            }
+            else
+            {
+                result.Status = Constants.WebApiStatusFail;
+                result.Message = message;
             }
 
-            return null;
+            return result;
         }
 
-        public bool UserTypeRegistration(long userId, long companyId, int userType, out string message)
+        public ResponseSingleModel<bool> UserTypeRegistration(long userId, long companyId, int userType, out string message)
         {
+            var result = new ResponseSingleModel<bool>();
             message = string.Empty;
-            return instanceUser.InsertUserCompanyMapping(userId, companyId, userType, out message);
+            result.Response = instanceUser.InsertUserCompanyMapping(userId, companyId, userType, out message);
+            result.Status = Constants.WebApiStatusOk;
+            result.Message = message;
+            return result;
         }
 
 
-        public List<TransportType> GetTransportType()
+        public ResponseCollectionModel<TransportType> GetTransportType()
         {
+            var result = new ResponseCollectionModel<TransportType>();
             var data = instanceUser.GetTransportType();
-
-            return DataAccessUtility.ConvertToList<TransportType>(data);
-
+            result.Response = DataAccessUtility.ConvertToList<TransportType>(data);
+            result.Status = Constants.WebApiStatusOk;
+            return result;
         }
 
-        public List<TransportType> GetTransportTypeByUserId(long userid, out string message)
+        public ResponseCollectionModel<TransportType> GetTransportTypeByUserId(long userid, out string message)
         {
+            var result = new ResponseCollectionModel<TransportType>();
             message = string.Empty;
             var data = instanceUser.GetTransportTypeByUserId(userid, out message);
-            return DataAccessUtility.ConvertToList<TransportType>(data);
+            result.Response = DataAccessUtility.ConvertToList<TransportType>(data);
+            result.Status = Constants.WebApiStatusOk;
+            return result;
         }
 
-        public UserProfile WebRegistration(UserProfile user, out string message)
+        public ResponseSingleModel<UserProfile> WebRegistration(UserProfile user, out string message)
         {
+            var result = new ResponseSingleModel<UserProfile>();
             message = string.Empty;
-            UserProfile userDetail = null;
             user.OTP = new Random().Next(10000, 999999);
             long userid;
             if (instanceUser.InsertUpdateUserDetails(user, out userid, out message))
             {
                 var dt = instanceUser.GetById(userid, out message);
                 var lst = DataAccessUtility.ConvertToList<UserProfile>(dt);
-                userDetail = lst.Count > 0 ? lst[0] : null;
+                result.Response = lst !=null && lst.Count > 0 ? lst[0] : null;
+                result.Status = Constants.WebApiStatusOk;
+                result.Message = message;
+            }
+            else
+            {
+                result.Status = Constants.WebApiStatusFail;
+                result.Message = message;
             }
 
-            return userDetail;
+            return result;
         }
 
-        public UserProfile UpdateUserProfile(UserProfile user, out string message)
+        public ResponseSingleModel<UserProfile> UpdateUserProfile(UserProfile user, out string message)
         {
+            var result = new ResponseSingleModel<UserProfile>();
             message = string.Empty;
             long userid;
             if (instanceUser.InsertUpdateUserDetails(user, out userid, out message))
             {
-                return user;
+                result.Response= user;
+                result.Status = Constants.WebApiStatusOk;
+                result.Message = message;
             }
-
-            return null;
+            else
+            {
+                result.Status = Constants.WebApiStatusFail;
+                result.Message = message;
+            }
+            return result;
         }
 
-        public bool ChangePassword(string mobileNo, string emailAddress,string oldPassword, string password, out string message)
+        public ResponseSingleModel<bool> ChangePassword(string mobileNo, string emailAddress, string oldPassword, string password, out string message)
         {
+            var result = new ResponseSingleModel<bool>();
             message = string.Empty;
-            return instanceUser.UpdateUserPassword(mobileNo, emailAddress, oldPassword, password, out message);
+            result.Response= instanceUser.UpdateUserPassword(mobileNo, emailAddress, oldPassword, password, out message);
+            result.Status = Constants.WebApiStatusOk;
+            result.Message = message;
+            return result;
         }
 
-        public bool VerificationMobileEmail(long userId, int OTP, bool isMobile, out string token, out string message)
+        public ResponseSingleModel<bool> VerificationMobileEmail(long userId, int OTP, bool isMobile, out string token, out string message)
         {
+            var result = new ResponseSingleModel<bool>();
             message = string.Empty;
             token = string.Empty;
             if (instanceUser.UpdateMobileEmailVerification(userId, OTP, isMobile, out message))
             {
                 token = EncryptDecryptHelper.ComputePasswordHash(userId.ToString(), userId.ToString());
-                return instanceUser.UpdateToken(userId, token, out message);
+                result.Response = instanceUser.UpdateToken(userId, token, out message);
+                result.Status = Constants.WebApiStatusOk;
+                result.Message = message;
             }
-
-            return false;
+            else
+            {
+                result.Status = Constants.WebApiStatusFail;
+                result.Message = message;
+            }
+            return result;
         }
 
 
-        public bool ForgotUserLoginDetail(string mobileNo, string emailAddress, out string message)
+        public ResponseSingleModel<bool> ForgotUserLoginDetail(string mobileNo, string emailAddress, out string message)
         {
+            var result = new ResponseSingleModel<bool>();
             message = string.Empty;
             var dt = instanceUser.ForgotUserLoginDetail(mobileNo, emailAddress, out message);
             var lst = DataAccessUtility.ConvertToList<UserProfile>(dt);
-            UserProfile user = lst.Count > 0 ? lst[0] : null;
+            UserProfile user = lst != null &&  lst.Count > 0 ? lst[0] : null;
+            result.Response = user != null;
+            result.Status = result.Response ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+            result.Message = message;
             if (user != null)
             {
                 SmtpMailUtility.SendMail(user.emailaddress, "QTransSupport@gmail.com", "New Password for your QTrans account", "Hello, This is auto generated mail. Your password is :" + user.Password, false);
             }
 
-            return user != null;
+            return result;
         }
 
-        public UserProfile GetUserDetailById(long userid, out string message)
+        public ResponseSingleModel<UserProfile> GetUserDetailById(long userid, out string message)
         {
+            var result = new ResponseSingleModel<UserProfile>();
             message = string.Empty;
             var dt = instanceUser.GetById(userid, out message);
             var lst = DataAccessUtility.ConvertToList<UserProfile>(dt);
             UserProfile user = lst.Count > 0 ? lst[0] : null;
-            return user;
+            result.Response = user;
+            result.Status = user != null ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+            result.Message = message;
+            return result;
         }
 
-        public UserProfile GetUserDetailByToken(string token, out string message)
+        public ResponseSingleModel<UserProfile> GetUserDetailByToken(string token, out string message)
         {
+            var result = new ResponseSingleModel<UserProfile>();
             message = string.Empty;
             var dt = instanceUser.GetBytoken(token, out message);
             var lst = DataAccessUtility.ConvertToList<UserProfile>(dt);
-            UserProfile user = lst.Count > 0 ? lst[0] : null;
-            return user;
+            UserProfile user = lst != null && lst.Count > 0 ? lst[0] : null;
+            result.Response = user;
+            result.Status = user != null ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+            result.Message = message;
+            return result;
         }
 
-        public UserProfile Login(string username, string password, out string message)
+        public ResponseSingleModel<UserProfile> Login(string username, string password, out string message)
         {
+            var result = new ResponseSingleModel<UserProfile>();
             message = string.Empty;
             var dt = instanceUser.UserLogIn(username, password, out message);
             var lst = DataAccessUtility.ConvertToList<UserProfile>(dt);
-            UserProfile user = lst.Count > 0 ? lst[0] : null;
-            return user;
+            UserProfile user = lst != null && lst.Count > 0 ? lst[0] : null;
+            result.Response = user;
+            result.Status = user != null ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+            result.Message = message;
+            return result;
         }
 
-        public bool UpdateMobileEmailVerification(string mobilenumber, string emailaddres, bool isMobile, int OTP, out long userid, out string token, out string message)
+        public ResponseSingleModel<bool> UpdateMobileEmailVerification(string mobilenumber, string emailaddres, bool isMobile, int OTP, out long userid, out string token, out string message)
         {
+            var result = new ResponseSingleModel<bool>();
             message = string.Empty;
             token = string.Empty;
             userid = 0;
             if (instanceUser.UpdateMobileEmailVerification(mobilenumber, emailaddres, isMobile, OTP, out message))
             {
                 token = EncryptDecryptHelper.ComputePasswordHash(isMobile ? mobilenumber : emailaddres, isMobile ? mobilenumber : emailaddres);
-                return instanceUser.UpdateToken(mobilenumber, emailaddres, token, out userid, out message);
+                result.Response = instanceUser.UpdateToken(mobilenumber, emailaddres, token, out userid, out message);
             }
+            
+            result.Status = result.Response ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+            result.Message = message;
 
-            return false;
+            return result;
         }
 
-        public int UpdateUserPhoto(Int64 userID, string filePath, out string message)
+        public ResponseSingleModel<int> UpdateUserPhoto(Int64 userID, string filePath, out string message)
         {
             try
             {
-                int rowsAffected = 0;
-                rowsAffected = instanceUser.UpdateUserPhoto(userID, filePath, out message);
-                return rowsAffected;
+                var result = new ResponseSingleModel<int>();
+                result.Response = instanceUser.UpdateUserPhoto(userID, filePath, out message);
+                result.Status = result.Response > 0 ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+                result.Message = message;
+                return result;
             }
             catch (Exception exp)
             {

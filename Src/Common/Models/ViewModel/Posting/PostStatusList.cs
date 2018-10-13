@@ -74,4 +74,11 @@ namespace QTrans.Models.ViewModel.Posting
         public string loadingtype { get; set; }
        
     }
+
+    public class PostStats
+    {
+        public Int16 PostStatus { get; set; }
+
+        public int Stats { get; set; }
+    }
 }

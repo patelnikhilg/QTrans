@@ -67,7 +67,7 @@ namespace QTrans.WebPortal.Controllers
             List<SelectListItem> citynames = new List<SelectListItem>();
             if (stateId > 0)
             {
-                List<QTrans.Models.ViewModel.Common.StateCity> city = new CommonRepository().GetCityByStateId(stateId).Where(x => x.StateId == stateId).ToList();
+                List<QTrans.Models.ViewModel.Common.StateCity> city = new CommonRepository().GetCityByStateId(stateId).Response.Where(x => x.StateId == stateId).ToList();
                 city.ForEach(x =>
                 {
                     citynames.Add(new SelectListItem { Text = x.CityName, Value = x.CityId.ToString() });
@@ -91,7 +91,7 @@ namespace QTrans.WebPortal.Controllers
         [HttpPost]
         public JsonResult GetState(string Prefix)
         {
-            List<QTrans.Models.ViewModel.Common.CountryState> state = new CommonRepository().GetState();
+            List<QTrans.Models.ViewModel.Common.CountryState> state = new CommonRepository().GetState().Response.ToList();
             //Searching records from list using LINQ query  
             var stateList = (from N in state
                             where N.State.ToLower().StartsWith(Prefix.ToLower())
