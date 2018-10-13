@@ -6,6 +6,7 @@ using System.Web.Http;
 
 namespace QTrans.WebAPI.Controllers
 {
+    [RoutePrefix("api/common")]
     public class CommonController : ApiController
     {
         private AppLogger log = new AppLogger("QTransAPILogger");

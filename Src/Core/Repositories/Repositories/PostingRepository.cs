@@ -1,5 +1,6 @@
 ﻿using QTrans.DataAccess;
 using QTrans.Models;
+using QTrans.Models.ViewModel.Common;
 using QTrans.Models.ViewModel.Posting;
 using System;
 using System.Collections.Generic;
@@ -89,9 +90,15 @@ namespace QTrans.Repositories
             return lstProfile.Count > 0 ? lstProfile : null;
         }
 
-        public bool SubmitRatingByDtlPostId(long dtlpostId, long userId, Int16 rating, string comments)
+        public bool SubmitRatingByDtlPostId(long dtlpostId, long userId, Int16 rating, string comments, Int16 isRate)
         {
-            return this.instancePosting.RatingByDtlPostUserId(dtlpostId, userId, rating, comments);
+            return this.instancePosting.RatingByDtlPostUserId(dtlpostId, userId, rating, comments, isRate);
+        }
+
+        public List<Rating> PendingPostRatingByUserId(long userId)
+        {
+            var dt = this.instancePosting.PendingPostRatingByUserId(userId);
+            return DataAccessUtility.ConvertToList<Rating>(dt);
         }
     }
 }

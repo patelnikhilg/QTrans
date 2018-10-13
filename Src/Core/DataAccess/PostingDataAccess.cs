@@ -128,7 +128,7 @@ namespace QTrans.DataAccess
             return dt;
         }
 
-        public bool RatingByDtlPostUserId(long dtlpostId, long userId, Int16 rating, string comments)
+        public bool RatingByDtlPostUserId(long dtlpostId, long userId, Int16 rating, string comments, Int16 isRate)
         {
             int rowEffected = 0;
             using (DBConnector connector = new DBConnector("Usp_PostRatingByDtlPostUserId", true))
@@ -138,10 +138,24 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@UserId", userId);
                 connector.AddInParameterWithValue("@rating", rating);
                 connector.AddInParameterWithValue("@RatingComment", comments);
+                connector.AddInParameterWithValue("@isRate", isRate);
                 rowEffected = connector.ExceuteNonQuery();
             }
 
             return rowEffected > 0;
+        }
+
+        public DataTable PendingPostRatingByUserId(long userId)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_PendingPostRatingByUserId", true))
+            {
+
+                connector.AddInParameterWithValue("@UserId", userId);
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
         }
     }
 }

@@ -4,6 +4,7 @@ using QTrans.Models;
 using QTrans.Models.ViewModel.Bidding;
 using System.Linq;
 using System;
+using QTrans.Models.ViewModel.Common;
 
 namespace QTrans.Repositories
 {
@@ -120,9 +121,15 @@ namespace QTrans.Repositories
         }
 
        
-        public bool SubmitRatingByDtlPostId(long dtlpostId,long userId,Int16 rating, string comments)
+        public bool SubmitRatingByDtlPostId(long dtlpostId,long userId,Int16 rating, string comments, Int16 isRate)
         {
-            return this.instanceBidding.RatingByDtlPostUserId(dtlpostId, userId, rating, comments);
+            return this.instanceBidding.RatingByDtlPostUserId(dtlpostId, userId, rating, comments,isRate);
+        }
+
+        public List<Rating> PendingBidRatingByUserId(long userId)
+        {
+            var dt = this.instanceBidding.PendingBidRatingByUserId(userId);
+            return DataAccessUtility.ConvertToList<Rating>(dt);
         }
     }
 }

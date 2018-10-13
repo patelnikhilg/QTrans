@@ -114,11 +114,11 @@ namespace QTrans.WebAPI.Controllers
 
         [Route("SubmitRatingByDtlPostId")]
         [HttpPost]
-        public IHttpActionResult SubmitRatingByDtlPostId([FromUri] BidRateParam param)
+        public IHttpActionResult SubmitRatingByDtlPostId([FromUri] RatingParam param)
         {
             string message = string.Empty;
             PostingRepository repository = new PostingRepository(param.UserId);
-            var result = repository.SubmitRatingByDtlPostId(param.DtlPostingId, param.UserId, param.Rating, param.RatingComment);
+            var result = repository.SubmitRatingByDtlPostId(param.DtlPostingId, param.UserId, param.Rating, param.RatingComment, param.IsRate);
             if (result)
             {
                 log.Info("Bidding Rating operation is fail");
@@ -129,6 +129,15 @@ namespace QTrans.WebAPI.Controllers
                 message = Constants.WebApiStatusOk;
             }
             return Ok(new { Status = message, data = result });
+        }
+
+        [Route("PendingPostingRatebyUserId")]
+        [HttpGet]
+        public IHttpActionResult PendingPostingRatebyUserId(long Userid)
+        {
+            PostingRepository repository = new PostingRepository(Userid);
+            var result = repository.PendingPostRatingByUserId(Userid);          
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
     }
 }
