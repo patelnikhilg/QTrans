@@ -14,4 +14,12 @@ namespace QTrans.WebAPI.Models
         public bool IsPast { get; set; } = false;
     }
 
+    public class PostingStatusParam
+    {
+        public long UserId { get; set; }
+
+        public long DtlPostingId { get; set; }
+
+        public Int16 Status { get; set; }
+    }
 }

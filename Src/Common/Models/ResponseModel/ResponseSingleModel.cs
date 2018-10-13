@@ -27,11 +27,11 @@ namespace QTrans.Models.ResponseModel
         /// <summary>
         ///  Gets or sets a value indicating whether status. We will use it to assign status of the response of user request.
         /// </summary>
-        public bool Status { get; set; }
+        public string Status { get; set; }
 
         /// <summary>
         /// Gets or sets property. We will use it to assign exception which occurred during the execution of process.
         /// </summary>
-        public Exception ErrorException { get; set; }
+        public string Message { get; set; }
     }
 }

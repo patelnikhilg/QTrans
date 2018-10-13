@@ -79,9 +79,9 @@ namespace QTrans.WebPortal.Controllers
         [HttpPost]
         public JsonResult GetCity(string Prefix)
         {
-            List<QTrans.Models.ViewModel.Common.StateCity> city = new CommonRepository().GetCity();
+            var city = new CommonRepository().GetCity();
             //Searching records from list using LINQ query  
-            var CityList = (from N in city
+            var CityList = (from N in city.Response.ToList()
                             where N.CityName.ToLower().StartsWith(Prefix.ToLower())
                             select new { N.CityName });
             return Json(CityList, JsonRequestBehavior.AllowGet);

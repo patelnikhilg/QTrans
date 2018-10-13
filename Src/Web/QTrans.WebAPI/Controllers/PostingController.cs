@@ -112,6 +112,7 @@ namespace QTrans.WebAPI.Controllers
             return Ok(new { Status = message, data = result });
         }
 
+#region ============= Rating ===================
         [Route("SubmitRatingByDtlPostId")]
         [HttpPost]
         public IHttpActionResult SubmitRatingByDtlPostId([FromUri] RatingParam param)
@@ -139,5 +140,47 @@ namespace QTrans.WebAPI.Controllers
             var result = repository.PendingPostRatingByUserId(Userid);          
             return Ok(new { Status = Constants.WebApiStatusOk, data = result });
         }
+
+        #endregion
+
+        #region===================== Posting Status====================
+        [Route("SubmitRatingByDtlPostId")]
+        [HttpPost]
+        public IHttpActionResult UpdatePostingStatus([FromUri] PostingStatusParam param)
+        {
+            string message = string.Empty;
+            PostingRepository repository = new PostingRepository(param.UserId);
+            if (repository.UpdatePostingStatus(param.DtlPostingId,param.Status))
+            {
+                log.Info("Update Posting status operation is fail");
+                message = Constants.WebApiStatusFail;
+            }
+            else
+            {
+                message = Constants.WebApiStatusOk;
+            }
+
+            return Ok(new { Status = message, data = "Successfully Updated" });
+        }
+
+        [Route("GetPostingStatsByUserId")]
+        [HttpGet]
+        public IHttpActionResult GetPostingStatsByUserId([FromUri] PostingStatusParam param)
+        {
+            PostingRepository repository = new PostingRepository(param.UserId);
+            var result = repository.GetPostingStatsByUserId(param.UserId);
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
+        }
+
+        [Route("GetPostingStatusByUserId")]
+        [HttpGet]
+        public IHttpActionResult GetPostingStatusByUserId([FromUri] PostingStatusParam param)
+        {
+            PostingRepository repository = new PostingRepository(param.UserId);
+            var result = repository.GetPostingStatusByUserId(param.UserId, param.Status);
+            return Ok(new { Status = Constants.WebApiStatusOk, data = result });
+        }
+
+        #endregion
     }
 }

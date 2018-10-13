@@ -1,5 +1,6 @@
 ﻿using QTrans.DataAccess;
 using QTrans.Models;
+using QTrans.Models.ResponseModel;
 using QTrans.Models.ViewModel.Common;
 using QTrans.Utility.Common;
 using System.Collections.Generic;
@@ -135,17 +136,20 @@ namespace QTrans.Repositories.Repositories
             }
         }
 
-        public List<StateCity> GetCity()
+        public ResponseCollectionModel<StateCity> GetCity()
         {
+            var result = new ResponseCollectionModel<StateCity>();
             if (InMemoryStorage.Instance.CityStorage.Count > 0)
             {
-                return InMemoryStorage.Instance.CityStorage.Values.ToList();
+                result.Response = InMemoryStorage.Instance.CityStorage.Values.ToList();
             }
             else
             {
                 var data = instance.GetCity();
-                return DataAccessUtility.ConvertToList<StateCity>(data);
+                result.Response = DataAccessUtility.ConvertToList<StateCity>(data);
             }
+            result.Status = Constants.WebApiStatusOk;
+            return result;
         }
 
         public List<CityPincode> GetPincode()

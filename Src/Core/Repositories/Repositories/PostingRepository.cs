@@ -2,8 +2,10 @@
 using QTrans.Models;
 using QTrans.Models.ViewModel.Common;
 using QTrans.Models.ViewModel.Posting;
+using QTrans.Utility;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace QTrans.Repositories
 {
@@ -99,6 +101,58 @@ namespace QTrans.Repositories
         {
             var dt = this.instancePosting.PendingPostRatingByUserId(userId);
             return DataAccessUtility.ConvertToList<Rating>(dt);
+        }
+
+        public Dictionary<PostStatus,int> GetPostingStatsByUserId(long userId)
+        {
+            Dictionary<PostStatus, int> postStatus = new Dictionary<PostStatus, int>();
+            postStatus.Add(Utility.PostStatus.None, 0);
+            postStatus.Add(Utility.PostStatus.Open, 0);
+            postStatus.Add(Utility.PostStatus.Close, 0);
+            postStatus.Add(Utility.PostStatus.InProgress, 0);
+            postStatus.Add(Utility.PostStatus.ConfirmPending, 0);
+            postStatus.Add(Utility.PostStatus.ConfirmCompleted, 0);
+            var dt = this.instancePosting.GetPostingStatsByUserId(userId);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    switch (Convert.ToInt16(dr["PostStatus"].ToString()))
+                    {
+                        case 1:
+                            postStatus[Utility.PostStatus.Open] = Convert.ToInt32(dr["Stats"].ToString());
+                            break;
+                        case 2:
+                            postStatus[Utility.PostStatus.Close] = Convert.ToInt32(dr["Stats"].ToString());
+                            break;
+                        case 3:
+                            postStatus[Utility.PostStatus.InProgress] = Convert.ToInt32(dr["Stats"].ToString());
+                            break;
+                        case 4:
+                            postStatus[Utility.PostStatus.ConfirmPending] = Convert.ToInt32(dr["Stats"].ToString());
+                            break;
+                        case 5:
+                            postStatus[Utility.PostStatus.ConfirmCompleted] = Convert.ToInt32(dr["Stats"].ToString());
+                            break;
+                        default:
+                            postStatus[Utility.PostStatus.None] = Convert.ToInt32(dr["Stats"].ToString());
+                            break;
+                    }
+                }
+            }
+
+            return postStatus;
+        }
+
+        public List<PostStatusList> GetPostingStatusByUserId(long userId, Int16 PostStatus)
+        {
+            var dt = this.instancePosting.GetPostingStatusByUserId(userId, PostStatus);
+            return DataAccessUtility.ConvertToList<PostStatusList>(dt);
+        }
+
+        public bool UpdatePostingStatus(long dtlpostId,  Int16 PostStatus)
+        {
+            return this.instancePosting.UpdatePostingStatus(dtlpostId, PostStatus);
         }
     }
 }

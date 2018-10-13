@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace QTrans.Models.ViewModel.Posting
 {
-    public class PostingList
+    public class PostStatusList
     {
         public long postingid { get; set; }
-        public long dtlpostingid { get; set; }               
+        public long dtlpostingid { get; set; }
         [DisplayName("Post Type")]
         public string posttype { get; set; }
         [DisplayName("City")]
@@ -36,7 +36,7 @@ namespace QTrans.Models.ViewModel.Posting
         public int dst_pincode { get; set; }
         [DisplayName("Material Type")]
         public string materialtype { get; set; }
-        
+
         [DisplayName("Package Type")]
         public string packagetype { get; set; }
 
@@ -72,6 +72,6 @@ namespace QTrans.Models.ViewModel.Posting
 
         [DisplayName("Loading Type")]
         public string loadingtype { get; set; }
-
+       
     }
 }

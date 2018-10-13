@@ -73,6 +73,7 @@
     <Compile Include="ViewModel\Common\Rating.cs" />
     <Compile Include="ViewModel\Posting\PostingList.cs" />
     <Compile Include="ViewModel\Posting\PostingProfileView.cs" />
+    <Compile Include="ViewModel\Posting\PostStatusList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\Users\" />

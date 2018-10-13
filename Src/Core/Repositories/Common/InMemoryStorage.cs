@@ -103,7 +103,7 @@ namespace QTrans.Utility.Common
         private void LoadCity()
         {
             CommonRepository repository = new CommonRepository();
-            foreach (var item in repository.GetCity())
+            foreach (var item in repository.GetCity().Response)
             {
                 if (this.CityStorage.Keys.Contains(item.CityId))
                 {

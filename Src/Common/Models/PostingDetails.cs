@@ -49,7 +49,7 @@ namespace QTrans.Models
         [DisplayName("Delivery Period")]
         public Nullable<short> deliveryperiodday { get; set; }
 
-        [DisplayName("Pickup Date")]
+        [DisplayName("Pickup On")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = Constants.FormatDateTime)]
         public System.DateTime pickupdatetime { get; set; }
         [RegularExpression(Constants.RegexDecimalInput, ErrorMessage = Constants.StringDecimal)]

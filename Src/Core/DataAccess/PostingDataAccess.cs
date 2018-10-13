@@ -157,5 +157,46 @@ namespace QTrans.DataAccess
 
             return dt;
         }
+
+        public DataTable GetPostingStatsByUserId(long userId)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetPostingStatsByUserId", true))
+            {
+
+                connector.AddInParameterWithValue("@UserId", userId);
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetPostingStatusByUserId(long userId, Int16 PostStatus)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetPostingStatusByUserId", true))
+            {
+
+                connector.AddInParameterWithValue("@UserId", userId);
+                connector.AddInParameterWithValue("@PostStatus", PostStatus);
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
+        public bool UpdatePostingStatus(long dtlpostingId, Int16 PostStatus)
+        {
+            int rowEffected = 0;
+            using (DBConnector connector = new DBConnector("Usp_UpdatePostingStatusById", true))
+            {
+
+                connector.AddInParameterWithValue("@DtlPostingId", dtlpostingId);
+                connector.AddInParameterWithValue("@PostStatus", PostStatus);
+                rowEffected = connector.ExceuteNonQuery();
+            }
+
+            return rowEffected > 0;
+        }
     }
 }

@@ -39,6 +39,9 @@ namespace QTrans.Utility
         None = 0,
         Open = 1,
         Close = 2,
+        InProgress =3,
+        ConfirmPending=4,
+        ConfirmCompleted=5       
     }
 
     public enum OrderType
