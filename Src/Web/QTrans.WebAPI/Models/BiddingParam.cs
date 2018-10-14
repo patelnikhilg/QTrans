@@ -12,6 +12,17 @@ namespace QTrans.WebAPI.Models
         public long DtlPostingId { get; set; }
     }
 
+    public class BiddingConfirmParam
+    {
+        public long UserId { get; set; }
+
+        public long BidUserId { get; set; }
+
+        public long DtlPostingId { get; set; }
+
+        public Int16 BidStatus { get; set; }
+    }
+
     public class RatingParam
     {
         public long UserId { get; set; }
@@ -30,6 +41,13 @@ namespace QTrans.WebAPI.Models
         public long UserId { get; set; }
 
         public long biddingId { get; set; }
+    }
+
+    public class BiddingStatusParam
+    {
+        public long UserId { get; set; }
+        
+        public Int16 Status { get; set; }
     }
 
     public class BiddingUserParam

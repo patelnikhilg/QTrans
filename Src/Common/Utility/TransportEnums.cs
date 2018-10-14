@@ -53,10 +53,11 @@ namespace QTrans.Utility
 
     public enum BiddingStatus
     {
-        None = 0,
+        None = 0, 
         Confirm = 1,
         Reject = 2,
-        Cancel = 3
+        Cancel = 3,
+        Pending = 4
     }
     //  }
 }

@@ -140,5 +140,48 @@ namespace QTrans.DataAccess
 
             return dt;
         }
+
+        public DataTable GetBiddingStatsByUserId(long userId)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetBidStatsByUserId", true))
+            {
+
+                connector.AddInParameterWithValue("@UserId", userId);
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetBidStatusByUserId(long userId, Int16 PostStatus)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetBidStatusByUserId", true))
+            {
+
+                connector.AddInParameterWithValue("@UserId", userId);
+                connector.AddInParameterWithValue("@PostStatus", PostStatus);
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
+        public bool BiddingStatusByUserId(long dtlpostingId, long userId, Int16 BidStatus)
+        {
+            int rowEffected = 0;
+            using (DBConnector connector = new DBConnector("Usp_BiddingStatusByUserId", true))
+            {
+
+                connector.AddInParameterWithValue("@DtlPostingId", dtlpostingId);
+                connector.AddInParameterWithValue("@UserId", userId);
+                connector.AddInParameterWithValue("@BidStatus", BidStatus);
+                rowEffected = connector.ExceuteNonQuery();
+            }
+
+            return rowEffected > 0;
+        }
+
     }
 }

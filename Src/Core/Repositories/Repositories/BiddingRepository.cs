@@ -6,6 +6,7 @@ using System.Linq;
 using System;
 using QTrans.Models.ViewModel.Common;
 using QTrans.Models.ResponseModel;
+using QTrans.Models.ViewModel.Posting;
 
 namespace QTrans.Repositories
 {
@@ -166,5 +167,40 @@ namespace QTrans.Repositories
             response.Status = Constants.WebApiStatusOk;
             return response;
         }
+
+        public ResponseSingleModel<bool> BiddingStatusByUserId(long dtlpostingId, long userId, Int16 BidStatus)
+        {
+            var response = new ResponseSingleModel<bool>();
+            var result = this.instanceBidding.BiddingStatusByUserId(dtlpostingId, userId, BidStatus);
+            response.Response = result;
+            response.Status = Constants.WebApiStatusOk;
+            return response;
+        }
+
+        public ResponseCollectionModel<PostStats> GetBiddingStatsByUserId(long userId)
+        {
+            var dt = this.instanceBidding.GetBiddingStatsByUserId(userId);
+            var result = new ResponseCollectionModel<PostStats>();
+            result.Response = DataAccessUtility.ConvertToList<PostStats>(dt); ;
+            result.Status = Constants.WebApiStatusOk;
+            return result;
+        }
+
+        /// <summary>
+        /// Get list of bidding done by userid (false means Current posting otherwise close posting).
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="isPast"></param>
+        /// <returns></returns>
+        public ResponseCollectionModel<PostingListBid> GetBidStatusByUserId(long userId, Int16 status)
+        {
+            var response = new ResponseCollectionModel<PostingListBid>();
+            var dt = this.instanceBidding.GetBidStatusByUserId(userId, status);
+            var lst = DataAccessUtility.ConvertToList<PostingListBid>(dt);
+            response.Response = lst;
+            response.Status = Constants.WebApiStatusOk;
+            return response;
+        }
+
     }
 }
