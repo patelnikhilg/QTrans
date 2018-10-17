@@ -34,6 +34,8 @@ namespace QTrans.WebAPI.Models
         public string RatingComment { get; set; }
 
         public Int16 IsRate { get; set; }
+
+        public long CreatedBy { get; set; }
     }
 
     public class BiddingDetailsParam

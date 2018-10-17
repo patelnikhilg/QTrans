@@ -122,10 +122,10 @@ namespace QTrans.Repositories
             return result;
         }
 
-        public ResponseSingleModel<bool> SubmitRatingByDtlPostId(long dtlpostId, long userId, Int16 rating, string comments, Int16 isRate)
+        public ResponseSingleModel<bool> SubmitRatingByDtlPostId(long dtlpostId, long userId, Int16 rating, string comments, Int16 isRate,long CreatedBy)
         {
             var result = new ResponseSingleModel<bool>();
-            result.Response= this.instancePosting.RatingByDtlPostUserId(dtlpostId, userId, rating, comments, isRate);
+            result.Response= this.instancePosting.RatingByDtlPostUserId(dtlpostId, userId, rating, comments, isRate, CreatedBy);
             result.Status = Constants.WebApiStatusOk;
             return result;
         }

@@ -128,7 +128,7 @@ namespace QTrans.DataAccess
             return dt;
         }
 
-        public bool RatingByDtlPostUserId(long dtlpostId, long userId, Int16 rating, string comments, Int16 isRate)
+        public bool RatingByDtlPostUserId(long dtlpostId, long userId, Int16 rating, string comments, Int16 isRate, long CreatedBy)
         {
             int rowEffected = 0;
             using (DBConnector connector = new DBConnector("Usp_PostRatingByDtlPostUserId", true))
@@ -139,6 +139,7 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@rating", rating);
                 connector.AddInParameterWithValue("@RatingComment", comments);
                 connector.AddInParameterWithValue("@isRate", isRate);
+                connector.AddInParameterWithValue("@CreatedBy", CreatedBy);
                 rowEffected = connector.ExceuteNonQuery();
             }
 

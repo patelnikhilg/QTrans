@@ -94,7 +94,7 @@ namespace QTrans.WebAPI.Controllers
         {
             string message = string.Empty;
             PostingRepository repository = new PostingRepository(param.UserId);
-            var result = repository.SubmitRatingByDtlPostId(param.DtlPostingId, param.UserId, param.Rating, param.RatingComment, param.IsRate);
+            var result = repository.SubmitRatingByDtlPostId(param.DtlPostingId, param.UserId, param.Rating, param.RatingComment, param.IsRate, param.CreatedBy);
             if (!result.Response)
             {
                 log.Info("Bidding Rating operation is fail");
