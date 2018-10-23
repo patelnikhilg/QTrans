@@ -7,13 +7,24 @@ using System.Collections.Generic;
 
 namespace QTrans.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IDisposable
     {
-        private UserDataAccess instanceUser;
+        /// <summary>
+        /// Flag: Has Dispose already been called
+        /// </summary>
+        bool disposed;
+        private UserDataAccess instance;
+        #region "=================== Constructor =============================="
         public UserRepository()
         {
-            this.instanceUser = new UserDataAccess();
+            this.instance = new UserDataAccess();
         }
+
+        ~UserRepository()
+        {
+            this.Dispose(false);
+        }
+        #endregion
 
         public ResponseSingleModel<UserProfile> DeviceRegistration(string mobileNo, out string message)
         {
@@ -23,7 +34,7 @@ namespace QTrans.Repositories
             user.mobilenumber = mobileNo;
             user.OTP = CommonFunction.GenerateOTP();
             long identity;
-            if (instanceUser.InsertUpdateUserDetails(user, out identity, out message))
+            if (instance.InsertUpdateUserDetails(user, out identity, out message))
             {
                 user.userid = identity;
                 var cmp = new Company() { UserId = identity };
@@ -45,7 +56,7 @@ namespace QTrans.Repositories
         {
             var result = new ResponseSingleModel<bool>();
             message = string.Empty;
-            result.Response = instanceUser.InsertUserCompanyMapping(userId, companyId, userType, out message);
+            result.Response = instance.InsertUserCompanyMapping(userId, companyId, userType, out message);
             result.Status = Constants.WebApiStatusOk;
             result.Message = message;
             return result;
@@ -55,7 +66,7 @@ namespace QTrans.Repositories
         public ResponseCollectionModel<TransportType> GetTransportType()
         {
             var result = new ResponseCollectionModel<TransportType>();
-            var data = instanceUser.GetTransportType();
+            var data = instance.GetTransportType();
             result.Response = DataAccessUtility.ConvertToList<TransportType>(data);
             result.Status = Constants.WebApiStatusOk;
             return result;
@@ -65,7 +76,7 @@ namespace QTrans.Repositories
         {
             var result = new ResponseCollectionModel<TransportType>();
             message = string.Empty;
-            var data = instanceUser.GetTransportTypeByUserId(userid, out message);
+            var data = instance.GetTransportTypeByUserId(userid, out message);
             result.Response = DataAccessUtility.ConvertToList<TransportType>(data);
             result.Status = Constants.WebApiStatusOk;
             return result;
@@ -77,11 +88,11 @@ namespace QTrans.Repositories
             message = string.Empty;
             user.OTP = new Random().Next(10000, 999999);
             long userid;
-            if (instanceUser.InsertUpdateUserDetails(user, out userid, out message))
+            if (instance.InsertUpdateUserDetails(user, out userid, out message))
             {
-                var dt = instanceUser.GetById(userid, out message);
+                var dt = instance.GetById(userid, out message);
                 var lst = DataAccessUtility.ConvertToList<UserProfile>(dt);
-                result.Response = lst !=null && lst.Count > 0 ? lst[0] : null;
+                result.Response = lst != null && lst.Count > 0 ? lst[0] : null;
                 result.Status = Constants.WebApiStatusOk;
                 result.Message = message;
             }
@@ -99,9 +110,9 @@ namespace QTrans.Repositories
             var result = new ResponseSingleModel<UserProfile>();
             message = string.Empty;
             long userid;
-            if (instanceUser.InsertUpdateUserDetails(user, out userid, out message))
+            if (instance.InsertUpdateUserDetails(user, out userid, out message))
             {
-                result.Response= user;
+                result.Response = user;
                 result.Status = Constants.WebApiStatusOk;
                 result.Message = message;
             }
@@ -117,7 +128,7 @@ namespace QTrans.Repositories
         {
             var result = new ResponseSingleModel<bool>();
             message = string.Empty;
-            result.Response= instanceUser.UpdateUserPassword(mobileNo, emailAddress, oldPassword, password, out message);
+            result.Response = instance.UpdateUserPassword(mobileNo, emailAddress, oldPassword, password, out message);
             result.Status = Constants.WebApiStatusOk;
             result.Message = message;
             return result;
@@ -128,10 +139,10 @@ namespace QTrans.Repositories
             var result = new ResponseSingleModel<bool>();
             message = string.Empty;
             token = string.Empty;
-            if (instanceUser.UpdateMobileEmailVerification(userId, OTP, isMobile, out message))
+            if (instance.UpdateMobileEmailVerification(userId, OTP, isMobile, out message))
             {
                 token = EncryptDecryptHelper.ComputePasswordHash(userId.ToString(), userId.ToString());
-                result.Response = instanceUser.UpdateToken(userId, token, out message);
+                result.Response = instance.UpdateToken(userId, token, out message);
                 result.Status = Constants.WebApiStatusOk;
                 result.Message = message;
             }
@@ -148,9 +159,9 @@ namespace QTrans.Repositories
         {
             var result = new ResponseSingleModel<bool>();
             message = string.Empty;
-            var dt = instanceUser.ForgotUserLoginDetail(mobileNo, emailAddress, out message);
+            var dt = instance.ForgotUserLoginDetail(mobileNo, emailAddress, out message);
             var lst = DataAccessUtility.ConvertToList<UserProfile>(dt);
-            UserProfile user = lst != null &&  lst.Count > 0 ? lst[0] : null;
+            UserProfile user = lst != null && lst.Count > 0 ? lst[0] : null;
             result.Response = user != null;
             result.Status = result.Response ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
             result.Message = message;
@@ -166,7 +177,7 @@ namespace QTrans.Repositories
         {
             var result = new ResponseSingleModel<UserProfile>();
             message = string.Empty;
-            var dt = instanceUser.GetById(userid, out message);
+            var dt = instance.GetById(userid, out message);
             var lst = DataAccessUtility.ConvertToList<UserProfile>(dt);
             UserProfile user = lst.Count > 0 ? lst[0] : null;
             result.Response = user;
@@ -179,7 +190,7 @@ namespace QTrans.Repositories
         {
             var result = new ResponseSingleModel<UserProfile>();
             message = string.Empty;
-            var dt = instanceUser.GetBytoken(token, out message);
+            var dt = instance.GetBytoken(token, out message);
             var lst = DataAccessUtility.ConvertToList<UserProfile>(dt);
             UserProfile user = lst != null && lst.Count > 0 ? lst[0] : null;
             result.Response = user;
@@ -192,7 +203,7 @@ namespace QTrans.Repositories
         {
             var result = new ResponseSingleModel<UserProfile>();
             message = string.Empty;
-            var dt = instanceUser.UserLogIn(username, password, out message);
+            var dt = instance.UserLogIn(username, password, out message);
             var lst = DataAccessUtility.ConvertToList<UserProfile>(dt);
             UserProfile user = lst != null && lst.Count > 0 ? lst[0] : null;
             result.Response = user;
@@ -207,12 +218,12 @@ namespace QTrans.Repositories
             message = string.Empty;
             token = string.Empty;
             userid = 0;
-            if (instanceUser.UpdateMobileEmailVerification(mobilenumber, emailaddres, isMobile, OTP, out message))
+            if (instance.UpdateMobileEmailVerification(mobilenumber, emailaddres, isMobile, OTP, out message))
             {
                 token = EncryptDecryptHelper.ComputePasswordHash(isMobile ? mobilenumber : emailaddres, isMobile ? mobilenumber : emailaddres);
-                result.Response = instanceUser.UpdateToken(mobilenumber, emailaddres, token, out userid, out message);
+                result.Response = instance.UpdateToken(mobilenumber, emailaddres, token, out userid, out message);
             }
-            
+
             result.Status = result.Response ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
             result.Message = message;
 
@@ -224,7 +235,7 @@ namespace QTrans.Repositories
             try
             {
                 var result = new ResponseSingleModel<int>();
-                result.Response = instanceUser.UpdateUserPhoto(userID, filePath, out message);
+                result.Response = instance.UpdateUserPhoto(userID, filePath, out message);
                 result.Status = result.Response > 0 ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
                 result.Message = message;
                 return result;
@@ -234,5 +245,32 @@ namespace QTrans.Repositories
                 throw exp;
             }
         }
+
+        #region ========================= Dispose Method ==============
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed) return;
+
+            if (disposing)
+            {
+                if (this.instance != null)
+                {
+                    this.instance.Dispose();
+                    this.instance = null;
+                }
+
+                ////Clean all memeber and release resource.
+            }
+
+            // Free any unmanaged objects here.
+            disposed = true;
+        }
+        #endregion
     }
 }

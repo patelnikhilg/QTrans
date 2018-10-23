@@ -10,15 +10,26 @@ using QTrans.Models.ViewModel.Posting;
 
 namespace QTrans.Repositories
 {
-    public class BiddingRepository
+    public class BiddingRepository : IDisposable
     {
+        /// <summary>
+        /// Flag: Has Dispose already been called
+        /// </summary>
+        bool disposed;
         private BiddingDataAccess instanceBidding;
         private long UserId;
+        #region "=================== Constructor =============================="
         public BiddingRepository(long userid)
         {
             this.UserId = userid;
             this.instanceBidding = new BiddingDataAccess();
         }
+
+        ~BiddingRepository()
+        {
+            this.Dispose(false);
+        }
+        #endregion
 
         public ResponseSingleModel<BiddingProfile> BiddingSubmition(BiddingProfile bidding, out string message)
         {
@@ -201,6 +212,32 @@ namespace QTrans.Repositories
             response.Status = Constants.WebApiStatusOk;
             return response;
         }
+        #region ========================= Dispose Method ==============
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed) return;
+
+            if (disposing)
+            {
+                if(this.instanceBidding != null)
+                {
+                    this.instanceBidding.Dispose();
+                    this.instanceBidding = null;
+                }
+
+                ////Clean all memeber and release resource.
+            }
+
+            // Free any unmanaged objects here.
+            disposed = true;
+        }
+        #endregion
 
     }
 }

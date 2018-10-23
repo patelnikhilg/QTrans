@@ -21,14 +21,16 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult WebRegistration(UserProfile model)
         {
             string message = string.Empty;
-            UserRepository userRepository = new UserRepository();
-            var result = userRepository.WebRegistration(model, out message);
-            if (!string.IsNullOrEmpty(message))
+            using (var userRepository = new UserRepository())
             {
-                log.Info(message);
-            }
+                var result = userRepository.WebRegistration(model, out message);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    log.Info(message);
+                }
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("DeviceRegistration")]
@@ -36,14 +38,16 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult DeviceRegistration(MobileModel model)
         {
             string message = string.Empty;
-            UserRepository userRepository = new UserRepository();
-            var result = userRepository.DeviceRegistration(model.mobileno, out message);
-            if (!string.IsNullOrEmpty(message))
+            using (var userRepository = new UserRepository())
             {
-                log.Info(message);
-            }
+                var result = userRepository.DeviceRegistration(model.mobileno, out message);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    log.Info(message);
+                }
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("OTPVerificationByUser")]
@@ -57,14 +61,18 @@ namespace QTrans.WebAPI.Controllers
             string token = string.Empty;
             if (Platform.ToLower() == "web")
             {
-                UserRepository userRepository = new UserRepository();
-                result = userRepository.VerificationMobileEmail(OTP.userId, OTP.OTP, false, out token, out message).Response;
+                using (var userRepository = new UserRepository())
+                {
+                    result = userRepository.VerificationMobileEmail(OTP.userId, OTP.OTP, false, out token, out message).Response;
+                }
 
             }
             else if (Platform.ToLower() == "mobile")
             {
-                UserRepository userRepository = new UserRepository();
-                result = userRepository.VerificationMobileEmail(OTP.userId, OTP.OTP, true, out token, out message).Response;
+                using (var userRepository = new UserRepository())
+                {
+                    result = userRepository.VerificationMobileEmail(OTP.userId, OTP.OTP, true, out token, out message).Response;
+                }
             }
             if (!string.IsNullOrEmpty(message))
             {
@@ -94,14 +102,18 @@ namespace QTrans.WebAPI.Controllers
             long userid = 0;
             if (Platform.ToLower() == "web")
             {
-                UserRepository userRepository = new UserRepository();
-                result = userRepository.UpdateMobileEmailVerification(OTP.mobileno, OTP.emailaddres, false, OTP.OTP, out userid, out token, out message).Response;
+                using (var userRepository = new UserRepository())
+                {
+                    result = userRepository.UpdateMobileEmailVerification(OTP.mobileno, OTP.emailaddres, false, OTP.OTP, out userid, out token, out message).Response;
+                }
 
             }
             else if (Platform.ToLower() == "mobile")
             {
-                UserRepository userRepository = new UserRepository();
-                result = userRepository.UpdateMobileEmailVerification(OTP.mobileno, OTP.emailaddres, true, OTP.OTP, out userid, out token, out message).Response;
+                using (var userRepository = new UserRepository())
+                {
+                    result = userRepository.UpdateMobileEmailVerification(OTP.mobileno, OTP.emailaddres, true, OTP.OTP, out userid, out token, out message).Response;
+                }
             }
             if (!string.IsNullOrEmpty(message))
             {
@@ -128,14 +140,16 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult ForgotUserLoginDetail(string mobileno, string emailaddress)
         {
             string message = string.Empty;
-            UserRepository userRepository = new UserRepository();
-            var result = userRepository.ForgotUserLoginDetail(mobileno, emailaddress, out message);
-            if (!string.IsNullOrEmpty(message))
+            using (var userRepository = new UserRepository())
             {
-                log.Info(message);
+                var result = userRepository.ForgotUserLoginDetail(mobileno, emailaddress, out message);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    log.Info(message);
+                }
+
+                return Ok(new { result.Status, data = result });
             }
-          
-            return Ok(new { result.Status, data = result });
         }
 
     }

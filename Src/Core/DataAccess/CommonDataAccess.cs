@@ -8,8 +8,22 @@ using System.Threading.Tasks;
 
 namespace QTrans.DataAccess
 {
-    public class CommonDataAccess
+    public class CommonDataAccess : IDisposable
     {
+        /// <summary>
+        /// Flag: Has Dispose already been called
+        /// </summary>
+        bool disposed;
+        #region "=================== Constructor =============================="
+        public CommonDataAccess()
+        {
+        }
+
+        ~CommonDataAccess()
+        {
+            this.Dispose(false);
+        }
+        #endregion
         public bool InsertContactDetails(Contact contact)
         {
             int rowEffected = 0;
@@ -134,6 +148,29 @@ namespace QTrans.DataAccess
 
             return dt;
         }
+        #endregion
+
+        #region ========================= Dispose Method ==============
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed) return;
+
+            if (disposing)
+            {
+
+                ////TODO: Clean all memeber and release resource.
+            }
+
+            // Free any unmanaged objects here.
+            disposed = true;
+        }
+
         #endregion
     }
 }

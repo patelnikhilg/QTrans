@@ -3,18 +3,29 @@ using QTrans.Models;
 using QTrans.Models.ResponseModel;
 using QTrans.Models.ViewModel.Common;
 using QTrans.Utility.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace QTrans.Repositories.Repositories
 {
-    public class CommonRepository
+    public class CommonRepository : IDisposable
     {
+        /// <summary>
+        /// Flag: Has Dispose already been called
+        /// </summary>
+        bool disposed;
         private CommonDataAccess instance;
+        #region "=================== Constructor =============================="
         public CommonRepository()
         {
             this.instance = new CommonDataAccess();
         }
+        ~CommonRepository()
+        {
+            this.Dispose(false);
+        }
+        #endregion
 
         public bool InsertContactDetails(Contact contact)
         {
@@ -27,7 +38,7 @@ namespace QTrans.Repositories.Repositories
             var response = new ResponseCollectionModel<MaterialType>();
             if (InMemoryStorage.Instance.MaterialTypeStorage.Count > 0)
             {
-                var lst= InMemoryStorage.Instance.MaterialTypeStorage.Values.ToList();
+                var lst = InMemoryStorage.Instance.MaterialTypeStorage.Values.ToList();
                 response.Response = lst;
             }
             else
@@ -58,7 +69,7 @@ namespace QTrans.Repositories.Repositories
             var response = new ResponseCollectionModel<PackageType>();
             if (InMemoryStorage.Instance.PackageTypeStorage.Count > 0)
             {
-                var lst= InMemoryStorage.Instance.PackageTypeStorage.Values.ToList();
+                var lst = InMemoryStorage.Instance.PackageTypeStorage.Values.ToList();
                 response.Response = lst;
             }
             else
@@ -89,7 +100,7 @@ namespace QTrans.Repositories.Repositories
             var response = new ResponseCollectionModel<VehicleType>();
             if (InMemoryStorage.Instance.VehicleTypeStorage.Count > 0)
             {
-                var lst= InMemoryStorage.Instance.VehicleTypeStorage.Values.ToList();
+                var lst = InMemoryStorage.Instance.VehicleTypeStorage.Values.ToList();
                 response.Response = lst;
             }
             else
@@ -137,7 +148,7 @@ namespace QTrans.Repositories.Repositories
         {
             var response = new ResponseCollectionModel<AreaPreference>();
             var data = instance.GetAreaPeferenceByUserId(userId);
-            response.Response= DataAccessUtility.ConvertToList<AreaPreference>(data);
+            response.Response = DataAccessUtility.ConvertToList<AreaPreference>(data);
             response.Status = Constants.WebApiStatusOk;
             return response;
         }
@@ -151,14 +162,14 @@ namespace QTrans.Repositories.Repositories
             var response = new ResponseCollectionModel<CountryState>();
             if (InMemoryStorage.Instance.StateStorage.Count > 0)
             {
-                var lst= InMemoryStorage.Instance.StateStorage.Values.ToList();
+                var lst = InMemoryStorage.Instance.StateStorage.Values.ToList();
                 response.Response = lst;
-                
+
             }
             else
             {
                 var data = instance.GetState();
-                var lst= DataAccessUtility.ConvertToList<CountryState>(data);
+                var lst = DataAccessUtility.ConvertToList<CountryState>(data);
                 response.Response = lst;
             }
 
@@ -188,12 +199,12 @@ namespace QTrans.Repositories.Repositories
             var result = new ResponseCollectionModel<CityPincode>();
             if (InMemoryStorage.Instance.PincodeStorage.Count > 0)
             {
-                result.Response= InMemoryStorage.Instance.PincodeStorage.Values.ToList();
+                result.Response = InMemoryStorage.Instance.PincodeStorage.Values.ToList();
             }
             else
             {
                 var data = instance.GetPincode();
-                result.Response= DataAccessUtility.ConvertToList<CityPincode>(data);
+                result.Response = DataAccessUtility.ConvertToList<CityPincode>(data);
             }
 
             result.Status = Constants.WebApiStatusOk;
@@ -226,6 +237,33 @@ namespace QTrans.Repositories.Repositories
             return result;
         }
 
+        #endregion
+
+        #region ========================= Dispose Method ==============
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed) return;
+
+            if (disposing)
+            {
+                if (this.instance != null)
+                {
+                    this.instance.Dispose();
+                    this.instance = null;
+                }
+
+                ////Clean all memeber and release resource.
+            }
+
+            // Free any unmanaged objects here.
+            disposed = true;
+        }
         #endregion
     }
 }

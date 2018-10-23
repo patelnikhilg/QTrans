@@ -5,8 +5,22 @@ using System;
 
 namespace QTrans.DataAccess
 {
-    public class UserDataAccess
+    public class UserDataAccess : IDisposable
     {
+        /// <summary>
+        /// Flag: Has Dispose already been called
+        /// </summary>
+        bool disposed;
+        #region "=================== Constructor =============================="
+        public UserDataAccess()
+        {
+        }
+
+        ~UserDataAccess()
+        {
+            this.Dispose(false);
+        }
+        #endregion
         public bool InsertUpdateUserDetails(UserProfile user, out long identity, out string message)
         {
             int rowEffected = 0;
@@ -243,5 +257,28 @@ namespace QTrans.DataAccess
 
             return rowEffected;
         }
+
+        #region ========================= Dispose Method ==============
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed) return;
+
+            if (disposing)
+            {
+
+                ////TODO: Clean all memeber and release resource.
+            }
+
+            // Free any unmanaged objects here.
+            disposed = true;
+        }
+
+        #endregion
     }
 }

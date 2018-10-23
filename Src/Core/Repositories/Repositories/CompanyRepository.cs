@@ -7,22 +7,33 @@ using QTrans.Models.ResponseModel;
 
 namespace QTrans.Repositories
 {
-    public class CompanyRepository
+    public class CompanyRepository : IDisposable
     {
-        private CompanyDataAccess instanceCompany;
+        /// <summary>
+        /// Flag: Has Dispose already been called
+        /// </summary>
+        bool disposed;
+        private CompanyDataAccess instance;
         private long UserId;
+        #region "=================== Constructor =============================="
         public CompanyRepository(long userid)
         {
             this.UserId = userid;
-            this.instanceCompany = new CompanyDataAccess();
+            this.instance = new CompanyDataAccess();
         }
+
+        ~CompanyRepository()
+        {
+            this.Dispose(false);
+        }
+        #endregion
 
         public ResponseSingleModel<Company> CompanyRegistration(Company company, out string message)
         {
             var result = new ResponseSingleModel<Company>();
             long companyId = 0;
-            message = string.Empty;            
-            if (this.instanceCompany.InsertUpdateCompanyDetails(company, out companyId, out message))
+            message = string.Empty;
+            if (this.instance.InsertUpdateCompanyDetails(company, out companyId, out message))
             {
                 company.companyid = companyId;
                 result.Status = Constants.WebApiStatusOk;
@@ -33,7 +44,7 @@ namespace QTrans.Repositories
                 result.Message = message;
             }
             result.Response = company;
-           
+
             return result;
         }
 
@@ -43,9 +54,9 @@ namespace QTrans.Repositories
             message = string.Empty;
             if (companyId > 0)
             {
-                var dt = this.instanceCompany.GetById(companyId, out message);
+                var dt = this.instance.GetById(companyId, out message);
                 var lst = DataAccessUtility.ConvertToList<Company>(dt);
-                result.Response = lst !=null && lst.Count > 0 ? lst[0] : null;
+                result.Response = lst != null && lst.Count > 0 ? lst[0] : null;
                 result.Status = lst != null && lst.Count > 0 ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
                 result.Message = message;
             }
@@ -62,12 +73,39 @@ namespace QTrans.Repositories
         {
             var result = new ResponseSingleModel<Company>();
             message = string.Empty;
-            var dt = this.instanceCompany.GetByUserId(userId, out message);
+            var dt = this.instance.GetByUserId(userId, out message);
             var lst = DataAccessUtility.ConvertToList<Company>(dt);
             result.Response = lst != null && lst.Count > 0 ? lst[0] : null;
             result.Status = lst != null && lst.Count > 0 ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
             result.Message = message;
             return result;
         }
+
+        #region ========================= Dispose Method ==============
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed) return;
+
+            if (disposing)
+            {
+                if (this.instance != null)
+                {
+                    this.instance.Dispose();
+                    this.instance = null;
+                }
+
+                ////Clean all memeber and release resource.
+            }
+
+            // Free any unmanaged objects here.
+            disposed = true;
+        }
+        #endregion
     }
 }

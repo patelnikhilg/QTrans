@@ -12,7 +12,7 @@ namespace QTrans.Models.ViewModel.Bidding
         public decimal amount { get; set; }
         public string biddercomment { get; set; }
         public string rating { get; set; }
-        public int statu { get; set; }
+        public int status { get; set; }
         public int RatingAvg { get; set; }
         public int TotalRating { get; set; }
         public DateTime LastModify { get; set; }

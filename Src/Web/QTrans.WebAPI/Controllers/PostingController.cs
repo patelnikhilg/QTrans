@@ -16,14 +16,16 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult SubmitPosting(PostingProfile posting)
         {
             string message = string.Empty;
-            PostingRepository repository = new PostingRepository(posting.userid);
-            var result = repository.PostingPorfileCreation(posting, out message);
-            if (!string.IsNullOrEmpty(message))
+            using (var repository = new PostingRepository(posting.userid))
             {
-                log.Info(message);
-            }
+                var result = repository.PostingPorfileCreation(posting, out message);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    log.Info(message);
+                }
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("PostingDetail")]
@@ -31,14 +33,16 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult SubmitPostingDetails(PostingDetails postingDetails)
         {
             string message = string.Empty;
-            PostingRepository repository = new PostingRepository(0);
-            var result = repository.PostingDetailCreation(postingDetails, out message);
-            if (!string.IsNullOrEmpty(message))
+            using (var repository = new PostingRepository(0))
             {
-                log.Info(message);
-            }
+                var result = repository.PostingDetailCreation(postingDetails, out message);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    log.Info(message);
+                }
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
 
@@ -47,14 +51,16 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult GetpostingById([FromUri] PostingParam param)
         {
             string message = string.Empty;
-            PostingRepository repository = new PostingRepository(param.UserId);
-            var result = repository.GetPostingDetailById(param.PostingId, out message);
-            if (!string.IsNullOrEmpty(message))
+            using (var repository = new PostingRepository(param.UserId))
             {
-                log.Info(message);
-            }
+                var result = repository.GetPostingDetailById(param.PostingId, out message);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    log.Info(message);
+                }
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetPostingProfileById")]
@@ -62,14 +68,16 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult GetPostingProfileById([FromUri] PostingParam param)
         {
             string message = string.Empty;
-            PostingRepository repository = new PostingRepository(param.UserId);
-            var result = repository.GetPostingProfileById(param.PostingId, out message);
-            if (!string.IsNullOrEmpty(message))
+            using (var repository = new PostingRepository(param.UserId))
             {
-                log.Info(message);
-            }
+                var result = repository.GetPostingProfileById(param.PostingId, out message);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    log.Info(message);
+                }
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetPostingListById")]
@@ -77,14 +85,16 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult GetPostingProfileListById([FromUri] PostingParam param)
         {
             string message = string.Empty;
-            PostingRepository repository = new PostingRepository(param.UserId);
-            var result = repository.GetPostingListByUserId(param.UserId, param.IsPast, out message);
-            if (!string.IsNullOrEmpty(message))
+            using (var repository = new PostingRepository(param.UserId))
             {
-                log.Info(message);
-            }
+                var result = repository.GetPostingListByUserId(param.UserId, param.IsPast, out message);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    log.Info(message);
+                }
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         #region ============= Rating ===================
@@ -93,23 +103,27 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult SubmitRatingByDtlPostId([FromUri] RatingParam param)
         {
             string message = string.Empty;
-            PostingRepository repository = new PostingRepository(param.UserId);
-            var result = repository.SubmitRatingByDtlPostId(param.DtlPostingId, param.UserId, param.Rating, param.RatingComment, param.IsRate, param.CreatedBy);
-            if (!result.Response)
+            using (var repository = new PostingRepository(param.UserId))
             {
-                log.Info("Bidding Rating operation is fail");
-            }
+                var result = repository.SubmitRatingByDtlPostId(param.DtlPostingId, param.UserId, param.Rating, param.RatingComment, param.IsRate, param.CreatedBy);
+                if (!result.Response)
+                {
+                    log.Info("Bidding Rating operation is fail");
+                }
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("PendingPostingRatebyUserId")]
         [HttpGet]
         public IHttpActionResult PendingPostingRatebyUserId(long Userid)
         {
-            PostingRepository repository = new PostingRepository(Userid);
-            var result = repository.PendingPostRatingByUserId(Userid);
-            return Ok(new { result.Status, data = result });
+            using (var repository = new PostingRepository(Userid))
+            {
+                var result = repository.PendingPostRatingByUserId(Userid);
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         #endregion
@@ -120,32 +134,38 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult UpdatePostingStatus([FromUri] PostingStatusParam param)
         {
             string message = string.Empty;
-            PostingRepository repository = new PostingRepository(param.UserId);
-            var result = repository.UpdatePostingStatus(param.DtlPostingId, param.Status);
-            if (!result.Response)
+            using (var repository = new PostingRepository(param.UserId))
             {
-                log.Info("Update Posting status operation is fail");
-            }
+                var result = repository.UpdatePostingStatus(param.DtlPostingId, param.Status);
+                if (!result.Response)
+                {
+                    log.Info("Update Posting status operation is fail");
+                }
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetPostingStatsByUserId")]
         [HttpGet]
         public IHttpActionResult GetPostingStatsByUserId([FromUri] PostingStatusParam param)
         {
-            PostingRepository repository = new PostingRepository(param.UserId);
-            var result = repository.GetPostingStatsByUserId(param.UserId);
-            return Ok(new { result.Status, data = result });
+            using (var repository = new PostingRepository(param.UserId))
+            {
+                var result = repository.GetPostingStatsByUserId(param.UserId);
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetPostingStatusByUserId")]
         [HttpGet]
         public IHttpActionResult GetPostingStatusByUserId([FromUri] PostingStatusParam param)
         {
-            PostingRepository repository = new PostingRepository(param.UserId);
-            var result = repository.GetPostingStatusByUserId(param.UserId, param.Status);
-            return Ok(new { result.Status, data = result });
+            using (var repository = new PostingRepository(param.UserId))
+            {
+                var result = repository.GetPostingStatusByUserId(param.UserId, param.Status);
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         #endregion

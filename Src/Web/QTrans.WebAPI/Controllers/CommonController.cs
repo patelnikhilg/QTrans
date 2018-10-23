@@ -16,27 +16,33 @@ namespace QTrans.WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult GetMaterialType()
         {
-            CommonRepository repository = new CommonRepository();
-            var result = repository.GetMaterialType();
-            return Ok(new { result.Status, data = result });
+            using (var repository = new CommonRepository())
+            {
+                var result = repository.GetMaterialType();
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetPackageType")]
         [HttpGet]
         public IHttpActionResult GetPackageType()
         {
-            CommonRepository repository = new CommonRepository();
-            var result = repository.GetPackageType();
-            return Ok(new { result.Status, data = result });
+            using (var repository = new CommonRepository())
+            {
+                var result = repository.GetPackageType();
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetVehicleType")]
         [HttpGet]
         public IHttpActionResult GetVehicleType()
         {
-            CommonRepository repository = new CommonRepository();
-            var result = repository.GetVehicleType();
-            return Ok(new { result.Status, data = result });
+            using (var repository = new CommonRepository())
+            {
+                var result = repository.GetVehicleType();
+                return Ok(new { result.Status, data = result });
+            }
         }
 
 
@@ -72,27 +78,33 @@ namespace QTrans.WebAPI.Controllers
         [HttpPost]
         public IHttpActionResult CreateAreaPeference(AreaPreferenceParam area)
         {
-            CommonRepository repository = new CommonRepository();
-            var result = repository.InsertAreaPeference(area.UserId, area.CityId);
-            return Ok(new { result.Status, data = result });
+            using (var repository = new CommonRepository())
+            {
+                var result = repository.InsertAreaPeference(area.UserId, area.CityId);
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("DeleteAreaPeference")]
         [HttpPost]
         public IHttpActionResult DeleteAreaPeference(AreaPreferenceParam area)
         {
-            CommonRepository repository = new CommonRepository();
-            var result = repository.DeleteAreaPeference(area.UserId, area.CityId);
-            return Ok(new { result.Status, data = result });
+            using (var repository = new CommonRepository())
+            {
+                var result = repository.DeleteAreaPeference(area.UserId, area.CityId);
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetAreaPeference")]
         [HttpGet]
         public IHttpActionResult GetAreaPeference(long userId)
         {
-            CommonRepository repository = new CommonRepository();
-            var result = repository.GetAreaPeferenceByUserId(userId);
-            return Ok(new { result.Status, data = result });
+            using (var repository = new CommonRepository())
+            {
+                var result = repository.GetAreaPeferenceByUserId(userId);
+                return Ok(new { result.Status, data = result });
+            }
         }
         #endregion
 
@@ -102,45 +114,55 @@ namespace QTrans.WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult GetState()
         {
-            CommonRepository repository = new CommonRepository();
-            var result = repository.GetState();
-            return Ok(new { result.Status, data = result });
+            using (var repository = new CommonRepository())
+            {
+                var result = repository.GetState();
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetCity")]
         [HttpGet]
         public IHttpActionResult GetCity()
         {
-            CommonRepository repository = new CommonRepository();
-            var result = repository.GetCity();
-            return Ok(new { result.Status, data = result });
+            using (var repository = new CommonRepository())
+            {
+                var result = repository.GetCity();
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetPincode")]
         [HttpGet]
         public IHttpActionResult GetPincode()
         {
-            CommonRepository repository = new CommonRepository();
-            var result = repository.GetPincode();
-            return Ok(new { result.Status, data = result });
+            using (var repository = new CommonRepository())
+            {
+                var result = repository.GetPincode();
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetCityByStateId")]
         [HttpGet]
         public IHttpActionResult GetCityByStateId(int stateId)
         {
-            CommonRepository repository = new CommonRepository();
-            var result = repository.GetCityByStateId(stateId);
-            return Ok(new { result.Status, data = result });
+            using (var repository = new CommonRepository())
+            {
+                var result = repository.GetCityByStateId(stateId);
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetPincodeByCityId")]
         [HttpGet]
         public IHttpActionResult GetPincodeByCityId(int cityId)
         {
-            CommonRepository repository = new CommonRepository();
-            var result = repository.GetPincodeByCityId(cityId);
-            return Ok(new { result.Status, data = result });
+            using (var repository = new CommonRepository())
+            {
+                var result = repository.GetPincodeByCityId(cityId);
+                return Ok(new { result.Status, data = result });
+            }
         }
         #endregion
     }

@@ -8,8 +8,22 @@ using QTrans.Models;
 
 namespace QTrans.DataAccess
 {
-    public class PostingDataAccess
+    public class PostingDataAccess : IDisposable
     {
+        /// <summary>
+        /// Flag: Has Dispose already been called
+        /// </summary>
+        bool disposed;
+        #region "=================== Constructor =============================="
+        public PostingDataAccess()
+        {
+        }
+
+        ~PostingDataAccess()
+        {
+            this.Dispose(false);
+        }
+        #endregion
         public bool InsertUpdatePosting(PostingProfile posting, out long identity, out string message)
         {
             int rowEffected = 0;
@@ -199,5 +213,28 @@ namespace QTrans.DataAccess
 
             return rowEffected > 0;
         }
+
+        #region ========================= Dispose Method ==============
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed) return;
+
+            if (disposing)
+            {
+
+                ////TODO: Clean all memeber and release resource.
+            }
+
+            // Free any unmanaged objects here.
+            disposed = true;
+        }
+
+        #endregion
     }
 }

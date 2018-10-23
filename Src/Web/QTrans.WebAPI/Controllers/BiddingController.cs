@@ -21,14 +21,16 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult SubmitBidding(BiddingProfile posting)
         {
             string message = string.Empty;
-            BiddingRepository repository = new BiddingRepository(posting.userid);
-            var result = repository.BiddingSubmition(posting, out message);
-            if (!string.IsNullOrEmpty(message))
+            using (var repository = new BiddingRepository(posting.userid))
             {
-                log.Info(message);
-            }
+                var result = repository.BiddingSubmition(posting, out message);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    log.Info(message);
+                }
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }     
 
 
@@ -36,58 +38,70 @@ namespace QTrans.WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult GetBiddingById([FromUri] BiddingDetailsParam param)
         {
-            BiddingRepository repository = new BiddingRepository(param.UserId);
-            var result = repository.GetBiddingDetailById(param.biddingId);
-            return Ok(new { result.Status, data = result });
+            using (var repository = new BiddingRepository(param.UserId))
+            {
+                var result = repository.GetBiddingDetailById(param.biddingId);
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetPostingDetailsByDtlPostId")]
         [HttpGet]
         public IHttpActionResult GetPostingDetailsByDtlPostId([FromUri] BiddingParam param)
         {
-            BiddingRepository repository = new BiddingRepository(param.UserId);
-            var result = repository.GetPostingDetailByDtlPostingId(param.DtlPostingId);
-            return Ok(new { result.Status, data = result });
+            using (var repository = new BiddingRepository(param.UserId))
+            {
+                var result = repository.GetPostingDetailByDtlPostingId(param.DtlPostingId);
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetPostingListByUserId")]
         [HttpGet]
         public IHttpActionResult GetPostingListByUserId([FromUri] BiddingUserParam param)
         {
-            BiddingRepository repository = new BiddingRepository(param.UserId);
-            var result = repository.GetPostingList(param.UserId, param.IsPast);
+            using (var repository = new BiddingRepository(param.UserId))
+            {
+                var result = repository.GetPostingList(param.UserId, param.IsPast);
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetBiddingListByUserId")]
         [HttpGet]
         public IHttpActionResult GetBiddingListByUserId(long UserId)
         {
-            BiddingRepository repository = new BiddingRepository(UserId);
-            var result = repository.GetBiddingDetailListByUserId(UserId);
+            using (var repository = new BiddingRepository(UserId))
+            {
+                var result = repository.GetBiddingDetailListByUserId(UserId);
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetBiddingListByDtlPostinId")]
         [HttpGet]
         public IHttpActionResult GetBiddingListByDtlPostinId([FromUri] BiddingParam param)
         {
-            BiddingRepository repository = new BiddingRepository(param.UserId);
-            var result = repository.GetBiddingListByDtPostingId(param.DtlPostingId);
+            using (var repository = new BiddingRepository(param.UserId))
+            {
+                var result = repository.GetBiddingListByDtPostingId(param.DtlPostingId);
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetBidMinMaxAmountById")]
         [HttpGet]
         public IHttpActionResult GetBidMinMaxAmountById([FromUri] BiddingParam param)
         {
-            BiddingRepository repository = new BiddingRepository(param.UserId);
-            var result = repository.GetBidMinMaxByDtlPostId(param.DtlPostingId);
+            using (var repository = new BiddingRepository(param.UserId))
+            {
+                var result = repository.GetBidMinMaxByDtlPostId(param.DtlPostingId);
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         #region ================= Bidding Rating ==============================
@@ -97,23 +111,27 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult SubmitRatingByDtlPostId([FromUri] RatingParam param)
         {
             string message = string.Empty;
-            BiddingRepository repository = new BiddingRepository(param.UserId);
-            var result = repository.SubmitRatingByDtlPostId(param.DtlPostingId, param.UserId, param.Rating, param.RatingComment, param.IsRate);
-            if (!result.Response)
+            using (var repository = new BiddingRepository(param.UserId))
             {
-                log.Info("Bidding Rating operation is fail");              
-            }
+                var result = repository.SubmitRatingByDtlPostId(param.DtlPostingId, param.UserId, param.Rating, param.RatingComment, param.IsRate);
+                if (!result.Response)
+                {
+                    log.Info("Bidding Rating operation is fail");
+                }
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("PendingBidRatebyUserId")]
         [HttpGet]
         public IHttpActionResult PendingBidRatebyUserId(long Userid)
         {
-            BiddingRepository repository = new BiddingRepository(Userid);
-            var result = repository.PendingBidRatingByUserId(Userid);
-            return Ok(new { result.Status, data = result });
+            using (var repository = new BiddingRepository(Userid))
+            {
+                var result = repository.PendingBidRatingByUserId(Userid);
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         #endregion
@@ -124,32 +142,38 @@ namespace QTrans.WebAPI.Controllers
         public IHttpActionResult BiddingStatusByUserId([FromUri] BiddingConfirmParam param)
         {
             string message = string.Empty;
-            BiddingRepository repository = new BiddingRepository(param.UserId);
-            var result = repository.BiddingStatusByUserId(param.DtlPostingId, param.BidUserId, param.BidStatus);
-            if (!result.Response)
+            using (var repository = new BiddingRepository(param.UserId))
             {
-                log.Info("Bidding Status operation is fail");
-            }
+                var result = repository.BiddingStatusByUserId(param.DtlPostingId, param.BidUserId, param.BidStatus);
+                if (!result.Response)
+                {
+                    log.Info("Bidding Status operation is fail");
+                }
 
-            return Ok(new { result.Status, data = result });
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetBiddingStatsByUserId")]
         [HttpGet]
         public IHttpActionResult GetBiddingStatsByUserId([FromUri] BiddingStatusParam param)
         {
-            BiddingRepository repository = new BiddingRepository(param.UserId);
-            var result = repository.GetBiddingStatsByUserId(param.UserId);
-            return Ok(new { result.Status, data = result });
+            using (var repository = new BiddingRepository(param.UserId))
+            {
+                var result = repository.GetBiddingStatsByUserId(param.UserId);
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         [Route("GetBiddingStatusByUserId")]
         [HttpGet]
         public IHttpActionResult GetBiddingStatusByUserId([FromUri] BiddingStatusParam param)
         {
-            BiddingRepository repository = new BiddingRepository(param.UserId);
-            var result = repository.GetBidStatusByUserId(param.UserId, param.Status);
-            return Ok(new { result.Status, data = result });
+            using (var repository = new BiddingRepository(param.UserId))
+            {
+                var result = repository.GetBidStatusByUserId(param.UserId, param.Status);
+                return Ok(new { result.Status, data = result });
+            }
         }
 
         #endregion

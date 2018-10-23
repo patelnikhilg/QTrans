@@ -155,6 +155,18 @@ namespace QTrans.DataAccess
 
             if (disposing)
             {
+                if(this.sqlConnection != null)
+                {
+                    this.sqlConnection.Close();
+                    this.sqlConnection.Dispose();
+                    this.sqlConnection = null;
+                }
+
+                if (this.sqlCommand != null)
+                {                    
+                    this.sqlCommand.Dispose();
+                    this.sqlCommand = null;
+                }
                 ////Clean all memeber and release resource.
             }
 

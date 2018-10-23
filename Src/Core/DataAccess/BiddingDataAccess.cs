@@ -5,8 +5,23 @@ using System.Data;
 
 namespace QTrans.DataAccess
 {
-    public class BiddingDataAccess
+    public class BiddingDataAccess : IDisposable
     {
+        /// <summary>
+        /// Flag: Has Dispose already been called
+        /// </summary>
+        bool disposed;
+        #region "=================== Constructor =============================="
+        public BiddingDataAccess()
+        {
+        }
+
+        ~BiddingDataAccess()
+        {
+            this.Dispose(false);
+        }
+        #endregion
+
         public bool InsertUpdateBiddingDetails(BiddingProfile bidding, out long identity, out string message)
         {
             int rowEffected = 0;
@@ -116,7 +131,7 @@ namespace QTrans.DataAccess
             int rowEffected = 0;
             using (DBConnector connector = new DBConnector("Usp_RatingByDtlPostUserId", true))
             {
-              
+
                 connector.AddInParameterWithValue("@dtlpostingid", dtlpostId);
                 connector.AddInParameterWithValue("@UserId", userId);
                 connector.AddInParameterWithValue("@rating", rating);
@@ -182,6 +197,29 @@ namespace QTrans.DataAccess
 
             return rowEffected > 0;
         }
+
+        #region ========================= Dispose Method ==============
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed) return;
+
+            if (disposing)
+            {               
+
+                ////TODO: Clean all memeber and release resource.
+            }
+
+            // Free any unmanaged objects here.
+            disposed = true;
+        }
+
+        #endregion
 
     }
 }
