@@ -198,6 +198,18 @@ namespace QTrans.DataAccess
             return rowEffected > 0;
         }
 
+        public DataTable GetPostByUserPef(long userId)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetPostByUserPef", true))
+            {
+                connector.AddInParameterWithValue("@UserId", userId);
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
         #region ========================= Dispose Method ==============
         public void Dispose()
         {
