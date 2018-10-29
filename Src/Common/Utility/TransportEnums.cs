@@ -38,17 +38,17 @@ namespace QTrans.Utility
     {
         None = 0,
         Open = 1,
-        Close = 2,
-        InProgress = 3,
-        ConfirmPending = 4,
-        ConfirmCompleted = 5
+        Close = 2
+        //InProgress = 3,
+        //ConfirmPending = 4,
+        //ConfirmCompleted = 5
     }
 
     public enum OrderType
     {
         None = 0,
         SingleParty = 1,
-        Distributive = 2,
+        Distributive = 2
     }
 
     public enum BiddingStatus
@@ -58,8 +58,7 @@ namespace QTrans.Utility
         Reject = 2,
         Cancel = 3,
         Pending = 4,
-        Accept = 5,
-        Completed = 6
+        Completed = 5
     }
     //  }
 }

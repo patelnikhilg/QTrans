@@ -178,6 +178,23 @@ namespace QTrans.WebAPI.Controllers
             }
         }
 
+        [Route("BiddingStatusByBiddingId")]
+        [HttpPost]
+        public IHttpActionResult BiddingStatusByBiddingId([FromUri] BiddingRCStatusParam param)
+        {
+            string message = string.Empty;
+            using (var repository = new BiddingRepository(param.UserId))
+            {
+                var result = repository.BiddingStatusByBiddingId(param.BiddingId, param.UserId, param.BidStatus,param.Reason);
+                if (!result.Response)
+                {
+                    log.Info("Bidding Status operation is fail");
+                }
+
+                return Ok(new { result.Status, data = result });
+            }
+        }
+
         [Route("GetBiddingStatsByUserId")]
         [HttpGet]
         public IHttpActionResult GetBiddingStatsByUserId([FromUri] BiddingStatusParam param)

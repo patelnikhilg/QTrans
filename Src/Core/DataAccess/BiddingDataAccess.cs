@@ -223,6 +223,22 @@ namespace QTrans.DataAccess
             return dt;
         }
 
+        public bool BiddingStatusByBiddingId(long biddingId, long userId, Int16 BidStatus, string reason)
+        {
+            int rowEffected = 0;
+            using (DBConnector connector = new DBConnector("Usp_UpdateBiddingStatusById", true))
+            {
+                connector.AddInParameterWithValue("@BiddingId", biddingId);
+                connector.AddInParameterWithValue("@UserId", userId);
+                connector.AddInParameterWithValue("@Status", BidStatus);
+                connector.AddInParameterWithValue("@Reason", reason);
+                rowEffected = connector.ExceuteNonQuery();
+            }
+
+            return rowEffected > 0;
+        }
+        
+
         #region ========================= Dispose Method ==============
         public void Dispose()
         {

@@ -188,6 +188,15 @@ namespace QTrans.Repositories
             return response;
         }
 
+        public ResponseSingleModel<bool> BiddingStatusByBiddingId(long biddingId, long userId, Int16 BidStatus,string reason)
+        {
+            var response = new ResponseSingleModel<bool>();
+            var result = this.instanceBidding.BiddingStatusByBiddingId(biddingId, userId, BidStatus, reason);
+            response.Response = result;
+            response.Status = Constants.WebApiStatusOk;
+            return response;
+        }
+
         public ResponseCollectionModel<PostingListBid> GetPostByUserPef(long userId)
         {
             var response = new ResponseCollectionModel<PostingListBid>();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace QTrans.Models.ViewModel.Bidding
 {
@@ -15,6 +16,7 @@ namespace QTrans.Models.ViewModel.Bidding
         public int status { get; set; }
         public int RatingAvg { get; set; }
         public int TotalRating { get; set; }
+        [DisplayFormat(DataFormatString = Constants.FormatDateTime)]
         public DateTime LastModify { get; set; }
 
         public ICollection<BiddingDetails> biddingDetails { get; set; }

@@ -23,6 +23,17 @@ namespace QTrans.WebAPI.Models
         public Int16 BidStatus { get; set; }
     }
 
+    public class BiddingRCStatusParam
+    {
+        public long UserId { get; set; }
+
+        public long BiddingId { get; set; }
+
+        public Int16 BidStatus { get; set; }
+
+        public string Reason { get; set; }
+    }
+
     public class RatingParam
     {
         public long UserId { get; set; }
