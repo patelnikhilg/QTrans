@@ -92,6 +92,18 @@ namespace QTrans.WebAPI.Controllers
             }
         }
 
+        [Route("GetBiddingOrderByUserId")]
+        [HttpGet]
+        public IHttpActionResult GetBiddingOrderByUserId([FromUri] BiddingStatusParam param)
+        {
+            using (var repository = new BiddingRepository(param.UserId))
+            {
+                var result = repository.GetBiddingOrderByUserId(param.UserId, param.Status);
+
+                return Ok(new { result.Status, data = result });
+            }
+        }
+
         [Route("GetPostingListByUserPef")]
         [HttpGet]
         public IHttpActionResult GetPostingByUserPef([FromUri] long userId)

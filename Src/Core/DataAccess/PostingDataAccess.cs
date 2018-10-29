@@ -214,6 +214,19 @@ namespace QTrans.DataAccess
             return rowEffected > 0;
         }
 
+        public DataTable GetPostingOrderByUserId(long userId, int Status)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetPostingOrderByUserId", true))
+            {
+                connector.AddInParameterWithValue("@userId", userId);
+                connector.AddInParameterWithValue("@Status", Status);
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
         #region ========================= Dispose Method ==============
         public void Dispose()
         {

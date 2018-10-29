@@ -55,7 +55,7 @@ namespace QTrans.Repositories
             }
 
             return response;
-        }      
+        }
 
         public ResponseSingleModel<BiddingProfile> GetBiddingDetailById(long biddingId)
         {
@@ -80,8 +80,8 @@ namespace QTrans.Repositories
             var response = new ResponseSingleModel<PostingDetailsBid>();
             var dt = this.instanceBidding.GetPostingDetailsByDtlPostingId(dtlpostingId);
             var lst = DataAccessUtility.ConvertToList<PostingDetailsBid>(dt);
-            response.Response = lst.Count > 0 ? lst[0] : null; 
-            response.Status = lst.Count > 0 ? Constants.WebApiStatusOk: Constants.WebApiStatusFail;
+            response.Response = lst.Count > 0 ? lst[0] : null;
+            response.Status = lst.Count > 0 ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
             return response;
         }
 
@@ -119,9 +119,9 @@ namespace QTrans.Repositories
             var ds = this.instanceBidding.GetBiddingListByDtlPostId(DtlPostingId);
             var lstbidding = DataAccessUtility.ConvertToList<BiddingListDetails>(ds.Tables[0]);
             var lstBidDetails = DataAccessUtility.ConvertToList<BiddingDetails>(ds.Tables[1]);
-            foreach(var bid in lstbidding)
+            foreach (var bid in lstbidding)
             {
-                bid.biddingDetails = lstBidDetails.Where(item => item.biddingid == bid.biddingid).ToList(); 
+                bid.biddingDetails = lstBidDetails.Where(item => item.biddingid == bid.biddingid).ToList();
             }
 
             response.Response = lstbidding;
@@ -135,12 +135,12 @@ namespace QTrans.Repositories
         /// <param name="userId"></param>
         /// <param name="isPast"></param>
         /// <returns></returns>
-        public ResponseCollectionModel<PostingListBid> GetPostingList(long userId,bool isPast)
+        public ResponseCollectionModel<PostingListBid> GetPostingList(long userId, bool isPast)
         {
             var response = new ResponseCollectionModel<PostingListBid>();
-            var dt = this.instanceBidding.GetPostingList(userId,isPast);
+            var dt = this.instanceBidding.GetPostingList(userId, isPast);
             var lst = DataAccessUtility.ConvertToList<PostingListBid>(dt);
-            response.Response = lst ;
+            response.Response = lst;
             response.Status = Constants.WebApiStatusOk;
             return response;
         }
@@ -155,16 +155,16 @@ namespace QTrans.Repositories
             var response = new ResponseSingleModel<BidMinMaxAmount>();
             var dt = this.instanceBidding.GetMinMaxBidAmount(dtlpostId);
             var result = DataAccessUtility.ConvertToList<BidMinMaxAmount>(dt);
-             
-            response.Response = result != null && result.Count > 0 ? result[0] : new BidMinMaxAmount() { dtlpostingid = dtlpostId }; 
+
+            response.Response = result != null && result.Count > 0 ? result[0] : new BidMinMaxAmount() { dtlpostingid = dtlpostId };
             response.Status = Constants.WebApiStatusOk;
             return response;
         }
-       
-        public ResponseSingleModel<bool> SubmitRatingByDtlPostId(long dtlpostId,long userId,Int16 rating, string comments, Int16 isRate)
+
+        public ResponseSingleModel<bool> SubmitRatingByDtlPostId(long dtlpostId, long userId, Int16 rating, string comments, Int16 isRate)
         {
             var response = new ResponseSingleModel<bool>();
-            var result= this.instanceBidding.RatingByDtlPostUserId(dtlpostId, userId, rating, comments,isRate);
+            var result = this.instanceBidding.RatingByDtlPostUserId(dtlpostId, userId, rating, comments, isRate);
             response.Response = result;
             response.Status = Constants.WebApiStatusOk;
             return response;
@@ -222,6 +222,16 @@ namespace QTrans.Repositories
             response.Status = Constants.WebApiStatusOk;
             return response;
         }
+        public ResponseCollectionModel<OrderList> GetBiddingOrderByUserId(long userId, int Status)
+        {
+            var response = new ResponseCollectionModel<OrderList>();
+            var dt = this.instanceBidding.GetBiddingOrderByUserId(userId, Status);
+            var lstbidding = DataAccessUtility.ConvertToList<OrderList>(dt);
+            response.Response = lstbidding;
+            response.Status = Constants.WebApiStatusOk;
+            return response;
+        }
+
         #region ========================= Dispose Method ==============
         public void Dispose()
         {
@@ -235,7 +245,7 @@ namespace QTrans.Repositories
 
             if (disposing)
             {
-                if(this.instanceBidding != null)
+                if (this.instanceBidding != null)
                 {
                     this.instanceBidding.Dispose();
                     this.instanceBidding = null;

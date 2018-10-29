@@ -97,6 +97,18 @@ namespace QTrans.WebAPI.Controllers
             }
         }
 
+        [Route("GetPostingOrderByUserId")]
+        [HttpGet]
+        public IHttpActionResult GetPostingOrderByUserId([FromUri] BiddingStatusParam param)
+        {
+            using (var repository = new PostingRepository(param.UserId))
+            {
+                var result = repository.GetPostingOrderByUserId(param.UserId, param.Status);
+
+                return Ok(new { result.Status, data = result });
+            }
+        }
+
         #region ============= Rating ===================
         [Route("SubmitRatingByDtlPostId")]
         [HttpPost]

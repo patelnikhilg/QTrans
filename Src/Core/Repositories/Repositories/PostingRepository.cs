@@ -1,6 +1,7 @@
 ﻿using QTrans.DataAccess;
 using QTrans.Models;
 using QTrans.Models.ResponseModel;
+using QTrans.Models.ViewModel.Bidding;
 using QTrans.Models.ViewModel.Common;
 using QTrans.Models.ViewModel.Posting;
 using QTrans.Utility;
@@ -173,6 +174,16 @@ namespace QTrans.Repositories
             result.Response = this.instance.UpdatePostingStatus(dtlpostId, PostStatus);
             result.Status = Constants.WebApiStatusOk;
             return result;
+        }
+
+        public ResponseCollectionModel<OrderList> GetPostingOrderByUserId(long userId, int Status)
+        {
+            var response = new ResponseCollectionModel<OrderList>();
+            var dt = this.instance.GetPostingOrderByUserId(userId, Status);
+            var lstbidding = DataAccessUtility.ConvertToList<OrderList>(dt);          
+            response.Response = lstbidding;
+            response.Status = Constants.WebApiStatusOk;
+            return response;
         }
 
         #region ========================= Dispose Method ==============
