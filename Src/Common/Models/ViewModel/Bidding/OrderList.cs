@@ -14,6 +14,8 @@ namespace QTrans.Models.ViewModel.Bidding
         public string firstname { get; set; }
         public string lastname { get; set; }
         public long biddingid { get; set; }
+        public long OrderNo { get { return this.biddingid; } }
+        public DateTime OrderDate { get; set; }
         public decimal amount { get; set; }
         public string biddercomment { get; set; }
         public string rating { get; set; }
