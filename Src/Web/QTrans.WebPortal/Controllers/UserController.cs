@@ -30,7 +30,7 @@ namespace QTrans.WebPortal.Controllers
             UserRepository repository = new UserRepository();
             //Perform the conversion and fetch the destination view model
             var user = repository.GetUserDetailById(id > 0 ?id:this.UserId, out message);
-            var userProf = Mapper.Map<QTrans.WebPortal.Models.UserProfile>(user);
+            var userProf = Mapper.Map<QTrans.WebPortal.Models.UserProfile>(user.Response);
             return View(userProf);
         }
 
@@ -55,13 +55,15 @@ namespace QTrans.WebPortal.Controllers
                     //Perform the conversion and fetch the destination view model
                     var userProf = Mapper.Map<QTrans.Models.UserProfile>(userCompany.userProfile);
                     var user = repository.WebRegistration(userProf, out message);
-                    if (user != null)
+                    if (user.Response != null)
                     {
                         CompanyRepository cmprepository = new CompanyRepository(user.Response.userid);
                         userCompany.company.userid = user.Response.userid;
                         //Perform the conversion and fetch the destination view model
                         var comp = Mapper.Map<QTrans.Models.Company>(userCompany.company);
                         var company=cmprepository.CompanyRegistration(comp, out message);
+
+                        //var company = repository.UserTypeRegistration(user.Response.userid,comp.companyid,userCompany., out message);
                         return RedirectToAction("../login/login");
                     }
                 }
@@ -81,7 +83,7 @@ namespace QTrans.WebPortal.Controllers
             UserRepository repository = new UserRepository();
             //Perform the conversion and fetch the destination view model
             var user = repository.GetUserDetailById(id, out message);
-            var userProf = Mapper.Map<QTrans.WebPortal.Models.UserProfile>(user);
+            var userProf = Mapper.Map<QTrans.WebPortal.Models.UserProfile>(user.Response);
             return View(userProf);
         }
 
@@ -100,7 +102,7 @@ namespace QTrans.WebPortal.Controllers
                     //Perform the conversion and fetch the destination view model
                     var userProf = Mapper.Map<QTrans.Models.UserProfile>(userProfile);
                     var user = repository.UpdateUserProfile(userProf, out message);
-                    if (user != null)
+                    if (user.Response != null)
                     {
                         return RedirectToAction("Details/" + id.ToString());
                     }

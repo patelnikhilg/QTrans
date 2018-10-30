@@ -127,5 +127,10 @@ namespace QTrans.Models.ViewModel.Bidding
         [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = Constants.FormatDateTime)]
         public Nullable<System.DateTime> LastModifyDate { get { return modifydate == null ? createddate : modifydate; } }
         public Nullable<System.DateTime> modifydate { get; set; }
+
+        public string firstname { get; set; }
+        public string lastname { get; set; }
+        public int RatingAvg { get; set; }
+        public int TotalRating { get; set; }
     }
 }

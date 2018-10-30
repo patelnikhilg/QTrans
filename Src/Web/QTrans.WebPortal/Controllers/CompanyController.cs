@@ -21,9 +21,9 @@ namespace QTrans.WebPortal.Controllers
             CompanyRepository repository = new CompanyRepository(this.UserId);
             //Perform the conversion and fetch the destination view model
             var comp = repository.GetCompanyDetailByUserId(this.UserId, out message);
-            if (comp != null)
+            if (comp.Response != null)
             {
-                var Company = Mapper.Map<QTrans.WebPortal.Models.Company>(comp);
+                var Company = Mapper.Map<QTrans.WebPortal.Models.Company>(comp.Response);
                 return View(Company);
             }
 
@@ -77,7 +77,7 @@ namespace QTrans.WebPortal.Controllers
             CompanyRepository repository = new CompanyRepository(this.UserId);
             //Perform the conversion and fetch the destination view model
             var company = repository.GetCompanyDetailById(id, out message);
-            var comp = Mapper.Map<QTrans.WebPortal.Models.Company>(company);
+            var comp = Mapper.Map<QTrans.WebPortal.Models.Company>(company.Response);
             return View(comp);
         }
 

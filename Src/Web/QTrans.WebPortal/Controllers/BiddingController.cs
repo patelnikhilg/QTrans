@@ -19,7 +19,7 @@ namespace QTrans.WebPortal.Controllers
         {
             BiddingRepository postingRepository = new BiddingRepository(this.UserId);
             var post = postingRepository.GetPostingList(this.UserId, false);
-            return View(post);
+            return View(post.Response);
         }
 
         // GET: Bidding
@@ -28,7 +28,7 @@ namespace QTrans.WebPortal.Controllers
             var message = string.Empty;
             BiddingRepository postingRepository = new BiddingRepository(this.UserId);
             var post = postingRepository.GetPostingList(this.UserId, true);
-            return View(post);
+            return View(post.Response);
         }
 
         // GET: Bidding
@@ -94,7 +94,7 @@ namespace QTrans.WebPortal.Controllers
             var message = string.Empty;
             BiddingRepository postingRepository = new BiddingRepository(this.UserId);
             var post = postingRepository.GetBiddingDetailListByUserId(this.UserId);
-            return View(post);
+            return View(post.Response);
         }
 
         // GET: Bidding
@@ -103,7 +103,7 @@ namespace QTrans.WebPortal.Controllers
             var message = string.Empty;
             BiddingRepository postingRepository = new BiddingRepository(this.UserId);
             var post = postingRepository.GetPostingDetailByDtlPostingId(Id);
-            return View(post);
+            return View(post.Response);
         }
 
         // GET: posting/Create
@@ -141,7 +141,7 @@ namespace QTrans.WebPortal.Controllers
                     profile.biddingDetails = biddingDetailslist;
                     //Perform the conversion and fetch the destination view model
                     var profileresult = repository.BiddingSubmition(profile, out message);
-                    if (profileresult != null)
+                    if (profileresult.Response != null)
                     {
                         ViewBag.Message  = message;
                     }
@@ -166,7 +166,7 @@ namespace QTrans.WebPortal.Controllers
             BiddingRepository repository = new BiddingRepository(this.UserId);
             //Perform the conversion and fetch the destination view model
             var profile = repository.GetBiddingDetailById(id);
-            return View(profile);
+            return View(profile.Response);
         }
 
         // POST: posting/Edit/5
@@ -182,7 +182,7 @@ namespace QTrans.WebPortal.Controllers
                     BiddingRepository repository = new BiddingRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
                     var profileresult = repository.BiddingSubmition(profile, out message);
-                    if (profileresult != null)
+                    if (profileresult.Response != null)
                     {
                         ViewBag.Message  = "Successfully updated";
                     }

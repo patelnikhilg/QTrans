@@ -36,7 +36,7 @@ namespace QTrans.WebPortal.Controllers
                     var message = string.Empty;
                     UserRepository repository = new UserRepository();
                     var user = repository.Login(login.UserName, login.Password, out message);
-                    if (user != null)
+                    if (user.Response != null)
                     {
                         return RedirectToAction("Details/" + user.Response.userid);
                     }
@@ -61,7 +61,7 @@ namespace QTrans.WebPortal.Controllers
                     var message = string.Empty;
                     UserRepository repository = new UserRepository();
                     var user = repository.Login(login.UserName, login.Password, out message);
-                    if (user != null)
+                    if (user.Response != null)
                     {
                         var session = new UserSession();
                         session.SetValue(user.Response);

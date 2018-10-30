@@ -15,7 +15,7 @@ namespace QTrans.WebPortal.Controllers
         {
             CommonRepository repository = new CommonRepository();
             var result = repository.GetAreaPeferenceByUserId(this.UserId);
-            return View(result);
+            return View(result.Response);
         }
 
         public ActionResult CreateAreaPeference()

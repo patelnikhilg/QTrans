@@ -63,7 +63,7 @@ namespace QTrans.WebPortal.Models
         public string mobilenumber { get; set; }
 
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringAlphNumeric)]
-        [DisplayName("Landline Name")]
+        [DisplayName("Landline Number")]
         [StringLength(15)]
         public string landlinenumber { get; set; }
 

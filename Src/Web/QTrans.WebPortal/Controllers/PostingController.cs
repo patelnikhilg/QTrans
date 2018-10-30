@@ -19,7 +19,7 @@ namespace QTrans.WebPortal.Controllers
             var message = string.Empty;
             PostingRepository postingRepository = new PostingRepository(this.UserId);
             var post = postingRepository.GetPostingDetailById(id, out message);
-            return View(post);
+            return View(post.Response);
         }
 
         // GET: posting/Create
@@ -73,11 +73,11 @@ namespace QTrans.WebPortal.Controllers
                     PostingRepository repository = new PostingRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
                     var profileresult = repository.PostingPorfileCreation(data.profile, out message);
-                    if (profileresult != null)
+                    if (profileresult.Response != null)
                     {
                         data.details.postingid = profileresult.Response.postingid;
                         var details = repository.PostingDetailCreation(data.details, out message);
-                        if (details != null)
+                        if (details.Response != null)
                         {
                             ViewBag.Message  = string.IsNullOrEmpty(message) ? "Post saved successfully" : message; ;
                             return RedirectToAction("Details/" + profileresult.Response.postingid);
@@ -139,11 +139,11 @@ namespace QTrans.WebPortal.Controllers
                     PostingRepository repository = new PostingRepository(this.UserId);
                     //Perform the conversion and fetch the destination view model
                     var profileresult = repository.PostingPorfileCreation(data.profile, out message);
-                    if (profileresult != null)
+                    if (profileresult.Response != null)
                     {
                         data.details.postingid = id;
                         var details = repository.PostingDetailCreation(data.details, out message);
-                        if (details != null)
+                        if (details.Response != null)
                         {
                             ViewBag.Message = string.IsNullOrEmpty(message) ? "Post updated successfully" : message; ;
                            // return RedirectToAction("Details/" + id.ToString());
@@ -181,7 +181,7 @@ namespace QTrans.WebPortal.Controllers
             var message = string.Empty;
             PostingRepository postingRepository = new PostingRepository(this.UserId);
             var post = postingRepository.GetPostingListByUserId(this.UserId, true, out message);
-            return View(post);
+            return View(post.Response);
         }
 
         public ActionResult CurrentList()
@@ -189,7 +189,7 @@ namespace QTrans.WebPortal.Controllers
             var message = string.Empty;
             PostingRepository postingRepository = new PostingRepository(this.UserId);
             var post = postingRepository.GetPostingListByUserId(this.UserId, false, out message);
-            return View(post);
+            return View(post.Response);
         }
 
     }
