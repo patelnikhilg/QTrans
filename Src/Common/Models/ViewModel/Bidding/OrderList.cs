@@ -15,6 +15,8 @@ namespace QTrans.Models.ViewModel.Bidding
         public long dtlpostingid { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
+        public string city { get; set; }
+        public string state { get; set; }
         public string src_city { get; set; }
         public string src_state { get; set; }
         public string dst_city { get; set; }
