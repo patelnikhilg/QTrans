@@ -197,6 +197,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DBContext.cs" />
+    <Compile Include="Helpers\EncryptDecryptHelper.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\RequestValidatorAttribute.cs" />
     <Compile Include="Models\BiddingParam.cs" />
     <Compile Include="Models\DeviceRegistration.cs" />

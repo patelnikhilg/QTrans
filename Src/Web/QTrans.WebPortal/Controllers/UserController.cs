@@ -176,6 +176,7 @@ namespace QTrans.WebPortal.Controllers
         {
             string fname = string.Empty;
             string filePath = string.Empty;
+            string profileImagePath = string.Empty;
             int userID = 0;
             string message = string.Empty;
             if (Request.Files.Count > 0)
@@ -190,7 +191,7 @@ namespace QTrans.WebPortal.Controllers
                         for (int i = 0; i < files.Count; i++)
                         {
                             HttpPostedFileBase file = files[i];
-                            filePath = ConfigurationManager.AppSettings["FileUploadPath"] + "/" + userID + "/" + file.FileName;
+                            profileImagePath = ConfigurationManager.AppSettings["ProfileImagePath"] + userID + "/" + file.FileName;
                             // Checking for Internet Explorer  
                             if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
                             {
@@ -203,7 +204,8 @@ namespace QTrans.WebPortal.Controllers
                             }
 
                             // Get the complete folder path and store the file inside it.
-                            string imageFolderPath = Server.MapPath("~/Uploads/") + userID.ToString() + "/";
+                            string imageFolderPath = ConfigurationManager.AppSettings["FileUploadPath"].ToString() + userID.ToString();
+
                             if (!Directory.Exists(imageFolderPath))
                                 Directory.CreateDirectory(imageFolderPath);
 
@@ -220,10 +222,11 @@ namespace QTrans.WebPortal.Controllers
                         }
 
                         UserRepository res = new UserRepository();
-                        int rowsAffected = res.UpdateUserPhoto(userID, filePath, out message).Response;
+                        //int rowsAffected = res.UpdateUserPhoto(userID, profileImagePath, out message);
+                        res.UpdateUserPhoto(userID, profileImagePath, out message);
                     }
                     // Returns message that successfully uploaded  
-                    return Json("" + filePath);
+                    return Json("" + profileImagePath);
                 }
                 catch (Exception ex)
                 {
