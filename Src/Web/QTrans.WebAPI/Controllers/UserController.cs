@@ -198,5 +198,79 @@ namespace QTrans.WebAPI.Controllers
             return Ok(new { Status = "Success", Message = "Profile photo uploaded successfully" });
         }
 
+
+        [Route("UploadIdentityDocument")]
+        [HttpPost]
+        public IHttpActionResult UploadIdentityDocument()
+        {
+            string returnStatus = string.Empty;
+            string Message = string.Empty;
+            string profileImagePath = string.Empty;
+
+            var httpRequest = HttpContext.Current.Request;
+
+            try
+            {
+                //Fetch Form Data
+                Int64 UserID = Convert.ToInt64(httpRequest.Form["userid"]);
+                string DocumentType = httpRequest.Form["documenttype"].ToString();
+                string originalFileName = string.Empty;
+                string newFileName = string.Empty;
+
+                #region Fetch File(s)
+                //string DocumentPath = HttpContext.Current.Server.MapPath("/") + ConfigurationManager.AppSettings["DocumentPath"].ToString() + UserID;
+                string DocumentPath = ConfigurationManager.AppSettings["FileUploadPath"].ToString() + UserID.ToString() + "\\" + DocumentType;
+                if (!Directory.Exists(DocumentPath))
+                    Directory.CreateDirectory(DocumentPath);
+
+                //delete all existing files for current user
+                DirectoryInfo di = new DirectoryInfo(DocumentPath);
+
+                foreach (FileInfo fileToDelete in di.GetFiles())
+                {
+                    fileToDelete.Delete();
+                }
+
+                if (UserID > 0)
+                {
+                    if (httpRequest.Files != null && httpRequest.Files.Count > 0)
+                    {
+                        var docfiles = new List<string>();
+                        foreach (string fileName in httpRequest.Files)
+                        {
+                            HttpPostedFile file = httpRequest.Files[fileName];
+                            originalFileName = file.FileName;
+                            profileImagePath = ConfigurationManager.AppSettings["ProfileImagePath"] + UserID + "/" + DocumentType + "/" + file.FileName;
+
+                            //newFileName = Guid.NewGuid().ToString().ToUpperInvariant() + Path.GetExtension(file.FileName);
+
+                            //string filePath = DocumentPath + newFileName;
+                            string filePath = Path.Combine(DocumentPath, originalFileName);
+
+                            file.SaveAs(filePath);
+                            UserRepository res = new UserRepository();
+                            //res.UpdateUserIDDocuments(UserID, DocumentType, profileImagePath, out Message);
+                        }
+                    }
+                    else
+                    {
+                        return Ok(new { Status = "Error", Message = "No File To Upload" });
+                    }
+                }
+                else
+                {
+                    return Ok(new { Status = "Error", Message = "User id is required" });
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { Status = "Error", Message = "Exception occurred in uploading profile photo.  Exception: " + ex.Message });
+            }
+
+            return Ok(new { Status = "Success", Message = "Profile photo uploaded successfully" });
+        }
+
     }
 }
