@@ -246,6 +246,24 @@ namespace QTrans.Repositories
             }
         }
 
+        public ResponseSingleModel<int> UpdateIdentityDocument(Int64 userID, string documentType, string filePath, out string message)
+        {
+            try
+            {
+                var result = new ResponseSingleModel<int>();
+                result.Response = instance.UpdateIdentityDocument(userID, documentType, filePath, out message);
+                result.Status = result.Response > 0 ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+                result.Message = message;
+                return result;
+            }
+            catch (Exception exp)
+            {
+                throw exp;
+            }
+        }
+
+        //res.UpdateUserIDDocument(UserID, DocumentType, profileImagePath, out Message);
+
         #region ========================= Dispose Method ==============
         public void Dispose()
         {

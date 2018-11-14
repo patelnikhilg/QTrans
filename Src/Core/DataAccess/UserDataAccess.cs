@@ -258,6 +258,24 @@ namespace QTrans.DataAccess
             return rowEffected;
         }
 
+
+        public int UpdateIdentityDocument(Int64 userID, string documentType, string filePath, out string message)
+        {
+            int rowEffected = 0;
+            using (DBConnector connector = new DBConnector("Usp_UpdateIdentityPhoto", true))
+            {
+                connector.AddInParameterWithValue("@UserId", userID);
+                connector.AddInParameterWithValue("@DocumentType", documentType);
+                connector.AddInParameterWithValue("@photo", filePath);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                rowEffected = connector.ExceuteNonQuery();
+                message = connector.GetParamaeterValue("@Message").ToString();
+            }
+
+            return rowEffected;
+        }
+        //UpdateIdentityDocument(Int64 userID, string documentType, string filePath, out string message)
+
         #region ========================= Dispose Method ==============
         public void Dispose()
         {

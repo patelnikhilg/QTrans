@@ -249,7 +249,7 @@ namespace QTrans.WebAPI.Controllers
 
                             file.SaveAs(filePath);
                             UserRepository res = new UserRepository();
-                            //res.UpdateUserIDDocuments(UserID, DocumentType, profileImagePath, out Message);
+                            res.UpdateIdentityDocument(UserID, DocumentType, profileImagePath, out Message);
                         }
                     }
                     else
