@@ -249,5 +249,23 @@ namespace QTrans.DataAccess
         }
 
         #endregion
+
+
+        public int AddPostingPhoto(Int64 postingID, Int64 userID, string filePath, bool isDefault, out string message)
+        {
+            int rowEffected = 0;
+            using (DBConnector connector = new DBConnector("Usp_AddPostingPhoto", true))
+            {
+                connector.AddInParameterWithValue("@PostingID", postingID);
+                connector.AddInParameterWithValue("@photo", filePath);
+                connector.AddInParameterWithValue("@UserId", userID);
+                connector.AddInParameterWithValue("@IsDefault", isDefault);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                rowEffected = connector.ExceuteNonQuery();
+                message = connector.GetParamaeterValue("@Message").ToString();
+            }
+
+            return rowEffected;
+        }
     }
 }

@@ -212,5 +212,21 @@ namespace QTrans.Repositories
             disposed = true;
         }
         #endregion
+
+        public ResponseSingleModel<int> AddPostingPhoto(Int64 PostingID, Int64 userID, string filePath, bool isDefault, out string message)
+        {
+            try
+            {
+                var result = new ResponseSingleModel<int>();
+                result.Response = instance.AddPostingPhoto(PostingID, userID, filePath, isDefault, out message);
+                result.Status = result.Response > 0 ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+                result.Message = message;
+                return result;
+            }
+            catch (Exception exp)
+            {
+                throw exp;
+            }
+        }
     }
 }
