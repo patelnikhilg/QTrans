@@ -63,9 +63,11 @@ namespace QTrans.Repositories
                 var dsPhotos = this.instance.GetByPostingPhotosById(postingDetails.postingid, out message);
                 var lstProfile = DataAccessUtility.ConvertToList<QTrans.Models.ViewModel.Posting.PostingProfileView>(ds.Tables[0]);
                 var lstDetails = DataAccessUtility.ConvertToList<PostingDetails>(ds.Tables[1]);
+                var lstPostingPhotos = DataAccessUtility.ConvertToList<PostingPhotos>(dsPhotos.Tables[0]);
                 postingDetails = lstDetails.Count > 0 ? lstDetails[0] : null;
                 postingDetails.postingProfile = lstProfile.Count > 0 ? lstProfile[0] : null;
                 postingDetails.dtlpostingid = dtlpostingid;
+                postingDetails.PostingPhotoList = lstPostingPhotos;
                 result.Response = postingDetails;
                 result.Status = Constants.WebApiStatusOk;
                 result.Message = message;
@@ -85,10 +87,15 @@ namespace QTrans.Repositories
             message = string.Empty;
             PostingDetails postingDetails = null;
             var ds = this.instance.GetByPostingDetailsId(postingId, out message);
+            var dsPhotos = this.instance.GetByPostingPhotosById(postingDetails.postingid, out message);
+
             var lstProfile = DataAccessUtility.ConvertToList<QTrans.Models.ViewModel.Posting.PostingProfileView>(ds.Tables[0]);
             var lstDetails = DataAccessUtility.ConvertToList<PostingDetails>(ds.Tables[1]);
+            var lstPostingPhotos = DataAccessUtility.ConvertToList<PostingPhotos>(dsPhotos.Tables[0]);
+
             postingDetails = lstDetails.Count > 0 ? lstDetails[0] : null;
             postingDetails.postingProfile = lstProfile.Count > 0 ? lstProfile[0] : null;
+            postingDetails.PostingPhotoList = lstPostingPhotos;
             result.Response = postingDetails;
             result.Status = Constants.WebApiStatusOk;
             result.Message = message;
@@ -101,10 +108,15 @@ namespace QTrans.Repositories
             message = string.Empty;
             PostingDetails postingDetails = null;
             var ds = this.instance.GetByPostingDetailsId(postingId, out message);
+            var dsPhotos = this.instance.GetByPostingPhotosById(postingDetails.postingid, out message);
+            var lstPostingPhotos = DataAccessUtility.ConvertToList<PostingPhotos>(dsPhotos.Tables[0]);
+
             var lstProfile = DataAccessUtility.ConvertToList<PostingProfile>(ds.Tables[0]);
             var lstDetails = DataAccessUtility.ConvertToList<PostingDetails>(ds.Tables[1]);
             profile = lstProfile.Count > 0 ? lstProfile[0] : null;
             postingDetails = lstDetails.Count > 0 ? lstDetails[0] : null;
+            postingDetails.PostingPhotoList = lstPostingPhotos;
+
             result.Response = postingDetails;
             result.Status = Constants.WebApiStatusOk;
             result.Message = message;

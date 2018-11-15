@@ -118,6 +118,7 @@ namespace QTrans.Models
         [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = Constants.FormatDateTime)]  
         public Nullable<System.DateTime> LastModifyDate { get { return modifydate == null ? createddate : modifydate; } }
         public Nullable<System.DateTime> modifydate { get; set; }
+        public List<PostingPhotos> PostingPhotoList { get; set; }
 
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="Materialtype.cs" />
     <Compile Include="Packagetype.cs" />
     <Compile Include="PostingDetails.cs" />
+    <Compile Include="PostingPhotos.cs" />
     <Compile Include="PostingProfile.cs" />
     <Compile Include="Posting\DtlPostingDetails.cs" />
     <Compile Include="Posting\MstPostingProfile.cs" />
