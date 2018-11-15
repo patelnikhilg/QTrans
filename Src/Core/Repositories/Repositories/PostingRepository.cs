@@ -60,6 +60,7 @@ namespace QTrans.Repositories
             if (this.instance.InsertUpdatePostingDetails(postingDetails, out dtlpostingid, out message))
             {
                 var ds = this.instance.GetByPostingDetailsId(postingDetails.postingid, out message);
+                var dsPhotos = this.instance.GetByPostingPhotosById(postingDetails.postingid, out message);
                 var lstProfile = DataAccessUtility.ConvertToList<QTrans.Models.ViewModel.Posting.PostingProfileView>(ds.Tables[0]);
                 var lstDetails = DataAccessUtility.ConvertToList<PostingDetails>(ds.Tables[1]);
                 postingDetails = lstDetails.Count > 0 ? lstDetails[0] : null;

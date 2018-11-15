@@ -126,7 +126,19 @@ namespace QTrans.DataAccess
 
             return ds;
         }
-        
+        public DataSet GetByPostingPhotosById(long postingId, out string message)
+        {
+            DataSet ds = null;
+            using (DBConnector connector = new DBConnector("Usp_GetPostingPhotosById", true))
+            {
+                connector.AddInParameterWithValue("@postingId", postingId);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                ds = connector.GetDataSet();
+                message = connector.GetParamaeterValue("@Message").ToString();
+            }
+
+            return ds;
+        }
         public DataTable GetListPostingByUserId(long userId, bool isPast,out string message)
         {
             DataTable dt = null;
