@@ -108,7 +108,7 @@ namespace QTrans.Repositories
             message = string.Empty;
             PostingDetails postingDetails = null;
             var ds = this.instance.GetByPostingDetailsId(postingId, out message);
-            var dsPhotos = this.instance.GetByPostingPhotosById(postingDetails.postingid, out message);
+            var dsPhotos = this.instance.GetByPostingPhotosById(postingId, out message);
             var lstPostingPhotos = DataAccessUtility.ConvertToList<PostingPhotos>(dsPhotos.Tables[0]);
 
             var lstProfile = DataAccessUtility.ConvertToList<PostingProfile>(ds.Tables[0]);
