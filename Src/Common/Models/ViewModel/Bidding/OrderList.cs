@@ -11,6 +11,8 @@ namespace QTrans.Models.ViewModel.Bidding
     public class OrderList
     {
         public long userid { get; set; }
+        public long postingid { get; set; }
+        public long dtlpostingid { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string src_city { get; set; }
