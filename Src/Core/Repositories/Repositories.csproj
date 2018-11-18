@@ -49,7 +49,10 @@
     <Compile Include="Repositories\CommonRepository.cs" />
     <Compile Include="Repositories\CompanyRepository.cs" />
     <Compile Include="Repositories\PostingRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\TrackingRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\VehicleRepository.cs" />
     <Compile Include="Services\AlertService.cs" />
   </ItemGroup>
   <ItemGroup>

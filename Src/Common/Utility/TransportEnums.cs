@@ -6,16 +6,16 @@ namespace QTrans.Utility
 {
     //public class TransportEnums
     //{
-    ////public enum VehicleType
-    ////{
-    ////    None = 0,
-    ////    HalfBody = 1,
-    ////    FullBody = 2,
-    ////    OpenBody = 3,
-    ////    Canter = 4,
-    ////    CarCarrier = 5,
-    ////    LCV = 6
-    ////}
+    public enum VehicleType
+    {
+        None = 0,
+        HalfBody = 1,
+        FullBody = 2,
+        OpenBody = 3,
+        Canter = 4,
+        CarCarrier = 5,
+        LCV = 6
+    }
 
     public enum UserType
     {
