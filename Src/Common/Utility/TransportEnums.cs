@@ -6,7 +6,7 @@ namespace QTrans.Utility
 {
     //public class TransportEnums
     //{
-    public enum VehicleType
+    public enum VehicleTypeEnum
     {
         None = 0,
         HalfBody = 1,
