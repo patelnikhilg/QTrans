@@ -1,4 +1,7 @@
-﻿using System;
+﻿using QTrans.DataAccess;
+using QTrans.Models;
+using QTrans.Models.ResponseModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +15,13 @@ namespace QTrans.Repositories.Repositories
         /// Flag: Has Dispose already been called
         /// </summary>
         bool disposed;
+        private VehicleDataAccess instance;
+        private long UserId;
         #region "=================== Constructor =============================="
-        public VehicleRepository()
+        public VehicleRepository(long userid)
         {
+            this.UserId = userid;
+            this.instance = new VehicleDataAccess();
         }
 
         ~VehicleRepository()
@@ -22,7 +29,45 @@ namespace QTrans.Repositories.Repositories
             this.Dispose(false);
         }
         #endregion
+        public ResponseSingleModel<Vehicle> VehicleRegistration(Vehicle vehicle, out string message)
+        {
+            var result = new ResponseSingleModel<Vehicle>();
+            long vehicleId = 0;
+            message = string.Empty;
+            if (this.instance.InsertUpdateVehicle(vehicle, out vehicleId, out message))
+            {
+                vehicle.vehicleid = vehicleId;
+                result.Status = Constants.WebApiStatusOk;
+            }
+            else
+            {
+                result.Status = Constants.WebApiStatusFail;
+                result.Message = message;
+            }
+            result.Response = vehicle;
 
+            return result;
+        }
+
+        public ResponseSingleModel<InsuranceDetails> Insurancedetails(InsuranceDetails insurance, out string message)
+        {
+            var result = new ResponseSingleModel<InsuranceDetails>();
+            long insuranceId = 0;
+            message = string.Empty;
+            if (this.instance.InsertUpdateInsurance(insurance, out insuranceId, out message))
+            {
+                insurance.insuranceid = insuranceId;
+                result.Status = Constants.WebApiStatusOk;
+            }
+            else
+            {
+                result.Status = Constants.WebApiStatusFail;
+                result.Message = message;
+            }
+            result.Response = insurance;
+
+            return result;
+        }
 
         #region ========================= Dispose Method ==============
         public void Dispose()
