@@ -1,6 +1,7 @@
 ﻿using QTrans.DataAccess;
 using QTrans.Models;
 using QTrans.Models.ResponseModel;
+using QTrans.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,6 +69,46 @@ namespace QTrans.Repositories.Repositories
             result.Response = install;
 
             return result;
+        }
+
+        public ResponseSingleModel<Product> GetById(long productId)
+        {
+            var response = new ResponseSingleModel<Product>();
+            var dt = this.instance.GetById(productId);
+            response.Response = DataAccessUtility.ConvertToList<Product>(dt)[0];
+            response.Status = Constants.WebApiStatusOk;
+
+            return response;
+        }
+
+        public ResponseSingleModel<ProductInstallDetails> GetInstallProductById(long DtlProductId, long productId, long vehicleId)
+        {
+            var response = new ResponseSingleModel<ProductInstallDetails>();
+            var dt = this.instance.GetInstallProductById(DtlProductId,productId, vehicleId);
+            response.Response = DataAccessUtility.ConvertToList<ProductInstallDetails>(dt)[0];
+            response.Status = Constants.WebApiStatusOk;
+
+            return response;
+        }
+
+        public ResponseCollectionModel<ProductInstallDetails> GetInstallProductListByUserId(long userId, long installer)
+        {
+            var response = new ResponseCollectionModel<ProductInstallDetails>();
+            var dt = this.instance.GetInstallProductListByUserId(userId, installer);
+            response.Response = DataAccessUtility.ConvertToList<ProductInstallDetails>(dt);
+            response.Status = Constants.WebApiStatusOk;
+
+            return response;
+        }
+
+        public ResponseCollectionModel<Product> GetProductListByUserId(long userId)
+        {
+            var response = new ResponseCollectionModel<Product>();
+            var dt = this.instance.GetProductListByUserId(userId);
+            response.Response = DataAccessUtility.ConvertToList<Product>(dt);
+            response.Status = Constants.WebApiStatusOk;
+
+            return response;
         }
 
         #region ========================= Dispose Method ==============

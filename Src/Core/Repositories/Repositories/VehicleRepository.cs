@@ -69,6 +69,38 @@ namespace QTrans.Repositories.Repositories
             return result;
         }
 
+        public ResponseSingleModel<Vehicle> GetVehicleById(long vehicleId)
+        {
+            var response = new ResponseSingleModel<Vehicle>();
+            var dt = this.instance.GetById(vehicleId);
+            Vehicle vehicle = DataAccessUtility.ConvertToList<Vehicle>(dt)[0];
+            response.Response = vehicle;
+            response.Status = Constants.WebApiStatusOk;
+
+            return response;
+        }
+
+        public ResponseSingleModel<InsuranceDetails> GetInsuranceById(long vehicleId, long insuranceId)
+        {
+            var response = new ResponseSingleModel<InsuranceDetails>();
+            var dt = this.instance.GetInsuranceById(vehicleId,insuranceId);
+            InsuranceDetails insuranceDetails = DataAccessUtility.ConvertToList<InsuranceDetails>(dt)[0];
+            response.Response = insuranceDetails;
+            response.Status = Constants.WebApiStatusOk;
+
+            return response;
+        }
+
+        public ResponseCollectionModel<Vehicle> GetVehicleListByUserId(long userId)
+        {
+            var response = new ResponseCollectionModel<Vehicle>();
+            var dt = this.instance.GetVehicleListByUserId(userId);
+            response.Response = DataAccessUtility.ConvertToList<Vehicle>(dt);
+            response.Status = Constants.WebApiStatusOk;
+
+            return response;
+        }
+
         #region ========================= Dispose Method ==============
         public void Dispose()
         {

@@ -31,6 +31,6 @@ namespace QTrans.Models
         public System.DateTime registrationdate { get; set; }
         public System.DateTime createddate { get; set; }
         public Nullable<System.DateTime> modifydate { get; set; }
-    
+        public long userid { get; set; }
     }
 }

@@ -79,6 +79,7 @@
     <Compile Include="ViewModel\Posting\PostingList.cs" />
     <Compile Include="ViewModel\Posting\PostingProfileView.cs" />
     <Compile Include="ViewModel\Posting\PostStatusList.cs" />
+    <Compile Include="ViewModel\ProductInstallDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\Users\" />

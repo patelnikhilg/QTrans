@@ -16,6 +16,7 @@ namespace QTrans.Models
         public bool Status { get; set; }
         public System.DateTime createddate { get; set; }
         public Nullable<System.DateTime> modifydate { get; set; }
-
+        public long UserId { get; set; }
+        public long CreatedBy { get; set; }
     }
 }

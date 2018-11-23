@@ -1,6 +1,7 @@
 ﻿using QTrans.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,6 +63,55 @@ namespace QTrans.DataAccess
             }
 
             return rowEffected > 0;
+        }
+
+        public DataTable GetById(long productId)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetProductById", true))
+            {
+                connector.AddInParameterWithValue("@productId", productId);
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetInstallProductById(long DtlProductId,long productId, long vehicleId)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetInstallProductById", true))
+            {
+                connector.AddInParameterWithValue("@productId", productId);
+                connector.AddInParameterWithValue("@vehicleId", vehicleId);
+                connector.AddInParameterWithValue("@DtlProductId", DtlProductId);
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetInstallProductListByUserId(long userId,long installer)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetInstallProductListByUserId", true))
+            {
+                connector.AddInParameterWithValue("@userId", userId);
+                connector.AddInParameterWithValue("@installer", installer);                
+                dt = connector.GetDataTable();
+            }
+            return dt;
+        }
+
+        public DataTable GetProductListByUserId(long userId)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetProductListByUserId", true))
+            {
+                connector.AddInParameterWithValue("@userId", userId);
+                dt = connector.GetDataTable();
+            }
+            return dt;
         }
 
         #region ========================= Dispose Method ==============

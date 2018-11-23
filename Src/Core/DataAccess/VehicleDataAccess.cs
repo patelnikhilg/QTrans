@@ -1,6 +1,7 @@
 ﻿using QTrans.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,8 +70,45 @@ namespace QTrans.DataAccess
             return rowEffected > 0;
         }
 
-            #region ========================= Dispose Method ==============
-            public void Dispose()
+        public DataTable GetById(long vehicleId)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetVehicleById", true))
+            {
+                connector.AddInParameterWithValue("@vehicleId", vehicleId);
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetInsuranceById(long vehicleId, long InsuranceId)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetInsuranceById", true))
+            {
+                connector.AddInParameterWithValue("@InsuranceId", InsuranceId);
+                connector.AddInParameterWithValue("@vehicleId", vehicleId);
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetVehicleListByUserId(long userId)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Usp_GetVehicleListByUserId", true))
+            {
+                connector.AddInParameterWithValue("@userId", userId);
+                dt = connector.GetDataTable();
+            }
+
+            return dt;
+        }
+
+        #region ========================= Dispose Method ==============
+        public void Dispose()
         {
             this.Dispose(true);
             GC.SuppressFinalize(this);
