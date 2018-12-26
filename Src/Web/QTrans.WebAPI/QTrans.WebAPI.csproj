@@ -194,6 +194,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PostingController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Global.asax.cs">
@@ -206,6 +207,7 @@
     <Compile Include="Models\BiddingParam.cs" />
     <Compile Include="Models\DeviceRegistration.cs" />
     <Compile Include="Models\PostingParam.cs" />
+    <Compile Include="Models\ProductParam.cs" />
     <Compile Include="Models\UserPersonalDetail.cs" />
     <Compile Include="Models\VehicelParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

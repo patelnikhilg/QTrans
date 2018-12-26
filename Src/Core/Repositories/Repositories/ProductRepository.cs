@@ -31,7 +31,7 @@ namespace QTrans.Repositories.Repositories
         }
         #endregion
 
-        public ResponseSingleModel<Product> VehicleRegistration(Product product, out string message)
+        public ResponseSingleModel<Product> ProductRegistration(Product product, out string message)
         {
             var result = new ResponseSingleModel<Product>();
             long productId = 0;
@@ -51,7 +51,7 @@ namespace QTrans.Repositories.Repositories
             return result;
         }
 
-        public ResponseSingleModel<ProductInstall> VehicleRegistration(ProductInstall install, out string message)
+        public ResponseSingleModel<ProductInstall> ProductInstallation(ProductInstall install, out string message)
         {
             var result = new ResponseSingleModel<ProductInstall>();
             long dtlProductId = 0;
