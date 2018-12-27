@@ -36,4 +36,14 @@ namespace QTrans.Models
         [DisplayName("Capacity of Vehicle")]
         public short capacity { get; set; }
     }
+
+    public class BiddingStat
+    {
+        public long dtlpostingid { get; set; }
+        public decimal MaxBidAmount { get; set; }
+        public decimal MinBidAmount { get; set; }
+        public decimal AvgBidAmount { get; set; }
+        public int TotalBids { get; set; }
+
+    }
 }

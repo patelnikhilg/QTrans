@@ -14,7 +14,7 @@ namespace QTrans.Models.ViewModel.Bidding
         public string biddercomment { get; set; }
         public string rating { get; set; }
         public int status { get; set; }
-        public int RatingAvg { get; set; }
+        public double RatingAvg { get; set; }
         public int TotalRating { get; set; }
         [DisplayFormat(DataFormatString = Constants.FormatDateTime)]
         public DateTime LastModify { get; set; }

@@ -45,13 +45,24 @@ namespace QTrans.WebAPI.Controllers
             }
         }
 
+        [Route("GetBiddingDetailByUserIddtlPostingId")]
+        [HttpGet]
+        public IHttpActionResult GetBiddingDetailByUserIddtlPostingId(long UserId, long dtlPostingid)
+        {
+            using (var repository = new BiddingRepository(UserId))
+            {
+                var result = repository.GetBiddingDetailByUserIddtlPostingId(UserId,dtlPostingid);
+                return Ok(new { result.Status, data = result });
+            }
+        }
+
         [Route("GetPostingDetailsByDtlPostId")]
         [HttpGet]
         public IHttpActionResult GetPostingDetailsByDtlPostId([FromUri] BiddingParam param)
         {
             using (var repository = new BiddingRepository(param.UserId))
             {
-                var result = repository.GetPostingDetailByDtlPostingId(param.DtlPostingId);
+                var result = repository.GetPostingDetailByDtlPostingId(param.DtlPostingId,param.UserId);
                 return Ok(new { result.Status, data = result });
             }
         }
@@ -127,6 +138,20 @@ namespace QTrans.WebAPI.Controllers
                 return Ok(new { result.Status, data = result });
             }
         }
+
+
+        [Route("GetBidderSummary")]
+        [HttpGet]
+        public IHttpActionResult GetBidderSummary([FromUri] long userId)
+        {
+            using (var repository = new BiddingRepository(userId))
+            {
+                
+                var result = repository.GetBidderSummary(userId);
+                return Ok(new { result.Status, data = result});
+            }
+        }
+
 
         #region ================= Bidding Rating ==============================
 

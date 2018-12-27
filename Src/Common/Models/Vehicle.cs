@@ -19,7 +19,7 @@ namespace QTrans.Models
         }
     
         public long vehicleid { get; set; }
-        public string vehicletype { get; set; }
+        public short vehicletype { get; set; }
         public string manufacturername { get; set; }
         public string descrition { get; set; }
         public System.DateTime manufactureryear { get; set; }
@@ -32,5 +32,8 @@ namespace QTrans.Models
         public System.DateTime createddate { get; set; }
         public Nullable<System.DateTime> modifydate { get; set; }
         public long userid { get; set; }
+        public string drivername { get; set; }
+        public string drivernumber { get; set; }
+        public string vehicleTypeName { get; set; }
     }
 }

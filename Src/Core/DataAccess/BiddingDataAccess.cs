@@ -65,13 +65,29 @@ namespace QTrans.DataAccess
             return ds;
         }
 
-        public DataTable GetPostingDetailsByDtlPostingId(long dtlpostingId)
+        public DataSet GetByUserIdDtlPostingId(long UserId,long dtlPostingid)
         {
-            DataTable dt = null;
+            DataSet ds = null;
+            using (DBConnector connector = new DBConnector("Usp_GetBiddingDetailsByUserIddtlPostId", true))
+            {
+                connector.AddInParameterWithValue("@UserId", UserId);
+                connector.AddInParameterWithValue("@dtlpostingId", dtlPostingid);
+                ds = connector.GetDataSet();
+            }
+
+            return ds;
+        }
+
+
+        public DataSet GetPostingDetailsByDtlPostingId(long dtlpostingId,long UserID)
+        {
+            DataSet dt = null;
             using (DBConnector connector = new DBConnector("Usp_GetBiddingDetailsByDtlPostingId", true))
             {
                 connector.AddInParameterWithValue("@DtlpostingId", dtlpostingId);
-                dt = connector.GetDataTable();
+                connector.AddInParameterWithValue("@UserId", UserID);
+                //@UserId
+                dt = connector.GetDataSet();
             }
 
             return dt;
@@ -96,6 +112,20 @@ namespace QTrans.DataAccess
             {
                 connector.AddInParameterWithValue("@DtlPostingId", dtlPostingId);
                 ds = connector.GetDataSet();
+            }
+
+            return ds;
+        }
+
+        public DataSet GetByPostingPhotosById(long dtlpostingId, out string message)
+        {
+            DataSet ds = null;
+            using (DBConnector connector = new DBConnector("Usp_GetPostingPhotosByDtlpostingId", true))
+            {
+                connector.AddInParameterWithValue("@dtlPostingId", dtlpostingId);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                ds = connector.GetDataSet();
+                message = connector.GetParamaeterValue("@Message").ToString();
             }
 
             return ds;
@@ -237,7 +267,20 @@ namespace QTrans.DataAccess
 
             return rowEffected > 0;
         }
-        
+
+        public DataTable GetBidderSummary(long userId)
+        {
+             DataTable dt = null;
+                using (DBConnector connector = new DBConnector("Asp_GetBidderSummary", true))
+                {
+                    connector.AddInParameterWithValue("@userId", userId);
+                    dt = connector.GetDataTable();
+                }
+                return dt;
+
+          
+        }
+
 
         #region ========================= Dispose Method ==============
         public void Dispose()

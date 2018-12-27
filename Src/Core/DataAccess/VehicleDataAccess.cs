@@ -37,10 +37,15 @@ namespace QTrans.DataAccess
                 connector.AddInParameterWithValue("@manufacturerYear", vehicle.manufactureryear);
                 connector.AddInParameterWithValue("@TotalWheel", vehicle.totalwheel);
                 connector.AddInParameterWithValue("@weightCapacity", vehicle.weightcapacity);
-                connector.AddInParameterWithValue("@RCBookCopyPath", vehicle.rcbookcopypath);
-                connector.AddInParameterWithValue("@RTORegistrationNumber", vehicle.rtoregistrationnumber);
-                connector.AddInParameterWithValue("@CompanyId", vehicle.companyid);
-                connector.AddInParameterWithValue("@RegistrationDate", vehicle.registrationdate);
+                connector.AddInParameterWithValue("@rcbookcopypath", vehicle.rcbookcopypath);
+                //connector.AddInParameterWithValue("@RCBookCopyPath", vehicle.rcbookcopypath);
+                connector.AddInParameterWithValue("@rtoregistrationnumber", vehicle.rtoregistrationnumber);
+                connector.AddInParameterWithValue("@companyid", vehicle.companyid);
+                connector.AddInParameterWithValue("@DriverName", vehicle.drivername);
+                connector.AddInParameterWithValue("@DriverNumber", vehicle.drivernumber);
+                connector.AddInOutParameterWithValue("@identity", SqlDbType.BigInt);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                connector.AddInParameterWithValue("@userid", vehicle.userid);
                 rowEffected = connector.ExceuteNonQuery();
                 message = connector.GetParamaeterValue("@Message").ToString();
                 identity = vehicle.vehicleid == 0 ? Convert.ToInt64(connector.GetParamaeterValue("@identity")) : vehicle.vehicleid;
@@ -105,6 +110,26 @@ namespace QTrans.DataAccess
             }
 
             return dt;
+        }
+
+
+
+
+        public int updateRcPhoto(Int64 truckid, Int64 userID, string filePath, bool isDefault, out string message)
+        {
+            int rowEffected = 0;
+            using (DBConnector connector = new DBConnector("Usp_UpdateRCPhoto", true))
+            {
+                connector.AddInParameterWithValue("@truckID", truckid );
+                connector.AddInParameterWithValue("@photo", filePath);
+                connector.AddInParameterWithValue("@UserId", userID);
+                connector.AddInParameterWithValue("@IsDefault", isDefault);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                rowEffected = connector.ExceuteNonQuery();
+                message = connector.GetParamaeterValue("@Message").ToString();
+            }
+
+            return rowEffected;
         }
 
         #region ========================= Dispose Method ==============

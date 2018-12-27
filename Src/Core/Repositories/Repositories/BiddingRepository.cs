@@ -69,18 +69,55 @@ namespace QTrans.Repositories
             return response;
         }
 
+        //GetByUserIdDtlPostingId
+        public ResponseSingleModel<BiddingProfile> GetBiddingDetailByUserIddtlPostingId(long UserId, long dtlPostingid)
+        {
+            var response = new ResponseSingleModel<BiddingProfile>();
+            var ds = this.instanceBidding.GetByUserIdDtlPostingId(UserId,dtlPostingid);
+            BiddingProfile biddingProfile;
+            if (ds.Tables[0].Rows.Count >0)
+            {
+                biddingProfile = DataAccessUtility.ConvertToList<BiddingProfile>(ds.Tables[0])[0];
+                if (ds.Tables[1].Rows.Count > 0)
+                {
+                    biddingProfile.biddingDetails = DataAccessUtility.ConvertToList<BiddingDetails>(ds.Tables[1]);
+                }
+                else
+                    biddingProfile.biddingDetails = null;
+            }
+            else
+            {
+                biddingProfile = null;
+            }
+            response.Response = biddingProfile;
+            response.Status = Constants.WebApiStatusOk;
+
+            return response;
+        }
+
         /// <summary>
         /// Get list of bidding by posting and user id.
         /// </summary>
         /// <param name="postingId"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public ResponseSingleModel<PostingDetailsBid> GetPostingDetailByDtlPostingId(long dtlpostingId)
+        public ResponseSingleModel<PostingDetailsBid> GetPostingDetailByDtlPostingId(long dtlpostingId,long UserId)
         {
+            var message = "";
             var response = new ResponseSingleModel<PostingDetailsBid>();
-            var dt = this.instanceBidding.GetPostingDetailsByDtlPostingId(dtlpostingId);
-            var lst = DataAccessUtility.ConvertToList<PostingDetailsBid>(dt);
+            var dt = this.instanceBidding.GetPostingDetailsByDtlPostingId(dtlpostingId,UserId);
+            var lst = DataAccessUtility.ConvertToList<PostingDetailsBid>(dt.Tables[0]);
+
+            var lstRateByTransporter = DataAccessUtility.ConvertToList<RatingByTransporter>(dt.Tables[1]);
+
+            var dsPhotos = this.instanceBidding.GetByPostingPhotosById(dtlpostingId, out message);
+
+            var lstPostingPhotos = DataAccessUtility.ConvertToList<PostingPhotos>(dsPhotos.Tables[0]);
+            if (lst.Count > 0)
+                lst[0].PostingPhotoList = lstPostingPhotos;
+
             response.Response = lst.Count > 0 ? lst[0] : null;
+            response.Response.ratingByTransporter = lstRateByTransporter.Count > 0 ? lstRateByTransporter[0] : null;
             response.Status = lst.Count > 0 ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
             return response;
         }
@@ -97,9 +134,18 @@ namespace QTrans.Repositories
             var ds = this.instanceBidding.GetByUserId(userId);
             var lstbidding = DataAccessUtility.ConvertToList<BiddingProfile>(ds.Tables[0]);
             var lstBidDetails = DataAccessUtility.ConvertToList<BiddingDetails>(ds.Tables[1]);
+            var lstBidStat = DataAccessUtility.ConvertToList<BiddingStat>(ds.Tables[2]);
+
             foreach (var bid in lstbidding)
             {
                 bid.biddingDetails = lstBidDetails.Where(item => item.biddingid == bid.biddingid).ToList();
+                foreach (var item in lstBidStat.Where(item => item.dtlpostingid == bid.dtlpostingid).ToList())
+                {
+                    bid.MinBidAmount =item.MinBidAmount ;
+                    bid.MaxBidAmount = item.MaxBidAmount;
+                    bid.AvgBidAmount = item.AvgBidAmount;
+                    bid.TotalBids = item.TotalBids;
+                }
             }
 
             response.Response = lstbidding;
@@ -115,10 +161,13 @@ namespace QTrans.Repositories
         /// <returns></returns>
         public ResponseCollectionModel<BiddingListDetails> GetBiddingListByDtPostingId(long DtlPostingId)
         {
+            var message="";
             var response = new ResponseCollectionModel<BiddingListDetails>();
             var ds = this.instanceBidding.GetBiddingListByDtlPostId(DtlPostingId);
+           
             var lstbidding = DataAccessUtility.ConvertToList<BiddingListDetails>(ds.Tables[0]);
             var lstBidDetails = DataAccessUtility.ConvertToList<BiddingDetails>(ds.Tables[1]);
+
             foreach (var bid in lstbidding)
             {
                 bid.biddingDetails = lstBidDetails.Where(item => item.biddingid == bid.biddingid).ToList();
@@ -239,6 +288,21 @@ namespace QTrans.Repositories
             response.Response = lstbidding;
             response.Status = Constants.WebApiStatusOk;
             return response;
+        }
+
+        public ResponseSingleModel<BidderSummary> GetBidderSummary(long userId)
+        {
+            
+                var result = new ResponseSingleModel<BidderSummary>();
+                var dt = this.instanceBidding.GetBidderSummary(UserId);
+                var lst = DataAccessUtility.ConvertToList<BidderSummary>(dt);
+                BidderSummary summary = lst.Count > 0 ? lst[0] : null;
+                result.Response = summary;
+                result.Status = summary != null ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+                result.Message = "";
+                return result;
+
+           
         }
 
         #region ========================= Dispose Method ==============

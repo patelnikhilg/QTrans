@@ -102,7 +102,7 @@ namespace QTrans.WebPortal.Controllers
         {
             var message = string.Empty;
             BiddingRepository postingRepository = new BiddingRepository(this.UserId);
-            var post = postingRepository.GetPostingDetailByDtlPostingId(Id);
+            var post = postingRepository.GetPostingDetailByDtlPostingId(Id,this.UserId);
             return View(post.Response);
         }
 

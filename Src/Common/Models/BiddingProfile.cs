@@ -59,5 +59,22 @@ namespace QTrans.Models
         public Nullable<System.DateTime> LastModifyDate { get { return modifydate == null ? createddate : modifydate; } }
 
         public ICollection<BiddingDetails> biddingDetails { get; set; }
+
+
+        public string posttype { get; set; }
+        public string Src_city { get; set; }
+        public string Dst_city { get; set; }
+        public DateTime biddingactivatedatetime { get; set; }
+        public DateTime biddingclosedatetime { get; set; }
+
+
+
+        public decimal MaxBidAmount { get; set; }
+        public decimal MinBidAmount { get; set; }
+        public decimal AvgBidAmount { get; set; }
+        public int TotalBids { get; set; }
+
+        public Nullable<short> RatingStatus { get; set; }
+   
     }
 }

@@ -279,5 +279,19 @@ namespace QTrans.DataAccess
 
             return rowEffected;
         }
+
+        public DataTable GetPostingSummary(long userId)
+        {
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Asp_GetPostingSummary", true))
+            {
+                connector.AddInParameterWithValue("@userId", userId);
+                dt = connector.GetDataTable();
+            }
+            return dt;
+
+
+        }
+
     }
 }

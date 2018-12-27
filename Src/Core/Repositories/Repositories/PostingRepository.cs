@@ -1,5 +1,6 @@
 ﻿using QTrans.DataAccess;
 using QTrans.Models;
+using QTrans.Models.Posting;
 using QTrans.Models.ResponseModel;
 using QTrans.Models.ViewModel.Bidding;
 using QTrans.Models.ViewModel.Common;
@@ -87,7 +88,7 @@ namespace QTrans.Repositories
             message = string.Empty;
             PostingDetails postingDetails = null;
             var ds = this.instance.GetByPostingDetailsId(postingId, out message);
-            var dsPhotos = this.instance.GetByPostingPhotosById(postingDetails.postingid, out message);
+            var dsPhotos = this.instance.GetByPostingPhotosById(postingId, out message);
 
             var lstProfile = DataAccessUtility.ConvertToList<QTrans.Models.ViewModel.Posting.PostingProfileView>(ds.Tables[0]);
             var lstDetails = DataAccessUtility.ConvertToList<PostingDetails>(ds.Tables[1]);
@@ -241,5 +242,21 @@ namespace QTrans.Repositories
                 throw exp;
             }
         }
+
+        public ResponseSingleModel<PostingSummary> GetPostingSummary(long userId)
+        {
+
+            var result = new ResponseSingleModel<PostingSummary>();
+            var dt = this.instance.GetPostingSummary(UserId);
+            var lst = DataAccessUtility.ConvertToList<PostingSummary>(dt);
+            PostingSummary summary = lst.Count > 0 ? lst[0] : null;
+            result.Response = summary;
+            result.Status = summary != null ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+            result.Message = "";
+            return result;
+
+
+        }
+
     }
 }

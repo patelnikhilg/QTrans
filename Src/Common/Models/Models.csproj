@@ -57,6 +57,7 @@
     <Compile Include="PostingProfile.cs" />
     <Compile Include="Posting\DtlPostingDetails.cs" />
     <Compile Include="Posting\MstPostingProfile.cs" />
+    <Compile Include="Posting\PostingSummary.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductInstall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="UserProfile.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Vehicletype.cs" />
+    <Compile Include="ViewModel\Bidding\BidderSummary.cs" />
     <Compile Include="ViewModel\Bidding\BiddingListDetails.cs" />
     <Compile Include="ViewModel\Bidding\BidMinMaxAmount.cs" />
     <Compile Include="ViewModel\Bidding\PostingDetailsBid.cs" />

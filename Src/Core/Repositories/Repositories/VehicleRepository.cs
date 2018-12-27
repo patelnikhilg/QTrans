@@ -101,6 +101,23 @@ namespace QTrans.Repositories.Repositories
             return response;
         }
 
+
+        public ResponseSingleModel<int> updateRcPhoto(Int64 truckId, Int64 userID, string filePath, bool isDefault, out string message)
+        {
+            try
+            {
+                var result = new ResponseSingleModel<int>();
+                result.Response = instance.updateRcPhoto(truckId, userID, filePath, isDefault, out message);
+                result.Status = result.Response > 0 ? Constants.WebApiStatusOk : Constants.WebApiStatusFail;
+                result.Message = message;
+                return result;
+            }
+            catch (Exception exp)
+            {
+                throw exp;
+            }
+        }
+
         #region ========================= Dispose Method ==============
         public void Dispose()
         {

@@ -41,6 +41,8 @@ namespace QTrans.Models.ViewModel.Posting
         [DisplayName("Package Description")]
         public string packagetypedesc { get; set; }
         public DateTime createddate { get; set; }
-        public DateTime? modifydate { get; set; }               
+        public DateTime? modifydate { get; set; }
+
+        public long userid { get; set; }
     }
 }

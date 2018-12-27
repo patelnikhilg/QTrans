@@ -128,9 +128,43 @@ namespace QTrans.Models.ViewModel.Bidding
         public Nullable<System.DateTime> LastModifyDate { get { return modifydate == null ? createddate : modifydate; } }
         public Nullable<System.DateTime> modifydate { get; set; }
 
+        public long postUserid { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
-        public int RatingAvg { get; set; }
+        public string mobilenumber { get; set; }
+        public decimal RatingAvg { get; set; }
         public int TotalRating { get; set; }
+        public string photo { get; set; }
+
+        public string city { get; set; }
+        public string state { get; set; }
+        public int TotalBids { get; set; }
+        public decimal MinimumBid { get; set; }
+
+
+        public List<PostingPhotos> PostingPhotoList { get; set; }
+
+        public RatingByTransporter ratingByTransporter { get; set; }
     }
+
+    public class RatingByTransporter
+    {
+        public long RatingId { get; set; }
+
+        public Int16 Rating { get; set; }
+
+        public Int16 Status { get; set; }
+
+        public string Comments { get; set; }
+
+        public DateTime CreateDate { get; set; }
+
+        public long DtlpostingId { get; set; }
+
+        public long UserId { get; set; }
+
+        public long CreatedBy { get; set; }
+    }
+
+
 }

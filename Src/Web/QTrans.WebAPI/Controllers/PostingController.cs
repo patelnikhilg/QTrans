@@ -1,5 +1,6 @@
 ﻿using QTrans.Logging;
 using QTrans.Models;
+using QTrans.Models.ResponseModel;
 using QTrans.Repositories;
 using QTrans.WebAPI.Models;
 using System;
@@ -117,7 +118,7 @@ namespace QTrans.WebAPI.Controllers
         #region ============= Rating ===================
         [Route("SubmitRatingByDtlPostId")]
         [HttpPost]
-        public IHttpActionResult SubmitRatingByDtlPostId([FromUri] RatingParam param)
+        public IHttpActionResult SubmitRatingByDtlPostId( RatingParam param)
         {
             string message = string.Empty;
             using (var repository = new PostingRepository(param.UserId))
@@ -148,7 +149,8 @@ namespace QTrans.WebAPI.Controllers
         #region===================== Posting Status====================
         [Route("UpdatePostingStatus")]
         [HttpPost]
-        public IHttpActionResult UpdatePostingStatus([FromUri] PostingStatusParam param)
+//        public IHttpActionResult UpdatePostingStatus([FromUri] PostingStatusParam param)
+        public IHttpActionResult UpdatePostingStatus(PostingStatusParam param)
         {
             string message = string.Empty;
             using (var repository = new PostingRepository(param.UserId))
@@ -193,9 +195,10 @@ namespace QTrans.WebAPI.Controllers
         [HttpPost]
         public IHttpActionResult UploadPostingPhoto()
         {
+            var result = new ResponseSingleModel<bool>();
             string returnStatus = string.Empty;
             string Message = string.Empty;
-            string profileImagePath = string.Empty;
+            string imageUri = string.Empty;
 
             var httpRequest = HttpContext.Current.Request;
 
@@ -213,17 +216,9 @@ namespace QTrans.WebAPI.Controllers
 
                 #region Fetch File(s)
                 //string DocumentPath = HttpContext.Current.Server.MapPath("/") + ConfigurationManager.AppSettings["DocumentPath"].ToString() + UserID;
-                string DocumentPath = ConfigurationManager.AppSettings["FileUploadPath"].ToString() + UserID.ToString() + "\\Postings";
+                string DocumentPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfigurationManager.AppSettings["FileUploadPath"].ToString(), "Postings", PostingID.ToString());
                 if (!Directory.Exists(DocumentPath))
                     Directory.CreateDirectory(DocumentPath);
-
-                //delete all existing files for current user
-                DirectoryInfo di = new DirectoryInfo(DocumentPath);
-
-                //foreach (FileInfo fileToDelete in di.GetFiles())
-                //{
-                //    fileToDelete.Delete();
-                //}
 
                 if (UserID > 0)
                 {
@@ -234,40 +229,59 @@ namespace QTrans.WebAPI.Controllers
                         {
                             HttpPostedFile file = httpRequest.Files[fileName];
                             originalFileName = file.FileName;
-                            profileImagePath = ConfigurationManager.AppSettings["ProfileImagePath"] + UserID + "/Postings/" + file.FileName;
+                            imageUri = ConfigurationManager.AppSettings["DefaultImageUri"] + "Postings/" + PostingID + "/" + file.FileName;
 
-                            //newFileName = Guid.NewGuid().ToString().ToUpperInvariant() + Path.GetExtension(file.FileName);
-
-                            //string filePath = DocumentPath + newFileName;
                             string filePath = Path.Combine(DocumentPath, originalFileName);
-
                             file.SaveAs(filePath);
+
                             PostingRepository res = new PostingRepository(UserID);
-                            //int rowsAffected = res.UpdateUserPhoto(UserID, profileImagePath, out Message);
-                            //res.UpdateUserPhoto(UserID, profileImagePath, out Message);
-                            res.AddPostingPhoto(PostingID, UserID, profileImagePath, IsDefault, out Message);
+                            res.AddPostingPhoto(PostingID, UserID, imageUri, IsDefault, out Message);
                         }
                     }
                     else
                     {
-                        return Ok(new { Status = "Error", Message = "No File To Upload" });
+                        result.Status = Constants.WebApiStatusFail;
+                        result.Response = true;
+                        result.Message = "No File To Upload";
+                        return Ok(new { result.Status, data = result });
                     }
                 }
                 else
                 {
-                    return Ok(new { Status = "Error", Message = "User id is required" });
+                    result.Status = Constants.WebApiStatusFail;
+                    result.Response = true;
+                    result.Message = "User id is required";
+                    return Ok(new { result.Status, data = result });
                 }
 
                 #endregion
             }
             catch (Exception ex)
             {
-                return Ok(new { Status = "Error", Message = "Exception occurred in uploading profile photo.  Exception: " + ex.Message });
+                result.Status = Constants.WebApiStatusFail;
+                result.Response = true;
+                result.Message = "Exception occurred in uploading profile photo.";
+                return Ok(new { result.Status, data = result });
             }
 
-            return Ok(new { Status = "Success", Message = "Profile photo uploaded successfully" });
+            result.Status = Constants.WebApiStatusOk;
+            result.Response = true;
+            result.Message = "";
+            return Ok(new { result.Status, data = result });
         }
 
         #endregion
+
+        [Route("GetPostingSummary")]
+        [HttpGet]
+        public IHttpActionResult GetPostingSummary([FromUri] long userId)
+        {
+            using (var repository = new PostingRepository(userId))
+            {
+
+                var result = repository.GetPostingSummary(userId);
+                return Ok(new { result.Status, data = result });
+            }
+        }
     }
 }
