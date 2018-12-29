@@ -80,10 +80,31 @@ namespace QTrans.Repositories.Repositories
             return response;
         }
 
+
+        public ResponseSingleModel<bool> DeleteVahicalById(long vehicleId, out string message)
+        {
+            var response = new ResponseSingleModel<bool>();
+            if (this.instance.DeleteById(vehicleId, out message))
+            {
+                response.Response = true;
+                response.Status = Constants.WebApiStatusOk;
+                response.Message = "";
+            }
+            else
+            {
+                response.Response = false;
+                response.Status = Constants.WebApiStatusFail ;
+                response.Message = message;
+            }
+
+            return response;
+        }
+
+
         public ResponseSingleModel<InsuranceDetails> GetInsuranceById(long vehicleId, long insuranceId)
         {
             var response = new ResponseSingleModel<InsuranceDetails>();
-            var dt = this.instance.GetInsuranceById(vehicleId,insuranceId);
+            var dt = this.instance.GetInsuranceById(vehicleId, insuranceId);
             InsuranceDetails insuranceDetails = DataAccessUtility.ConvertToList<InsuranceDetails>(dt)[0];
             response.Response = insuranceDetails;
             response.Status = Constants.WebApiStatusOk;

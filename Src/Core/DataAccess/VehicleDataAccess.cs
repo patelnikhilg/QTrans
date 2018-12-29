@@ -87,6 +87,21 @@ namespace QTrans.DataAccess
             return dt;
         }
 
+        public bool DeleteById(long vehicleId,out string message)
+        {
+            int rowEffected = 0;
+            using (DBConnector connector = new DBConnector("Usp_DeleteVehicleById", true))
+            {
+                connector.AddInParameterWithValue("@vehicleId", vehicleId);
+                connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
+                rowEffected = connector.ExceuteNonQuery();
+                message = connector.GetParamaeterValue("@Message").ToString();
+               // message = insurance.vehicleid == 0 ? Convert.ToInt64(connector.GetParamaeterValue("@insurance")) : insurance.vehicleid;
+            }
+
+            return rowEffected > 0;
+        }
+
         public DataTable GetInsuranceById(long vehicleId, long InsuranceId)
         {
             DataTable dt = null;

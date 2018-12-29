@@ -38,7 +38,7 @@ namespace QTrans.WebAPI.Controllers
                     return Ok(new { Constants.WebApiStatusFail, data = "Vehicle id is grater than zero" });
                 }
 
-                return Ok(new { result.Status, data = result.Message });
+                return Ok(new { result.Status, data = result });
             }
         }
 
@@ -192,6 +192,22 @@ namespace QTrans.WebAPI.Controllers
         #endregion
 
 
+        [Route("DeleteVehicleById")]
+        [HttpPost]
+        public IHttpActionResult DeleteVehicle([FromBody] Vehicle vehicle)
+        {
+            string message = string.Empty;
+            using (var vehicleRepository = new VehicleRepository(vehicle.userid))
+            {
+                var result = vehicleRepository.DeleteVahicalById(vehicle.vehicleid , out message);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    log.Info(message);
+                }
+
+                return Ok(new { result.Status, data = result });
+            }
+        }
 
 
     }
