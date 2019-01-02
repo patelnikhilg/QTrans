@@ -14,7 +14,7 @@ namespace QTrans.Models
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
-    public  class BiddingDetails
+    public class BiddingDetails
     {
         public long dtlbiddingid { get; set; }
         [RegularExpression(Constants.RegexStringInput, ErrorMessage = Constants.StringNumeric)]
@@ -24,6 +24,15 @@ namespace QTrans.Models
         [DisplayName("Capacity of Vehicle")]
         public short capacity { get; set; }
         public Nullable<long> biddingid { get; set; }
+
+        public bool status { get; set; }
+        public DateTime statusdatetime { get; set; }
+
+        public long vehicleid { get; set; }
+        public string drivername { get; set; }
+        public string drivernumber { get; set; }
+
+
     }
 
     public class BiddinguserType
