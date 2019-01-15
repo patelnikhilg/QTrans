@@ -31,14 +31,25 @@ namespace QTrans.DataAccess
             {
                 Direction = ParameterDirection.Input
             };
-            sqlCommand.Parameters.Add(param);            
+            sqlCommand.Parameters.Add(param);
         }
+
+        public void AddInTableParameterWithValue(string name, object value)
+        {
+            SqlParameter param = new SqlParameter(name, value)
+            {
+                Direction = ParameterDirection.Input
+            };
+            param.SqlDbType = SqlDbType.Structured;
+            sqlCommand.Parameters.Add(param);
+        }
+
 
         public void AddOutParameterWithType(string name, SqlDbType dbType)
         {
             SqlParameter param = new SqlParameter(name, dbType)
             {
-                
+
                 Direction = ParameterDirection.Output
             };
             if (name == "@Message")
@@ -46,7 +57,7 @@ namespace QTrans.DataAccess
                 param.Size = 100;
             }
             sqlCommand.Parameters.Add(param);
-        }       
+        }
 
         public void AddInOutParameterWithValue(string name, object value)
         {
@@ -55,7 +66,7 @@ namespace QTrans.DataAccess
                 Direction = ParameterDirection.InputOutput
             };
             sqlCommand.Parameters.Add(param);
-        }        
+        }
 
         public void AddReturnParameterWithValue(string name, object value)
         {
@@ -71,7 +82,7 @@ namespace QTrans.DataAccess
             sqlCommand.Parameters.Add(parameter);
         }
         public void AddInParameter(string name, SqlDbType dbType, int size, string sourceColumn)
-        {   
+        {
             sqlCommand.Parameters.Add(name, dbType, size, sourceColumn);
         }
         public void AddOutParameter(string name, SqlDbType dbType, int size)
@@ -85,7 +96,7 @@ namespace QTrans.DataAccess
 
         public object GetParamaeterValue(string parameter)
         {
-            return sqlCommand.Parameters[parameter].Value??0;
+            return sqlCommand.Parameters[parameter].Value ?? 0;
         }
 
         public int ExceuteNonQuery()
@@ -155,7 +166,7 @@ namespace QTrans.DataAccess
 
             if (disposing)
             {
-                if(this.sqlConnection != null)
+                if (this.sqlConnection != null)
                 {
                     this.sqlConnection.Close();
                     this.sqlConnection.Dispose();
@@ -163,7 +174,7 @@ namespace QTrans.DataAccess
                 }
 
                 if (this.sqlCommand != null)
-                {                    
+                {
                     this.sqlCommand.Dispose();
                     this.sqlCommand = null;
                 }

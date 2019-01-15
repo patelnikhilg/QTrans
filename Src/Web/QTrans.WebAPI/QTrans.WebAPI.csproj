@@ -195,6 +195,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PostingController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\TrackingController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Global.asax.cs">
