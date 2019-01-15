@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,24 @@ namespace QTrans.DataAccess
         }
         #endregion
 
+        public bool BulkInsertion(DataTable table)
+        {
+            int rowEffected = 0;
+            try
+            {
+                using (DBConnector connector = new DBConnector("Usp_InsertLocationDetails", true))
+                {
+                    connector.AddInTableParameterWithValue("@locationDetails", table);                    
+                    rowEffected = connector.ExceuteNonQuery();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+
+            return rowEffected > 0;
+        }
 
         #region ========================= Dispose Method ==============
         public void Dispose()

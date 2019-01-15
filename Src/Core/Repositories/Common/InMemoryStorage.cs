@@ -42,7 +42,7 @@ namespace QTrans.Utility.Common
             this.PincodeStorage = new ConcurrentDictionary<int, CityPincode>();
         }
 
-        public void Int()
+        public void Init()
         {
             this.LoadLocationDetails(0);
         }
