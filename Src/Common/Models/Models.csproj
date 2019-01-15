@@ -48,6 +48,7 @@
     <Compile Include="Company.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Contact.cs" />
+    <Compile Include="DeviceMessage.cs" />
     <Compile Include="InsuranceDetails.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Materialtype.cs" />

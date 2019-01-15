@@ -25,4 +25,6 @@ namespace QTrans.Models
         public DateTime deviceDatetime { get; set; }
         public long msgid { get; set; }
     }
+
+   
 }

@@ -21,5 +21,14 @@ namespace QTrans.WebAPI.Controllers
             TrackingCollection.Instance.LocationDetailSubmit(locationDetails);           
             return Ok(new { Constants.WebApiStatusOk, data = true });
         }
+
+        [Route("DeviceLocation")]
+        [HttpPost]
+        public IHttpActionResult DeviceLocation([FromBody] DeviceMessage deviceMessage)
+        {
+            string message = string.Empty;            
+            TrackingCollection.Instance.DeviceLocation(deviceMessage);
+            return Ok(new { Constants.WebApiStatusOk, data = true });
+        }
     }
 }

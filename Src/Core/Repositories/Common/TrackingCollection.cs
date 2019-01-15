@@ -77,6 +77,22 @@ namespace QTrans.Repositories.Common
         }
 
 
+        public void DeviceLocation(DeviceMessage deviceMessage)
+        {
+            var locationdetail = new LocationDetails();
+            locationdetail.UnitId = deviceMessage.uid;
+            locationdetail.fix = deviceMessage.gps.fix;
+            locationdetail.loc = string.Join(",", deviceMessage.gps.loc);
+            locationdetail.speed = deviceMessage.gps.speed;
+            locationdetail.sat = deviceMessage.gps.sat;
+            locationdetail.alt = deviceMessage.gps.alt;
+            locationdetail.dir = deviceMessage.gps.dir;
+            locationdetail.odo = deviceMessage.gps.odo;
+            locationdetail.deviceDatetime = DateTime.Now;//deviceMessage.dt;
+            locationdetail.msgid = deviceMessage.info.msgid;
+            this.LocationDetailSubmit(locationdetail);
+        }
+
         /// <summary>
         /// Add location details for bulk insertion
         /// </summary>
