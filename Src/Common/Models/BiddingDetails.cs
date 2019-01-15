@@ -32,8 +32,9 @@ namespace QTrans.Models
         public long vehicleid { get; set; }
         public string drivername { get; set; }
         public string drivernumber { get; set; }
+        public int weightcapacity { get; set; }
 
-
+        public string rtoregistrationnumber { get; set; }
     }
 
     public class BiddinguserType

@@ -203,6 +203,10 @@ namespace QTrans.WebAPI.Controllers
             }
         }
 
+
+
+
+
         [Route("BiddingStatusByBiddingId")]
         [HttpPost]
         public IHttpActionResult BiddingStatusByBiddingId([FromUri] BiddingRCStatusParam param)
@@ -254,5 +258,24 @@ namespace QTrans.WebAPI.Controllers
         }
 
         #endregion
+
+        [Route("AssignTruck")]
+        [HttpPost]
+        public IHttpActionResult AssignTruck( AssignTruckParam param)
+        {
+            string message = string.Empty;
+            using (var repository = new BiddingRepository(param.UserId))
+            {
+                var result = repository.AssignTruck(param.dtlBiddingId, param.VehicleId, param.DriverName,param.DriverNumber);
+                if (!result.Response)
+                {
+                    log.Info("Assign truck operation is fail");
+                }
+
+                return Ok(new { result.Status, data = result });
+            }
+        }
+
+
     }
 }

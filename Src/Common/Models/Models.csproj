@@ -67,6 +67,7 @@
     <Compile Include="Transporttype.cs" />
     <Compile Include="UserDetails.cs" />
     <Compile Include="UserProfile.cs" />
+    <Compile Include="UserVehicle.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Vehicletype.cs" />
     <Compile Include="ViewModel\Bidding\BidderSummary.cs" />

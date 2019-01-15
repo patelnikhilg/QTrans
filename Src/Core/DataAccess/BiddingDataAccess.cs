@@ -288,6 +288,22 @@ namespace QTrans.DataAccess
             return rowEffected > 0;
         }
 
+        public bool AssignTruck(long dtlbiddingId, long vehicleid, string drivername, string drivernumber)
+        {
+            int rowEffected = 0;
+            using (DBConnector connector = new DBConnector("Usp_AssignTruck", true))
+            {
+                connector.AddInParameterWithValue("@dtlbiddingid", dtlbiddingId);
+                connector.AddInParameterWithValue("@vehicleid", vehicleid);
+                connector.AddInParameterWithValue("@drivername", drivername);
+                connector.AddInParameterWithValue("@drivernumber", drivernumber);
+                rowEffected = connector.ExceuteNonQuery();
+            }
+
+            return rowEffected > 0;
+        }
+
+
         public DataTable GetBidderSummary(long userId)
         {
             DataTable dt = null;

@@ -11,13 +11,13 @@ namespace QTrans.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public  class Vehicle
+
+    public class Vehicle
     {
         public Vehicle()
         {
         }
-    
+
         public long vehicleid { get; set; }
         public short vehicletype { get; set; }
         public string manufacturername { get; set; }
@@ -36,4 +36,9 @@ namespace QTrans.Models
         public string drivernumber { get; set; }
         public string vehicleTypeName { get; set; }
     }
+
+
+  
+
+
 }

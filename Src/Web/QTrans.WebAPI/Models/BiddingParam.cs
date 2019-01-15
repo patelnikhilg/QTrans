@@ -82,4 +82,14 @@ namespace QTrans.WebAPI.Models
 
         public bool IsPast { get; set; }
     }
+
+    public class AssignTruckParam
+    {
+        public long UserId { get; set; }
+        public long dtlBiddingId { get; set; }
+        public long VehicleId { get; set; }
+        public string DriverName { get; set; }
+        public string DriverNumber { get; set; }
+    }
+
 }

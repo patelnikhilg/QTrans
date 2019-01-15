@@ -80,6 +80,30 @@ namespace QTrans.Repositories.Repositories
             return response;
         }
 
+        public ResponseSingleModel<UserVehicle> GetVehicleByMobile(string mobilenumber)
+        {
+            var response = new ResponseSingleModel<UserVehicle>();
+            var ds = this.instance.GetByMobile(mobilenumber);
+            UserVehicle userVehicle;
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                userVehicle = DataAccessUtility.ConvertToList<UserVehicle>(ds.Tables[0])[0];
+                if (ds.Tables[1].Rows.Count > 0)
+                {
+                    userVehicle.vehicles= DataAccessUtility.ConvertToList<Vehicle>(ds.Tables[1]);
+                }
+                else
+                    userVehicle.vehicles = null;
+            }
+            else
+            {
+                userVehicle = null;
+            }
+            response.Response = userVehicle;
+            response.Status = Constants.WebApiStatusOk;
+
+            return response;
+        }
 
         public ResponseSingleModel<bool> DeleteVahicalById(long vehicleId, out string message)
         {
