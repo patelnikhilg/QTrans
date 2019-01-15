@@ -87,6 +87,19 @@ namespace QTrans.DataAccess
             return dt;
         }
 
+       
+        public DataSet GetByMobile(string mobilenumber )
+        {
+            DataSet ds = null;
+            using (DBConnector connector = new DBConnector("Usp_GetVehicleListByMobile", true))
+            {
+                connector.AddInParameterWithValue("@mobilenumber", mobilenumber);
+                ds = connector.GetDataSet();
+            }
+
+            return ds;
+        }
+
         public bool DeleteById(long vehicleId,out string message)
         {
             int rowEffected = 0;

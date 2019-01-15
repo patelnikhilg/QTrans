@@ -237,6 +237,17 @@ namespace QTrans.Repositories
             return response;
         }
 
+
+        public ResponseSingleModel<bool> AssignTruck(long dtlbiddingId, long vehicleid, string drivername, string drivernumber)
+        {
+            var response = new ResponseSingleModel<bool>();
+            var result = this.instanceBidding.AssignTruck(dtlbiddingId, vehicleid, drivername,drivernumber);
+            response.Response = result;
+            response.Status = Constants.WebApiStatusOk;
+            return response;
+        }
+
+
         public ResponseSingleModel<bool> BiddingStatusByBiddingId(long biddingId, long userId, Int16 BidStatus,string reason)
         {
             var response = new ResponseSingleModel<bool>();

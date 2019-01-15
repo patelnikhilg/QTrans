@@ -42,6 +42,9 @@ namespace QTrans.WebAPI.Controllers
             }
         }
 
+
+
+
         [Route("VehicleRegistration")]
         [HttpPost]
         public IHttpActionResult VehicleRegistration([FromBody] Vehicle vehicle)
@@ -109,6 +112,28 @@ namespace QTrans.WebAPI.Controllers
                 return Ok(new { result.Status, data = result });
             }
         }
+
+
+
+        [Route("GetVehicleListByMobile")]
+        [HttpGet]
+        public IHttpActionResult GetVehicleListByMobile(long userId,string mobileNumber)
+        {
+            string message = string.Empty;
+            using (var vehicleRepository = new VehicleRepository(userId))
+            {
+                var result = vehicleRepository.GetVehicleByMobile(mobileNumber);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    log.Info(message);
+                }
+
+                return Ok(new { result.Status, data = result });
+            }
+        }
+
+
+
 
         #region ==============================Upload Posting Photo===============================
         [Route("UploadRCPhoto")]
