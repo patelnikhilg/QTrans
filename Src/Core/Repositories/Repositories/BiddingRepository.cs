@@ -95,6 +95,15 @@ namespace QTrans.Repositories
             return response;
         }
 
+        public ResponseSingleModel<bool> UpdateBidTruckStatus(long dtlbiddingid, short status, long vehicleId, string drivername, string mobilenumber)
+        {
+            var response = new ResponseSingleModel<bool>();
+            var result = this.instanceBidding.UpdateBidTruckStatus(dtlbiddingid, status, vehicleId, drivername, mobilenumber);
+            response.Response = result;
+            response.Status = Constants.WebApiStatusOk;
+            return response;
+        }
+
         /// <summary>
         /// Get list of bidding by posting and user id.
         /// </summary>

@@ -65,7 +65,7 @@ namespace QTrans.DataAccess
             return ds;
         }
 
-        public DataSet GetByUserIdDtlPostingId(long UserId,long dtlPostingid)
+        public DataSet GetByUserIdDtlPostingId(long UserId, long dtlPostingid)
         {
             DataSet ds = null;
             using (DBConnector connector = new DBConnector("Usp_GetBiddingDetailsByUserIddtlPostId", true))
@@ -79,7 +79,7 @@ namespace QTrans.DataAccess
         }
 
 
-        public DataSet GetPostingDetailsByDtlPostingId(long dtlpostingId,long UserID)
+        public DataSet GetPostingDetailsByDtlPostingId(long dtlpostingId, long UserID)
         {
             DataSet dt = null;
             using (DBConnector connector = new DBConnector("Usp_GetBiddingDetailsByDtlPostingId", true))
@@ -156,6 +156,7 @@ namespace QTrans.DataAccess
             return dt;
         }
 
+
         public bool RatingByDtlPostUserId(long dtlpostId, long userId, Int16 rating, string comments, Int16 isRate)
         {
             int rowEffected = 0;
@@ -228,6 +229,25 @@ namespace QTrans.DataAccess
             return rowEffected > 0;
         }
 
+
+
+        public bool UpdateBidTruckStatus(long dtlbiddingid, short status, long vehicleId, string drivername ,string mobilenumber)
+        {
+            int rowEffected = 0;
+            using (DBConnector connector = new DBConnector("Usp_UpdateBidTruckStatus", true))
+            {
+
+                connector.AddInParameterWithValue("@dtlbiddingid", dtlbiddingid);
+                connector.AddInParameterWithValue("@Status", status);
+                connector.AddInParameterWithValue("@VehicleId", vehicleId);
+                connector.AddInParameterWithValue("@driverName", drivername);
+                connector.AddInParameterWithValue("@driverNumber", mobilenumber);
+                rowEffected = connector.ExceuteNonQuery();
+            }
+
+            return rowEffected > 0;
+        }
+
         public DataTable GetPostByUserPef(long userId)
         {
             DataTable dt = null;
@@ -270,15 +290,15 @@ namespace QTrans.DataAccess
 
         public DataTable GetBidderSummary(long userId)
         {
-             DataTable dt = null;
-                using (DBConnector connector = new DBConnector("Asp_GetBidderSummary", true))
-                {
-                    connector.AddInParameterWithValue("@userId", userId);
-                    dt = connector.GetDataTable();
-                }
-                return dt;
+            DataTable dt = null;
+            using (DBConnector connector = new DBConnector("Asp_GetBidderSummary", true))
+            {
+                connector.AddInParameterWithValue("@userId", userId);
+                dt = connector.GetDataTable();
+            }
+            return dt;
 
-          
+
         }
 
 
@@ -294,7 +314,7 @@ namespace QTrans.DataAccess
             if (this.disposed) return;
 
             if (disposing)
-            {               
+            {
 
                 ////TODO: Clean all memeber and release resource.
             }

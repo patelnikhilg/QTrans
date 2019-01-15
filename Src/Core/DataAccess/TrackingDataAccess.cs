@@ -35,7 +35,7 @@ namespace QTrans.DataAccess
                     rowEffected = connector.ExceuteNonQuery();
                 }
             }
-            catch
+            catch(Exception exp)
             {
                 throw;
             }

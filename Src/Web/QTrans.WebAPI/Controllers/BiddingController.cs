@@ -31,7 +31,7 @@ namespace QTrans.WebAPI.Controllers
 
                 return Ok(new { result.Status, data = result });
             }
-        }     
+        }
 
 
         [Route("GetBiddingDetailById")]
@@ -51,7 +51,7 @@ namespace QTrans.WebAPI.Controllers
         {
             using (var repository = new BiddingRepository(UserId))
             {
-                var result = repository.GetBiddingDetailByUserIddtlPostingId(UserId,dtlPostingid);
+                var result = repository.GetBiddingDetailByUserIddtlPostingId(UserId, dtlPostingid);
                 return Ok(new { result.Status, data = result });
             }
         }
@@ -62,7 +62,7 @@ namespace QTrans.WebAPI.Controllers
         {
             using (var repository = new BiddingRepository(param.UserId))
             {
-                var result = repository.GetPostingDetailByDtlPostingId(param.DtlPostingId,param.UserId);
+                var result = repository.GetPostingDetailByDtlPostingId(param.DtlPostingId, param.UserId);
                 return Ok(new { result.Status, data = result });
             }
         }
@@ -146,9 +146,9 @@ namespace QTrans.WebAPI.Controllers
         {
             using (var repository = new BiddingRepository(userId))
             {
-                
+
                 var result = repository.GetBidderSummary(userId);
-                return Ok(new { result.Status, data = result});
+                return Ok(new { result.Status, data = result });
             }
         }
 
@@ -210,7 +210,7 @@ namespace QTrans.WebAPI.Controllers
             string message = string.Empty;
             using (var repository = new BiddingRepository(param.UserId))
             {
-                var result = repository.BiddingStatusByBiddingId(param.BiddingId, param.UserId, param.BidStatus,param.Reason);
+                var result = repository.BiddingStatusByBiddingId(param.BiddingId, param.UserId, param.BidStatus, param.Reason);
                 if (!result.Response)
                 {
                     log.Info("Bidding Status operation is fail");
@@ -238,6 +238,17 @@ namespace QTrans.WebAPI.Controllers
             using (var repository = new BiddingRepository(param.UserId))
             {
                 var result = repository.GetBidStatusByUserId(param.UserId, param.Status);
+                return Ok(new { result.Status, data = result });
+            }
+        }
+
+        [Route("UpdateBidTruckStatus")]
+        [HttpPost]
+        public IHttpActionResult UpdateBidTruckStatus([FromUri] BidTruckStatusParam param)
+        {
+            using (var repository = new BiddingRepository(param.UserId))
+            {
+                var result = repository.UpdateBidTruckStatus(param.dtlbiddingid, param.Status, param.vehicleId, param.drivername, param.mobilenumber);
                 return Ok(new { result.Status, data = result });
             }
         }

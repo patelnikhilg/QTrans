@@ -63,6 +63,19 @@ namespace QTrans.WebAPI.Models
         public Int16 Status { get; set; }
     }
 
+
+    public class BidTruckStatusParam
+    {
+        public long UserId { get; set; }
+
+        public long dtlbiddingid { get; set; }
+        public long vehicleId { get; set; }
+        public string drivername { get; set; }
+        public string mobilenumber { get; set; }
+
+        public short Status { get; set; }
+    }
+
     public class BiddingUserParam
     {
         public long UserId { get; set; }

@@ -25,7 +25,8 @@ namespace QTrans.Models
         public short capacity { get; set; }
         public Nullable<long> biddingid { get; set; }
 
-        public bool status { get; set; }
+        public short status { get; set; }
+
         public DateTime statusdatetime { get; set; }
 
         public long vehicleid { get; set; }
