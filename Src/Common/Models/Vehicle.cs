@@ -13,6 +13,7 @@ namespace QTrans.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
 
     public class Vehicle
     {
@@ -54,6 +55,12 @@ namespace QTrans.Models
 
         [DisplayName("Truck Type")]
         public string vehicleTypeName { get; set; }
+
+
+     
+        public HttpPostedFileBase ImageFile { get; set; }
+
+      
     }
 
 
