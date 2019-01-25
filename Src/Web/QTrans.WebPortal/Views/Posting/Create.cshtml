@@ -131,9 +131,9 @@
 </script>
 
 @{
-    List<QTrans.Models.MaterialType> listMaterialItems = new QTrans.Repositories.Repositories.CommonRepository().GetMaterialType();
-    List<QTrans.Models.PackageType> listPackageItems = new QTrans.Repositories.Repositories.CommonRepository().GetPackageType();
-    List<QTrans.Models.VehicleType> listVehicleTypeItems = new QTrans.Repositories.Repositories.CommonRepository().GetVehicleType();
+    List<QTrans.Models.MaterialType> listMaterialItems = new QTrans.Repositories.Repositories.CommonRepository().GetMaterialType().Response.ToList();
+    List<QTrans.Models.PackageType> listPackageItems = new QTrans.Repositories.Repositories.CommonRepository().GetPackageType().Response.ToList();
+    List<QTrans.Models.VehicleType> listVehicleTypeItems = new QTrans.Repositories.Repositories.CommonRepository().GetVehicleType().Response.ToList();
 }
 
 @using (Html.BeginForm())

@@ -1,0 +1,243 @@
+﻿@model QTrans.Models.Vehicle
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_QTLayout.cshtml";
+
+
+    var photoPath = "/Content/adminlte/img/rcBook.png";
+    if (Model != null)
+    {
+        if (Model.rcbookcopypath.Length > 0 && Model.rcbookcopypath != "NA")
+        {
+            photoPath = Model.rcbookcopypath;
+        }
+        else
+        {
+            Model.rcbookcopypath = photoPath;
+        }
+
+    }
+
+    List<QTrans.Models.VehicleType> listVehicleTypeItems = new QTrans.Repositories.Repositories.CommonRepository().GetVehicleType().Response.ToList();
+}
+
+
+
+<!-- Content Wrapper. Contains page content -->
+@*@using (Html.BeginForm("Edit", "QTTrucks", FormMethod.Post))
+    {*@
+<form id="myForm">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.vehicleid)
+    @Html.HiddenFor(model => model.manufacturername)
+    @Html.HiddenFor(model => model.descrition)
+    @Html.HiddenFor(model => model.manufactureryear)
+    @Html.HiddenFor(model => model.companyid)
+    @Html.HiddenFor(model => model.registrationdate)
+    @Html.HiddenFor(model => model.createddate)
+    @Html.HiddenFor(model => model.rcbookcopypath)
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Edit
+                <small>Truck detail</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="@Url.Action("Index","QTDashBoard")"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="@Url.Action("Index","QTTrucks")">Truck</a></li>
+                <li><a href="@Url.Action("Index","QTTrucks")">My Trucks</a></li>
+                <li class="active">Edit Truck</li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <!-- Default box -->
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Edit Truck Detail</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" id="btnUpdate" class="btn btn-success"><i class="fa fa-check-circle margin-r-5"></i>Update</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index","QTTrucks")'"><i class="fa fa-arrow-circle-left margin-r-5"></i>Back to List</button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.rtoregistrationnumber)
+                                        <div>
+                                            @Html.EditorFor(model => model.rtoregistrationnumber, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.rtoregistrationnumber) } })
+                                            @Html.ValidationMessageFor(model => model.rtoregistrationnumber, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.vehicleTypeName)
+                                        @Html.DropDownListFor(model => model.vehicletype, new SelectList(listVehicleTypeItems, "VehicleTypeId", "VehicleType"), null, new { id = "dropDown", @class = "form-control select2" })
+                                        @Html.ValidationMessageFor(model => model.vehicletype, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.totalwheel)
+                                        <div>
+                                            @Html.EditorFor(model => model.totalwheel, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.totalwheel), Type = "Number" } })
+                                            @Html.ValidationMessageFor(model => model.totalwheel, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.weightcapacity)
+                                        <div>
+                                            @Html.EditorFor(model => model.weightcapacity, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.weightcapacity) } })
+                                            @Html.ValidationMessageFor(model => model.weightcapacity, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.drivername)
+                                        <div>
+                                            @Html.EditorFor(model => model.drivername, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.drivername) } })
+                                            @Html.ValidationMessageFor(model => model.drivername, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.drivernumber)
+                                        <div>
+                                            @Html.EditorFor(model => model.drivernumber, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.drivernumber) } })
+                                            @Html.ValidationMessageFor(model => model.drivernumber, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="box fa-border">
+                                        <div class="box-header">
+                                            @Html.LabelFor(model => model.rcbookcopypath)
+
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <div>
+                                                    <img src="@photoPath" style="width:100%;height:300px;" class="img-bordered" alt="Thumbnail Image">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="box-footer">
+                                            <div class="pull-right">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="glyphicon glyphicon-resize-full margin-r-5"></i>Full Screen</button>
+                                                <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-upload margin-r-5"></i>Upload New</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade" id="modal-default" style="display: none;">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h4 class="modal-title">RC Book</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="@photoPath" style="width:100%;height:auto;" class="img-bordered" alt="Thumbnail Image">
+                                </div>
+
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+             
+                </div>
+                <!-- /.box-footer-->
+            </div>
+            <!-- /.box -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
+
+
+
+
+    @*}*@
+</form>
+@section Scripts
+{
+
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                //Initialize Select2 Elements
+                $('#dropDown').select2();
+            })
+
+            $('#btnUpdate').click(function () {
+                debugger
+                var data = $('#myForm').serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "/QTTrucks/Edit",
+                    data: data,
+                    success: function (response) {
+                        
+                        swal({
+                            type: "success",
+                            title: "Truck Detail Updated Successfully",
+                            showConfirmButton: false,
+                            timer:1500
+                        },
+                            function (isConfirm) {
+                                window.location.href = "@Url.Action("Index", "QTTrucks")";
+                            });
+                    },
+                    error: function (response) {
+                        swal({
+                            type: "error",
+                            title: "Error processing request, try after some time.",
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    }
+                })
+
+            })
+
+        })
+
+    </script>
+
+}

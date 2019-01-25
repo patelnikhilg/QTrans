@@ -11,6 +11,8 @@ namespace QTrans.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public class Vehicle
     {
@@ -23,17 +25,34 @@ namespace QTrans.Models
         public string manufacturername { get; set; }
         public string descrition { get; set; }
         public System.DateTime manufactureryear { get; set; }
+
+        [Required(ErrorMessage = "Required")]
+        [Range(4,999)]
+        [DisplayName("Total Wheels")]
         public short totalwheel { get; set; }
+
+        [Required(ErrorMessage = "Required")]
+        [Range(0, 999)]
+        [DisplayName("Passing Tonnage")]
         public int weightcapacity { get; set; }
+
+        [DisplayName("RC Book Copy")]
         public string rcbookcopypath { get; set; }
+
+        [Required(ErrorMessage = "Required Truck Number")]
+        [DisplayName("Truck No.")]
         public string rtoregistrationnumber { get; set; }
         public long companyid { get; set; }
         public System.DateTime registrationdate { get; set; }
         public System.DateTime createddate { get; set; }
         public Nullable<System.DateTime> modifydate { get; set; }
         public long userid { get; set; }
+        [DisplayName("Driver Name")]
         public string drivername { get; set; }
+        [DisplayName("Driver Number")]
         public string drivernumber { get; set; }
+
+        [DisplayName("Truck Type")]
         public string vehicleTypeName { get; set; }
     }
 

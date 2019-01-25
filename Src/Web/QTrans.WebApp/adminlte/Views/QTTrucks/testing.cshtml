@@ -1,0 +1,124 @@
+﻿@model IEnumerable<QTrans.Models.Vehicle>
+
+@{
+    ViewBag.Title = "testing";
+    Layout = "~/Views/Shared/_QTLayout.cshtml";
+}
+
+<h2>testing</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.vehicletype)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.manufacturername)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descrition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.manufactureryear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.totalwheel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.weightcapacity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rcbookcopypath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rtoregistrationnumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.companyid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.registrationdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createddate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modifydate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.drivername)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.drivernumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vehicleTypeName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.vehicletype)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.manufacturername)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descrition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.manufactureryear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.totalwheel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.weightcapacity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rcbookcopypath)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rtoregistrationnumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.companyid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.registrationdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.createddate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.modifydate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.drivername)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.drivernumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vehicleTypeName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.vehicleid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.vehicleid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.vehicleid })
+        </td>
+    </tr>
+}
+
+</table>

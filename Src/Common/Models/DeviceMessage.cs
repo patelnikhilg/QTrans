@@ -66,7 +66,7 @@ namespace QTrans.Models
     public class DBG
     {
         public int[] status { get; set; }
-        public string ver { get; set; }
+        public string[] ver { get; set; }
         public string lib { get; set; }
     }
 }

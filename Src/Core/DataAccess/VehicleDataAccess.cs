@@ -32,8 +32,9 @@ namespace QTrans.DataAccess
             {
                 connector.AddInParameterWithValue("@VehicleId", vehicle.vehicleid);
                 connector.AddInParameterWithValue("@VehicleType", vehicle.vehicletype);
-                connector.AddInParameterWithValue("@manufacturerName", vehicle.manufacturername);
-                connector.AddInParameterWithValue("@Descrition", vehicle.descrition);
+                connector.AddInParameterWithValue("@manufacturername", vehicle.manufacturername == null ? "" : vehicle.manufacturername);
+
+                connector.AddInParameterWithValue("@Descrition", vehicle.descrition == null ? "" : vehicle.descrition);
                 connector.AddInParameterWithValue("@manufacturerYear", vehicle.manufactureryear);
                 connector.AddInParameterWithValue("@TotalWheel", vehicle.totalwheel);
                 connector.AddInParameterWithValue("@weightCapacity", vehicle.weightcapacity);
@@ -41,8 +42,8 @@ namespace QTrans.DataAccess
                 //connector.AddInParameterWithValue("@RCBookCopyPath", vehicle.rcbookcopypath);
                 connector.AddInParameterWithValue("@rtoregistrationnumber", vehicle.rtoregistrationnumber);
                 connector.AddInParameterWithValue("@companyid", vehicle.companyid);
-                connector.AddInParameterWithValue("@DriverName", vehicle.drivername);
-                connector.AddInParameterWithValue("@DriverNumber", vehicle.drivernumber);
+                connector.AddInParameterWithValue("@DriverName", vehicle.drivername == null ? "" : vehicle.drivername);
+                connector.AddInParameterWithValue("@DriverNumber", vehicle.drivernumber == null ? "" : vehicle.drivernumber);
                 connector.AddInOutParameterWithValue("@identity", SqlDbType.BigInt);
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 connector.AddInParameterWithValue("@userid", vehicle.userid);
@@ -87,8 +88,8 @@ namespace QTrans.DataAccess
             return dt;
         }
 
-       
-        public DataSet GetByMobile(string mobilenumber )
+
+        public DataSet GetByMobile(string mobilenumber)
         {
             DataSet ds = null;
             using (DBConnector connector = new DBConnector("Usp_GetVehicleListByMobile", true))
@@ -100,7 +101,7 @@ namespace QTrans.DataAccess
             return ds;
         }
 
-        public bool DeleteById(long vehicleId,out string message)
+        public bool DeleteById(long vehicleId, out string message)
         {
             int rowEffected = 0;
             using (DBConnector connector = new DBConnector("Usp_DeleteVehicleById", true))
@@ -109,7 +110,7 @@ namespace QTrans.DataAccess
                 connector.AddOutParameterWithType("@Message", SqlDbType.VarChar);
                 rowEffected = connector.ExceuteNonQuery();
                 message = connector.GetParamaeterValue("@Message").ToString();
-               // message = insurance.vehicleid == 0 ? Convert.ToInt64(connector.GetParamaeterValue("@insurance")) : insurance.vehicleid;
+                // message = insurance.vehicleid == 0 ? Convert.ToInt64(connector.GetParamaeterValue("@insurance")) : insurance.vehicleid;
             }
 
             return rowEffected > 0;
@@ -148,7 +149,7 @@ namespace QTrans.DataAccess
             int rowEffected = 0;
             using (DBConnector connector = new DBConnector("Usp_UpdateRCPhoto", true))
             {
-                connector.AddInParameterWithValue("@truckID", truckid );
+                connector.AddInParameterWithValue("@truckID", truckid);
                 connector.AddInParameterWithValue("@photo", filePath);
                 connector.AddInParameterWithValue("@UserId", userID);
                 connector.AddInParameterWithValue("@IsDefault", isDefault);

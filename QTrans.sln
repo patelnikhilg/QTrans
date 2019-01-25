@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QTrans.Alert.Core", "Src\Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Src\Common\Common\Common.csproj", "{4F348B66-920B-4FCF-B553-5EE577514A6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "adminlte", "Src\Web\QTrans.WebApp\adminlte\adminlte.csproj", "{137833FC-20C9-455B-9E2D-A7F562820336}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{4F348B66-920B-4FCF-B553-5EE577514A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F348B66-920B-4FCF-B553-5EE577514A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F348B66-920B-4FCF-B553-5EE577514A6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{137833FC-20C9-455B-9E2D-A7F562820336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{137833FC-20C9-455B-9E2D-A7F562820336}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{137833FC-20C9-455B-9E2D-A7F562820336}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{137833FC-20C9-455B-9E2D-A7F562820336}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +118,7 @@ Global
 		{BADA55A7-3DBB-4F00-9372-9FBF790475FB} = {CD451587-5E71-420D-9369-E2C5C42BF5AE}
 		{1FF4DB41-B4EC-4A72-AA20-25106722EC4F} = {9C8B052A-F050-4DE3-AC8E-0A6879FBC421}
 		{4F348B66-920B-4FCF-B553-5EE577514A6C} = {CD451587-5E71-420D-9369-E2C5C42BF5AE}
+		{137833FC-20C9-455B-9E2D-A7F562820336} = {16B3FB65-3D7B-4F59-A813-BD88C1A73113}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {960E7416-D611-425E-ADD8-BF7EEB898EA6}

@@ -1,0 +1,147 @@
+﻿@model QTrans.Models.Vehicle
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_QTLayout.cshtml";
+}
+
+<h2>Detail</h2>
+
+<div>
+    <h4>Vehicle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.vehicletype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vehicletype)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.manufacturername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.manufacturername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descrition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descrition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.manufactureryear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.manufactureryear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalwheel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalwheel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.weightcapacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.weightcapacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rcbookcopypath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rcbookcopypath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rtoregistrationnumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rtoregistrationnumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.companyid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.companyid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.registrationdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registrationdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createddate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createddate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modifydate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modifydate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.drivername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.drivername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.drivernumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.drivernumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vehicleTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vehicleTypeName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.vehicleid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
