@@ -38,15 +38,15 @@
             </li>
 
             <li class="header">Search Load</li>
-            <li class="@Html.IsSelected(controller: "Dashboard") treeview">
-                <a href="@Url.Action("Dashboardv1", "Dashboard")">
+            <li class="@Html.IsSelected(controller: "QTSearchLoad") treeview">
+                <a href="@Url.Action("Index", "QTSearchLoad")">
                     <i class="fa fa-cubes"></i> <span>Search Load</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="@Html.IsSelected(action: "Dashboardv1")"><a href="@Url.Action("Index", "QTDashboard")"><i class="fa fa-circle-o"></i> Recommanded</a></li>
+                    <li class="@Html.IsSelected(action: "Dashboardv1")"><a href="@Url.Action("Index", "QTSearchLoad")"><i class="fa fa-circle-o"></i> Recommanded</a></li>
                     <li class="@Html.IsSelected(action: "Dashboardv2")"><a href="@Url.Action("Index", "QTDashboard")"><i class="fa fa-circle-o"></i> All Open</a></li>
                     <li class="@Html.IsSelected(action: "Dashboardv2")"><a href="@Url.Action("Index", "QTDashboard")"><i class="fa fa-circle-o"></i> Your Bids</a></li>
                     <li class="@Html.IsSelected(action: "Dashboardv2")"><a href="@Url.Action("Index", "QTDashboard")"><i class="fa fa-circle-o"></i> Active Orders</a></li>

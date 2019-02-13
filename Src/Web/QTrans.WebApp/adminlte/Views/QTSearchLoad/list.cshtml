@@ -1,0 +1,214 @@
+﻿@model IEnumerable<QTrans.Models.ViewModel.Bidding.PostingListBid>
+
+@{
+    ViewBag.Title = "list";
+    Layout = "~/Views/Shared/_QTLayout.cshtml";
+}
+
+<h2>list</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.postingid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dtlpostingid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.posttype)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.src_city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.src_state)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.From)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.To)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.soureaddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.src_landmark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.src_pincode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dst_city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dst_state)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.destinationadress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dst_landmark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dst_pincode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.materialtype)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.packagetype)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.materialweight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vehicletype)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.novehicle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pickupdatetime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ordertype)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ordertypeValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.biddingactivatedatetime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.biddingclosedatetime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.poststatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postamount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BidStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BidStatusValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.loadingtype)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.postingid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtlpostingid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.posttype)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.src_city)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.src_state)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.From)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.To)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.soureaddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.src_landmark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.src_pincode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dst_city)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dst_state)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.destinationadress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dst_landmark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dst_pincode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.materialtype)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.packagetype)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.materialweight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vehicletype)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.novehicle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pickupdatetime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ordertype)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ordertypeValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.biddingactivatedatetime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.biddingclosedatetime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.poststatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postamount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BidStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BidStatusValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.loadingtype)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

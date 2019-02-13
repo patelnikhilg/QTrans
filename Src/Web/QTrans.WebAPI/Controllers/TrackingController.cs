@@ -30,5 +30,20 @@ namespace QTrans.WebAPI.Controllers
             TrackingCollection.Instance.DeviceLocation(deviceMessage);
             return Ok(new { Constants.WebApiStatusOk, data = true });
         }
+
+
+        [Route("DeviceLocationTest")]
+        [HttpPost]
+        public IHttpActionResult DeviceLocationTest([FromBody] string deviceMessage )
+        {
+            using (System.IO.StreamWriter file =new System.IO.StreamWriter(@"C:\Users\Public\TestFolder\WriteLines2.txt"))
+            {
+               
+                        file.WriteLine("FromBody:" + deviceMessage);
+                
+
+            }
+            return Ok(new { Constants.WebApiStatusOk, data = true });
+        }
     }
 }
